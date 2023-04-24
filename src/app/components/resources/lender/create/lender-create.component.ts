@@ -29,7 +29,7 @@ export class LenderCreateComponent  {
             this.form.get('description')?.value
         ).subscribe({
             next: (response) => {
-                this.router.navigate(['home'])
+                this.router.navigate([this.router.url])
             },
             error : (err: AppError) => {
                 if (err instanceof UnprocessableEntityError ){

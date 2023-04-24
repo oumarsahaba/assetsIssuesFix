@@ -75,7 +75,7 @@ export class WholesalerCreateComponent implements OnInit{
             this.form.get('description')?.value
         ).subscribe({
             next: (response) => {
-                this.router.navigate(['home'])
+                this.router.navigate([this.router.url])
             },
             error : (err: AppError) => {
                 if (err instanceof UnprocessableEntityError ){
@@ -106,16 +106,11 @@ export class WholesalerCreateComponent implements OnInit{
         this.form.get('codeAggregator')?.setValue($event.target.value, {
             onlySelf: true,
         })
-
-        console.log(this.form.get('codeAggregator')?.value)
     }
 
     changeLender($event: any) {
         this.form.get('codeLender')?.setValue($event.target.value, {
             onlySelf: true,
         })
-
-        console.log(this.form.get('codeAggregator')?.value)
-
     }
 }
