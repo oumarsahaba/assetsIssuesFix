@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BaseAPIService } from "./base-api.service";
+import {Injectable} from '@angular/core';
+import {BaseAPIService} from "./base-api.service";
 
 @Injectable({
     providedIn: 'root'

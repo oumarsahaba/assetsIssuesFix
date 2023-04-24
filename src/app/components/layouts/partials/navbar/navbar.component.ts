@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {KeycloakService} from "keycloak-angular";
-import {Route, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-navbar',

@@ -1,4 +1,4 @@
-import { TitleCasePipe } from './title-case.pipe';
+import {TitleCasePipe} from './title-case.pipe';
 
 describe('TitleCasePipe', () => {
   it('create an instance', () => {

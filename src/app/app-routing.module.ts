@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import {HomeComponent} from "./components/pages/home/home.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from "./guards/auth.guard";
 import {NotFoundComponent} from "./components/pages/not-found/not-found.component";
 import {LenderIndexComponent} from "./components/resources/lender/index/lender-index.component";
