@@ -6,13 +6,8 @@ import {AppError} from "../commons/errors/app-error";
 import {NotFoundError} from "../commons/errors/not-found-error";
 import {BadRequestError} from "../commons/errors/bad-request-error";
 import {UnprocessableEntityError} from "../commons/errors/unprocessable-entity-error";
+import {ApiResponse} from "../commons/interfaces/api-response";
 
-interface ApiResponse {
-    data: []
-    errors: []
-    message: string
-    statusCode: number
-}
 
 @Injectable({
     providedIn: 'root'

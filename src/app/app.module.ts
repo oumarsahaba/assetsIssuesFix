@@ -9,7 +9,7 @@ import { TitleCasePipe } from './pipes/title-case/title-case.pipe';
 import {HttpClientModule} from "@angular/common/http";
 import {AppErrorHandler} from "./commons/errors/app-error-handler";
 import {RouterModule} from "@angular/router";
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotFoundComponent } from './components/pages/not-found/not-found.component';
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {initializeKeycloak} from "./commons/keycloak-init.factory";
 import {AuthGuard} from "./guards/auth.guard";
@@ -18,8 +18,12 @@ import { SidebarComponent } from './components/layouts/partials/sidebar/sidebar.
 import { NavbarComponent } from './components/layouts/partials/navbar/navbar.component';
 import { DashboardComponent } from './components/layouts/dashboard/dashboard.component';
 import { LenderCreateComponent } from './components/resources/lender/create/lender-create.component';
-import { IndexComponent } from './components/resources/lender/index/index.component';
+import { LenderIndexComponent } from './components/resources/lender/index/lender-index.component';
 import { ModalComponent } from './components/shared/modal/modal.component';
+import {AggregatorIndexComponent} from "./components/resources/aggregator/index/aggregator-index.component";
+import {AggregatorCreateComponent} from "./components/resources/aggregator/create/aggregator-create.component";
+import { WholesalerIndexComponent } from './components/resources/wholesaler/index/wholesaler-index.component';
+import { WholesalerCreateComponent } from './components/resources/wholesaler/create/wholesaler-create.component';
 
 @NgModule({
     declarations: [
@@ -31,9 +35,13 @@ import { ModalComponent } from './components/shared/modal/modal.component';
         SidebarComponent,
         NavbarComponent,
         DashboardComponent,
+        LenderIndexComponent,
         LenderCreateComponent,
-        IndexComponent,
+        AggregatorIndexComponent,
+        AggregatorCreateComponent,
         ModalComponent,
+        WholesalerIndexComponent,
+        WholesalerCreateComponent,
     ],
     imports: [
         BrowserModule,

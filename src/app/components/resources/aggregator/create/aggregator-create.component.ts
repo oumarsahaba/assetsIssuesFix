@@ -1,22 +1,22 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {LenderService} from "../../../../services/lender.service";
+import {AggregatorService} from "../../../../services/aggregator.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {Router} from "@angular/router";
 import {UnprocessableEntityError} from "../../../../commons/errors/unprocessable-entity-error";
 
 @Component({
-    selector: 'app-lender-create',
-    templateUrl: './lender-create.component.html',
-    styleUrls: ['./lender-create.component.css']
+    selector: 'app-aggregator-create',
+    templateUrl: './aggregator-create.component.html',
+    styleUrls: ['./aggregator-create.component.css']
 })
-export class LenderCreateComponent  {
+export class AggregatorCreateComponent {
     form : FormGroup
     displayModal: boolean
 
-    constructor(private lenderService: LenderService, private router: Router) {
+    constructor(private aggregatorService: AggregatorService, private router: Router) {
         this.form = new FormGroup({
-            codeLender: new FormControl('', Validators.required),
+            codeAggregator: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
         })
 
@@ -24,12 +24,13 @@ export class LenderCreateComponent  {
     }
 
     create() {
-        this.lenderService.create(
-            this.form.get('codeLender')?.value,
+        this.aggregatorService.create(
+            this.form.get('codeAggregator')?.value,
             this.form.get('description')?.value
         ).subscribe({
             next: (response) => {
-                this.router.navigate(['home'])
+                console.log(response)
+                this.router.navigate(['/aggregator'])
             },
             error : (err: AppError) => {
                 if (err instanceof UnprocessableEntityError ){

@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {LenderCreateComponent} from './lender-create.component';
+import {WholesalerIndexComponent} from './wholesaler-index.component';
 
-describe('LenderCreateComponent', () => {
-  let component: LenderCreateComponent;
-  let fixture: ComponentFixture<LenderCreateComponent>;
+describe('IndexComponent', () => {
+  let component: WholesalerIndexComponent;
+  let fixture: ComponentFixture<WholesalerIndexComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LenderCreateComponent ]
+      declarations: [ WholesalerIndexComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LenderCreateComponent);
+    fixture = TestBed.createComponent(WholesalerIndexComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

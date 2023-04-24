@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {LenderCreateComponent} from './lender-create.component';
+import {LenderIndexComponent} from './lender-index.component';
 
-describe('LenderCreateComponent', () => {
-  let component: LenderCreateComponent;
-  let fixture: ComponentFixture<LenderCreateComponent>;
+describe('IndexComponent', () => {
+  let component: LenderIndexComponent;
+  let fixture: ComponentFixture<LenderIndexComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LenderCreateComponent ]
+      declarations: [ LenderIndexComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LenderCreateComponent);
+    fixture = TestBed.createComponent(LenderIndexComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
