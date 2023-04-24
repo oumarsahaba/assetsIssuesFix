@@ -13,10 +13,13 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {initializeKeycloak} from "./commons/keycloak-init.factory";
 import {AuthGuard} from "./guards/auth.guard";
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './components/pages/home/home.component';
 import { SidebarComponent } from './components/layouts/partials/sidebar/sidebar.component';
 import { NavbarComponent } from './components/layouts/partials/navbar/navbar.component';
 import { DashboardComponent } from './components/layouts/dashboard/dashboard.component';
+import { LenderCreateComponent } from './components/resources/lender/create/lender-create.component';
+import { IndexComponent } from './components/resources/lender/index/index.component';
+import { ModalComponent } from './components/shared/modal/modal.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +31,9 @@ import { DashboardComponent } from './components/layouts/dashboard/dashboard.com
         SidebarComponent,
         NavbarComponent,
         DashboardComponent,
+        LenderCreateComponent,
+        IndexComponent,
+        ModalComponent,
     ],
     imports: [
         BrowserModule,
@@ -36,11 +42,7 @@ import { DashboardComponent } from './components/layouts/dashboard/dashboard.com
         ReactiveFormsModule,
         HttpClientModule,
         KeycloakAngularModule,
-        RouterModule.forRoot([
-            {path: '', component: HomeComponent, canActivate: [AuthGuard]},
-            {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-            {path: '**', component: NotFoundComponent},
-        ])
+        AppRoutingModule
     ],
     providers: [
         {
