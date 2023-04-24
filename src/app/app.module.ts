@@ -22,6 +22,8 @@ import {AggregatorIndexComponent} from "./components/resources/aggregator/index/
 import {AggregatorCreateComponent} from "./components/resources/aggregator/create/aggregator-create.component";
 import {WholesalerIndexComponent} from './components/resources/wholesaler/index/wholesaler-index.component';
 import {WholesalerCreateComponent} from './components/resources/wholesaler/create/wholesaler-create.component';
+import {AgentIndexComponent} from './components/resources/agent/index/agent-index.component';
+import {AgentCreateComponent} from './components/resources/agent/create/agent-create.component';
 
 @NgModule({
     declarations: [
@@ -40,6 +42,8 @@ import {WholesalerCreateComponent} from './components/resources/wholesaler/creat
         ModalComponent,
         WholesalerIndexComponent,
         WholesalerCreateComponent,
+        AgentIndexComponent,
+        AgentCreateComponent,
     ],
     imports: [
         BrowserModule,

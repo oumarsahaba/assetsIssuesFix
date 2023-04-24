@@ -16,7 +16,7 @@ export class BaseWholesaler implements Wholesaler {
 
     constructor(wholesaler: Wholesaler) {
         this.codeWholesaler = wholesaler.codeWholesaler
-        this.aggregator  = new BaseAggregator(wholesaler.aggregator)
+        this.aggregator  = new BaseAggregator(wholesaler?.aggregator)
         this.lender  = new BaseLender(wholesaler.lender)
         this.account  = new BaseAccount(wholesaler.account)
         this.description = wholesaler.description
