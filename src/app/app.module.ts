@@ -24,6 +24,8 @@ import {WholesalerIndexComponent} from './components/resources/wholesaler/index/
 import {WholesalerCreateComponent} from './components/resources/wholesaler/create/wholesaler-create.component';
 import {AgentIndexComponent} from './components/resources/agent/index/agent-index.component';
 import {AgentCreateComponent} from './components/resources/agent/create/agent-create.component';
+import { LoanRequestIndexComponent } from './components/resources/loan-request/index/loan-request-index.component';
+import { LoanRequestValidationComponent } from './components/resources/loan-request/validation/loan-request-validation.component';
 
 @NgModule({
     declarations: [
@@ -44,6 +46,8 @@ import {AgentCreateComponent} from './components/resources/agent/create/agent-cr
         WholesalerCreateComponent,
         AgentIndexComponent,
         AgentCreateComponent,
+        LoanRequestIndexComponent,
+        LoanRequestValidationComponent,
     ],
     imports: [
         BrowserModule,

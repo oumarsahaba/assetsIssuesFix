@@ -2,6 +2,7 @@ import {Agent} from "../interfaces/agent";
 import {BaseAccount} from "./account";
 import {Account} from "../interfaces/account";
 import {BaseSimpleWholesaler} from "./simple-wholesaler";
+import {SimpleWholesaler} from "../interfaces/simple-wholesaler";
 
 export class BaseAgent implements Agent {
     account: Account;
@@ -12,7 +13,7 @@ export class BaseAgent implements Agent {
     overdraftLimitAmount: number;
     overdraftMaxDailyCount: number;
     overdraftPenaltyAmount: number;
-    wholesaler: BaseSimpleWholesaler;
+    wholesaler: SimpleWholesaler;
 
     constructor(agent: Agent) {
         this.codeAgent = agent.codeAgent

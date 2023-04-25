@@ -6,6 +6,7 @@ import {LenderIndexComponent} from "./components/resources/lender/index/lender-i
 import {AggregatorIndexComponent} from "./components/resources/aggregator/index/aggregator-index.component";
 import {WholesalerIndexComponent} from "./components/resources/wholesaler/index/wholesaler-index.component";
 import {AgentIndexComponent} from "./components/resources/agent/index/agent-index.component";
+import {LoanRequestIndexComponent} from "./components/resources/loan-request/index/loan-request-index.component";
 
 const routes: Routes = [
     {path: '', redirectTo: 'lender', pathMatch: "full"},
@@ -13,6 +14,8 @@ const routes: Routes = [
     {path: 'aggregator', component: AggregatorIndexComponent, canActivate: [AuthGuard]},
     {path: 'wholesaler', component: WholesalerIndexComponent, canActivate: [AuthGuard]},
     {path: 'agent', component: AgentIndexComponent, canActivate: [AuthGuard]},
+
+    {path: 'loan/request', component: LoanRequestIndexComponent, canActivate: [AuthGuard]},
     {path: '**', component: NotFoundComponent, title: 'not-found'},
 ];
 

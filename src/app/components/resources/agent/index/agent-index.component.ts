@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {AgentService} from "../../../../services/agent.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
-import {BaseAgent} from "../../../../commons/models/Agent";
+import {BaseAgent} from "../../../../commons/models/agent";
 import {navigateBack} from "../../../../commons/helpers";
 
 @Component({
