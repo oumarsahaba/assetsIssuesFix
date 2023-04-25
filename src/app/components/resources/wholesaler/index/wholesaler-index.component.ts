@@ -5,6 +5,7 @@ import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {BaseWholesaler} from "../../../../commons/models/wholesaler";
+import {navigateBack} from "../../../../commons/helpers";
 
 @Component({
   selector: 'app-wholesaler-index',
@@ -38,7 +39,7 @@ export class WholesalerIndexComponent implements OnInit {
         this.wholesalerService.delete(codeWholesaler).subscribe({
             next: (response) => {
                 if (response.statusCode == 200)
-                    this.router.navigate([this.router.url])
+                    navigateBack(this.router)
             },
             error: () => {}
         })

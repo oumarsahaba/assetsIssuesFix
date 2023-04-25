@@ -5,6 +5,7 @@ import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {Aggregator} from "../../../../commons/interfaces/aggregator";
 import {AggregatorService} from "../../../../services/aggregator.service";
 import {BaseAggregator} from "../../../../commons/models/aggregator";
+import {navigateBack} from "../../../../commons/helpers";
 
 
 @Component({
@@ -39,7 +40,7 @@ export class AggregatorIndexComponent implements OnInit {
         this.aggregatorService.delete(codeAggregator).subscribe({
             next: (response) => {
                 if (response.statusCode == 200)
-                    this.router.navigate([this.router.url])
+                    navigateBack(this.router)
             },
             error: () => {}
         })

@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AggregatorService} from "../../../../services/aggregator.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {Router} from "@angular/router";
-import {UnprocessableEntityError} from "../../../../commons/errors/unprocessable-entity-error";
+import {handleFormError, navigateBack} from "../../../../commons/helpers";
 
 @Component({
     selector: 'app-aggregator-create',
@@ -29,27 +29,10 @@ export class AggregatorCreateComponent {
             this.form.get('description')?.value
         ).subscribe({
             next: (response) => {
-                console.log(response)
-                this.router.navigate(['/aggregator'])
+                if (response.statusCode == 200)
+                    navigateBack(this.router)
             },
-            error : (err: AppError) => {
-                if (err instanceof UnprocessableEntityError ){
-                    let validationErrors = err.errors
-
-                    Object.keys(validationErrors).forEach(prop => {
-                        const formControl = this.form.get(prop);
-                        if (formControl) {
-                            let error = validationErrors[prop as keyof typeof validationErrors]
-
-                            if (Array.isArray(error)){
-                                formControl.setErrors({
-                                    serverError: error[0]
-                                });
-                            }
-                        }
-                    });
-                }
-            }
+            error : (err: AppError) => handleFormError(err, this.form)
         })
     }
 

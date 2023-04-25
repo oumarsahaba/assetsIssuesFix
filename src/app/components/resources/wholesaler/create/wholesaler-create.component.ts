@@ -11,6 +11,7 @@ import {AggregatorService} from "../../../../services/aggregator.service";
 import {BaseLender} from "../../../../commons/models/lender";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {BaseAggregator} from "../../../../commons/models/aggregator";
+import {handleFormError, navigateBack} from "../../../../commons/helpers";
 
 @Component({
     selector: 'app-wholesaler-create',
@@ -75,26 +76,9 @@ export class WholesalerCreateComponent implements OnInit{
             this.form.get('description')?.value
         ).subscribe({
             next: (response) => {
-                this.router.navigate([this.router.url])
+                navigateBack(this.router)
             },
-            error : (err: AppError) => {
-                if (err instanceof UnprocessableEntityError ){
-                    let validationErrors = err.errors
-
-                    Object.keys(validationErrors).forEach(prop => {
-                        const formControl = this.form.get(prop);
-                        if (formControl) {
-                            let error = validationErrors[prop as keyof typeof validationErrors]
-
-                            if (Array.isArray(error)){
-                                formControl.setErrors({
-                                    serverError: error[0]
-                                });
-                            }
-                        }
-                    });
-                }
-            }
+            error : (err: AppError) => handleFormError(err, this.form)
         })
     }
 

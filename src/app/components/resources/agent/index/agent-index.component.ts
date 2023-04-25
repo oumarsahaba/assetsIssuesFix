@@ -6,6 +6,7 @@ import {AgentService} from "../../../../services/agent.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {BaseAgent} from "../../../../commons/models/Agent";
+import {navigateBack} from "../../../../commons/helpers";
 
 @Component({
   selector: 'app-agent-index',
@@ -38,4 +39,13 @@ export class AgentIndexComponent implements OnInit{
             })
     }
 
+    delete(codeAgent: string) {
+        this.agentService.delete(codeAgent).subscribe({
+            next: (response) => {
+                if (response.statusCode == 200)
+                    navigateBack(this.router)
+            },
+            error: () => {}
+        })
+    }
 }
