@@ -1,0 +1,23 @@
+service: credit-digital-front
+runtime: python27
+api_version: 1
+threadsafe: true
+handlers:
+    - url: /(.*\.(gif|png|jpg|css|js)(|\.map))$
+      static_files: dist/credit-digital-front/\1
+      upload: dist/credit-digital-front/(.*)(|\.map)
+
+    - url: /(.*)
+      static_files: dist/credit-digital-front/index.html
+      upload: dist/credit-digital-front/index.html
+
+skip_files:
+    - e2e/
+    - node_modules/
+    - src/
+    - coverage
+    - ^(.*/)?\..*$
+    - ^(.*/)?.*\.json$
+    - ^(.*/)?.*\.md$
+    - ^(.*/)?.*\.yaml$
+    - ^LICENSE

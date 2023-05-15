@@ -6,13 +6,13 @@ export function initializeKeycloak(keycloak: KeycloakService) {
 
         keycloak.init({
             config: {
-                url: 'http://localhost:28080/auth',
+                url: 'https://dev-sso.gutouch.net/auth',
                 realm: 'master',
                 clientId: 'creditdigital',
             },
             initOptions: {
                 checkLoginIframe: false,
-                redirectUri: 'http://localhost:4200',
+                redirectUri: 'https://credit-digital-front-dot-credit-digital-386211.oa.r.appspot.com',
             },
             loadUserProfileAtStartUp : true
         });
