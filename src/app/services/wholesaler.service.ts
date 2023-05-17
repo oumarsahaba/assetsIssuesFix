@@ -9,11 +9,10 @@ export class WholesalerService extends BaseAPIService{
         return this.httpGetCall('/wholesaler')
     }
 
-    create(codeWholesaler: string, codeAggregator: string, codeLender: string, description: string) {
+    create(codeWholesaler: string, codeAggregator: string, description: string) {
         return this.httpPostCall('/wholesaler/store', {
             codeWholesaler : codeWholesaler,
             codeAggregator : codeAggregator,
-            codeLender : codeLender,
             description : description
         })
     }

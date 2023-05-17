@@ -39,23 +39,6 @@
                         </div>
                     </div>
                     <div class="mt-5">
-                        <label for="codeLender" class="block text-sm font-medium leading-6 text-gray-900">Lender</label>
-                        <div class="mt-2">
-                            <select id="codeLender"
-                                    (change)="changeLender($event)"
-                                   formControlName="codeLender"
-                                   class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                <option value="">Select a lender</option>
-                                <option *ngFor="let lender of lenders"
-                                [value]="lender.codeLender" >{{ lender.description }}</option>
-                            </select>
-
-                            <p class="text-xs text-red-500" *ngIf="form.get('codeLender')?.errors?.['serverError']">
-                                {{ form.get('codeLender')?.errors?.['serverError'] }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="mt-5">
                         <label for="description" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
                         <div class="mt-2">
                             <textarea id="description" rows="3"

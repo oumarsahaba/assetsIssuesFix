@@ -8,7 +8,7 @@ import {BaseAccount} from "./account";
 
 export class BaseWholesaler implements Wholesaler {
     aggregator: Aggregator;
-    lender: Lender;
+    codeLender: string;
     account: Account
     codeWholesaler: string;
     createdAt: Date;
@@ -17,7 +17,7 @@ export class BaseWholesaler implements Wholesaler {
     constructor(wholesaler: Wholesaler) {
         this.codeWholesaler = wholesaler.codeWholesaler
         this.aggregator  = new BaseAggregator(wholesaler?.aggregator)
-        this.lender  = new BaseLender(wholesaler.lender)
+        this.codeLender  = wholesaler.codeLender
         this.account  = new BaseAccount(wholesaler.account)
         this.description = wholesaler.description
         this.createdAt = new Date(wholesaler.createdAt)

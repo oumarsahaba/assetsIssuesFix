@@ -24,7 +24,6 @@ export class WholesalerIndexComponent implements OnInit {
         this.wholesalerService.getAll()
             .subscribe({
                 next: (response) => {
-                    console.log(response)
                     this.wholesalers = (response.data as Wholesaler[])
                         .map((wholesaler) => new BaseWholesaler(wholesaler))
                 },

@@ -2,9 +2,10 @@ import {AppError} from "./errors/app-error";
 import {FormGroup} from "@angular/forms";
 import {UnprocessableEntityError} from "./errors/unprocessable-entity-error";
 import {Router} from "@angular/router";
+import {BadRequestError} from "./errors/bad-request-error";
 
 export function handleFormError(err: AppError, form: FormGroup) {
-    if (err instanceof UnprocessableEntityError) {
+    if (err instanceof BadRequestError) {
         let validationErrors = err.errors
 
         Object.keys(validationErrors).forEach(prop => {
@@ -12,11 +13,9 @@ export function handleFormError(err: AppError, form: FormGroup) {
             if (formControl) {
                 let error = validationErrors[prop as keyof typeof validationErrors]
 
-                if (Array.isArray(error)) {
-                    formControl.setErrors({
-                        serverError: error[0]
-                    });
-                }
+                formControl.setErrors({
+                    serverError: error
+                });
             }
         });
     }

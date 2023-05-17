@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {KeycloakService} from "keycloak-angular";
-import {catchError, throwError} from "rxjs";
+import {catchError, tap, throwError} from "rxjs";
 import {AppError} from "../commons/errors/app-error";
 import {NotFoundError} from "../commons/errors/not-found-error";
 import {BadRequestError} from "../commons/errors/bad-request-error";
@@ -27,7 +27,9 @@ export abstract class BaseAPIService {
     httpGetCall(pathUrl: string) {
         return this.httpClient
             .get<ApiResponse>(this.baseUrl + pathUrl, { headers: this.httpHeaders })
-            .pipe(catchError((err: Response) => this.handleError(err)))
+            .pipe(
+                catchError((err: Response) => this.handleError(err))
+            )
     }
 
     httpPostCall(pathUrl: string, body: any) {
@@ -51,13 +53,13 @@ export abstract class BaseAPIService {
     private handleError(err: Response) {
         switch (err.status) {
             case 400 :
-                return throwError(() => new BadRequestError())
+                return throwError(() => new BadRequestError(err))
             case 404 :
                 return throwError(() => new NotFoundError())
             case 422 :
                 return throwError(() => new UnprocessableEntityError(err))
             default :
-                return throwError(() => new AppError())
+                return throwError(() => new AppError(err))
         }
     }
 }

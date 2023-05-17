@@ -12,7 +12,7 @@ export function initializeKeycloak(keycloak: KeycloakService) {
             },
             initOptions: {
                 checkLoginIframe: false,
-                redirectUri: 'https://credit-digital-front-dot-credit-digital-386211.oa.r.appspot.com',
+                redirectUri: 'http://localhost:4200',
             },
             loadUserProfileAtStartUp : true
         });
