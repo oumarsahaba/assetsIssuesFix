@@ -7,10 +7,13 @@ import {AggregatorIndexComponent} from "./components/resources/aggregator/index/
 import {WholesalerIndexComponent} from "./components/resources/wholesaler/index/wholesaler-index.component";
 import {AgentIndexComponent} from "./components/resources/agent/index/agent-index.component";
 import {LoanRequestIndexComponent} from "./components/resources/loan-request/index/loan-request-index.component";
+import {LenderDetailsComponent} from "./components/resources/lender/details/lender-details.component";
 
 const routes: Routes = [
     {path: '', redirectTo: 'lender', pathMatch: "full"},
     {path: 'lender', component: LenderIndexComponent, canActivate: [AuthGuard]},
+    {path: 'lender/:codeLender/details/:accountSlug', component: LenderDetailsComponent, canActivate: [AuthGuard]},
+
     {path: 'aggregator', component: AggregatorIndexComponent, canActivate: [AuthGuard]},
     {path: 'wholesaler', component: WholesalerIndexComponent, canActivate: [AuthGuard]},
     {path: 'agent', component: AgentIndexComponent, canActivate: [AuthGuard]},

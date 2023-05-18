@@ -41,7 +41,7 @@ export class LenderIndexComponent implements OnInit {
                 if (response.statusCode == 200)
                     navigateBack(this.router)
             },
-            error: () => {}
+            error: (err) => console.log(err)
         })
     }
 }

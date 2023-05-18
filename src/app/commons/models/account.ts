@@ -2,10 +2,10 @@ import {Account} from "../interfaces/account";
 
 export class BaseAccount implements Account {
     balance: number;
-    codeAccount: string;
+    slug: string;
 
     constructor(account: Account) {
-        this.codeAccount = account.codeAccount
+        this.slug = account.slug
         this.balance = account.balance
     }
 }

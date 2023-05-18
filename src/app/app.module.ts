@@ -26,6 +26,8 @@ import {AgentIndexComponent} from './components/resources/agent/index/agent-inde
 import {AgentCreateComponent} from './components/resources/agent/create/agent-create.component';
 import { LoanRequestIndexComponent } from './components/resources/loan-request/index/loan-request-index.component';
 import { LoanRequestValidationComponent } from './components/resources/loan-request/validation/loan-request-validation.component';
+import { OperationsComponent } from './components/account/operations/operations.component';
+import { LenderDetailsComponent } from './components/resources/lender/details/lender-details.component';
 
 @NgModule({
     declarations: [
@@ -48,6 +50,8 @@ import { LoanRequestValidationComponent } from './components/resources/loan-requ
         AgentCreateComponent,
         LoanRequestIndexComponent,
         LoanRequestValidationComponent,
+        OperationsComponent,
+        LenderDetailsComponent,
     ],
     imports: [
         BrowserModule,

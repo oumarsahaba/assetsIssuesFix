@@ -1,4 +1,4 @@
 export interface Account {
-    codeAccount: string
+    slug: string
     balance: number
 }
