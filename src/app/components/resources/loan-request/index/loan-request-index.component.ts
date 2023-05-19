@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LoanRequest} from "../../../../commons/interfaces/loan-request";
 import {LoanRequestService} from "../../../../services/loan-request.service";
-import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
-import {BaseWholesaler} from "../../../../commons/models/wholesaler";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {BaseLoanRequest} from "../../../../commons/models/loan-request";

@@ -16,8 +16,19 @@
                         <input type="text" id="codeAggregator"
                                formControlName="codeAggregator"
                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        <p class="text-xs text-red-500" *ngIf="form.get('codeAggregator')?.errors?.['serverError']">
+                        <p class="text-xs text-red-500 py-2" *ngIf="form.get('codeAggregator')?.errors?.['serverError']">
                             {{ form.get('codeAggregator')?.errors?.['serverError'] }}
+                        </p>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <label for="webhook" class="block text-sm font-medium leading-6 text-gray-900">Webhook URL</label>
+                    <div class="mt-2">
+                        <input type="text" id="webhook"
+                               formControlName="webhook"
+                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-30codeAggregator0 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <p class="text-xs text-red-500 py-2" *ngIf="form.get('webhook')?.errors?.['serverError']">
+                            {{ form.get('webhook')?.errors?.['serverError'] }}
                         </p>
                     </div>
                 </div>
@@ -27,7 +38,7 @@
                             <textarea id="description" rows="3"
                                       formControlName="description"
                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
-                        <p class="text-xs text-red-500" *ngIf="form.get('description')?.errors?.['serverError']">
+                        <p class="text-xs text-red-500 py-2" *ngIf="form.get('description')?.errors?.['serverError']">
                             {{ form.get('description')?.errors?.['serverError'] }}
                         </p>
                     </div>

@@ -29,8 +29,6 @@ export class AgentIndexComponent implements OnInit{
                     console.log(response)
                     this.agents = (response.data as Agent[])
                         .map((agent) => new BaseAgent(agent))
-
-                    console.log('agents', this.agents)
                 },
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)

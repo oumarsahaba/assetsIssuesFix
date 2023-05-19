@@ -9,9 +9,10 @@ export class AggregatorService extends BaseAPIService{
         return this.httpGetCall('/aggregator')
     }
 
-    create(code: string, description: string) {
+    create(code: string, webhook: string, description: string) {
         return this.httpPostCall('/aggregator/store', {
             codeAggregator : code,
+            webhook : webhook,
             description : description
         })
     }

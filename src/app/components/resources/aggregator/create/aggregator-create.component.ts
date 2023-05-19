@@ -17,6 +17,7 @@ export class AggregatorCreateComponent {
     constructor(private aggregatorService: AggregatorService, private router: Router) {
         this.form = new FormGroup({
             codeAggregator: new FormControl('', Validators.required),
+            webhook: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
         })
 
@@ -26,6 +27,7 @@ export class AggregatorCreateComponent {
     create() {
         this.aggregatorService.create(
             this.form.get('codeAggregator')?.value,
+            this.form.get('webhook')?.value,
             this.form.get('description')?.value
         ).subscribe({
             next: (response) => {
