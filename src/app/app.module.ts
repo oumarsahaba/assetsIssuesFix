@@ -28,6 +28,10 @@ import { LoanRequestIndexComponent } from './components/resources/loan-request/i
 import { LoanRequestValidationComponent } from './components/resources/loan-request/validation/loan-request-validation.component';
 import { OperationsComponent } from './components/account/operations/operations.component';
 import { LenderDetailsComponent } from './components/resources/lender/details/lender-details.component';
+import {AgentDetailsComponent} from "./components/resources/agent/details/agent-details.component";
+import {AggregatorDetailsComponent} from "./components/resources/aggregator/details/aggregator-details.component";
+import {WholesalerDetailsComponent} from "./components/resources/wholesaler/details/wholesaler-details.component";
+import { LoanRequestCreateComponent } from './components/resources/loan-request/create/loan-request-create.component';
 
 @NgModule({
     declarations: [
@@ -52,6 +56,10 @@ import { LenderDetailsComponent } from './components/resources/lender/details/le
         LoanRequestValidationComponent,
         OperationsComponent,
         LenderDetailsComponent,
+        AgentDetailsComponent,
+        AggregatorDetailsComponent,
+        WholesalerDetailsComponent,
+        LoanRequestCreateComponent,
     ],
     imports: [
         BrowserModule,
