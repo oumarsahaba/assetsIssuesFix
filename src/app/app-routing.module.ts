@@ -7,24 +7,24 @@ import {AggregatorIndexComponent} from "./components/resources/aggregator/index/
 import {WholesalerIndexComponent} from "./components/resources/wholesaler/index/wholesaler-index.component";
 import {AgentIndexComponent} from "./components/resources/agent/index/agent-index.component";
 import {LoanRequestIndexComponent} from "./components/resources/loan-request/index/loan-request-index.component";
-import {LenderDetailsComponent} from "./components/resources/lender/details/lender-details.component";
-import {WholesalerDetailsComponent} from "./components/resources/wholesaler/details/wholesaler-details.component";
-import {AgentDetailsComponent} from "./components/resources/agent/details/agent-details.component";
-import {AggregatorDetailsComponent} from "./components/resources/aggregator/details/aggregator-details.component";
+import {LenderShowComponent} from "./components/resources/lender/show/lender-show.component";
+import {WholesalerShowComponent} from "./components/resources/wholesaler/show/wholesaler-show.component";
+import {AgentShowComponent} from "./components/resources/agent/show/agent-show.component";
+import {AggregatorShowComponent} from "./components/resources/aggregator/show/aggregator-show.component";
 
 const routes: Routes = [
     {path: '', redirectTo: 'lender', pathMatch: "full"},
     {path: 'lender', component: LenderIndexComponent, canActivate: [AuthGuard]},
-    {path: 'lender/:codeLender/details/:accountSlug', component: LenderDetailsComponent, canActivate: [AuthGuard]},
+    {path: 'lender/:codeLender', component: LenderShowComponent, canActivate: [AuthGuard]},
 
     {path: 'aggregator', component: AggregatorIndexComponent, canActivate: [AuthGuard]},
-    {path: 'aggregator/:codeAggregator/details/:accountSlug', component: AggregatorDetailsComponent, canActivate: [AuthGuard]},
+    {path: 'aggregator/:codeAggregator', component: AggregatorShowComponent, canActivate: [AuthGuard]},
 
     {path: 'wholesaler', component: WholesalerIndexComponent, canActivate: [AuthGuard]},
-    {path: 'wholesaler/:codeWholesaler/details/:accountSlug', component: WholesalerDetailsComponent, canActivate: [AuthGuard]},
+    {path: 'wholesaler/:codeWholesaler', component: WholesalerShowComponent, canActivate: [AuthGuard]},
 
     {path: 'agent', component: AgentIndexComponent, canActivate: [AuthGuard]},
-    {path: 'agent/:codeAgent/details/:accountSlug', component: AgentDetailsComponent, canActivate: [AuthGuard]},
+    {path: 'agent/:codeAgent', component: AgentShowComponent, canActivate: [AuthGuard]},
 
     {path: 'loan/request', component: LoanRequestIndexComponent, canActivate: [AuthGuard]},
     {path: '**', component: NotFoundComponent, title: 'not-found'},

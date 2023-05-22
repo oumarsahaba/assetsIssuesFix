@@ -29,10 +29,10 @@ import {
     LoanRequestValidationComponent
 } from './components/resources/loan-request/validation/loan-request-validation.component';
 import {OperationsComponent} from './components/account/operations/operations.component';
-import {LenderDetailsComponent} from './components/resources/lender/details/lender-details.component';
-import {AgentDetailsComponent} from "./components/resources/agent/details/agent-details.component";
-import {AggregatorDetailsComponent} from "./components/resources/aggregator/details/aggregator-details.component";
-import {WholesalerDetailsComponent} from "./components/resources/wholesaler/details/wholesaler-details.component";
+import {LenderShowComponent} from './components/resources/lender/show/lender-show.component';
+import {AgentShowComponent} from "./components/resources/agent/show/agent-show.component";
+import {AggregatorShowComponent} from "./components/resources/aggregator/show/aggregator-show.component";
+import {WholesalerShowComponent} from "./components/resources/wholesaler/show/wholesaler-show.component";
 import {LoanRequestCreateComponent} from './components/resources/loan-request/create/loan-request-create.component';
 
 @NgModule({
@@ -57,10 +57,10 @@ import {LoanRequestCreateComponent} from './components/resources/loan-request/cr
         LoanRequestIndexComponent,
         LoanRequestValidationComponent,
         OperationsComponent,
-        LenderDetailsComponent,
-        AgentDetailsComponent,
-        AggregatorDetailsComponent,
-        WholesalerDetailsComponent,
+        LenderShowComponent,
+        AgentShowComponent,
+        AggregatorShowComponent,
+        WholesalerShowComponent,
         LoanRequestCreateComponent,
     ],
     imports: [
