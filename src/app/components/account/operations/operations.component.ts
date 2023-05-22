@@ -12,7 +12,7 @@ import {OperationService} from "../../../services/operation.service";
 })
 export class OperationsComponent implements OnInit {
     @Input()
-    accountSlug: string | null
+    accountSlug: any
 
     operations: Operation[]
 

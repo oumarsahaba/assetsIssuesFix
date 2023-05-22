@@ -24,7 +24,6 @@ export class LenderIndexComponent implements OnInit {
         this.lenderService.getAll()
             .subscribe({
                 next: (response) => {
-                    console.log(response)
                     this.lenders = (response.data as Lender[])
                         .map((lender) => new BaseLender(lender))
                 },
@@ -41,7 +40,7 @@ export class LenderIndexComponent implements OnInit {
                 if (response.statusCode == 200)
                     navigateBack(this.router)
             },
-            error: (err) => console.log(err)
+            error: (err) => console.log('code lender delete error', err)
         })
     }
 }

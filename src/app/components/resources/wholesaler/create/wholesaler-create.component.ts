@@ -36,7 +36,6 @@ export class WholesalerCreateComponent implements OnInit{
         this.aggregatorService.getAll()
             .subscribe({
                 next: (response) => {
-                    console.log(response)
                     this.aggregators = (response.data as Aggregator[])
                         .map((aggregator) => new BaseAggregator(aggregator))
                 },

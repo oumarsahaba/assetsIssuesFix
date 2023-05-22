@@ -1,15 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {WholesalerService} from "../../../../services/wholesaler.service";
 import {Router} from "@angular/router";
 import {LoanRequestService} from "../../../../services/loan-request.service";
 import {LenderService} from "../../../../services/lender.service";
-import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 import {Lender} from "../../../../commons/interfaces/lender";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {BaseLender} from "../../../../commons/models/lender";
-import {BaseWholesaler} from "../../../../commons/models/wholesaler";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 
 @Component({
@@ -20,7 +18,9 @@ import {handleFormError, navigateBack} from "../../../../commons/helpers";
 export class LoanRequestCreateComponent implements OnInit {
     displayModal: any;
     form : FormGroup
-    wholesalers: Wholesaler[]
+
+    @Input()
+    codeWholesaler: string
     lenders: Lender[]
 
     constructor(private loanRequestService: LoanRequestService,
@@ -28,14 +28,14 @@ export class LoanRequestCreateComponent implements OnInit {
                 private lenderService: LenderService,
                 private router: Router) {
         this.form = new FormGroup({
-            codeWholesaler: new FormControl('', Validators.required),
             codeLender: new FormControl('', Validators.required),
             amount: new FormControl('', Validators.required),
             recoveryPeriodInDays: new FormControl('', Validators.required),
+            description: new FormControl('', Validators.required),
             recoveryAmountByPeriod: new FormControl('', Validators.required),
         })
 
-        this.wholesalers = []
+        this.codeWholesaler = ''
         this.lenders = []
         this.displayModal = false
     }
@@ -44,22 +44,8 @@ export class LoanRequestCreateComponent implements OnInit {
         this.lenderService.getAll()
             .subscribe({
                 next: (response) => {
-                    console.log(response)
                     this.lenders = (response.data as Lender[])
                         .map((lender) => new BaseLender(lender))
-                },
-                error : (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['**'])
-                }
-            })
-
-        this.wholesalerService.getAll()
-            .subscribe({
-                next: (response) => {
-                    console.log(response)
-                    this.wholesalers = (response.data as Wholesaler[])
-                        .map((wholesaler) => new BaseWholesaler(wholesaler))
                 },
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
@@ -78,14 +64,9 @@ export class LoanRequestCreateComponent implements OnInit {
         })
     }
 
-    changeWholesaler($event: any) {
-        this.form.get('codeWholesaler')?.setValue($event.target.value, {
-            onlySelf: true,
-        })
-    }
     create() {
         this.loanRequestService.create(
-            this.form.get('codeWholesaler')?.value,
+            this.codeWholesaler,
             this.form.get('codeLender')?.value,
             this.form.get('amount')?.value,
             this.form.get('recoveryPeriodInDays')?.value,

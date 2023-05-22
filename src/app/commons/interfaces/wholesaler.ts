@@ -3,7 +3,6 @@ import {Account} from "./account";
 
 export interface Wholesaler {
     codeWholesaler: string
-    codeLender: string
     aggregator: Aggregator
     account: Account
     aggregatorWholesalerAccount: Account

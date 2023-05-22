@@ -26,7 +26,7 @@ const routes: Routes = [
     {path: 'agent', component: AgentIndexComponent, canActivate: [AuthGuard]},
     {path: 'agent/:codeAgent', component: AgentShowComponent, canActivate: [AuthGuard]},
 
-    {path: 'loan/request', component: LoanRequestIndexComponent, canActivate: [AuthGuard]},
+    /*{path: 'loan/request', component: LoanRequestIndexComponent, canActivate: [AuthGuard]},*/
     {path: '**', component: NotFoundComponent, title: 'not-found'},
 ];
 

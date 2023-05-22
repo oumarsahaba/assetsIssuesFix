@@ -1,5 +1,18 @@
 <app-dashboard>
-    <app-loan-request-index></app-loan-request-index>
-    <div class="divide-amber-50 my-5"></div>
-    <app-account-operations [accountSlug]="accountSlug"/>
+    <div class="px-4 sm:px-6 lg:px-8 mb-10">
+        <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                <dt class="truncate text-sm font-medium text-gray-500">Wholesaler Balance</dt>
+                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900" *ngIf="wholesaler">{{ wholesaler?.account?.balance | number }}</dd>
+            </div>
+            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                <dt class="truncate text-sm font-medium text-gray-500">Wholesaler Aggregator Balance</dt>
+                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ wholesaler?.aggregatorWholesalerAccount?.balance | number:'2.' }}</dd>
+            </div>
+        </dl>
+    </div>
+
+    <app-loan-request-index *ngIf="wholesaler" [codeWholesaler]="wholesaler.codeWholesaler"></app-loan-request-index>
+    <div class="divide-amber-50 py-1 my-10"></div>
+    <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.account.slug"/>
 </app-dashboard>

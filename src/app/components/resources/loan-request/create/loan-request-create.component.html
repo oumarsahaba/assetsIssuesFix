@@ -11,27 +11,11 @@
                     <h2 class="text-base font-semibold leading-7 text-gray-900">Create a new loan request</h2>
 
                     <div class="mt-5">
-                        <label for="codeWholesaler" class="block text-sm font-medium leading-6 text-gray-900">Wholesaler</label>
-                        <div class="mt-2">
-                            <select id="codeWholesaler"
-                                    (change)="changeWholesaler($event)"
-                                    formControlName="codeWholesaler"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                <option value="">Select a wholesaler</option>
-                                <option *ngFor="let wholesaler of wholesalers"
-                                        [value]="wholesaler.codeWholesaler">{{ wholesaler.description }}</option>
-                            </select>
-                            <p class="text-xs text-red-500" *ngIf="form.get('codeWholesaler')?.errors?.['serverError']">
-                                {{ form.get('codeWholesaler')?.errors?.['serverError'] }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="mt-5">
                         <label for="codeLender" class="block text-sm font-medium leading-6 text-gray-900">Lender</label>
                         <div class="mt-2">
                             <select id="codeLender"
                                     (change)="changeLender($event)"
-                                    formControlName="codeAggregator"
+                                    formControlName="codeLender"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 <option value="">Select a lender</option>
                                 <option *ngFor="let lender of lenders"
@@ -50,7 +34,7 @@
                                    formControlName="amount"
                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             <p class="text-xs text-red-500" *ngIf="form.get('amount')?.errors?.['serverError']">
-                                {{ form.get('codeWholesaler')?.errors?.['serverError'] }}
+                                {{ form.get('amount')?.errors?.['serverError'] }}
                             </p>
                         </div>
                     </div>

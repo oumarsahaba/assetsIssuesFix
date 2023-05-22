@@ -41,4 +41,5 @@ export class WholesalerShowComponent {
     }
 
 
+    protected readonly console = console;
 }

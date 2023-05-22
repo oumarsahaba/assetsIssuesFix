@@ -6,7 +6,8 @@ export function initializeKeycloak(keycloak: KeycloakService) {
 
         keycloak.init({
             config: {
-                url: 'https://dev-sso.gutouch.net/auth',
+                //url: 'https://dev-sso.gutouch.net/auth',
+                url: 'http://localhost:28080/auth',
                 realm: 'master',
                 clientId: 'creditdigital',
             },
