@@ -24,14 +24,16 @@ import {WholesalerIndexComponent} from './components/resources/wholesaler/index/
 import {WholesalerCreateComponent} from './components/resources/wholesaler/create/wholesaler-create.component';
 import {AgentIndexComponent} from './components/resources/agent/index/agent-index.component';
 import {AgentCreateComponent} from './components/resources/agent/create/agent-create.component';
-import { LoanRequestIndexComponent } from './components/resources/loan-request/index/loan-request-index.component';
-import { LoanRequestValidationComponent } from './components/resources/loan-request/validation/loan-request-validation.component';
-import { OperationsComponent } from './components/account/operations/operations.component';
-import { LenderDetailsComponent } from './components/resources/lender/details/lender-details.component';
+import {LoanRequestIndexComponent} from './components/resources/loan-request/index/loan-request-index.component';
+import {
+    LoanRequestValidationComponent
+} from './components/resources/loan-request/validation/loan-request-validation.component';
+import {OperationsComponent} from './components/account/operations/operations.component';
+import {LenderDetailsComponent} from './components/resources/lender/details/lender-details.component';
 import {AgentDetailsComponent} from "./components/resources/agent/details/agent-details.component";
 import {AggregatorDetailsComponent} from "./components/resources/aggregator/details/aggregator-details.component";
 import {WholesalerDetailsComponent} from "./components/resources/wholesaler/details/wholesaler-details.component";
-import { LoanRequestCreateComponent } from './components/resources/loan-request/create/loan-request-create.component';
+import {LoanRequestCreateComponent} from './components/resources/loan-request/create/loan-request-create.component';
 
 @NgModule({
     declarations: [

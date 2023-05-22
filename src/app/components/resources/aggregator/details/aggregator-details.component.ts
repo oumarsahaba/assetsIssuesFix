@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Operation} from "../../../../commons/interfaces/operation";
 import {ActivatedRoute} from "@angular/router";
 

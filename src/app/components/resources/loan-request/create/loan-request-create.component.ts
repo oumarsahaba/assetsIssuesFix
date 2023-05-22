@@ -1,14 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {WholesalerService} from "../../../../services/wholesaler.service";
-import {AggregatorService} from "../../../../services/aggregator.service";
 import {Router} from "@angular/router";
 import {LoanRequestService} from "../../../../services/loan-request.service";
 import {LenderService} from "../../../../services/lender.service";
 import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 import {Lender} from "../../../../commons/interfaces/lender";
-import {Aggregator} from "../../../../commons/interfaces/aggregator";
-import {BaseAggregator} from "../../../../commons/models/aggregator";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {BaseLender} from "../../../../commons/models/lender";

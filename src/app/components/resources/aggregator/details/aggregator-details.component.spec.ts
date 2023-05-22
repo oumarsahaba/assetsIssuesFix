@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AggregatorDetailsComponent } from './aggregator-details.component';
+import {AggregatorDetailsComponent} from './aggregator-details.component';
 
 describe('AggregatorComponent', () => {
   let component: AggregatorDetailsComponent;

@@ -1,4 +1,3 @@
-import {Lender} from "./lender";
 import {Aggregator} from "./aggregator";
 import {Account} from "./account";
 
@@ -7,6 +6,7 @@ export interface Wholesaler {
     codeLender: string
     aggregator: Aggregator
     account: Account
+    aggregatorWholesalerAccount: Account
     description: string
     createdAt: Date
 }

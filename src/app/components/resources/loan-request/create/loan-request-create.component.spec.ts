@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { LoanRequestCreateComponent } from './loan-request-create.component';
+import {LoanRequestCreateComponent} from './loan-request-create.component';
 
 describe('CreateComponent', () => {
   let component: LoanRequestCreateComponent;
