@@ -3,7 +3,6 @@ import {Operation} from "../../../../commons/interfaces/operation";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 import {WholesalerService} from "../../../../services/wholesaler.service";
-import {Lender} from "../../../../commons/interfaces/lender";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 

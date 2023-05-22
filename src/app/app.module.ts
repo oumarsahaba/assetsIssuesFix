@@ -34,6 +34,10 @@ import {AgentShowComponent} from "./components/resources/agent/show/agent-show.c
 import {AggregatorShowComponent} from "./components/resources/aggregator/show/aggregator-show.component";
 import {WholesalerShowComponent} from "./components/resources/wholesaler/show/wholesaler-show.component";
 import {LoanRequestCreateComponent} from './components/resources/loan-request/create/loan-request-create.component';
+import {CreditRequestIndexComponent} from "./components/resources/credit-request/index/credit-request-index.component";
+import {
+    CreditRequestCreateComponent
+} from "./components/resources/credit-request/create/credit-request-create.component";
 
 @NgModule({
     declarations: [
@@ -45,23 +49,33 @@ import {LoanRequestCreateComponent} from './components/resources/loan-request/cr
         SidebarComponent,
         NavbarComponent,
         DashboardComponent,
+
+        LenderShowComponent,
         LenderIndexComponent,
         LenderCreateComponent,
+
         AggregatorIndexComponent,
         AggregatorCreateComponent,
+        AggregatorShowComponent,
+
         ModalComponent,
+
         WholesalerIndexComponent,
         WholesalerCreateComponent,
-        AgentIndexComponent,
-        AgentCreateComponent,
-        LoanRequestIndexComponent,
-        LoanRequestValidationComponent,
-        OperationsComponent,
-        LenderShowComponent,
-        AgentShowComponent,
-        AggregatorShowComponent,
         WholesalerShowComponent,
+
+        AgentIndexComponent,
+        AgentShowComponent,
+        AgentCreateComponent,
+
+        LoanRequestIndexComponent,
         LoanRequestCreateComponent,
+        LoanRequestValidationComponent,
+
+        CreditRequestIndexComponent,
+        CreditRequestCreateComponent,
+
+        OperationsComponent,
     ],
     imports: [
         BrowserModule,

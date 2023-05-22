@@ -1,5 +1,4 @@
 import {SimpleLender} from "../interfaces/simple-lender";
-import {Lender} from "../interfaces/lender";
 
 export class BaseSimpleLender implements SimpleLender{
     codeLender: string;

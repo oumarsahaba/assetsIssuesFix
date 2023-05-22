@@ -6,7 +6,6 @@ import {LenderIndexComponent} from "./components/resources/lender/index/lender-i
 import {AggregatorIndexComponent} from "./components/resources/aggregator/index/aggregator-index.component";
 import {WholesalerIndexComponent} from "./components/resources/wholesaler/index/wholesaler-index.component";
 import {AgentIndexComponent} from "./components/resources/agent/index/agent-index.component";
-import {LoanRequestIndexComponent} from "./components/resources/loan-request/index/loan-request-index.component";
 import {LenderShowComponent} from "./components/resources/lender/show/lender-show.component";
 import {WholesalerShowComponent} from "./components/resources/wholesaler/show/wholesaler-show.component";
 import {AgentShowComponent} from "./components/resources/agent/show/agent-show.component";

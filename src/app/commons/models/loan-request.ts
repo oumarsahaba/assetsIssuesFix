@@ -1,8 +1,6 @@
 import {LoanRequest} from "../interfaces/loan-request";
 import {SimpleWholesaler} from "../interfaces/simple-wholesaler";
 import {BaseSimpleWholesaler} from "./simple-wholesaler";
-import {BaseLender} from "./lender";
-import {Lender} from "../interfaces/lender";
 import {SimpleLender} from "../interfaces/simple-lender";
 import {BaseSimpleLender} from "./simple-lender";
 

@@ -1,5 +1,4 @@
 import {SimpleWholesaler} from "./simple-wholesaler";
-import {Lender} from "./lender";
 import {SimpleLender} from "./simple-lender";
 
 export interface LoanRequest {

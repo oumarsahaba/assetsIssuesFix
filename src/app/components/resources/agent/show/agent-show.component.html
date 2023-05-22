@@ -1,3 +1,16 @@
 <app-dashboard>
-    <app-account-operations [accountSlug]="accountSlug"/>
+
+    <div class="px-4 sm:px-6 lg:px-8 mb-10">
+        <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                <dt class="truncate text-sm font-medium text-gray-500">Agent Balance</dt>
+                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900" *ngIf="agent">{{ agent.account.balance | number }}</dd>
+            </div>
+        </dl>
+    </div>
+
+
+    <app-credit-request-index *ngIf="agent" [codeAgent]="agent.codeAgent"></app-credit-request-index>
+    <div class="divide-amber-50 py-1 my-10"></div>
+    <app-account-operations *ngIf="agent" [accountSlug]="agent.account.slug"/>
 </app-dashboard>
