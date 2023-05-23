@@ -18,7 +18,7 @@ export class BaseCreditRequest implements CreditRequest {
         this.outstandingBalance = creditRequest.outstandingBalance;
         this.recoveredAmount = creditRequest.recoveredAmount;
         this.agent = new BaseSimpleAgent(creditRequest.agent)
-        this.createdAt = creditRequest.createdAt
+        this.createdAt = new Date(creditRequest.createdAt)
     }
 
 }

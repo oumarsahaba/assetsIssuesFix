@@ -23,7 +23,7 @@ export class BaseLoanRequest implements LoanRequest {
 
         this.wholesaler = new BaseSimpleWholesaler(loanRequest.wholesaler)
         this.lender = new BaseSimpleLender(loanRequest.lender)
-        this.createdAt = loanRequest.createdAt
+        this.createdAt = new Date(loanRequest.createdAt)
     }
 
 }
