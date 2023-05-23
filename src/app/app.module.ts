@@ -8,10 +8,9 @@ import {SummaryPipe} from './pipes/summary/summary.pipe';
 import {TitleCasePipe} from './pipes/title-case/title-case.pipe';
 import {HttpClientModule} from "@angular/common/http";
 import {AppErrorHandler} from "./commons/errors/app-error-handler";
-import {NotFoundComponent} from './components/pages/not-found/not-found.component';
+import {NotFoundComponent} from './components/shared/not-found/not-found.component';
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {initializeKeycloak} from "./commons/keycloak-init.factory";
-import {HomeComponent} from './components/pages/home/home.component';
 import {SidebarComponent} from './components/layouts/partials/sidebar/sidebar.component';
 import {NavbarComponent} from './components/layouts/partials/navbar/navbar.component';
 import {DashboardComponent} from './components/layouts/dashboard/dashboard.component';
@@ -38,14 +37,16 @@ import {CreditRequestIndexComponent} from "./components/resources/credit-request
 import {
     CreditRequestCreateComponent
 } from "./components/resources/credit-request/create/credit-request-create.component";
+import { WarningComponent } from './components/shared/warning/warning.component';
 
 @NgModule({
     declarations: [
         SummaryPipe,
         TitleCasePipe,
+
         AppComponent,
         NotFoundComponent,
-        HomeComponent,
+
         SidebarComponent,
         NavbarComponent,
         DashboardComponent,
@@ -76,6 +77,7 @@ import {
         CreditRequestCreateComponent,
 
         OperationsComponent,
+         WarningComponent,
     ],
     imports: [
         BrowserModule,

@@ -22,8 +22,6 @@ export class LoanRequestIndexComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log("on init code wholesaler" , this.codeWholesaler)
-
         if (this.codeWholesaler != null) {
             this.loanRequestService.getAll(this.codeWholesaler)
                 .subscribe({

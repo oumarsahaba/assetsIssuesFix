@@ -43,6 +43,11 @@
                             </p>
                         </div>
                     </div>
+
+                    <app-shared-warning *ngIf="form.hasError('message')">
+                        {{ form.getError('message') }}
+                    </app-shared-warning>
+
                 </div>
             </div>
 
