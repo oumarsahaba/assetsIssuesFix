@@ -15,6 +15,12 @@ import {navigateBack} from "../../../../commons/helpers";
 })
 export class AgentIndexComponent implements OnInit{
     agents: Agent[]
+    page = {
+        totalItems: 0,
+        totalPages: 0,
+        currentPage: 0,
+        last: false
+    }
 
     constructor(private agentService: AgentService,
                 private wholesalerService: WholesalerService,
@@ -23,18 +29,7 @@ export class AgentIndexComponent implements OnInit{
     }
 
     ngOnInit(): void {
-        this.agentService.getAll()
-            .subscribe({
-                next: (response) => {
-                    console.log(response)
-                    this.agents = (response.data as Agent[])
-                        .map((agent) => new BaseAgent(agent))
-                },
-                error : (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['**'])
-                }
-            })
+        this.goToPage(0)
     }
 
     delete(codeAgent: string) {
@@ -45,5 +40,27 @@ export class AgentIndexComponent implements OnInit{
             },
             error: () => {}
         })
+    }
+
+    goToPage(page: number) {
+        this.agentService.getAll(page, 1)
+            .subscribe({
+                next: (response) => {
+                    console.log(response)
+                    this.agents = (response.data.agents as Agent[])
+                        .map((agent) => new BaseAgent(agent))
+                    this.page = {
+                        totalItems: response.data.totalItems,
+                        totalPages: response.data.totalPages,
+                        currentPage: response.data.page,
+                        last: response.data.last
+                    }
+                },
+                error : (err: AppError) => {
+                    if (err instanceof NotFoundError)
+                        this.router.navigate(['**'])
+                }
+            })
+
     }
 }

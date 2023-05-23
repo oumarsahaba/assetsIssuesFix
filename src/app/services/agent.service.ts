@@ -6,8 +6,8 @@ import {BaseAPIService} from "./base-api.service";
 })
 export class AgentService extends BaseAPIService {
 
-    getAll() {
-        return this.httpGetCall('/agent')
+    getAll(page: number = 0, size: number = 10) {
+        return this.httpGetCall(`/agent?page=${page}&size=${size}`)
     }
 
     create(codeAgent: string,
