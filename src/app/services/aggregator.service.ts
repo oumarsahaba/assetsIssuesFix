@@ -5,8 +5,8 @@ import {BaseAPIService} from "./base-api.service";
   providedIn: 'root'
 })
 export class AggregatorService extends BaseAPIService{
-    getAll() {
-        return this.httpGetCall('/aggregator')
+    getAll(page: number = 0, size: number = 10) {
+        return this.httpGetCall(`/aggregator?page=${page}&size=${size}`)
     }
 
     create(code: string, webhook: string, description: string) {

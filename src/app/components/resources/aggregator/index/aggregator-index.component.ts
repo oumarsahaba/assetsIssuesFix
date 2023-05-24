@@ -4,8 +4,8 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {Aggregator} from "../../../../commons/interfaces/aggregator";
 import {AggregatorService} from "../../../../services/aggregator.service";
-import {BaseAggregator} from "../../../../commons/models/aggregator";
 import {navigateBack} from "../../../../commons/helpers";
+import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 
 
 @Component({
@@ -14,19 +14,19 @@ import {navigateBack} from "../../../../commons/helpers";
     styleUrls: ['./aggregator-index.component.css']
 })
 export class AggregatorIndexComponent implements OnInit {
+    page : PaginatedResource<Aggregator>
 
-    aggregators: Aggregator[]
-
-    constructor(private aggregatorService: AggregatorService, private router: Router ) {
-        this.aggregators = []
-    }
+    constructor(private aggregatorService: AggregatorService, private router: Router ) {}
 
     ngOnInit(): void {
-        this.aggregatorService.getAll()
+        this.goToPage()
+    }
+
+    goToPage(page: number = 0) {
+        this.aggregatorService.getAll(page, 1)
             .subscribe({
                 next: (response) => {
-                    this.aggregators = (response.data as Aggregator[])
-                        .map((aggregator) => new BaseAggregator(aggregator))
+                    this.page = response.data as PaginatedResource<Aggregator>
                 },
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
@@ -34,6 +34,7 @@ export class AggregatorIndexComponent implements OnInit {
                 }
             })
     }
+
 
     delete(codeAggregator: string) {
         this.aggregatorService.delete(codeAggregator).subscribe({

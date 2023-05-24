@@ -5,8 +5,8 @@ import {BaseAPIService} from "./base-api.service";
     providedIn: 'root'
 })
 export class LenderService extends BaseAPIService {
-    getAll() {
-        return this.httpGetCall('/lender')
+    getAll(page: number = 0, size: number = 10) {
+        return this.httpGetCall(`/lender?page=${page}&size=${size}`)
     }
 
     create(code: string, description: string) {

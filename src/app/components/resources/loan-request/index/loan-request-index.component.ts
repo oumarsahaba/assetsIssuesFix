@@ -5,6 +5,8 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {BaseLoanRequest} from "../../../../commons/models/loan-request";
 import {Router} from "@angular/router";
+import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
+import {Agent} from "../../../../commons/interfaces/agent";
 
 @Component({
   selector: 'app-loan-request-index',
@@ -15,26 +17,26 @@ export class LoanRequestIndexComponent implements OnInit {
 
     @Input()
     codeWholesaler: any
-    loanRequests: LoanRequest[]
+    page: PaginatedResource<LoanRequest>;
 
     constructor(private loanRequestService: LoanRequestService, private router: Router) {
-        this.loanRequests = []
     }
 
     ngOnInit(): void {
-        if (this.codeWholesaler != null) {
-            this.loanRequestService.getAll(this.codeWholesaler)
-                .subscribe({
-                    next: (response) => {
-                        this.loanRequests = (response.data as LoanRequest[])
-                            .map((loanRequest) => new BaseLoanRequest(loanRequest))
-                    },
-                    error: (err: AppError) => {
-                        if (err instanceof NotFoundError)
-                            this.router.navigate(['**'])
-                    }
-                })
-        }
+        this.goToPage()
     }
 
+    goToPage(page: number = 0) {
+        this.loanRequestService.getAll(this.codeWholesaler, page, 1)
+            .subscribe({
+                next: (response) => {
+                    this.page = response.data as PaginatedResource<LoanRequest>
+                },
+                error : (err: AppError) => {
+                    if (err instanceof NotFoundError)
+                        this.router.navigate(['**'])
+                }
+            })
+
+    }
 }

@@ -5,8 +5,9 @@ import {Router} from "@angular/router";
 import {AgentService} from "../../../../services/agent.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
-import {BaseAgent} from "../../../../commons/models/agent";
 import {navigateBack} from "../../../../commons/helpers";
+import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
+
 
 @Component({
   selector: 'app-agent-index',
@@ -14,22 +15,21 @@ import {navigateBack} from "../../../../commons/helpers";
   styleUrls: ['./agent-index.component.css']
 })
 export class AgentIndexComponent implements OnInit{
-    agents: Agent[]
-    page = {
-        totalItems: 0,
+    page : PaginatedResource<Agent> = {
+        content : [],
+        totalElements: 0,
         totalPages: 0,
-        currentPage: 0,
+        number: 0,
+        first: true,
         last: false
     }
 
     constructor(private agentService: AgentService,
                 private wholesalerService: WholesalerService,
-                private router: Router) {
-        this.agents = []
-    }
+                private router: Router) {}
 
     ngOnInit(): void {
-        this.goToPage(0)
+        this.goToPage()
     }
 
     delete(codeAgent: string) {
@@ -42,19 +42,11 @@ export class AgentIndexComponent implements OnInit{
         })
     }
 
-    goToPage(page: number) {
+    goToPage(page: number = 0) {
         this.agentService.getAll(page, 1)
             .subscribe({
                 next: (response) => {
-                    console.log(response)
-                    this.agents = (response.data.agents as Agent[])
-                        .map((agent) => new BaseAgent(agent))
-                    this.page = {
-                        totalItems: response.data.totalItems,
-                        totalPages: response.data.totalPages,
-                        currentPage: response.data.page,
-                        last: response.data.last
-                    }
+                    this.page = response.data as PaginatedResource<Agent>
                 },
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
@@ -63,4 +55,6 @@ export class AgentIndexComponent implements OnInit{
             })
 
     }
+
+    protected readonly console = console;
 }

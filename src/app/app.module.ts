@@ -38,6 +38,7 @@ import {
     CreditRequestCreateComponent
 } from "./components/resources/credit-request/create/credit-request-create.component";
 import { WarningComponent } from './components/shared/warning/warning.component';
+import { PaginatedResourceComponent } from './components/shared/paginated-resource/paginated-resource.component';
 
 @NgModule({
     declarations: [
@@ -78,6 +79,7 @@ import { WarningComponent } from './components/shared/warning/warning.component'
 
         OperationsComponent,
          WarningComponent,
+         PaginatedResourceComponent,
     ],
     imports: [
         BrowserModule,

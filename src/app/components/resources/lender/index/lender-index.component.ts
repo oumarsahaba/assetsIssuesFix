@@ -6,6 +6,8 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {BaseLender} from "../../../../commons/models/lender";
 import {navigateBack} from "../../../../commons/helpers";
+import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
+import {Agent} from "../../../../commons/interfaces/agent";
 
 @Component({
     selector: 'app-lender-index',
@@ -14,24 +16,27 @@ import {navigateBack} from "../../../../commons/helpers";
 })
 export class LenderIndexComponent implements OnInit {
 
-    lenders: Lender[]
+    page: PaginatedResource<Lender>;
 
     constructor(private lenderService: LenderService, private router: Router ) {
-        this.lenders = []
     }
 
     ngOnInit(): void {
-        this.lenderService.getAll()
+        this.goToPage()
+    }
+
+    goToPage(page: number = 0) {
+        this.lenderService.getAll(page, 1)
             .subscribe({
                 next: (response) => {
-                    this.lenders = (response.data as Lender[])
-                        .map((lender) => new BaseLender(lender))
+                    this.page = response.data as PaginatedResource<Lender>
                 },
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['**'])
                 }
             })
+
     }
 
     delete(codeLender: string) {

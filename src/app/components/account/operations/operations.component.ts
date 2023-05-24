@@ -4,6 +4,9 @@ import {BaseOperation} from "../../../commons/models/operation";
 import {AppError} from "../../../commons/errors/app-error";
 import {NotFoundError} from "../../../commons/errors/not-found-error";
 import {OperationService} from "../../../services/operation.service";
+import {PaginatedResource} from "../../../commons/interfaces/paginated-resource";
+import {LoanRequest} from "../../../commons/interfaces/loan-request";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-account-operations',
@@ -13,29 +16,28 @@ import {OperationService} from "../../../services/operation.service";
 export class OperationsComponent implements OnInit {
     @Input()
     accountSlug: any
+    page: PaginatedResource<Operation>;
 
-    operations: Operation[]
-
-    constructor(private operationService: OperationService) {
-        this.operations = []
+    constructor(private router: Router, private operationService: OperationService) {
         this.accountSlug = ''
     }
 
     ngOnInit(): void {
-        if (this.accountSlug) {
-            this.operationService.getAccountOperations(this.accountSlug)
-                .subscribe({
-                    next: (response) => {
-                        console.log(response)
-                        this.operations = (response.data as Operation[])
-                            .map((operation) => new BaseOperation(operation))
-                    },
-                    error : (err: AppError) => {
-                        if (err instanceof NotFoundError)
-                            console.log(err)
-                    }
-                })
-        }
+        this.goToPage()
+    }
+
+    goToPage(page: number = 0) {
+        this.operationService.getAccountOperations(this.accountSlug, page)
+            .subscribe({
+                next: (response) => {
+                    this.page = response.data as PaginatedResource<Operation>
+                },
+                error : (err: AppError) => {
+                    if (err instanceof NotFoundError)
+                        this.router.navigate(['**'])
+                }
+            })
 
     }
+
 }

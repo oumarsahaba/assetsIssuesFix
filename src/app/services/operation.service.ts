@@ -5,7 +5,7 @@ import {BaseAPIService} from "./base-api.service";
   providedIn: 'root'
 })
 export class OperationService extends BaseAPIService{
-    getAccountOperations(accountSlug: string) {
-        return this.httpGetCall('/operation/account/' + accountSlug)
+    getAccountOperations(accountSlug: string, page: number = 0, size: number = 10) {
+        return this.httpGetCall(`/operation/account/${accountSlug}?page=${page}&size=${size}`)
     }
 }

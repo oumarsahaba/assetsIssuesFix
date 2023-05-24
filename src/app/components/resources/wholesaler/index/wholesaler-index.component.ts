@@ -4,8 +4,8 @@ import {WholesalerService} from "../../../../services/wholesaler.service";
 import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
-import {BaseWholesaler} from "../../../../commons/models/wholesaler";
 import {navigateBack} from "../../../../commons/helpers";
+import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 
 @Component({
   selector: 'app-wholesaler-index',
@@ -14,18 +14,20 @@ import {navigateBack} from "../../../../commons/helpers";
 })
 export class WholesalerIndexComponent implements OnInit {
 
-    wholesalers: Wholesaler[]
+    page : PaginatedResource<Wholesaler>
 
     constructor(private wholesalerService: WholesalerService, private router: Router ) {
-        this.wholesalers = []
     }
 
     ngOnInit(): void {
-        this.wholesalerService.getAll()
+        this.goToPage()
+    }
+
+    goToPage(page: number = 0) {
+        this.wholesalerService.getAll(page, 1)
             .subscribe({
                 next: (response) => {
-                    this.wholesalers = (response.data as Wholesaler[])
-                        .map((wholesaler) => new BaseWholesaler(wholesaler))
+                    this.page = response.data as PaginatedResource<Wholesaler>
                 },
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
