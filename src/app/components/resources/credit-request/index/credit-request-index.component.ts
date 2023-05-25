@@ -5,6 +5,8 @@ import {Router} from "@angular/router";
 import {CreditRequest} from "../../../../commons/interfaces/credit-request";
 import {CreditRequestService} from "../../../../services/credit-request.service";
 import {BaseCreditRequest} from "../../../../commons/models/credit-request";
+import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
+import {Operation} from "../../../../commons/interfaces/operation";
 
 @Component({
   selector: 'app-credit-request-index',
@@ -15,28 +17,28 @@ export class CreditRequestIndexComponent implements OnInit {
 
     @Input()
     codeAgent: any
-    creditRequests: CreditRequest[]
+    page: PaginatedResource<CreditRequest>;
 
     constructor(private creditRequestService: CreditRequestService, private router: Router) {
-        this.creditRequests = []
     }
 
     ngOnInit(): void {
-        console.log("on init code Agent" , this.codeAgent)
+        this.goToPage()
+    }
 
-        if (this.codeAgent != null) {
-            this.creditRequestService.getAll(this.codeAgent)
-                .subscribe({
-                    next: (response) => {
-                        this.creditRequests = (response.data as CreditRequest[])
-                            .map((creditRequest) => new BaseCreditRequest(creditRequest))
-                    },
-                    error: (err: AppError) => {
-                        if (err instanceof NotFoundError)
-                            this.router.navigate(['**'])
-                    }
-                })
-        }
+    goToPage(page: number = 0) {
+
+        this.creditRequestService.getAll(this.codeAgent, page, 5)
+            .subscribe({
+                next: (response) => {
+                    this.page = response.data as PaginatedResource<CreditRequest>
+                },
+                error : (err: AppError) => {
+                    if (err instanceof NotFoundError)
+                        this.router.navigate(['**'])
+                }
+            })
+
     }
 
 }

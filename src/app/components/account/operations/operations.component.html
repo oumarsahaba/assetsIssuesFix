@@ -26,7 +26,7 @@
                 <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ operation.balanceAfter }}</td>
                 <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ operation.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
             </tr>
-            <tr *ngIf="page.content.length ==0 ">
+            <tr *ngIf="page.content.length == 0">
                 <td class="whitespace-nowrap py-2 text-center text-sm text-gray-500 sm:pl-0" colspan="6"> No data available </td>
             </tr>
             </tbody>

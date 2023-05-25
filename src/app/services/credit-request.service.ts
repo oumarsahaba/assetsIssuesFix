@@ -6,8 +6,8 @@ import {BaseAPIService} from "./base-api.service";
 })
 export class CreditRequestService extends BaseAPIService {
 
-    getAll(codeAgent: string) {
-        return this.httpGetCall('/credit/request/'+ codeAgent)
+    getAll(codeAgent: string, page: number = 0, size: number = 10) {
+        return this.httpGetCall(`/credit/request/${codeAgent}?page=${page}&size=${size}`)
     }
 
     create(codeAgent: string, amount: number, recoveryPeriodInDays: number, recoveryAmountByPeriod: number) {
