@@ -5,6 +5,8 @@ import {Router} from "@angular/router";
 import {CommissionPlanService} from "../../../../services/commission-plan.service";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {AppError} from "../../../../commons/errors/app-error";
+import {Commissionable} from "../../../../commons/enums/Commissionable";
+import {OperationType} from "../../../../commons/enums/OperationType";
 
 @Component({
   selector: 'app-commission-plan-create',
@@ -20,6 +22,8 @@ export class CommissionPlanCreateComponent {
 
     @Input()
     type: string
+
+    protected readonly OperationType = OperationType;
 
     constructor(private commissionPlanService: CommissionPlanService, private router: Router) {
         this.form = new FormGroup({
@@ -61,4 +65,10 @@ export class CommissionPlanCreateComponent {
     toggleModal() {
         this.displayModal = !this.displayModal
     }
+
+    changeOperationType($event: Event) {
+
+    }
+
+    protected readonly Object = Object;
 }

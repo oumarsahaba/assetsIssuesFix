@@ -5,6 +5,7 @@ import {Aggregator} from "../../../../commons/interfaces/aggregator";
 import {AggregatorService} from "../../../../services/aggregator.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
+import {Commissionable} from "../../../../commons/enums/Commissionable";
 
 @Component({
   selector: 'app-aggregator-show',
@@ -16,11 +17,14 @@ export class AggregatorShowComponent {
     accountSlug: string | null
     operations: Operation[]
 
+    protected readonly Commissionable = Commissionable;
+
     constructor(private router: Router, private route: ActivatedRoute, private aggregatorService: AggregatorService) {
         this.aggregator = null
         this.accountSlug = null
         this.operations = []
     }
+
 
     ngOnInit(): void {
         if (this.route.snapshot.paramMap.get('codeAggregator') != null) {
@@ -38,6 +42,4 @@ export class AggregatorShowComponent {
                 })
         }
     }
-
-
 }

@@ -1,5 +1,5 @@
 <app-dashboard>
     <app-account-operations *ngIf="accountSlug" [accountSlug]="accountSlug"/>
     <div class="divide-amber-50 py-1 my-10"></div>
-    <app-commission-plan-index [code]="aggregator.codeAggregator" type="AGGREGATOR"/>
+    <app-commission-plan-index [code]="aggregator.codeAggregator" [type]="Commissionable.aggregator"/>
 </app-dashboard>

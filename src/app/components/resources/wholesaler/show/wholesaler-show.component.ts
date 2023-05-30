@@ -5,6 +5,7 @@ import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 import {WholesalerService} from "../../../../services/wholesaler.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
+import {Commissionable} from "../../../../commons/enums/Commissionable";
 
 @Component({
   selector: 'app-wholesaler-show',
@@ -15,6 +16,8 @@ export class WholesalerShowComponent {
     wholesaler: Wholesaler | null
     accountSlug: string | null
     operations: Operation[]
+
+    protected readonly Commissionable = Commissionable;
 
     constructor(private router: Router, private route: ActivatedRoute, private wholesalerService: WholesalerService) {
         this.wholesaler = null
@@ -38,7 +41,4 @@ export class WholesalerShowComponent {
                 })
         }
     }
-
-
-    protected readonly console = console;
 }
