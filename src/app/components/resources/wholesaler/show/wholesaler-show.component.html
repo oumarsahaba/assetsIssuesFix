@@ -15,4 +15,6 @@
     <app-loan-request-index *ngIf="wholesaler" [codeWholesaler]="wholesaler.codeWholesaler"></app-loan-request-index>
     <div class="divide-amber-50 py-1 my-10"></div>
     <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.account.slug"/>
+    <div class="divide-amber-50 py-1 my-10"></div>
+    <app-commission-plan-index [code]="wholesaler.codeWholesaler" type="WHOLESALER"/>
 </app-dashboard>

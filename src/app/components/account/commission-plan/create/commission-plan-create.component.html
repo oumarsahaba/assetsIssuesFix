@@ -1,0 +1,117 @@
+<button
+    (click)="toggleModal()"
+    type="button"
+    class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">New Commission Plan</button>
+
+<app-shared-modal [show]="displayModal">
+    <div class="px-4 sm:px-6 lg:px-8 py-4" >
+        <form class="w-full items-center" [formGroup]="form" (ngSubmit)="create()">
+            <div class="space-y-12">
+                <div class="border-b border-gray-900/10 pb-12">
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">Create a new commission plan</h2>
+
+                    <div class="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-6 flex items-end">
+                        <div class="col-span-1 sm:col-span-3">
+                            <label for="startAmount" class="block text-sm font-medium leading-6 text-gray-900">Start amount</label>
+                            <div class="mt-2">
+                                <input type="text" id="startAmount"
+                                       formControlName="startAmount"
+                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <p class="text-xs text-red-500" *ngIf="form.get('startAmount')?.errors?.['serverError']">
+                                    {{ form.get('startAmount')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-span-1 sm:col-span-3">
+                            <label for="endAmount" class="block text-sm font-medium leading-6 text-gray-900">End amount</label>
+                            <div class="mt-2">
+                                <input type="text" id="endAmount"
+                                       formControlName="endAmount"
+                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <p class="text-xs text-red-500" *ngIf="form.get('endAmount')?.errors?.['serverError']">
+                                    {{ form.get('endAmount')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-span-1 sm:col-span-3">
+                            <label for="feesFix" class="block text-sm font-medium leading-6 text-gray-900">Fix fees</label>
+                            <div class="mt-2">
+                                <input type="text" id="feesFix"
+                                       formControlName="feesFix"
+                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <p class="text-xs text-red-500" *ngIf="form.get('feesFix')?.errors?.['serverError']">
+                                    {{ form.get('feesFix')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-span-1 sm:col-span-3">
+                            <label for="feesPercentage" class="block text-sm font-medium leading-6 text-gray-900">Percentage fees</label>
+                            <div class="mt-2">
+                                <input type="text" id="feesPercentage"
+                                       formControlName="feesPercentage"
+                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <p class="text-xs text-red-500" *ngIf="form.get('feesPercentage')?.errors?.['serverError']">
+                                    {{ form.get('feesPercentage')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-span-1 sm:col-span-2">
+                            <label for="commissionAggregator" class="block text-sm font-medium leading-6 text-gray-900">Commission Aggregator</label>
+                            <div class="mt-2">
+                                <input type="text" id="commissionAggregator"
+                                       formControlName="commissionAggregator"
+                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <p class="text-xs text-red-500" *ngIf="form.get('commissionAggregator')?.errors?.['serverError']">
+                                    {{ form.get('commissionAggregator')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-span-1 sm:col-span-2">
+                            <label for="commissionWholesaler" class="block text-sm font-medium leading-6 text-gray-900">Commission Wholesaler</label>
+                            <div class="mt-2">
+                                <input type="text" id="commissionWholesaler"
+                                       formControlName="commissionWholesaler"
+                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <p class="text-xs text-red-500" *ngIf="form.get('commissionWholesaler')?.errors?.['serverError']">
+                                    {{ form.get('commissionWholesaler')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-span-1 sm:col-span-2">
+                            <label for="commissionLender" class="block text-sm font-medium leading-6 text-gray-900">Commission Lender</label>
+                            <div class="mt-2">
+                                <input type="text" id="commissionLender"
+                                       formControlName="commissionLender"
+                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <p class="text-xs text-red-500" *ngIf="form.get('commissionLender')?.errors?.['serverError']">
+                                    {{ form.get('commissionLender')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-span-1 sm:col-span-6">
+                            <label for="operationType" class="block text-sm font-medium leading-6 text-gray-900">Operation Type</label>
+                            <div class="mt-2">
+                                <input type="text" id="operationType"
+                                       formControlName="operationType"
+                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <p class="text-xs text-red-500" *ngIf="form.get('operationType')?.errors?.['serverError']">
+                                    {{ form.get('operationType')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+                <button
+                    (click)="toggleModal()"
+                    type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+            </div>
+        </form>
+    </div>
+</app-shared-modal>
