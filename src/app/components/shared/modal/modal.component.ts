@@ -12,8 +12,6 @@ export class ModalComponent implements OnInit {
     @Input()
     size: string = 'lg'
 
-    constructor() {}
-
     ngOnInit(): void {}
 
     toggle() {

@@ -43,7 +43,7 @@ export class AgentIndexComponent implements OnInit{
     }
 
     goToPage(page: number = 0) {
-        this.agentService.getAll(page, 1)
+        this.agentService.getAll(page)
             .subscribe({
                 next: (response) => {
                     this.page = response.data as PaginatedResource<Agent>

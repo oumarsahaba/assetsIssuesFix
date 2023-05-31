@@ -3,10 +3,8 @@ import {LoanRequest} from "../../../../commons/interfaces/loan-request";
 import {LoanRequestService} from "../../../../services/loan-request.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
-import {BaseLoanRequest} from "../../../../commons/models/loan-request";
 import {Router} from "@angular/router";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
-import {Agent} from "../../../../commons/interfaces/agent";
 
 @Component({
   selector: 'app-loan-request-index',
@@ -27,7 +25,7 @@ export class LoanRequestIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.loanRequestService.getAll(this.codeWholesaler, page, 1)
+        this.loanRequestService.getAll(this.codeWholesaler, page)
             .subscribe({
                 next: (response) => {
                     this.page = response.data as PaginatedResource<LoanRequest>

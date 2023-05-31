@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CommissionPlanIndexComponent } from './commission-plan-index.component';
+import {CommissionPlanIndexComponent} from './commission-plan-index.component';
 
 describe('IndexComponent', () => {
   let component: CommissionPlanIndexComponent;

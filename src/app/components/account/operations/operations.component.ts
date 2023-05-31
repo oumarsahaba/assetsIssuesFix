@@ -1,11 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Operation} from "../../../commons/interfaces/operation";
-import {BaseOperation} from "../../../commons/models/operation";
 import {AppError} from "../../../commons/errors/app-error";
 import {NotFoundError} from "../../../commons/errors/not-found-error";
 import {OperationService} from "../../../services/operation.service";
 import {PaginatedResource} from "../../../commons/interfaces/paginated-resource";
-import {LoanRequest} from "../../../commons/interfaces/loan-request";
 import {Router} from "@angular/router";
 
 @Component({

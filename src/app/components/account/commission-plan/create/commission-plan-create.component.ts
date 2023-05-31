@@ -1,11 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AggregatorService} from "../../../../services/aggregator.service";
 import {Router} from "@angular/router";
 import {CommissionPlanService} from "../../../../services/commission-plan.service";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {AppError} from "../../../../commons/errors/app-error";
-import {Commissionable} from "../../../../commons/enums/Commissionable";
 import {OperationType} from "../../../../commons/enums/OperationType";
 
 @Component({

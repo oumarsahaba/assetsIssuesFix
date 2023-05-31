@@ -4,9 +4,7 @@ import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {Router} from "@angular/router";
 import {CreditRequest} from "../../../../commons/interfaces/credit-request";
 import {CreditRequestService} from "../../../../services/credit-request.service";
-import {BaseCreditRequest} from "../../../../commons/models/credit-request";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
-import {Operation} from "../../../../commons/interfaces/operation";
 
 @Component({
   selector: 'app-credit-request-index',

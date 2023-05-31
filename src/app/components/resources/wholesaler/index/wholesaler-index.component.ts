@@ -24,7 +24,7 @@ export class WholesalerIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.wholesalerService.getPage(page, 1)
+        this.wholesalerService.getPage(page)
             .subscribe({
                 next: (response) => {
                     this.page = response.data as PaginatedResource<Wholesaler>

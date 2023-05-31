@@ -37,10 +37,12 @@ import {CreditRequestIndexComponent} from "./components/resources/credit-request
 import {
     CreditRequestCreateComponent
 } from "./components/resources/credit-request/create/credit-request-create.component";
-import { WarningComponent } from './components/shared/warning/warning.component';
-import { PaginatedResourceComponent } from './components/shared/paginated-resource/paginated-resource.component';
-import { CommissionPlanIndexComponent } from './components/account/commission-plan/index/commission-plan-index.component';
-import { CommissionPlanCreateComponent } from './components/account/commission-plan/create/commission-plan-create.component';
+import {WarningComponent} from './components/shared/warning/warning.component';
+import {PaginatedResourceComponent} from './components/shared/paginated-resource/paginated-resource.component';
+import {CommissionPlanIndexComponent} from './components/account/commission-plan/index/commission-plan-index.component';
+import {
+    CommissionPlanCreateComponent
+} from './components/account/commission-plan/create/commission-plan-create.component';
 
 @NgModule({
     declarations: [

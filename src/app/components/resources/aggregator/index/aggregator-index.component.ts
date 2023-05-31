@@ -23,7 +23,7 @@ export class AggregatorIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.aggregatorService.getPage(page, 1)
+        this.aggregatorService.getPage(page)
             .subscribe({
                 next: (response) => {
                     this.page = response.data as PaginatedResource<Aggregator>

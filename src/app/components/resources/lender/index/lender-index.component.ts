@@ -4,10 +4,8 @@ import {LenderService} from "../../../../services/lender.service";
 import {Router} from "@angular/router";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
-import {BaseLender} from "../../../../commons/models/lender";
 import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
-import {Agent} from "../../../../commons/interfaces/agent";
 
 @Component({
     selector: 'app-lender-index',
@@ -26,7 +24,7 @@ export class LenderIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.lenderService.getPage(page, 1)
+        this.lenderService.getPage(page)
             .subscribe({
                 next: (response) => {
                     this.page = response.data as PaginatedResource<Lender>

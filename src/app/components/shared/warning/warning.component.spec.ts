@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { WarningComponent } from './warning.component';
+import {WarningComponent} from './warning.component';
 
 describe('WarningComponent', () => {
   let component: WarningComponent;

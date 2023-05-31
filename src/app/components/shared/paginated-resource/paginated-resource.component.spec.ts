@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PaginatedResourceComponent } from './paginated-resource.component';
+import {PaginatedResourceComponent} from './paginated-resource.component';
 
 describe('PaginatedResourceComponent', () => {
   let component: PaginatedResourceComponent;

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BaseAPIService} from "./base-api.service";
 import {CommissionPlan} from "../commons/interfaces/commission-plan";
 
