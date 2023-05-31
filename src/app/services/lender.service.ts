@@ -9,6 +9,10 @@ export class LenderService extends BaseAPIService {
         return this.httpGetCall(`/lender?page=${page}&size=${size}`)
     }
 
+    getPage(page: number = 0, size: number = 10) {
+        return this.httpGetCall(`/lender/getPage?page=${page}&size=${size}`)
+    }
+
     create(code: string, description: string) {
         return this.httpPostCall('/lender/store', {
             codeLender : code,

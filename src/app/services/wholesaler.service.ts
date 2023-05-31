@@ -5,8 +5,12 @@ import {BaseAPIService} from "./base-api.service";
   providedIn: 'root'
 })
 export class WholesalerService extends BaseAPIService{
-    getAll(page: number = 0, size: number = 10) {
-        return this.httpGetCall(`/wholesaler?page=${page}&size=${size}`)
+    getAll() {
+        return this.httpGetCall(`/wholesaler`)
+    }
+
+    getPage(page: number = 0, size: number = 10) {
+        return this.httpGetCall(`/wholesaler/getPage?page=${page}&size=${size}`)
     }
 
     create(codeWholesaler: string, codeAggregator: string, description: string) {

@@ -26,7 +26,7 @@ export class LenderIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.lenderService.getAll(page, 1)
+        this.lenderService.getPage(page, 1)
             .subscribe({
                 next: (response) => {
                     this.page = response.data as PaginatedResource<Lender>

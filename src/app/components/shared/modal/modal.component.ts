@@ -9,6 +9,9 @@ export class ModalComponent implements OnInit {
     @Input()
     show: boolean = false
 
+    @Input()
+    size: string = 'lg'
+
     constructor() {}
 
     ngOnInit(): void {}
