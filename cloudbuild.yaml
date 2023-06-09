@@ -1,0 +1,23 @@
+steps:
+    - name: gcr.io/cloud-builders/gcloud
+      args:
+          - '-c'
+          - >
+              sed -i 's/%SERVICE_NAME%/${_SERVICE_NAME}/g'
+              app.yaml
+      id: Set application env
+      entrypoint: bash
+
+    - name: 'gcr.io/cloud-builders/npm:latest'
+      args:
+          - install
+    - name: 'gcr.io/cloud-builders/npm:latest'
+      args:
+          - run
+          - build
+          - '--prod'
+    - name: gcr.io/cloud-builders/gcloud
+      args:
+          - app
+          - deploy
+          - '--version=prod'
