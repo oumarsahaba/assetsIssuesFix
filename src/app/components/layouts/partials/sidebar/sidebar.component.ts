@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'app-sidebar',
@@ -11,6 +12,8 @@ export class SidebarComponent {
 
     @Output()
     sidebarClosed = new EventEmitter
+    constructor(public keycloakService: KeycloakService) {
+    }
 
     toggleSidebar() {
         this.showMobileSideBar = !this.showMobileSideBar

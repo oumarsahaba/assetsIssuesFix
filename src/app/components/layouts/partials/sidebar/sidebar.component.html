@@ -113,7 +113,7 @@
                 <li>
                     <div class="text-xs font-semibold leading-6 text-gray-400">Resources</div>
                     <ul role="list" class="-mx-2 mt-2 space-y-1">
-                        <li>
+                        <li *ngIf="keycloakService.isUserInRole('admin')">
                             <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
                             <a routerLink="/lender"
                                 routerLinkActive="bg-gray-800 text-white"
@@ -122,7 +122,7 @@
                                 <span class="truncate">Lenders</span>
                             </a>
                         </li>
-                        <li>
+                        <li *ngIf="keycloakService.isUserInRole('admin')">
                             <a routerLink="/aggregator"
                                routerLinkActive="bg-gray-800 text-white"
                                class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
