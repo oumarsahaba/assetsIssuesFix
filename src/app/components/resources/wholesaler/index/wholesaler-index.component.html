@@ -25,7 +25,7 @@
                 </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
-                <tr *ngFor="let wholesaler of page.content">
+                <tr *ngFor="let wholesaler of page?.content">
                     <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ wholesaler.codeWholesaler }}</td>
                     <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ wholesaler.aggregator.description }}</td>
                     <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.description }}</td>
@@ -55,7 +55,7 @@
 
                     </td>
                 </tr>
-                <tr *ngIf="page.content.length == 0">
+                <tr *ngIf="page?.content.length == 0">
                     <td class="whitespace-nowrap py-2 text-center text-sm text-gray-500 sm:pl-0" colspan="6"> No data available </td>
                 </tr>
                 </tbody>

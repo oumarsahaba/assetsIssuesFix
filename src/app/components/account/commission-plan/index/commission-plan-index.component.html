@@ -9,6 +9,7 @@
         </div>
     </div>
     <app-shared-paginated-resource *ngIf="page" [(page)]="page" (pageChange)="goToPage($event.number)">
+
         <table class="min-w-full divide-y divide-gray-300">
             <thead class="bg-gray-50">
             <tr>
@@ -26,7 +27,7 @@
             </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
-            <tr *ngFor="let commissionPlan of page.content">
+            <tr *ngFor="let commissionPlan of page?.content">
                 <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ commissionPlan.operationType }}</td>
                 <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ commissionPlan.startAmount }}</td>
                 <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ commissionPlan.endAmount }}</td>
@@ -49,7 +50,7 @@
                     </div>
                 </td>
             </tr>
-            <tr *ngIf="page.content.length == 0">
+            <tr *ngIf="page?.content.length == 0">
                 <td class="whitespace-nowrap py-2 text-center text-sm text-gray-500 sm:pl-0" colspan="8"> No data available </td>
             </tr>
             </tbody>
