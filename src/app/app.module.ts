@@ -43,6 +43,7 @@ import {CommissionPlanIndexComponent} from './components/account/commission-plan
 import {
     CommissionPlanCreateComponent
 } from './components/account/commission-plan/create/commission-plan-create.component';
+import { ForbiddenComponent } from './components/shared/forbidden/forbidden.component';
 
 @NgModule({
     declarations: [
@@ -86,6 +87,7 @@ import {
          PaginatedResourceComponent,
          CommissionPlanIndexComponent,
          CommissionPlanCreateComponent,
+         ForbiddenComponent,
     ],
     imports: [
         BrowserModule,

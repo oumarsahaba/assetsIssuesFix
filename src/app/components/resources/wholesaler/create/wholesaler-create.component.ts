@@ -41,7 +41,7 @@ export class WholesalerCreateComponent implements OnInit{
                 },
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
-                        this.router.navigate(['**'])
+                        this.router.navigate(['/not-found'])
                 }
             })
     }

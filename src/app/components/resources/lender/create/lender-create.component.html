@@ -3,7 +3,7 @@
     type="button"
     class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">New Lender</button>
 
-<app-shared-modal [show]="displayModal">
+<app-shared-modal [show]="displayModal" size="lg">
     <div class="px-4 sm:px-6 lg:px-8 py-4" >
     <form class="w-full items-center" [formGroup]="form" (ngSubmit)="create()">
         <div class="space-y-12">
