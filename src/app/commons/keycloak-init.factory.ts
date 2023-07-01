@@ -1,21 +1,19 @@
 import {KeycloakService} from "keycloak-angular";
+import {environment} from "../../environments/environment";
 
 export function initializeKeycloak(keycloak: KeycloakService) {
 
     return () =>
-
         keycloak.init({
             config: {
-                url: 'https://dev-sso.gutouch.net/auth',
-                // url: 'http://localhost:28080/auth',
-                realm: 'creditdigital',
-                clientId: 'engine',
+                url: environment.keycloak.baseUrl,
+                realm: environment.keycloak.realm,
+                clientId: environment.keycloak.clientId,
             },
             initOptions: {
                 checkLoginIframe: false,
-                redirectUri: 'http://localhost:4200',
+                redirectUri: environment.keycloak.redirectUri
             },
             loadUserProfileAtStartUp : true
         });
-
 }

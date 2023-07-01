@@ -7,14 +7,15 @@ import {NotFoundError} from "../commons/errors/not-found-error";
 import {BadRequestError} from "../commons/errors/bad-request-error";
 import {UnprocessableEntityError} from "../commons/errors/unprocessable-entity-error";
 import {ApiResponse} from "../commons/interfaces/api-response";
+import {environment} from "../../environments/environment";
 
 
 @Injectable({
     providedIn: 'root'
 })
 export abstract class BaseAPIService {
-    // private readonly baseUrl: string = 'http://localhost:8080/api/v1'
-    private readonly baseUrl: string = 'https://engine-back-end-dev-dot-credit-digital-386211.oa.r.appspot.com/api/v1'
+    private readonly baseUrl: string = environment.engine.baseUrl
+
     private httpHeaders : HttpHeaders = new HttpHeaders()
 
     constructor(private httpClient: HttpClient, private keycloakService: KeycloakService) {
