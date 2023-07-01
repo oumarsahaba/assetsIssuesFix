@@ -5,6 +5,7 @@ import {NotFoundError} from "../../../commons/errors/not-found-error";
 import {OperationService} from "../../../services/operation.service";
 import {PaginatedResource} from "../../../commons/interfaces/paginated-resource";
 import {Router} from "@angular/router";
+import {ForbiddenError} from "../../../commons/errors/forbidden-error";
 
 @Component({
   selector: 'app-account-operations',
@@ -33,6 +34,9 @@ export class OperationsComponent implements OnInit {
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
+
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden'])
                 }
             })
 

@@ -6,6 +6,7 @@ import {AggregatorService} from "../../../../services/aggregator.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {Commissionable} from "../../../../commons/enums/Commissionable";
+import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 
 @Component({
   selector: 'app-aggregator-show',
@@ -38,6 +39,9 @@ export class AggregatorShowComponent {
                     error : (err: AppError) => {
                         if (err instanceof NotFoundError)
                             this.router.navigate(['/not-found'])
+
+                        if (err instanceof ForbiddenError)
+                            this.router.navigate(['/forbidden'])
                     }
                 })
         }

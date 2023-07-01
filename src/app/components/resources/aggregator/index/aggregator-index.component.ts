@@ -6,6 +6,7 @@ import {Aggregator} from "../../../../commons/interfaces/aggregator";
 import {AggregatorService} from "../../../../services/aggregator.service";
 import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
+import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 
 
 @Component({
@@ -31,6 +32,9 @@ export class AggregatorIndexComponent implements OnInit {
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
+
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden'])
                 }
             })
     }

@@ -8,6 +8,7 @@ import {BadRequestError} from "../commons/errors/bad-request-error";
 import {UnprocessableEntityError} from "../commons/errors/unprocessable-entity-error";
 import {ApiResponse} from "../commons/interfaces/api-response";
 import {environment} from "../../environments/environment";
+import {ForbiddenError} from "../commons/errors/forbidden-error";
 
 
 @Injectable({
@@ -55,6 +56,8 @@ export abstract class BaseAPIService {
         switch (err.status) {
             case 400 :
                 return throwError(() => new BadRequestError(err))
+            case 403 :
+                return throwError(() => new ForbiddenError())
             case 404 :
                 return throwError(() => new NotFoundError())
             case 422 :

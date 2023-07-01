@@ -8,6 +8,7 @@ import {AggregatorService} from "../../../../services/aggregator.service";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {BaseAggregator} from "../../../../commons/models/aggregator";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
+import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 
 @Component({
     selector: 'app-wholesaler-create',
@@ -42,6 +43,9 @@ export class WholesalerCreateComponent implements OnInit{
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
+
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden'])
                 }
             })
     }

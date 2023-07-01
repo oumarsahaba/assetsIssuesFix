@@ -5,6 +5,7 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {AgentService} from "../../../../services/agent.service";
 import {Agent} from "../../../../commons/interfaces/agent";
+import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 
 @Component({
   selector: 'app-agent-show',
@@ -34,6 +35,9 @@ export class AgentShowComponent {
                     error : (err: AppError) => {
                         if (err instanceof NotFoundError)
                             this.router.navigate(['/not-found'])
+
+                        if (err instanceof ForbiddenError)
+                            this.router.navigate(['/forbidden'])
                     }
                 })
         }

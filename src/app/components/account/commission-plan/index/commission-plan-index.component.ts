@@ -5,6 +5,7 @@ import {CommissionPlanService} from "../../../../services/commission-plan.servic
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {CommissionPlan} from "../../../../commons/interfaces/commission-plan";
+import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 
 @Component({
   selector: 'app-commission-plan-index',
@@ -44,6 +45,9 @@ export class CommissionPlanIndexComponent implements OnInit {
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
+
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden'])
                 }
             })
 

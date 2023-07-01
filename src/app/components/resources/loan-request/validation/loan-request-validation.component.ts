@@ -5,6 +5,7 @@ import {LoanRequestService} from "../../../../services/loan-request.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {navigateBack} from "../../../../commons/helpers";
+import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 
 @Component({
     selector: 'app-loan-request-validation',
@@ -36,6 +37,9 @@ export class LoanRequestValidationComponent {
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
+
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden'])
                 }
             })
     }

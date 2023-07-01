@@ -8,6 +8,7 @@ import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {SimpleWholesaler} from "../../../../commons/interfaces/simple-wholesaler";
 import {BaseSimpleWholesaler} from "../../../../commons/models/simple-wholesaler";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
+import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 
 @Component({
     selector: 'app-agent-create',
@@ -46,6 +47,9 @@ export class AgentCreateComponent implements OnInit {
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
+
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden'])
                 }
             })
     }

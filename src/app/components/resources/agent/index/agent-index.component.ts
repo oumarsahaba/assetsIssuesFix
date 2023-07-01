@@ -7,6 +7,7 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
+import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 
 
 @Component({
@@ -51,6 +52,9 @@ export class AgentIndexComponent implements OnInit{
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/'])
+
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden'])
                 }
             })
 
