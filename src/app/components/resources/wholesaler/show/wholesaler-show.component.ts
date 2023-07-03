@@ -28,7 +28,6 @@ export class WholesalerShowComponent {
 
     ngOnInit(): void {
         if (this.route.snapshot.paramMap.get('codeWholesaler') != null) {
-            // @ts-ignore
             this.wholesalerService.show(this.route.snapshot.paramMap.get('codeWholesaler'))
                 .subscribe({
                     next: (response) => {

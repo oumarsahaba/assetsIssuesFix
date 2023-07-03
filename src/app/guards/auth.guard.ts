@@ -7,8 +7,7 @@ import {KeycloakAuthGuard, KeycloakService} from "keycloak-angular";
 })
 export class AuthGuard extends KeycloakAuthGuard {
 
-    constructor(protected override readonly router: Router,
-                protected readonly keycloak: KeycloakService) {
+    constructor(protected override readonly router: Router, protected readonly keycloak: KeycloakService) {
         super(router, keycloak);
     }
 
@@ -23,9 +22,11 @@ export class AuthGuard extends KeycloakAuthGuard {
         }
 
         // Get the roles required from the route.
-        const requiredRoles = route.data['roles'];
-        console.log("requiredRoles", requiredRoles)
+        let roles = route.data?.['roles'] as Array<string>
 
-        return this.authenticated;
+        if (roles.length > 0)
+            return roles.filter(role => this.keycloak.isUserInRole(role)).length > 0
+
+        return true
     }
 }

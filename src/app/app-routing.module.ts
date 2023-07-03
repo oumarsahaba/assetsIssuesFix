@@ -12,22 +12,21 @@ import {AgentShowComponent} from "./components/resources/agent/show/agent-show.c
 import {AggregatorShowComponent} from "./components/resources/aggregator/show/aggregator-show.component";
 import {DashboardGuard} from "./guards/dashboard.guard";
 import {ForbiddenComponent} from "./components/shared/forbidden/forbidden.component";
-import {RoleGuard} from "./guards/role.guard";
 
 const routes: Routes = [
     {path: '', redirectTo: '', pathMatch: 'full', canActivate: [AuthGuard, DashboardGuard]},
 
-    {path: 'lender', component: LenderIndexComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['admin']} },
-    {path: 'lender/:codeLender', component: LenderShowComponent, canActivate: [AuthGuard]},
+    {path: 'lender', component: LenderIndexComponent, canActivate: [AuthGuard], data: {roles: ['admin']} },
+    {path: 'lender/:codeLender', component: LenderShowComponent, canActivate: [AuthGuard], data: {roles: ['admin']} },
 
-    {path: 'aggregator', component: AggregatorIndexComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['admin']} },
-    {path: 'aggregator/:codeAggregator', component: AggregatorShowComponent, canActivate: [AuthGuard]},
+    {path: 'aggregator', component: AggregatorIndexComponent, canActivate: [AuthGuard], data: {roles: ['admin']} },
+    {path: 'aggregator/:codeAggregator', component: AggregatorShowComponent, canActivate: [AuthGuard], data: {roles: ['admin', 'aggregator']} },
 
-    {path: 'wholesaler', component: WholesalerIndexComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['admin', 'aggregator']} },
-    {path: 'wholesaler/:codeWholesaler', component: WholesalerShowComponent, canActivate: [AuthGuard]},
+    {path: 'wholesaler', component: WholesalerIndexComponent, canActivate: [AuthGuard], data: {roles: ['admin', 'aggregator', 'wholesaler']} },
+    {path: 'wholesaler/:codeWholesaler', component: WholesalerShowComponent, canActivate: [AuthGuard], data: {roles: ['admin', 'aggregator', 'wholesaler']} },
 
-    {path: 'agent', component: AgentIndexComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['admin', 'aggregator', 'wholesaler']} },
-    {path: 'agent/:codeAgent', component: AgentShowComponent, canActivate: [AuthGuard]},
+    {path: 'agent', component: AgentIndexComponent, canActivate: [AuthGuard], data: {roles: ['admin', 'aggregator', 'wholesaler']} },
+    {path: 'agent/:codeAgent', component: AgentShowComponent, canActivate: [AuthGuard], data: {roles: ['admin', 'aggregator', 'wholesaler']} },
 
     /*{path: 'loan/request', component: LoanRequestIndexComponent, canActivate: [AuthGuard]},*/
     {path: 'not-found', component: NotFoundComponent, title: 'not-found'},

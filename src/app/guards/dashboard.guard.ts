@@ -14,16 +14,19 @@ export class DashboardGuard implements CanActivate {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-        console.log(this.keycloakService.getUserRoles(), this.keycloakService.isUserInRole('aggregator'))
-
         if (this.keycloakService.isUserInRole('admin'))
-             return this.router.navigate(['/lender'])
+            return this.router.navigate(['/lender'])
+
+        let resourceCode = this.keycloakService.getKeycloakInstance().tokenParsed["resource_code"]
+
+        if (resourceCode == null)
+            return this.router.navigate(['/forbidden'])
 
         if (this.keycloakService.isUserInRole('aggregator'))
-            return this.router.navigate(['/wholesaler'])
+            return this.router.navigate(['/aggregator', resourceCode])
 
         if (this.keycloakService.isUserInRole('wholesaler'))
-            return this.router.navigate(['/agent'])
+            return this.router.navigate(['/wholesaler/', resourceCode])
 
         return this.router.navigate(['/forbidden'])
     }
