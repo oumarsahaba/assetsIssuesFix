@@ -9,8 +9,7 @@ export class ModalComponent implements OnInit {
     @Input()
     show: boolean = false
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     toggle() {
         this.show = !this.show
