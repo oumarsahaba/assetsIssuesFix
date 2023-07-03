@@ -15,10 +15,14 @@ import {ForbiddenError} from "../../../commons/errors/forbidden-error";
 export class OperationsComponent implements OnInit {
     @Input()
     accountSlug: any
+    @Input()
+    title: string
+
     page: PaginatedResource<Operation>;
 
     constructor(private router: Router, private operationService: OperationService) {
         this.accountSlug = ''
+        this.title = ''
     }
 
     ngOnInit(): void {

@@ -12,5 +12,7 @@
 
     <app-credit-request-index *ngIf="agent" [codeAgent]="agent.codeAgent"></app-credit-request-index>
     <div class="divide-amber-50 py-1 my-10"></div>
-    <app-account-operations *ngIf="agent" [accountSlug]="agent.account.slug"/>
+    <div class="px-4 sm:px-6 lg:px-8">
+        <app-account-operations *ngIf="agent" [accountSlug]="agent.account.slug"/>
+    </div>
 </app-dashboard>
