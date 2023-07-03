@@ -9,12 +9,7 @@ export class ModalComponent implements OnInit {
     @Input()
     show: boolean = false
 
-    @Input()
-    size: string = ''
-
     ngOnInit(): void {
-        if (this.size.length == 0)
-            this.size= 'xl'
     }
 
     toggle() {
