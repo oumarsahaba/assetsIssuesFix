@@ -5,7 +5,7 @@ export const environment = {
     },
     keycloak: {
         baseUrl: "https://dev-sso.gutouch.net/auth",
-        realm: "creditdigital",
+        realm: "credit-digital",
         clientId: "engine",
         redirectUri: "https://engine-front-end-dev-dot-credit-digital-386211.oa.r.appspot.com"
     }
