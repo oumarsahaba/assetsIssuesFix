@@ -3,7 +3,7 @@ steps:
       args:
           - '-c'
           - >
-              sed -i 's/%NG_SERVICE_NAME%/${_SERVICE_NAME}/g'
+              sed -i 's/%SERVICE_NAME%/${_SERVICE_NAME}/g'
               app.yaml
 
               sed -i 's/%NG_KEYCLOAK_REALM%/${_KEYCLOAK_REALM}/g'
