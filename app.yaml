@@ -2,7 +2,6 @@ service: "%SERVICE_NAME%"
 runtime: python27
 api_version: 1
 threadsafe: true
-env: flex
 
 handlers:
     - url: /(.*\.(gif|png|jpg|css|js)(|\.map))$
