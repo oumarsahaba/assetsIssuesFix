@@ -1,12 +1,12 @@
 export const environment = {
     production: true,
     engine: {
-        baseUrl: "%ENGINE_BASE_URL%"
+        baseUrl: import.meta.env.NG_ENGINE_BASE_URL,
     },
     keycloak: {
-        baseUrl: "%KEYCLOAK_SERVER_URL%",
-        realm: "%KEYCLOAK_REALM%",
-        clientId: "%KEYCLOAK_RESOURCE%",
-        redirectUri: "%KEYCLOAK_REDIRECT_URL%"
+        baseUrl: import.meta.env.NG_KEYCLOAK_SERVER_URL,
+        realm: import.meta.env.NG_KEYCLOAK_REALM,
+        clientId: import.meta.env.NG_KEYCLOAK_RESOURCE,
+        redirectUri: import.meta.env.NG_KEYCLOAK_REDIRECT_URL,
     }
 };
