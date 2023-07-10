@@ -8,7 +8,6 @@ import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 
-
 @Component({
     selector: 'app-aggregator-index',
     templateUrl: './aggregator-index.component.html',

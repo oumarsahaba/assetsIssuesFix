@@ -2,6 +2,7 @@ service: "%SERVICE_NAME%"
 runtime: python27
 api_version: 1
 threadsafe: true
+
 handlers:
     - url: /(.*\.(gif|png|jpg|css|js)(|\.map))$
       static_files: dist/credit-digital-front/\1
