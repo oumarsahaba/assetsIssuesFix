@@ -5,14 +5,19 @@ steps:
           - >
               sed -i 's/%SERVICE_NAME%/${_SERVICE_NAME}/g'
               app.yaml
+
               sed -i 's/%KEYCLOAK_REALM%/${_KEYCLOAK_REALM}/g'
               app.yaml
+
               sed -i 's/%ENGINE_BASE_URL%/${_ENGINE_BASE_URL}/g'
               app.yaml
+
               sed -i 's/%KEYCLOAK_RESOURCE%/${_KEYCLOAK_RESOURCE}/g'
               app.yaml
+
               sed -i 's/%KEYCLOAK_SERVER_URL%/${_KEYCLOAK_SERVER_URL}/g'
               app.yaml
+
               sed -i 's/%KEYCLOAK_REDIRECT_URL%/${_KEYCLOAK_REDIRECT_URL}/g'
               app.yaml
 
