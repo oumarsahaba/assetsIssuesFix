@@ -30,6 +30,10 @@ steps:
     - name: 'gcr.io/cloud-builders/npm:latest'
       args:
           - run
+          - create-env
+    - name: 'gcr.io/cloud-builders/npm:latest'
+      args:
+          - run
           - build
           - '--prod'
     - name: gcr.io/cloud-builders/gcloud
