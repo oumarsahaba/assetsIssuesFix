@@ -21,6 +21,8 @@ steps:
               sed -i 's/%KEYCLOAK_REDIRECT_URL%/${_KEYCLOAK_REDIRECT_URL}/g'
               .env.production
 
+              cat .env.production
+
       id: Set application env
       entrypoint: bash
 
