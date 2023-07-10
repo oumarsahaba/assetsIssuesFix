@@ -3,22 +3,22 @@ steps:
       args:
           - '-c'
           - >
-              sed -i 's/%SERVICE_NAME%/${_SERVICE_NAME}/g'
+              sed -i 's/%NG_SERVICE_NAME%/${_SERVICE_NAME}/g'
               app.yaml
 
-              sed -i 's/%KEYCLOAK_REALM%/${_KEYCLOAK_REALM}/g'
+              sed -i 's/%NG_KEYCLOAK_REALM%/${_KEYCLOAK_REALM}/g'
               app.yaml
 
-              sed -i 's/%ENGINE_BASE_URL%/${_ENGINE_BASE_URL}/g'
+              sed -i 's/%NG_ENGINE_BASE_URL%/${_ENGINE_BASE_URL}/g'
               app.yaml
 
-              sed -i 's/%KEYCLOAK_RESOURCE%/${_KEYCLOAK_RESOURCE}/g'
+              sed -i 's/%NG_KEYCLOAK_RESOURCE%/${_KEYCLOAK_RESOURCE}/g'
               app.yaml
 
-              sed -i 's/%KEYCLOAK_SERVER_URL%/${_KEYCLOAK_SERVER_URL}/g'
+              sed -i 's/%NG_KEYCLOAK_SERVER_URL%/${_KEYCLOAK_SERVER_URL}/g'
               app.yaml
 
-              sed -i 's/%KEYCLOAK_REDIRECT_URL%/${_KEYCLOAK_REDIRECT_URL}/g'
+              sed -i 's/%NG_KEYCLOAK_REDIRECT_URL%/${_KEYCLOAK_REDIRECT_URL}/g'
               app.yaml
 
       id: Set application env
@@ -27,10 +27,6 @@ steps:
     - name: 'gcr.io/cloud-builders/npm:latest'
       args:
           - install
-    - name: 'gcr.io/cloud-builders/npm:latest'
-      args:
-          - run
-          - create-env
     - name: 'gcr.io/cloud-builders/npm:latest'
       args:
           - run
