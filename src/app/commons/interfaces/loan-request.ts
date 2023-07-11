@@ -4,6 +4,7 @@ import {SimpleLender} from "./simple-lender";
 export interface LoanRequest {
     token: string
     amount: number
+    fees: number
     outstandingBalance: number
     recoveredAmount: number
     status: string
