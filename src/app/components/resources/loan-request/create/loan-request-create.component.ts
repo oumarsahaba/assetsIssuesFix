@@ -12,9 +12,9 @@ import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 
 @Component({
-  selector: 'app-loan-request-create',
-  templateUrl: './loan-request-create.component.html',
-  styleUrls: ['./loan-request-create.component.css']
+    selector: 'app-loan-request-create',
+    templateUrl: './loan-request-create.component.html',
+    styleUrls: ['./loan-request-create.component.css']
 })
 export class LoanRequestCreateComponent implements OnInit {
     displayModal: any;
@@ -48,7 +48,7 @@ export class LoanRequestCreateComponent implements OnInit {
                     this.lenders = (response.data as Lender[])
                         .map((lender) => new BaseLender(lender))
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
 
