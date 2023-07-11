@@ -15,9 +15,10 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 export class LoanRequestValidationComponent {
     @Input()
     token: string
+    @Input()
+    disabled: boolean
     form : FormGroup
     displayModal: boolean
-
     constructor(private loanRequestService: LoanRequestService, private router: Router) {
         this.form = new FormGroup({
             status: new FormControl('', Validators.required),
@@ -31,8 +32,9 @@ export class LoanRequestValidationComponent {
         this.loanRequestService.validate(this.token, this.form.get('status')?.value)
             .subscribe({
                 next: (response) => {
-                    if (response.statusCode == 200)
-                        navigateBack(this.router)
+                    if (response.statusCode == 200) {
+                        this.router.navigate([this.router.url])
+                    }
                 },
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)

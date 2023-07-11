@@ -44,6 +44,8 @@ import {
     CommissionPlanCreateComponent
 } from './components/account/commission-plan/create/commission-plan-create.component';
 import { ForbiddenComponent } from './components/shared/forbidden/forbidden.component';
+import {RouteReuseStrategy} from "@angular/router";
+import {CustomRouteReuseStrategy} from "./commons/custom-route-reuse-strategy";
 
 @NgModule({
     declarations: [
@@ -104,6 +106,10 @@ import { ForbiddenComponent } from './components/shared/forbidden/forbidden.comp
             useFactory: initializeKeycloak,
             multi: true,
             deps: [KeycloakService],
+        },
+        {
+            provide: RouteReuseStrategy,
+            useClass: CustomRouteReuseStrategy
         },
         { provide: ErrorHandler, useClass: AppErrorHandler}
     ],
