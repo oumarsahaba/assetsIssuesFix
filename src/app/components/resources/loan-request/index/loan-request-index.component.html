@@ -14,6 +14,7 @@
             <tr>
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Lender</th>
                 <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">amount</th>
+                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">fees</th>
                 <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Recovered amount</th>
                 <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Outstanding balance</th>
                 <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Status</th>
@@ -25,6 +26,7 @@
             <tr *ngFor="let loanRequest of page?.content">
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ loanRequest.lender.description }}</td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm font-medium text-gray-900 sm:pl-6">{{ loanRequest.amount | number:'2.' }}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm font-medium text-gray-900 sm:pl-6">{{ loanRequest.fees | number:'2.' }}</td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 sm:pl-6">{{ loanRequest.recoveredAmount | number:'2.' }}</td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 sm:pl-6">{{ loanRequest.outstandingBalance | number:'2.'}}</td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ loanRequest.status }}</td>
