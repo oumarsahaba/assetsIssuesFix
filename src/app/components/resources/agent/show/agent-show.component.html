@@ -45,7 +45,7 @@
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Balance</dt>
-                        <dd class="rounded-md py-1 text-xl font-medium">{{ agent.account.balance }}</dd>
+                        <dd class="rounded-md py-1 text-xl font-medium">{{ agent.account.balance | number: '.2' }}</dd>
                     </div>
                 </dl>
             </li>
