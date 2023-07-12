@@ -1,18 +1,18 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ProvisionRequestService} from "../../../../services/provision-request.service";
 import {Router} from "@angular/router";
-import {LoanRequestService} from "../../../../services/loan-request.service";
+import {navigateBack} from "../../../../commons/helpers";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
-import {navigateBack} from "../../../../commons/helpers";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 
 @Component({
-    selector: 'app-loan-request-validation',
-    templateUrl: './loan-request-validation.component.html',
-    styleUrls: ['./loan-request-validation.component.css']
+  selector: 'app-provision-request-validation',
+  templateUrl: './validation.component.html',
+  styleUrls: ['./validation.component.css']
 })
-export class LoanRequestValidationComponent {
+export class ValidationComponent {
     @Input()
     token: string
     @Input()
@@ -20,7 +20,7 @@ export class LoanRequestValidationComponent {
     form : FormGroup
     displayModal: boolean
 
-    constructor(private loanRequestService: LoanRequestService, private router: Router) {
+    constructor(private provisionRequestService: ProvisionRequestService, private router: Router) {
         this.form = new FormGroup({
             status: new FormControl('', Validators.required),
         })
@@ -30,7 +30,7 @@ export class LoanRequestValidationComponent {
     }
 
     validate() {
-        this.loanRequestService.validate(this.token, this.form.get('status')?.value)
+        this.provisionRequestService.validate(this.token, this.form.get('status')?.value)
             .subscribe({
                 next: (response) => {
                     navigateBack(this.router)

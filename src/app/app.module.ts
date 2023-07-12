@@ -46,6 +46,9 @@ import {
 import { ForbiddenComponent } from './components/shared/forbidden/forbidden.component';
 import {RouteReuseStrategy} from "@angular/router";
 import {CustomRouteReuseStrategy} from "./commons/custom-route-reuse-strategy";
+import { ProvisionRequestIndexComponent } from './components/resources/provision-request/index/provision-request-index.component';
+import { ProvisionRequestCreateComponent } from './components/resources/provision-request/create/provision-request-create.component';
+import { ValidationComponent } from './components/resources/provision-request/validation/validation.component';
 
 @NgModule({
     declarations: [
@@ -90,6 +93,9 @@ import {CustomRouteReuseStrategy} from "./commons/custom-route-reuse-strategy";
          CommissionPlanIndexComponent,
          CommissionPlanCreateComponent,
          ForbiddenComponent,
+         ProvisionRequestIndexComponent,
+         ProvisionRequestCreateComponent,
+         ValidationComponent,
     ],
     imports: [
         BrowserModule,
