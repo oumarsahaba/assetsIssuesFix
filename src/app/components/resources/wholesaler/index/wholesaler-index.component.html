@@ -30,8 +30,8 @@
                     <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ wholesaler.codeWholesaler }}</td>
                     <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ wholesaler.aggregator.description }}</td>
                     <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.description }}</td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.account.balance }}</td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.aggregatorWholesalerAccount.balance }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.account.balance | number: '.0-2' }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.aggregatorWholesalerAccount.balance | number: '.0-2'  }}</td>
                     <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
                     <td class="relative whitespace-nowrap py-2 pl-2 pr-4 text-right text-sm font-medium sm:pr-6">
                         <div class="isolate inline-flex shadow-sm">

@@ -13,7 +13,6 @@ export class BaseOperation implements Operation {
         this.amount = operation.amount
         this.balanceAfter = operation.balanceAfter
         this.balanceBefore = operation.balanceBefore
-        this.fees = operation.fees
         this.type = operation.type
         this.token = operation.token
         this.createdAt = new Date(operation.createdAt)
