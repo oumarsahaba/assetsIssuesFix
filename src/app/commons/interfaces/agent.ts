@@ -6,9 +6,7 @@ export interface Agent {
     wholesaler: SimpleWholesaler
     account: Account
     overdraftLimitAmount: number
-    overdraftPenaltyAmount: number
     overdraftMaxDailyCount: number
-    overdraftDeadlinesInDays: number
     description: string
     createdAt: Date
 }

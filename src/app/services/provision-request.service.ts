@@ -6,7 +6,7 @@ import {BaseAPIService} from "./base-api.service";
 })
 export class ProvisionRequestService extends BaseAPIService {
 
-    getAll(codeLender: string, page: number = 0, size: number = 10) {
+    getAll(codeLender: string, page: number = 0, size: number = 5) {
         return this.httpGetCall(`/provision/request/${codeLender}?page=${page}&size=${size}`)
     }
 

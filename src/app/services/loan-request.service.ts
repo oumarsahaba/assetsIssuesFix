@@ -5,7 +5,7 @@ import {BaseAPIService} from "./base-api.service";
   providedIn: 'root'
 })
 export class LoanRequestService extends BaseAPIService {
-    getAll(codeWholesaler: string, page: number = 0, size: number = 10) {
+    getAll(codeWholesaler: string, page: number = 0, size: number = 5) {
         return this.httpGetCall(`/loan/request/${codeWholesaler}?page=${page}&size=${size}`)
     }
 

@@ -7,7 +7,7 @@ import {CommissionPlan} from "../commons/interfaces/commission-plan";
 })
 export class CommissionPlanService extends BaseAPIService {
 
-    getAll(code: string, type: string, page: number = 0, size: number = 10) {
+    getAll(code: string, type: string, page: number = 0, size: number = 5) {
         return this.httpGetCall(`/commission/plan?code=${code}&type=${type}&page=${page}&size=${size}`)
     }
 
