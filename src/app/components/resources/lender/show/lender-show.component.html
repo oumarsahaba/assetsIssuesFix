@@ -8,10 +8,13 @@
         </dl>
     </div>
 
+    <app-provision-request-index [codeLender]="lender.codeLender"/>
+    <div class="divide-amber-50 py-1 my-10"></div>
 
     <div class="px-4 sm:px-6 lg:px-8">
         <app-account-operations *ngIf="accountSlug" [accountSlug]="accountSlug"/>
     </div>
+
     <div class="divide-amber-50 py-1 my-10"></div>
     <app-commission-plan-index [code]="lender.codeLender" [type]="Commissionable.lender"/>
 </app-dashboard>
