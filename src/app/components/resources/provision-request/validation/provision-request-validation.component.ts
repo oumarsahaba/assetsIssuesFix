@@ -6,15 +6,16 @@ import {navigateBack} from "../../../../commons/helpers";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
+import {ProvisionRequest} from "../../../../commons/interfaces/provision-request";
 
 @Component({
   selector: 'app-provision-request-validation',
-  templateUrl: './validation.component.html',
-  styleUrls: ['./validation.component.css']
+  templateUrl: './provision-request-validation.component.html',
+  styleUrls: ['./provision-request-validation.component.css']
 })
-export class ValidationComponent {
+export class ProvisionRequestValidationComponent {
     @Input()
-    token: string
+    provisionRequest: ProvisionRequest
     @Input()
     disabled: boolean
     form : FormGroup
@@ -25,12 +26,11 @@ export class ValidationComponent {
             status: new FormControl('', Validators.required),
         })
 
-        this.token = ''
         this.displayModal = false
     }
 
     validate() {
-        this.provisionRequestService.validate(this.token, this.form.get('status')?.value)
+        this.provisionRequestService.validate(this.provisionRequest.token, this.form.get('status')?.value)
             .subscribe({
                 next: (response) => {
                     navigateBack(this.router)

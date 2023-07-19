@@ -27,7 +27,7 @@
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ provisionRequest.status }}</td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ provisionRequest.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                    <app-provision-request-validation [token]="provisionRequest.token" [disabled]="provisionRequest.status !== 'INITIATED'"/>
+                    <app-provision-request-validation [provisionRequest]="provisionRequest" [disabled]="provisionRequest.status !== 'INITIATED'"/>
                 </td>
 
             </tr>

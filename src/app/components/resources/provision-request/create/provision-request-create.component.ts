@@ -4,11 +4,12 @@ import {ProvisionRequestService} from "../../../../services/provision-request.se
 import {Router} from "@angular/router";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {AppError} from "../../../../commons/errors/app-error";
+import {NgxDropzoneChangeEvent} from "ngx-dropzone";
 
 @Component({
-  selector: 'app-provision-request-create',
-  templateUrl: './provision-request-create.component.html',
-  styleUrls: ['./provision-request-create.component.css']
+    selector: 'app-provision-request-create',
+    templateUrl: './provision-request-create.component.html',
+    styleUrls: ['./provision-request-create.component.css']
 })
 export class ProvisionRequestCreateComponent {
     displayModal: any;
@@ -17,11 +18,12 @@ export class ProvisionRequestCreateComponent {
     @Input()
     codeLender: string
 
+    files: File[] = [];
+
     constructor(private provisionRequestService: ProvisionRequestService, private router: Router) {
         this.form = new FormGroup({
             amount: new FormControl('', Validators.required),
-            recoveryPeriodInDays: new FormControl('', Validators.required),
-            recoveryAmountByPeriod: new FormControl('', Validators.required),
+            files: new FormControl('', Validators.required),
         })
 
         this.codeLender = ''
@@ -36,12 +38,23 @@ export class ProvisionRequestCreateComponent {
         this.provisionRequestService.create(
             this.codeLender,
             this.form.get('amount')?.value,
+            this.files,
         ).subscribe({
             next: (response) => {
+                this.files = [];
                 navigateBack(this.router)
             },
             error : (err: AppError) => handleFormError(err, this.form)
         })
     }
 
+    onSelect($event: NgxDropzoneChangeEvent) {
+        console.log($event);
+        this.files.push(...$event.addedFiles);
+    }
+
+    onRemove(file: File) {
+        console.log(file);
+        this.files.splice(this.files.indexOf(file), 1);
+    }
 }

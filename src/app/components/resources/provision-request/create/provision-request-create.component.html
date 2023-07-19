@@ -21,10 +21,17 @@
                             </p>
                         </div>
                     </div>
+                    <div class="mt-5">
+                        <ngx-dropzone (change)="onSelect($event)">
+                            <ngx-dropzone-label>Vouchers</ngx-dropzone-label>
+                            <ngx-dropzone-preview *ngFor="let file of files" [removable]="true" (removed)="onRemove(file)">
+                                <ngx-dropzone-label>{{ file.name }} ({{ file.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                        </ngx-dropzone>
+                    </div>
                     <app-shared-warning *ngIf="form.hasError('message')">
                         {{ form.getError('message') }}
                     </app-shared-warning>
-
                 </div>
             </div>
 

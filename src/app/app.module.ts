@@ -48,7 +48,8 @@ import {RouteReuseStrategy} from "@angular/router";
 import {CustomRouteReuseStrategy} from "./commons/custom-route-reuse-strategy";
 import { ProvisionRequestIndexComponent } from './components/resources/provision-request/index/provision-request-index.component';
 import { ProvisionRequestCreateComponent } from './components/resources/provision-request/create/provision-request-create.component';
-import { ValidationComponent } from './components/resources/provision-request/validation/validation.component';
+import { ProvisionRequestValidationComponent } from './components/resources/provision-request/validation/provision-request-validation.component';
+import {NgxDropzoneModule} from "ngx-dropzone";
 
 @NgModule({
     declarations: [
@@ -95,7 +96,7 @@ import { ValidationComponent } from './components/resources/provision-request/va
          ForbiddenComponent,
          ProvisionRequestIndexComponent,
          ProvisionRequestCreateComponent,
-         ValidationComponent,
+         ProvisionRequestValidationComponent,
     ],
     imports: [
         BrowserModule,
@@ -104,7 +105,8 @@ import { ValidationComponent } from './components/resources/provision-request/va
         ReactiveFormsModule,
         HttpClientModule,
         KeycloakAngularModule,
-        AppRoutingModule
+        AppRoutingModule,
+        NgxDropzoneModule,
     ],
     providers: [
         {

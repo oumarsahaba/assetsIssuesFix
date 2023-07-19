@@ -1,4 +1,5 @@
 import {SimpleLender} from "./simple-lender";
+import {Media} from "./media";
 
 export interface ProvisionRequest{
     token: string
@@ -6,5 +7,6 @@ export interface ProvisionRequest{
     fees: number
     status: string
     lender: SimpleLender
+    medias: Media[]
     createdAt: Date
 }

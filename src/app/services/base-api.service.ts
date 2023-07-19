@@ -19,9 +19,9 @@ export abstract class BaseAPIService {
 
     private httpHeaders : HttpHeaders = new HttpHeaders()
 
-    constructor(private httpClient: HttpClient, private keycloakService: KeycloakService) {
+    constructor(protected httpClient: HttpClient, private keycloakService: KeycloakService) {
         keycloakService.getToken().then((token) => {
-                this.httpHeaders.set('authorization', 'Bearer ' + token)
+            this.httpHeaders.set('authorization', 'Bearer ' + token)
                 .set('Content-Type', 'application/json');
         }).catch((err) => throwError(() => new AppError(err)))
     }
@@ -35,6 +35,14 @@ export abstract class BaseAPIService {
     }
 
     httpPostCall(pathUrl: string, body: any) {
+        return this.httpClient
+            .post<ApiResponse>(this.baseUrl + pathUrl, body, { headers: this.httpHeaders})
+            .pipe(catchError((err: Response) => this.handleError(err)))
+    }
+
+    httpPostFormDataCall(pathUrl: string, body: FormData) {
+        this.httpHeaders.set('Content-Type', 'multipart/form-data')
+
         return this.httpClient
             .post<ApiResponse>(this.baseUrl + pathUrl, body, { headers: this.httpHeaders})
             .pipe(catchError((err: Response) => this.handleError(err)))

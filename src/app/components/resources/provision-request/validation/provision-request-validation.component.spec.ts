@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ValidationComponent } from './validation.component';
+import { ProvisionRequestValidationComponent } from './provision-request-validation.component';
 
 describe('ValidationComponent', () => {
-  let component: ValidationComponent;
-  let fixture: ComponentFixture<ValidationComponent>;
+  let component: ProvisionRequestValidationComponent;
+  let fixture: ComponentFixture<ProvisionRequestValidationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ValidationComponent ]
+      declarations: [ ProvisionRequestValidationComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ValidationComponent);
+    fixture = TestBed.createComponent(ProvisionRequestValidationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
