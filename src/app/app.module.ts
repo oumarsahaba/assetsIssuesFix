@@ -43,13 +43,22 @@ import {CommissionPlanIndexComponent} from './components/account/commission-plan
 import {
     CommissionPlanCreateComponent
 } from './components/account/commission-plan/create/commission-plan-create.component';
-import { ForbiddenComponent } from './components/shared/forbidden/forbidden.component';
+import {ForbiddenComponent} from './components/shared/forbidden/forbidden.component';
 import {RouteReuseStrategy} from "@angular/router";
 import {CustomRouteReuseStrategy} from "./commons/custom-route-reuse-strategy";
-import { ProvisionRequestIndexComponent } from './components/resources/provision-request/index/provision-request-index.component';
-import { ProvisionRequestCreateComponent } from './components/resources/provision-request/create/provision-request-create.component';
-import { ProvisionRequestValidationComponent } from './components/resources/provision-request/validation/provision-request-validation.component';
+import {
+    ProvisionRequestIndexComponent
+} from './components/resources/provision-request/index/provision-request-index.component';
+import {
+    ProvisionRequestCreateComponent
+} from './components/resources/provision-request/create/provision-request-create.component';
+import {
+    ProvisionRequestValidationComponent
+} from './components/resources/provision-request/validation/provision-request-validation.component';
 import {NgxDropzoneModule} from "ngx-dropzone";
+import {
+    CreditRequestValidationComponent
+} from './components/resources/credit-request/validation/credit-request-validation.component';
 
 @NgModule({
     declarations: [
@@ -97,6 +106,7 @@ import {NgxDropzoneModule} from "ngx-dropzone";
          ProvisionRequestIndexComponent,
          ProvisionRequestCreateComponent,
          ProvisionRequestValidationComponent,
+         CreditRequestValidationComponent,
     ],
     imports: [
         BrowserModule,

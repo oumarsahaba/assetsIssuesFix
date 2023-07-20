@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BaseAPIService} from "./base-api.service";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class CreditRequestService extends BaseAPIService {
 
@@ -16,6 +16,13 @@ export class CreditRequestService extends BaseAPIService {
             amount : amount,
             recoveryPeriodInDays: recoveryPeriodInDays,
             recoveryAmountByPeriod: recoveryAmountByPeriod
+        })
+    }
+
+    validate(token: string, status: string) {
+        return this.httpPostCall('/credit/request/validate', {
+            token: token,
+            status: status
         })
     }
 }
