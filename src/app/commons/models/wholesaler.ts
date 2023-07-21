@@ -11,6 +11,7 @@ export class BaseWholesaler implements Wholesaler {
     codeWholesaler: string;
     createdAt: Date;
     description: string;
+    active: boolean;
 
     constructor(wholesaler: Wholesaler) {
         this.codeWholesaler = wholesaler.codeWholesaler
@@ -18,6 +19,7 @@ export class BaseWholesaler implements Wholesaler {
         this.account = new BaseAccount(wholesaler.account)
         this.aggregatorWholesalerAccount = new BaseAccount(wholesaler.aggregatorWholesalerAccount)
         this.description = wholesaler.description
+        this.active = wholesaler.active
         this.createdAt = new Date(wholesaler.createdAt)
     }
 

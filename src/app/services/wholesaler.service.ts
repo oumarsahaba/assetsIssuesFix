@@ -21,8 +21,9 @@ export class WholesalerService extends BaseAPIService{
         })
     }
 
-    update(code: string, description: string) {
+    update(code: string, description: string, active: string) {
         return this.httpPutCall('/wholesaler/update/' + code, {
+            active: active,
             description : description
         })
     }

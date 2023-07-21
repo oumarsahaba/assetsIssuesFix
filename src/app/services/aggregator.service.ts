@@ -21,8 +21,9 @@ export class AggregatorService extends BaseAPIService{
         })
     }
 
-    update(code: string, description: string) {
+    update(code: string, webhook: string, description: string) {
         return this.httpPutCall('/aggregator/update/' + code, {
+            webhook : webhook,
             description : description
         })
     }

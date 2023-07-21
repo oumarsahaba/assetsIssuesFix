@@ -8,5 +8,6 @@ export interface Agent {
     overdraftLimitAmount: number
     overdraftMaxDailyCount: number
     description: string
+    active: boolean
     createdAt: Date
 }

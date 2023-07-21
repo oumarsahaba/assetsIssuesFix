@@ -7,5 +7,6 @@ export interface Wholesaler {
     account: Account
     aggregatorWholesalerAccount: Account
     description: string
+    active: boolean
     createdAt: Date
 }

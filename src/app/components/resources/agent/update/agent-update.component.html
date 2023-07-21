@@ -1,16 +1,21 @@
 <button
-    (click)="toggleModal()"
     type="button"
-    class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">New Agent</button>
+    (click)="toggleModal()"
+    class="relative inline-flex items-center bg-white px-2.5 py-1.5 text-sm font-semibold gap-x-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">
+    Edit
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-blue-600 font-bold">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+    </svg>
+</button>
 
 <app-shared-modal [show]="displayModal">
     <div class="px-4 sm:px-6 lg:px-8 py-4">
-        <form class="w-full items-center" [formGroup]="form" (ngSubmit)="create()">
+        <form class="w-full items-center" [formGroup]="form" (ngSubmit)="update()">
             <div class="space-y-12">
                 <div class="border-b border-gray-900/10 pb-12">
-                    <h2 class="text-base font-semibold leading-7 text-gray-900">Create a new agent</h2>
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">Update agent</h2>
 
-                    <div class="mt-5">
+                    <!--<div class="mt-5">
                         <label for="codeAgent" class="block text-sm font-medium leading-6 text-gray-900">Agent's Code</label>
                         <div class="mt-2">
                             <input type="text" id="codeAgent"
@@ -20,24 +25,7 @@
                                 {{ form.get('codeAgent')?.errors?.['serverError'] }}
                             </p>
                         </div>
-                    </div>
-                    <div class="mt-5">
-                        <label for="codeWholesaler" class="block text-sm font-medium leading-6 text-gray-900">Wholesaler</label>
-                        <div class="mt-2">
-                            <select id="codeWholesaler"
-                                    (change)="changeWholesaler($event)"
-                                    formControlName="codeWholesaler"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
-                                <option value="">Select a wholesaler</option>
-                                <option *ngFor="let wholesaler of wholesalers"
-                                        [value]="wholesaler.codeWholesaler" >{{ wholesaler.description }}</option>
-                            </select>
-
-                            <p class="text-xs text-red-500" *ngIf="form.get('codeWholesaler')?.errors?.['serverError']">
-                                {{ form.get('codeWholesaler')?.errors?.['serverError'] }}
-                            </p>
-                        </div>
-                    </div>
+                    </div>-->
                     <div class="mt-5">
                         <label for="overdraftMaxDailyCount" class="block text-sm font-medium leading-6 text-gray-900">Max daily overdraft count</label>
                         <div class="mt-2">
@@ -72,6 +60,22 @@
                             </p>
                         </div>
                     </div>
+                    <div class="mt-5">
+                        <div class="mt-6 space-y-6">
+                            <div class="relative flex gap-x-3">
+                                <div class="flex h-6 items-center">
+                                    <input id="active" formControlName="active" [defaultChecked]="form.get('active').value"
+                                           name="active" type="checkbox" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-600">
+                                </div>
+                                <div class="text-sm leading-6">
+                                    <label for="active" class="font-medium text-gray-900">Active</label>
+                                    <p class="text-gray-500">Allow to activate or deactivate the wholesaler.</p>
+                                    <p>active: {{ form.get('active').value }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 

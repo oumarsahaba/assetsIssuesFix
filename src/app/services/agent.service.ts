@@ -14,23 +14,26 @@ export class AgentService extends BaseAPIService {
            codeWholesaler: string,
            description: string,
            overdraftMaxDailyCount: string,
-           overdraftPenaltyAmount: number,
-           overdraftLimitAmount: number,
-           overdraftDeadlinesInDays: number) {
+           overdraftLimitAmount: number) {
         return this.httpPostCall('/agent/store', {
             codeAgent : codeAgent,
             codeWholesaler : codeWholesaler,
             description : description,
             overdraftMaxDailyCount: overdraftMaxDailyCount,
-            overdraftPenaltyAmount: overdraftPenaltyAmount,
             overdraftLimitAmount: overdraftLimitAmount,
-            overdraftDeadlinesInDays: overdraftDeadlinesInDays
         })
     }
 
-    update(code: string, description: string) {
-        return this.httpPutCall('/agent/update/' + code, {
-            description : description
+    update(codeAgent: string,
+           description: string,
+           overdraftMaxDailyCount: string,
+           overdraftLimitAmount: number,
+           active: boolean) {
+        return this.httpPutCall('/agent/update/' + codeAgent, {
+            description : description,
+            overdraftMaxDailyCount: overdraftMaxDailyCount,
+            overdraftLimitAmount: overdraftLimitAmount,
+            active: active,
         })
     }
 

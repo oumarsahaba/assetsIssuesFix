@@ -6,11 +6,13 @@ export class BaseAggregator implements Aggregator {
     createdAt: Date;
     account: Account;
     description: string;
+    webhook: string;
 
     constructor(aggregator: Aggregator) {
         this.codeAggregator = aggregator.codeAggregator
         this.description = aggregator.description
         this.account = aggregator.account
         this.createdAt = new Date(aggregator.createdAt)
+        this.webhook = aggregator.webhook
     }
 }

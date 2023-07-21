@@ -59,6 +59,10 @@ import {NgxDropzoneModule} from "ngx-dropzone";
 import {
     CreditRequestValidationComponent
 } from './components/resources/credit-request/validation/credit-request-validation.component';
+import {LenderUpdateComponent} from "./components/resources/lender/update/lender-update.component";
+import {AggregatorUpdateComponent} from "./components/resources/aggregator/update/aggregator-update.component";
+import {WholesalerUpdateComponent} from "./components/resources/wholesaler/update/wholesaler-update.component";
+import {AgentUpdateComponent} from "./components/resources/agent/update/agent-update.component";
 
 @NgModule({
     declarations: [
@@ -75,20 +79,24 @@ import {
         LenderShowComponent,
         LenderIndexComponent,
         LenderCreateComponent,
+        LenderUpdateComponent,
 
         AggregatorIndexComponent,
         AggregatorCreateComponent,
         AggregatorShowComponent,
+        AggregatorUpdateComponent,
 
         ModalComponent,
 
         WholesalerIndexComponent,
         WholesalerCreateComponent,
         WholesalerShowComponent,
+        WholesalerUpdateComponent,
 
         AgentIndexComponent,
         AgentShowComponent,
         AgentCreateComponent,
+        AgentUpdateComponent,
 
         LoanRequestIndexComponent,
         LoanRequestCreateComponent,

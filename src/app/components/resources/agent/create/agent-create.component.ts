@@ -60,9 +60,7 @@ export class AgentCreateComponent implements OnInit {
             this.form.get('codeWholesaler')?.value,
             this.form.get('description')?.value,
             this.form.get('overdraftMaxDailyCount')?.value,
-            this.form.get('overdraftPenaltyAmount')?.value,
             this.form.get('overdraftLimitAmount')?.value,
-            this.form.get('overdraftDeadlinesInDays')?.value
         ).subscribe({
             next: (response) => {
                 navigateBack(this.router)
