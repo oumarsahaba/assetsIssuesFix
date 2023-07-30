@@ -26,7 +26,7 @@
                 <tr *ngFor="let lender of page?.content">
                     <td class="whitespace-nowrap py-2 pl-4 text-sm font-medium text-gray-900 sm:pl-6">{{ lender.codeLender }}</td>
                     <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ lender.description }}</td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ lender.account.balance | number: '.0-2' }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ lender.creditAccount.balance | number: '.0-2' }}</td>
                     <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ lender.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
                     <td class="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                         <div class="isolate inline-flex shadow-sm">

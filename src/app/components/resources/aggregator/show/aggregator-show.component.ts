@@ -34,7 +34,7 @@ export class AggregatorShowComponent {
                 .subscribe({
                     next: (response) => {
                         this.aggregator = response.data as Aggregator
-                        this.accountSlug = this.aggregator.account.slug
+                        this.accountSlug = this.aggregator.creditAccount.slug
                     },
                     error : (err: AppError) => {
                         if (err instanceof NotFoundError)

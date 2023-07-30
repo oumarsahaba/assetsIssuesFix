@@ -34,7 +34,7 @@ export class LenderShowComponent implements OnInit {
                 .subscribe({
                     next: (response) => {
                         this.lender = response.data as Lender
-                        this.accountSlug = this.lender.account.slug
+                        this.accountSlug = this.lender.creditAccount.slug
                     },
                     error : (err: AppError) => {
                         if (err instanceof NotFoundError)

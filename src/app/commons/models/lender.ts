@@ -5,13 +5,15 @@ import {BaseAccount} from "./account";
 export class BaseLender implements Lender {
     codeLender: string;
     createdAt: Date;
-    account: Account;
+    creditAccount: Account;
+    commissionAccount: Account;
     description: string;
 
     constructor(lender: Lender) {
         this.codeLender = lender.codeLender
         this.description = lender.description
-        this.account  = new BaseAccount(lender.account)
+        this.creditAccount  = new BaseAccount(lender.commissionAccount)
+        this.commissionAccount  = new BaseAccount(lender.creditAccount)
         this.createdAt = new Date(lender.createdAt)
     }
 }

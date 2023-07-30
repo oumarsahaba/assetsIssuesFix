@@ -32,7 +32,7 @@ export class WholesalerShowComponent {
                 .subscribe({
                     next: (response) => {
                         this.wholesaler = response.data as Wholesaler
-                        this.accountSlug = this.wholesaler.account.slug
+                        this.accountSlug = this.wholesaler.creditAccount.slug
                     },
                     error : (err: AppError) => {
                         if (err instanceof NotFoundError)

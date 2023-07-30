@@ -4,6 +4,7 @@ export interface Aggregator {
     codeAggregator: string
     description: string
     webhook: string
-    account: Account
+    creditAccount: Account;
+    commissionAccount: Account;
     createdAt: Date
 }

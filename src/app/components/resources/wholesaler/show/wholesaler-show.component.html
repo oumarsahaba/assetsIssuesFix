@@ -1,9 +1,13 @@
 <app-dashboard>
     <div class="px-4 sm:px-6 lg:px-8 mb-10">
-        <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Credit account Balance</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900" *ngIf="wholesaler">{{ wholesaler.account.balance | number: '.0-2'  }}</dd>
+                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900" *ngIf="wholesaler">{{ wholesaler.creditAccount.balance | number: '.0-2'  }}</dd>
+            </div>
+            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                <dt class="truncate text-sm font-medium text-gray-500">Commission account Balance</dt>
+                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900" *ngIf="wholesaler">{{ wholesaler.commissionAccount.balance | number: '.0-2'  }}</dd>
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Operational account Balance</dt>
@@ -16,7 +20,12 @@
     <div class="divide-amber-50 py-1 my-5"></div>
 
     <div class="px-4 sm:px-6 lg:px-8">
-        <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.account.slug" title="Credit account"/>
+        <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.creditAccount.slug" title="Credit account"/>
+    </div>
+    <div class="divide-amber-50 py-1 my-5"></div>
+
+    <div class="px-4 sm:px-6 lg:px-8">
+        <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.commissionAccount.slug" title="Commission account"/>
     </div>
     <div class="divide-amber-50 py-1 my-5"></div>
 

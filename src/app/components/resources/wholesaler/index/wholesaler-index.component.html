@@ -19,6 +19,7 @@
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Description</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Active</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Credit Balance</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Commission Balance</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Operational Balance</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Created at</th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -43,7 +44,8 @@
                             </svg> Deactivated
                         </span>
                     </td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.account.balance | number: '.0-2' }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.creditAccount.balance | number: '.0-2' }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.commissionAccount.balance | number: '.0-2' }}</td>
                     <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.aggregatorWholesalerAccount.balance | number: '.0-2'  }}</td>
                     <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
                     <td class="relative whitespace-nowrap py-2 pl-2 pr-4 text-right text-sm font-medium sm:pr-6">
