@@ -11,7 +11,7 @@
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Operational account Balance</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ wholesaler?.aggregatorWholesalerAccount?.balance | number: '.0-2'  }}</dd>
+                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ wholesaler?.aggregatorWholesaler.account?.balance | number: '.0-2'  }}</dd>
             </div>
         </dl>
     </div>
@@ -30,7 +30,7 @@
     <div class="divide-amber-50 py-1 my-5"></div>
 
     <div class="px-4 sm:px-6 lg:px-8">
-        <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.aggregatorWholesalerAccount.slug" title="Operational account"/>
+        <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.aggregatorWholesaler.account.slug" title="Operational account"/>
     </div>
 
     <div class="divide-amber-50 py-1 my-10"></div>
