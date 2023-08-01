@@ -7,6 +7,7 @@ export interface CommissionPlan {
     commissionAggregator : number
     commissionWholesaler : number
     commissionLender:  number
+    commissionSystem:  number
     operationType : string
     resourceType:  string
     resourceCode : string

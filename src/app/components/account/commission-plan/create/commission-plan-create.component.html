@@ -10,6 +10,11 @@
                 <div class="border-b border-gray-900/10 pb-12">
                     <h2 class="text-base font-semibold leading-7 text-gray-900">Create a new commission plan</h2>
 
+
+                    <app-shared-warning *ngIf="form.hasError('message')">
+                        {{ form.getError('message') }}
+                    </app-shared-warning>
+
                     <div class="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-6 flex items-end">
                         <div class="col-span-1 sm:col-span-3">
                             <label for="startAmount" class="block text-sm font-medium leading-6 text-gray-900">Start amount</label>
@@ -56,7 +61,18 @@
                             </div>
                         </div>
 
-                        <div class="col-span-1 sm:col-span-2">
+                        <div class="col-span-1 sm:col-span-3">
+                            <label for="commissionSystem" class="block text-sm font-medium leading-6 text-gray-900">Commission System</label>
+                            <div class="mt-2">
+                                <input type="text" id="commissionSystem"
+                                       formControlName="commissionSystem"
+                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                                <p class="text-xs text-red-500" *ngIf="form.get('commissionSystem')?.errors?.['serverError']">
+                                    {{ form.get('commissionSystem')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-span-1 sm:col-span-3">
                             <label for="commissionAggregator" class="block text-sm font-medium leading-6 text-gray-900">Commission Aggregator</label>
                             <div class="mt-2">
                                 <input type="text" id="commissionAggregator"
@@ -67,7 +83,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-span-1 sm:col-span-2">
+                        <div class="col-span-1 sm:col-span-3">
                             <label for="commissionWholesaler" class="block text-sm font-medium leading-6 text-gray-900">Commission Wholesaler</label>
                             <div class="mt-2">
                                 <input type="text" id="commissionWholesaler"
@@ -78,7 +94,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-span-1 sm:col-span-2">
+                        <div class="col-span-1 sm:col-span-3">
                             <label for="commissionLender" class="block text-sm font-medium leading-6 text-gray-900">Commission Lender</label>
                             <div class="mt-2">
                                 <input type="text" id="commissionLender"
@@ -107,8 +123,7 @@
                                 </p>
                             </div>
                         </div>
-                   </div>
-
+                    </div>
                 </div>
             </div>
 

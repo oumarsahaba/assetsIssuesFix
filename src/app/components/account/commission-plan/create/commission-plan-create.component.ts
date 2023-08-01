@@ -32,6 +32,7 @@ export class CommissionPlanCreateComponent {
             commissionAggregator: new FormControl('', Validators.required),
             commissionWholesaler: new FormControl('', Validators.required),
             commissionLender: new FormControl('', Validators.required),
+            commissionSystem: new FormControl('', Validators.required),
             operationType: new FormControl('', Validators.required)
         })
 
@@ -48,6 +49,7 @@ export class CommissionPlanCreateComponent {
             commissionAggregator: this.form.get('commissionAggregator').value,
             commissionWholesaler: this.form.get('commissionWholesaler').value,
             commissionLender: this.form.get('commissionLender').value,
+            commissionSystem: this.form.get('commissionSystem').value,
             operationType: this.form.get('operationType').value,
             resourceType: this.type,
             resourceCode: this.code
