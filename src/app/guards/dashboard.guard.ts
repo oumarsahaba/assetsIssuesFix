@@ -6,7 +6,7 @@ import {KeycloakService} from "keycloak-angular";
 @Injectable({
     providedIn: 'root'
 })
-export class DashboardGuard implements CanActivate {
+export class DashboardGuard {
 
     constructor(private keycloakService: KeycloakService, private router: Router) {}
 
@@ -14,6 +14,8 @@ export class DashboardGuard implements CanActivate {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
+        return this.router.navigate(['/dashboard'])
+/*
         if (this.keycloakService.isUserInRole('admin'))
             return this.router.navigate(['/lender'])
 
@@ -29,6 +31,7 @@ export class DashboardGuard implements CanActivate {
             return this.router.navigate(['/wholesaler/', resourceCode])
 
         return this.router.navigate(['/forbidden'])
+*/
     }
 
 }
