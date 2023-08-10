@@ -9,7 +9,7 @@ import {ForbiddenComponent} from "./forbidden/forbidden.component";
 import { SharedRoutingModule } from './shared-routing.module';
 import {SidebarComponent} from "./layouts/partials/sidebar/sidebar.component";
 import {NavbarComponent} from "./layouts/partials/navbar/navbar.component";
-import {DashboardComponent} from "./layouts/dashboard/dashboard.component";
+import {MainComponent} from "./layouts/main/main.component";
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import {DashboardComponent} from "./layouts/dashboard/dashboard.component";
         ForbiddenComponent,
         SidebarComponent,
         NavbarComponent,
-        DashboardComponent
+        MainComponent
     ],
     imports: [
         CommonModule,
@@ -33,7 +33,7 @@ import {DashboardComponent} from "./layouts/dashboard/dashboard.component";
         WarningComponent,
         PaginatedResourceComponent,
         ForbiddenComponent,
-        DashboardComponent
+        MainComponent
     ],
 })
 export class SharedModule { }
