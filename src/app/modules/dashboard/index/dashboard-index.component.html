@@ -1,31 +1,40 @@
 <app-dashboard>
     <div>
-        <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-5">
+        <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-5">
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">System Balance</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metrics.systemBalance | number: '.0-2' }}</dd>
+                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metrics?.systemBalance | number: '.0-2' }}</dd>
             </div>
 
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Lender Count</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metrics.lenderCount }}</dd>
+                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metrics?.lenderCount }}</dd>
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Aggregator Count</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metrics.aggregatorCount }}</dd>
+                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metrics?.aggregatorCount }}</dd>
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Wholesaler Count</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metrics.wholesalerCount }}</dd>
+                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metrics?.wholesalerCount }}</dd>
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Agent Count</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metrics.agentCount }}</dd>
+                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metrics?.agentCount }}</dd>
             </div>
-        </dl>
+        </div>
     </div>
 
-    <div class="rounded-lg bg-white px-4 py-5 shadow sm:p-6 mt-5">
-        <app-credit-chart/>
+
+    <div class="rounded-lg bg-white px-1 py-5 shadow sm:p-6 mt-5">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div class="sm:col-span-1">
+                <app-credit-count-chart/>
+            </div>
+            <div class="sm:col-span-1">
+                <app-credit-flux-chart/>
+            </div>
+
+        </div>
     </div>
 </app-dashboard>

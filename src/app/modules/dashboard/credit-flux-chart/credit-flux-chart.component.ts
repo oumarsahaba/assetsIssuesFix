@@ -1,26 +1,23 @@
 import {Component, OnInit} from '@angular/core';
-import { Chart, registerables } from 'chart.js';
+import {Chart, registerables} from 'chart.js';
 import {DashboardService} from "../../../services/dashboard.service";
-import {DashboardMetrics} from "../../../commons/interfaces/dashboard-metrics";
 import {AppError} from "../../../commons/errors/app-error";
-import {NotFoundError} from "../../../commons/errors/not-found-error";
-import {ForbiddenError} from "../../../commons/errors/forbidden-error";
-import {CreditCountChart} from "../../../commons/interfaces/credit-count-chart";
+import {CreditRequestChart} from "../../../commons/interfaces/credit-request-chart";
 
 @Component({
-  selector: 'app-credit-chart',
-  templateUrl: './credit-chart.component.html',
-  styleUrls: ['./credit-chart.component.css']
+  selector: 'app-credit-flux-chart',
+  templateUrl: './credit-flux-chart.component.html',
+  styleUrls: ['./credit-flux-chart.component.css']
 })
-export class CreditChartComponent implements OnInit {
+export class CreditFluxChartComponent implements OnInit {
     constructor(private dashboardService: DashboardService) {}
 
     ngOnInit(): void {
 
-        this.dashboardService.getCreditCountChartData()
+        this.dashboardService.getCreditFluxChartData()
             .subscribe({
                 next: (response) => {
-                    let chartData = response.data as CreditCountChart
+                    let chartData = response.data as CreditRequestChart
 
                     this.createChart(chartData.labels, chartData.values)
                 },
@@ -34,16 +31,15 @@ export class CreditChartComponent implements OnInit {
     }
 
     private createChart(labels: string[], values: number[]) {
-        new Chart("creditChart", {
-            type: 'line',
+        new Chart("creditFluxChart", {
+            type: 'bar',
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Credit Request last 30 days',
+                    label: 'Credit Request Flux last 30 days',
                     data: values,
-                    fill: true,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.5
+                    backgroundColor:'rgba(217,140,62,0.43)',
+                    borderColor: 'rgb(247,162,72)',
                 }]
             },
             options: {

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreditChartComponent } from './credit-chart.component';
+import { CreditFluxChartComponent } from './credit-flux-chart.component';
 
 describe('CreditChartComponent', () => {
-  let component: CreditChartComponent;
-  let fixture: ComponentFixture<CreditChartComponent>;
+  let component: CreditFluxChartComponent;
+  let fixture: ComponentFixture<CreditFluxChartComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreditChartComponent ]
+      declarations: [ CreditFluxChartComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CreditChartComponent);
+    fixture = TestBed.createComponent(CreditFluxChartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

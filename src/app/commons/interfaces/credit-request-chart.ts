@@ -1,4 +1,4 @@
-export interface CreditCountChart {
+export interface CreditRequestChart {
     labels: string[],
     values: number[]
 }
