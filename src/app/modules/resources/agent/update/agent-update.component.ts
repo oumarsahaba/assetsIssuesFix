@@ -25,6 +25,7 @@ export class AgentUpdateComponent implements OnInit {
             //codeAgent: new FormControl('', Validators.required),
             overdraftMaxDailyCount: new FormControl('', Validators.required),
             overdraftLimitAmount: new FormControl('', Validators.required),
+            penaltyDelayInDays: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
             active: new FormControl('', Validators.required)
         })
@@ -34,8 +35,8 @@ export class AgentUpdateComponent implements OnInit {
         this.form.get('active').setValue(this.agent.active)
         this.form.get('description').setValue(this.agent.description)
         this.form.get('overdraftMaxDailyCount').setValue(this.agent.overdraftMaxDailyCount)
-
         this.form.get('overdraftLimitAmount').setValue(this.agent.overdraftLimitAmount)
+        this.form.get('penaltyDelayInDays').setValue(this.agent.penaltyDelayInDays)
         this.displayModal = false
     }
 
@@ -45,6 +46,7 @@ export class AgentUpdateComponent implements OnInit {
             this.form.get('description')?.value,
             this.form.get('overdraftMaxDailyCount')?.value,
             this.form.get('overdraftLimitAmount')?.value,
+            this.form.get('penaltyDelayInDays')?.value,
             this.form.get('active')?.value,
         ).subscribe({
             next: (response) => {

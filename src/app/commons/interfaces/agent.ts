@@ -7,6 +7,7 @@ export interface Agent {
     account: Account
     overdraftLimitAmount: number
     overdraftMaxDailyCount: number
+    penaltyDelayInDays: number,
     description: string
     active: boolean
     createdAt: Date

@@ -29,6 +29,7 @@ export class AgentCreateComponent implements OnInit {
             codeWholesaler: new FormControl('', Validators.required),
             overdraftMaxDailyCount: new FormControl('', Validators.required),
             overdraftLimitAmount: new FormControl('', Validators.required),
+            penaltyDelayInDays: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
         })
 
@@ -61,6 +62,7 @@ export class AgentCreateComponent implements OnInit {
             this.form.get('description')?.value,
             this.form.get('overdraftMaxDailyCount')?.value,
             this.form.get('overdraftLimitAmount')?.value,
+            this.form.get('penaltyDelayInDays')?.value,
         ).subscribe({
             next: (response) => {
                 navigateBack(this.router)
