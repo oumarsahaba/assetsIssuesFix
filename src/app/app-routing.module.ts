@@ -4,7 +4,7 @@ import {AuthGuard} from "./guards/auth.guard";
 import {DashboardGuard} from "./guards/dashboard.guard";
 
 const routes: Routes = [
-    {path: '', pathMatch: 'full', redirectTo: '/dashboard'},
+    {path: '', redirectTo: '', pathMatch: 'full', canActivate: [AuthGuard, DashboardGuard]},
 
     { path: '', loadChildren: () => import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule) },
 
