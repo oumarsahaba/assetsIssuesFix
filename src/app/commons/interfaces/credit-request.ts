@@ -8,5 +8,6 @@ export interface CreditRequest {
     recoveredAmount: number
     status: string
     agent: SimpleAgent
+    type: string
     createdAt: Date
 }

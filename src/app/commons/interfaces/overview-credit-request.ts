@@ -1,4 +1,3 @@
-import {SimpleAgent} from "./simple-agent";
 import {OverviewAgent} from "./overview-agent";
 
 export interface OverviewCreditRequest {
@@ -8,6 +7,7 @@ export interface OverviewCreditRequest {
     outstandingBalance: number
     recoveredAmount: number
     status: string
+    type: string
     agent: OverviewAgent
     createdAt: Date
 }

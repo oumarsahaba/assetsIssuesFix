@@ -3,22 +3,22 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {Router} from "@angular/router";
 import {CreditRequest} from "../../../../commons/interfaces/credit-request";
-import {CreditRequestService} from "../../../../services/credit-request.service";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
+import {OverdraftService} from "../../../../services/overdraft.service";
 
 @Component({
   selector: 'app-credit-request-index',
-  templateUrl: './credit-request-index.component.html',
-  styleUrls: ['./credit-request-index.component.css']
+  templateUrl: './overdraft-request-index.component.html',
+  styleUrls: ['./overdraft-request-index.component.css']
 })
-export class CreditRequestIndexComponent implements OnInit {
+export class OverdraftRequestIndexComponent implements OnInit {
 
     @Input()
     codeAgent: any
     page: PaginatedResource<CreditRequest>;
 
-    constructor(private creditRequestService: CreditRequestService, private router: Router) {
+    constructor(private overdraftService: OverdraftService, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -27,7 +27,7 @@ export class CreditRequestIndexComponent implements OnInit {
 
     goToPage(page: number = 0) {
 
-        this.creditRequestService.getAll(this.codeAgent, page, 5)
+        this.overdraftService.getAll(this.codeAgent, page, 5)
             .subscribe({
                 next: (response) => {
                     this.page = response.data as PaginatedResource<CreditRequest>

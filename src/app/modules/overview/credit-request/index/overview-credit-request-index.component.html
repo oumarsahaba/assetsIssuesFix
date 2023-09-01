@@ -10,7 +10,7 @@
                 <tr class="divide-x divide-gray-200">
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" colspan="2">Aggregator</th>
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" colspan="2">Wholesaler</th>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" colspan="7">Credit Request</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" colspan="8">Credit Request</th>
                 </tr>
                 <tr class="divide-x divide-gray-200">
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Code</th>
@@ -18,6 +18,7 @@
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Code</th>
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Description</th>
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Agent</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Type</th>
                     <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">amount</th>
                     <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">fees</th>
                     <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Recovered amount</th>
@@ -26,13 +27,17 @@
                     <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Created At</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200 bg-white">
+            <tbody>
             <tr *ngFor="let creditRequest of page?.content" class="divide-x divide-gray-200">
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.agent.wholesaler.aggregator.codeAggregator }}</td>
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.agent.wholesaler.aggregator.description }}</td>
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.agent.wholesaler.codeWholesaler }}</td>
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.agent.wholesaler.description }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.agent.description }}</td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                    <a routerLink="/agent/{{ creditRequest.agent.codeAgent }}"
+                     class="text-blue-700 underline">{{ creditRequest.agent.codeAgent }}</a>
+                </td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.type }}</td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.amount | number:'2.' }}</td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.fees | number:'.0-2' }}</td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 sm:pl-6">{{ creditRequest.recoveredAmount | number:'2.' }}</td>

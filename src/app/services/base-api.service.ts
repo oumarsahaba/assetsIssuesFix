@@ -15,8 +15,7 @@ import {ForbiddenError} from "../commons/errors/forbidden-error";
     providedIn: 'root'
 })
 export abstract class BaseAPIService {
-    private readonly baseUrl: string = environment.engine.baseUrl
-
+x
     private httpHeaders : HttpHeaders = new HttpHeaders()
 
     constructor(protected httpClient: HttpClient, private keycloakService: KeycloakService) {

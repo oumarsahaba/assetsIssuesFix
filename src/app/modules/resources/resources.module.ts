@@ -19,12 +19,12 @@ import {AgentShowComponent} from "./agent/show/agent-show.component";
 import {AgentUpdateComponent} from "./agent/update/agent-update.component";
 import {WholesalerShowComponent} from "./wholesaler/show/wholesaler-show.component";
 import {LoanRequestCreateComponent} from './loan-request/create/loan-request-create.component';
-import {CreditRequestIndexComponent} from "./credit-request/index/credit-request-index.component";
-import {CreditRequestCreateComponent} from "./credit-request/create/credit-request-create.component";
+import {OverdraftRequestIndexComponent} from "./overdraft-request/index/overdraft-request-index.component";
+import {CreditRequestCreateComponent} from "./overdraft-request/create/credit-request-create.component";
 import {ProvisionRequestIndexComponent} from './provision-request/index/provision-request-index.component';
 import {ProvisionRequestCreateComponent} from './provision-request/create/provision-request-create.component';
 import {ProvisionRequestValidationComponent} from './provision-request/validation/provision-request-validation.component';
-import {CreditRequestValidationComponent} from './credit-request/validation/credit-request-validation.component';
+import {CreditRequestValidationComponent} from './overdraft-request/validation/credit-request-validation.component';
 import {WholesalerUpdateComponent} from "./wholesaler/update/wholesaler-update.component";
 
 import { ResourcesRoutingModule } from './resources-routing.module';
@@ -54,7 +54,7 @@ import {NgxDropzoneModule} from "ngx-dropzone";
         AgentUpdateComponent,
         WholesalerShowComponent,
         LoanRequestCreateComponent,
-        CreditRequestIndexComponent,
+        OverdraftRequestIndexComponent,
         CreditRequestCreateComponent,
         ProvisionRequestIndexComponent,
         ProvisionRequestCreateComponent,
