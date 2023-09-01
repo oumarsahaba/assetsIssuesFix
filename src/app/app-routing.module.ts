@@ -14,6 +14,8 @@ const routes: Routes = [
 
     { path: '', loadChildren: () => import('./modules/account/account.module').then((m) => m.AccountModule) },
 
+    { path: '', loadChildren: () => import('./modules/overview/overview.module').then((m) => m.OverviewModule) },
+
     {path: '**', redirectTo: 'not-found'},
 ];
 

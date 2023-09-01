@@ -1,0 +1,49 @@
+<app-dashboard>
+    <div class="sm:flex-auto">
+        <h1 class="text-base font-semibold leading-6 text-gray-900">Credit request</h1>
+        <p class="mt-2 text-sm text-gray-700">A list of all credit requests.</p>
+    </div>
+
+    <app-shared-paginated-resource [(page)]="page" (pageChange)="goToPage($event.number)">
+        <table class="min-w-full divide-y divide-gray-300">
+            <thead class="bg-gray-50 divide-y divide-gray-200">
+                <tr class="divide-x divide-gray-200">
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" colspan="2">Aggregator</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" colspan="2">Wholesaler</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" colspan="7">Credit Request</th>
+                </tr>
+                <tr class="divide-x divide-gray-200">
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Code</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Description</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Code</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Description</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Agent</th>
+                    <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">amount</th>
+                    <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">fees</th>
+                    <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Recovered amount</th>
+                    <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Outstanding balance</th>
+                    <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Status</th>
+                    <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Created At</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+            <tr *ngFor="let creditRequest of page?.content" class="divide-x divide-gray-200">
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.agent.wholesaler.aggregator.codeAggregator }}</td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.agent.wholesaler.aggregator.description }}</td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.agent.wholesaler.codeWholesaler }}</td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.agent.wholesaler.description }}</td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.agent.description }}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.amount | number:'2.' }}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.fees | number:'.0-2' }}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 sm:pl-6">{{ creditRequest.recoveredAmount | number:'2.' }}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 sm:pl-6">{{ creditRequest.outstandingBalance | number:'2.'}}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ creditRequest.status }}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ creditRequest.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
+            </tr>
+            <tr *ngIf="page?.content.length == 0">
+                <td class="whitespace-nowrap py-2 text-center text-sm text-gray-500 sm:pl-0" colspan="6"> No data available </td>
+            </tr>
+            </tbody>
+        </table>
+    </app-shared-paginated-resource>
+</app-dashboard>
