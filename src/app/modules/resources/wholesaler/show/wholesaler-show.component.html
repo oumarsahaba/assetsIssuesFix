@@ -16,6 +16,9 @@
         </dl>
     </div>
 
+    <app-wholesaler-provision-index [codeWholesaler]="wholesaler.codeWholesaler"/>
+    <div class="divide-amber-50 py-1 my-10"></div>
+
     <app-loan-request-index *ngIf="wholesaler" [codeWholesaler]="wholesaler.codeWholesaler"></app-loan-request-index>
     <div class="divide-amber-50 py-1 my-5"></div>
 

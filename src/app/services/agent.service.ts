@@ -14,13 +14,15 @@ export class AgentService extends BaseAPIService {
            codeWholesaler: string,
            description: string,
            overdraftMaxDailyCount: string,
-           overdraftLimitAmount: number) {
+           overdraftLimitAmount: number,
+           penaltyDelayInDays: number) {
         return this.httpPostCall('/agent/store', {
             codeAgent : codeAgent,
             codeWholesaler : codeWholesaler,
             description : description,
             overdraftMaxDailyCount: overdraftMaxDailyCount,
             overdraftLimitAmount: overdraftLimitAmount,
+            penaltyDelayInDays: penaltyDelayInDays,
         })
     }
 
@@ -28,11 +30,13 @@ export class AgentService extends BaseAPIService {
            description: string,
            overdraftMaxDailyCount: string,
            overdraftLimitAmount: number,
+           penaltyDelayInDays: number,
            active: boolean) {
         return this.httpPutCall('/agent/update/' + codeAgent, {
             description : description,
             overdraftMaxDailyCount: overdraftMaxDailyCount,
             overdraftLimitAmount: overdraftLimitAmount,
+            penaltyDelayInDays: penaltyDelayInDays,
             active: active,
         })
     }

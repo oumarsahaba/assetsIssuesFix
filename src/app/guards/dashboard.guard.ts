@@ -14,10 +14,8 @@ export class DashboardGuard {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-        return this.router.navigate(['/dashboard'])
-/*
         if (this.keycloakService.isUserInRole('admin'))
-            return this.router.navigate(['/lender'])
+            return this.router.navigate(['/dashboard'])
 
         let resourceCode = this.keycloakService.getKeycloakInstance().tokenParsed["resource_code"]
 
@@ -31,7 +29,6 @@ export class DashboardGuard {
             return this.router.navigate(['/wholesaler/', resourceCode])
 
         return this.router.navigate(['/forbidden'])
-*/
     }
 
 }

@@ -4,7 +4,7 @@ import {AuthGuard} from "./guards/auth.guard";
 import {DashboardGuard} from "./guards/dashboard.guard";
 
 const routes: Routes = [
-    {path: '', pathMatch: 'full', redirectTo: '/dashboard'},
+    {path: '', redirectTo: '', pathMatch: 'full', canActivate: [AuthGuard, DashboardGuard]},
 
     { path: '', loadChildren: () => import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule) },
 
@@ -13,6 +13,8 @@ const routes: Routes = [
     { path: '', loadChildren: () => import('./modules/shared/shared.module').then((m) => m.SharedModule) },
 
     { path: '', loadChildren: () => import('./modules/account/account.module').then((m) => m.AccountModule) },
+
+    { path: '', loadChildren: () => import('./modules/overview/overview.module').then((m) => m.OverviewModule) },
 
     {path: '**', redirectTo: 'not-found'},
 ];

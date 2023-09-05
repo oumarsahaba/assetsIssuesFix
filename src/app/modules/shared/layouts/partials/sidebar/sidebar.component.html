@@ -21,9 +21,9 @@
                     <ul role="list" class="flex flex-1 flex-col gap-y-7">
                         <li>
                             <ul role="list" class="-mx-2 space-y-1">
-                                <li>
+                                <li *ngIf="keycloakService.isUserInRole('admin')">
                                     <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
-                                    <a routerLink="/"
+                                    <a routerLink="/dashboard"
                                        routerLinkActive="bg-gray-800 text-white"
                                        class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                         <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -72,6 +72,25 @@
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <div class="text-xs font-semibold leading-6 text-gray-400">Overviews</div>
+                            <ul role="list" class="-mx-2 mt-2 space-y-1">
+                                <li *ngIf="keycloakService.isUserInRole('admin')">
+                                    <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
+                                    <a routerLink="/overview/credit-request"
+                                       routerLinkActive="bg-gray-800 text-white"
+                                       class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+
+                                        <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                                        </svg>
+
+                                        <span class="truncate">Credit Requests</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="mt-auto">
                             <a href="#" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
                                 <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -99,9 +118,9 @@
             <ul role="list" class="flex flex-1 flex-col gap-y-7">
                 <li>
                     <ul role="list" class="-mx-2 space-y-1">
-                        <li>
+                        <li *ngIf="keycloakService.isUserInRole('admin')">
                             <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
-                            <a routerLink="/"
+                            <a routerLink="/dashboard"
                                routerLinkActive="bg-gray-800 text-white"
                                class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                 <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -159,6 +178,23 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <div class="text-xs font-semibold leading-6 text-gray-400">Overviews</div>
+                    <ul role="list" class="-mx-2 mt-2 space-y-1">
+                        <li *ngIf="keycloakService.isUserInRole('admin')">
+                            <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
+                            <a routerLink="/overview/credit-request"
+                               routerLinkActive="bg-gray-800 text-white"
+                               class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                                </svg>
+                                <span class="truncate">Credit Requests</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="mt-auto">
                     <a href="#" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
                         <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
