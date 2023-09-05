@@ -1,27 +1,27 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ProvisionRequestService} from "../../../../services/provision-request.service";
+import {WholesalerProvisionService} from "../../../../services/wholesaler-provision.service";
 import {Router} from "@angular/router";
 import {navigateBack} from "../../../../commons/helpers";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
-import {ProvisionRequest} from "../../../../commons/interfaces/provision-request";
+import {WholesalerProvision} from "../../../../commons/interfaces/wholesaler-provision";
 
 @Component({
-  selector: 'app-provision-request-validation',
-  templateUrl: './provision-request-validation.component.html',
-  styleUrls: ['./provision-request-validation.component.css']
+  selector: 'app-wholesaler-provision-validation',
+  templateUrl: './wholesaler-provision-validation.component.html',
+  styleUrls: ['./wholesaler-provision-validation.component.css']
 })
-export class ProvisionRequestValidationComponent {
+export class WholesalerProvisionValidationComponent {
     @Input()
-    provisionRequest: ProvisionRequest
+    provisionRequest: WholesalerProvision
     @Input()
     disabled: boolean
     form : FormGroup
     displayModal: boolean
 
-    constructor(private provisionRequestService: ProvisionRequestService, private router: Router) {
+    constructor(private provisionRequestService: WholesalerProvisionService, private router: Router) {
         this.form = new FormGroup({
             status: new FormControl('', Validators.required),
         })

@@ -21,9 +21,9 @@ import {WholesalerShowComponent} from "./wholesaler/show/wholesaler-show.compone
 import {LoanRequestCreateComponent} from './loan-request/create/loan-request-create.component';
 import {OverdraftRequestIndexComponent} from "./overdraft-request/index/overdraft-request-index.component";
 import {CreditRequestCreateComponent} from "./overdraft-request/create/credit-request-create.component";
-import {ProvisionRequestIndexComponent} from './provision-request/index/provision-request-index.component';
-import {ProvisionRequestCreateComponent} from './provision-request/create/provision-request-create.component';
-import {ProvisionRequestValidationComponent} from './provision-request/validation/provision-request-validation.component';
+import {LenderProvisionIndexComponent} from './lender-provision/index/lender-provision-index.component';
+import {LenderProvisionCreateComponent} from './lender-provision/create/lender-provision-create.component';
+import {LenderProvisionValidationComponent} from './lender-provision/validation/lender-provision-validation.component';
 import {CreditRequestValidationComponent} from './overdraft-request/validation/credit-request-validation.component';
 import {WholesalerUpdateComponent} from "./wholesaler/update/wholesaler-update.component";
 
@@ -32,6 +32,11 @@ import {SharedModule} from "../shared/shared.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AccountModule} from "../account/account.module";
 import {NgxDropzoneModule} from "ngx-dropzone";
+import {WholesalerProvisionIndexComponent} from "./wholesaler-provision/index/wholesaler-provision-index.component";
+import {WholesalerProvisionCreateComponent} from "./wholesaler-provision/create/wholesaler-provision-create.component";
+import {
+    WholesalerProvisionValidationComponent
+} from "./wholesaler-provision/validation/wholesaler-provision-validation.component";
 
 
 @NgModule({
@@ -56,9 +61,12 @@ import {NgxDropzoneModule} from "ngx-dropzone";
         LoanRequestCreateComponent,
         OverdraftRequestIndexComponent,
         CreditRequestCreateComponent,
-        ProvisionRequestIndexComponent,
-        ProvisionRequestCreateComponent,
-        ProvisionRequestValidationComponent,
+        LenderProvisionIndexComponent,
+        LenderProvisionCreateComponent,
+        LenderProvisionValidationComponent,
+        WholesalerProvisionIndexComponent,
+        WholesalerProvisionCreateComponent,
+        WholesalerProvisionValidationComponent,
         CreditRequestValidationComponent,
         WholesalerUpdateComponent,
     ],

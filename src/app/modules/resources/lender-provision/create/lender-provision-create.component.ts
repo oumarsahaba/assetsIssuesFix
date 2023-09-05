@@ -1,17 +1,17 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ProvisionRequestService} from "../../../../services/provision-request.service";
+import {LenderProvisionService} from "../../../../services/lender-provision.service";
 import {Router} from "@angular/router";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NgxDropzoneChangeEvent} from "ngx-dropzone";
 
 @Component({
-    selector: 'app-provision-request-create',
-    templateUrl: './provision-request-create.component.html',
-    styleUrls: ['./provision-request-create.component.css']
+    selector: 'app-lender-provision-create',
+    templateUrl: './lender-provision-create.component.html',
+    styleUrls: ['./lender-provision-create.component.css']
 })
-export class ProvisionRequestCreateComponent {
+export class LenderProvisionCreateComponent {
     displayModal: any;
     form : FormGroup
 
@@ -20,7 +20,7 @@ export class ProvisionRequestCreateComponent {
 
     files: File[] = [];
 
-    constructor(private provisionRequestService: ProvisionRequestService, private router: Router) {
+    constructor(private provisionRequestService: LenderProvisionService, private router: Router) {
         this.form = new FormGroup({
             amount: new FormControl('', Validators.required),
             files: new FormControl('', Validators.required),

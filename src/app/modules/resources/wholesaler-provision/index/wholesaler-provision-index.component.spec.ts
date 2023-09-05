@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProvisionRequestIndexComponent } from './provision-request-index.component';
+import { WholesalerProvisionIndexComponent } from './wholesaler-provision-index.component';
 
 describe('IndexComponent', () => {
-  let component: ProvisionRequestIndexComponent;
-  let fixture: ComponentFixture<ProvisionRequestIndexComponent>;
+  let component: WholesalerProvisionIndexComponent;
+  let fixture: ComponentFixture<WholesalerProvisionIndexComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProvisionRequestIndexComponent ]
+      declarations: [ WholesalerProvisionIndexComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ProvisionRequestIndexComponent);
+    fixture = TestBed.createComponent(WholesalerProvisionIndexComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

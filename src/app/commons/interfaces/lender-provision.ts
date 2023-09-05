@@ -1,7 +1,7 @@
 import {SimpleLender} from "./simple-lender";
 import {Media} from "./media";
 
-export interface ProvisionRequest{
+export interface LenderProvision {
     token: string
     amount: number
     fees: number

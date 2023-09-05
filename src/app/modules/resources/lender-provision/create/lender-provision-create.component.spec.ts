@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProvisionRequestCreateComponent } from './provision-request-create.component';
+import { LenderProvisionCreateComponent } from './lender-provision-create.component';
 
 describe('CreateComponent', () => {
-  let component: ProvisionRequestCreateComponent;
-  let fixture: ComponentFixture<ProvisionRequestCreateComponent>;
+  let component: LenderProvisionCreateComponent;
+  let fixture: ComponentFixture<LenderProvisionCreateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProvisionRequestCreateComponent ]
+      declarations: [ LenderProvisionCreateComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ProvisionRequestCreateComponent);
+    fixture = TestBed.createComponent(LenderProvisionCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
