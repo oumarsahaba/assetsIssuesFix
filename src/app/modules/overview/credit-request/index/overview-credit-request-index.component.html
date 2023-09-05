@@ -29,21 +29,21 @@
             </thead>
             <tbody>
             <tr *ngFor="let creditRequest of page?.content" class="divide-x divide-gray-200">
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.agent.wholesaler.aggregator.codeAggregator }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.agent.wholesaler.aggregator.description }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.agent.wholesaler.codeWholesaler }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.agent.wholesaler.description }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6">{{ creditRequest.agent.wholesaler.aggregator.codeAggregator }}</td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6">{{ creditRequest.agent.wholesaler.aggregator.description }}</td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6">{{ creditRequest.agent.wholesaler.codeWholesaler }}</td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6">{{ creditRequest.agent.wholesaler.description }}</td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6">
                     <a routerLink="/agent/{{ creditRequest.agent.codeAgent }}"
-                     class="text-blue-700 underline">{{ creditRequest.agent.codeAgent }}</a>
+                     class="text-blue-600 underline">{{ creditRequest.agent.codeAgent }}</a>
                 </td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.type }}</td>
-                <td class="whitespace-nowrap py-4 px-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.amount | number:'2.' }}</td>
-                <td class="whitespace-nowrap py-4 px-3 text-sm font-medium text-gray-900 sm:pl-6">{{ creditRequest.fees | number:'.0-2' }}</td>
-                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 sm:pl-6">{{ creditRequest.recoveredAmount | number:'2.' }}</td>
-                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 sm:pl-6">{{ creditRequest.outstandingBalance | number:'2.'}}</td>
-                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ creditRequest.status }}</td>
-                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ creditRequest.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6">{{ creditRequest.type }}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-700 sm:pl-6">{{ creditRequest.amount | number:'2.' }}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-700 sm:pl-6">{{ creditRequest.fees | number:'.0-2' }}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-700 sm:pl-6">{{ creditRequest.recoveredAmount | number:'2.' }}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-700 sm:pl-6">{{ creditRequest.outstandingBalance | number:'2.'}}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-700">{{ creditRequest.status }}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-700">{{ creditRequest.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
             </tr>
             <tr *ngIf="page?.content.length == 0">
                 <td class="whitespace-nowrap py-2 text-center text-sm text-gray-500 sm:pl-0" colspan="6"> No data available </td>
