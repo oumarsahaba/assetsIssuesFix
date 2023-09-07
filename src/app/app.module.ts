@@ -12,6 +12,9 @@ import {RouteReuseStrategy} from "@angular/router";
 import {CustomRouteReuseStrategy} from "./commons/custom-route-reuse-strategy";
 import {NgxDropzoneModule} from "ngx-dropzone";
 
+
+
+
 @NgModule({
     declarations: [
         AppComponent,
