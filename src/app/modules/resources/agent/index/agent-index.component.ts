@@ -8,6 +8,7 @@ import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
+import Swal from 'sweetalert2'
 
 
 @Component({
@@ -32,7 +33,24 @@ export class AgentIndexComponent implements OnInit{
     ngOnInit(): void {
         this.goToPage()
     }
-
+    confirmDelete(codeAgent: string) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to delete this agent.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel',
+        }).then((result) => {
+            if (result.value) {
+                // Call your delete function here
+                this.delete(codeAgent);
+                Swal.fire('Deleted!', 'Your item has been deleted.', 'success');
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire('Cancelled', 'Your item is safe :)', 'error');
+            }
+        });
+    }
     delete(codeAgent: string) {
         this.agentService.delete(codeAgent).subscribe({
             next: (response) => {
