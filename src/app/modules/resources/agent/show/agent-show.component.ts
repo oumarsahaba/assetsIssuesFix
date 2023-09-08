@@ -7,6 +7,7 @@ import {AgentService} from "../../../../services/agent.service";
 import {Agent} from "../../../../commons/interfaces/agent";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {TabsService} from "../../../shared/tabs/tabs/tabs.service";
+import {Commissionable} from "../../../../commons/enums/Commissionable";
 
 @Component({
   selector: 'app-agent-show',
@@ -46,4 +47,5 @@ export class AgentShowComponent {
         }
     }
 
+    protected readonly Commissionable = Commissionable;
 }

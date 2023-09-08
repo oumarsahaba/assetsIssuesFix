@@ -15,27 +15,29 @@
             </div>
         </dl>
     </div>
+    <div class="px-4 sm:px-6 lg:px-8 mb-10">
 
-    <app-wholesaler-provision-index [codeWholesaler]="wholesaler.codeWholesaler"/>
-    <div class="divide-amber-50 py-1 my-10"></div>
-
-    <app-loan-request-index *ngIf="wholesaler" [codeWholesaler]="wholesaler.codeWholesaler"></app-loan-request-index>
-    <div class="divide-amber-50 py-1 my-5"></div>
-
-    <div class="px-4 sm:px-6 lg:px-8">
-        <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.creditAccount.slug" title="Credit account"/>
+        <app-tab-container>
+            <app-tab-item tabTitle="Provision Request">
+                <app-wholesaler-provision-index [codeWholesaler]="wholesaler.codeWholesaler"/>
+            </app-tab-item>
+            <app-tab-item tabTitle="Loan request">
+                <app-loan-request-index *ngIf="wholesaler" [codeWholesaler]="wholesaler.codeWholesaler"></app-loan-request-index>
+            </app-tab-item>
+            <app-tab-item tabTitle="Credit Account Operation">
+                <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.creditAccount.slug" title="Credit account"/>
+            </app-tab-item>
+        </app-tab-container>
+        <app-tab-container>
+            <app-tab-item tabTitle="Operations Commission">
+                <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.commissionAccount.slug" title="Commission account"/>
+            </app-tab-item>
+            <app-tab-item tabTitle="Operations Agregator">
+                <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.aggregatorWholesaler.account.slug" title="Operational account"/>
+            </app-tab-item>
+            <app-tab-item tabTitle="Commission Plan">
+                <app-commission-plan-index [code]="wholesaler.codeWholesaler" [type]="Commissionable.wholesaler"/>
+            </app-tab-item>
+        </app-tab-container>
     </div>
-    <div class="divide-amber-50 py-1 my-5"></div>
-
-    <div class="px-4 sm:px-6 lg:px-8">
-        <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.commissionAccount.slug" title="Commission account"/>
-    </div>
-    <div class="divide-amber-50 py-1 my-5"></div>
-
-    <div class="px-4 sm:px-6 lg:px-8">
-        <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.aggregatorWholesaler.account.slug" title="Operational account"/>
-    </div>
-
-    <div class="divide-amber-50 py-1 my-10"></div>
-    <app-commission-plan-index [code]="wholesaler.codeWholesaler" [type]="Commissionable.wholesaler"/>
 </app-dashboard>

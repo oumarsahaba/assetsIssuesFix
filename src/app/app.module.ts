@@ -16,9 +16,11 @@ import {NgxDropzoneModule} from "ngx-dropzone";
 
 
 
+
 @NgModule({
     declarations: [
         AppComponent,
+
     ],
     imports: [
         BrowserModule,
@@ -29,6 +31,8 @@ import {NgxDropzoneModule} from "ngx-dropzone";
         KeycloakAngularModule,
         AppRoutingModule,
         NgxDropzoneModule,
+
+
     ],
     providers: [
         {
