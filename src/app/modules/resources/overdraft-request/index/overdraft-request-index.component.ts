@@ -8,7 +8,7 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {OverdraftService} from "../../../../services/overdraft.service";
 
 @Component({
-  selector: 'app-credit-request-index',
+  selector: 'app-overdraft-request-index',
   templateUrl: './overdraft-request-index.component.html',
   styleUrls: ['./overdraft-request-index.component.css']
 })
