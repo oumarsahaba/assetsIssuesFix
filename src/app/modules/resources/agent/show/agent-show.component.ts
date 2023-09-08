@@ -6,7 +6,6 @@ import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {AgentService} from "../../../../services/agent.service";
 import {Agent} from "../../../../commons/interfaces/agent";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
-import {TabsService} from "../../../shared/tabs/tabs/tabs.service";
 import {Commissionable} from "../../../../commons/enums/Commissionable";
 
 @Component({
@@ -20,8 +19,7 @@ export class AgentShowComponent {
     accountSlug: string | null
     operations: Operation[]
 
-    constructor(private router: Router, private route: ActivatedRoute,
-                private agentService: AgentService,public tabService:TabsService) {
+    constructor(private router: Router, private route: ActivatedRoute, private agentService: AgentService) {
         this.agent = null
         this.accountSlug = null
         this.operations = []
