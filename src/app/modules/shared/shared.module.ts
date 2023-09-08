@@ -10,6 +10,8 @@ import { SharedRoutingModule } from './shared-routing.module';
 import {SidebarComponent} from "./layouts/partials/sidebar/sidebar.component";
 import {NavbarComponent} from "./layouts/partials/navbar/navbar.component";
 import {MainComponent} from "./layouts/main/main.component";
+import { TabContainerComponent } from './tabs/container/tab-container.component';
+import { TabItemComponent } from './tabs/item/tab-item.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import {MainComponent} from "./layouts/main/main.component";
         ForbiddenComponent,
         SidebarComponent,
         NavbarComponent,
-        MainComponent
+        MainComponent,
+        TabContainerComponent,
+        TabItemComponent
     ],
     imports: [
         CommonModule,
@@ -33,7 +37,9 @@ import {MainComponent} from "./layouts/main/main.component";
         WarningComponent,
         PaginatedResourceComponent,
         ForbiddenComponent,
-        MainComponent
+        MainComponent,
+        TabContainerComponent,
+        TabItemComponent
     ],
 })
 export class SharedModule { }

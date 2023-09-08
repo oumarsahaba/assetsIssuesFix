@@ -1,8 +1,9 @@
+<div class="mt-15">
 <button
     (click)="toggleModal()"
     type="button"
     class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">New provision request</button>
-
+</div>
 <app-shared-modal [show]="displayModal">
     <div class="px-4 sm:px-6 lg:px-8 py-4" >
         <form class="w-full items-center" [formGroup]="form" (ngSubmit)="create()">
