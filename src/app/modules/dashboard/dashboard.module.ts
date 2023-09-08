@@ -6,6 +6,7 @@ import { DashboardIndexComponent } from './index/dashboard-index.component';
 import {SharedModule} from "../shared/shared.module";
 import { CreditCountChartComponent } from './credit-count-chart/credit-count-chart.component';
 import {CreditFluxChartComponent} from "./credit-flux-chart/credit-flux-chart.component";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {CreditFluxChartComponent} from "./credit-flux-chart/credit-flux-chart.co
     imports: [
         CommonModule,
         SharedModule,
-        DashboardRoutingModule
+        DashboardRoutingModule,
+        FormsModule
     ]
 })
 export class DashboardModule { }

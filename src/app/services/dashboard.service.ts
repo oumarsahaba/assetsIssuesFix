@@ -10,7 +10,7 @@ export class DashboardService extends BaseAPIService {
       return this.httpGetCall(`/dashboard/metrics`)
   }
 
-  getCreditCountChartData(){
+  getCreditCountChartData(period: string){
       return this.httpGetCall(`/dashboard/stats/credit/count`)
   }
   getCreditFluxChartData(){
