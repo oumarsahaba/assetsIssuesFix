@@ -8,7 +8,20 @@
         </dl>
     </div>
     <div class="px-4 sm:px-6 lg:px-8 mb-10">
-        <div class="border-b border-gray-200 dark:border-gray-700">
+
+        <app-tab-container>
+            <app-tab-item tabTitle="Provision account">
+                <app-lender-provision-index [codeLender]="lender.codeLender"/>
+            </app-tab-item>
+            <app-tab-item tabTitle="Accounts Operations">
+                <app-account-operations [accountSlug]="accountSlug"/>
+            </app-tab-item>
+            <app-tab-item tabTitle="Commission plans">
+                <app-commission-plan-index [code]="lender.codeLender" [type]="Commissionable.lender"/>
+            </app-tab-item>
+        </app-tab-container>
+
+        <!--<div class="border-b border-gray-200 dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
                 <li class="mr-2">
                     <a (click)="tabService.showProvisionRequest()" [class.active]="tabService.activeTab === 'provision'" class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
@@ -38,6 +51,6 @@
             <app-lender-provision-index *ngIf="tabService.activeTab === 'provision'" [codeLender]="lender.codeLender"/>
             <app-account-operations *ngIf="accountSlug && tabService.activeTab === 'accountOperation'" [accountSlug]="accountSlug"/>
             <app-commission-plan-index *ngIf="accountSlug && tabService.activeTab === 'commissionPlan'" [code]="lender.codeLender" [type]="Commissionable.lender"/>
-        </div>
+        </div>-->
     </div>
 </app-dashboard>

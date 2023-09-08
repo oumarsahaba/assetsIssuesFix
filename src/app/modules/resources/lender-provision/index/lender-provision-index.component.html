@@ -1,40 +1,38 @@
-<div class="px-4 sm:px-6 lg:px-8">
-    <div class="sm:flex sm:items-center">
-        <div class="sm:flex-auto">
-            <p class="mt-2 text-sm text-gray-700">A list of all provision requests.</p>
-        </div>
-        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <app-lender-provision-create [codeLender]="codeLender"/>
-        </div>
+<div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+        <p class="mt-2 text-sm text-gray-700">A list of all provision requests.</p>
     </div>
-    <app-shared-paginated-resource [(page)]="page" (pageChange)="goToPage($event.number)">
-        <table class="min-w-full divide-y divide-gray-300">
-            <thead class="bg-gray-50">
-            <tr>
-                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Lender</th>
-                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">amount</th>
-                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">fees</th>
-                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Status</th>
-                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Created At</th>
-                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900"></th>
-            </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200 bg-white">
-            <tr *ngFor="let provisionRequest of page?.content">
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">{{ provisionRequest.lender.description }}</td>
-                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 sm:pl-6">{{ provisionRequest.amount | number:'2.' }}</td>
-                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 sm:pl-6">{{ (provisionRequest.fees == null ? 0 : provisionRequest.fees) | number:'.0-2' }}</td>
-                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ provisionRequest.status }}</td>
-                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ provisionRequest.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
-                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                    <app-lender-provision-validation [provisionRequest]="provisionRequest" [disabled]="provisionRequest.status !== 'INITIATED'"/>
-                </td>
-
-            </tr>
-            <tr *ngIf="page?.content.length == 0">
-                <td class="whitespace-nowrap py-2 text-center text-sm text-gray-500 sm:pl-0" colspan="6"> No data available </td>
-            </tr>
-            </tbody>
-        </table>
-    </app-shared-paginated-resource>
+    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+        <app-lender-provision-create [codeLender]="codeLender"/>
+    </div>
 </div>
+<app-shared-paginated-resource [(page)]="page" (pageChange)="goToPage($event.number)">
+    <table class="min-w-full divide-y divide-gray-300">
+        <thead class="bg-gray-50">
+        <tr>
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Lender</th>
+            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">amount</th>
+            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">fees</th>
+            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Status</th>
+            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Created At</th>
+            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900"></th>
+        </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 bg-white">
+        <tr *ngFor="let provisionRequest of page?.content">
+            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">{{ provisionRequest.lender.description }}</td>
+            <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 sm:pl-6">{{ provisionRequest.amount | number:'2.' }}</td>
+            <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500 sm:pl-6">{{ (provisionRequest.fees == null ? 0 : provisionRequest.fees) | number:'.0-2' }}</td>
+            <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ provisionRequest.status }}</td>
+            <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ provisionRequest.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
+            <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
+                <app-lender-provision-validation [provisionRequest]="provisionRequest" [disabled]="provisionRequest.status !== 'INITIATED'"/>
+            </td>
+
+        </tr>
+        <tr *ngIf="page?.content.length == 0">
+            <td class="whitespace-nowrap py-2 text-center text-sm text-gray-500 sm:pl-0" colspan="6"> No data available </td>
+        </tr>
+        </tbody>
+    </table>
+</app-shared-paginated-resource>
