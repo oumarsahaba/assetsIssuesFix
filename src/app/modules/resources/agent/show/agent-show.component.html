@@ -55,11 +55,15 @@
             </li>
         </ul>
     </div>
+    <div class="px-4 sm:px-6 lg:px-8 mb-10">
 
-
-    <app-credit-request-index *ngIf="agent" [codeAgent]="agent.codeAgent"></app-credit-request-index>
-    <div class="divide-amber-50 py-1 my-10"></div>
-    <div class="px-4 sm:px-6 lg:px-8">
-        <app-account-operations *ngIf="agent" [accountSlug]="agent.account.slug"/>
+        <app-tab-container>
+            <app-tab-item tabTitle="OverDraft Request">
+                <app-credit-request-index *ngIf="agent" [codeAgent]="agent.codeAgent"></app-credit-request-index>
+            </app-tab-item>
+            <app-tab-item tabTitle="Accounts Operations">
+                <app-account-operations *ngIf="agent" [accountSlug]="agent.account.slug"/>
+            </app-tab-item>
+        </app-tab-container>
     </div>
 </app-dashboard>

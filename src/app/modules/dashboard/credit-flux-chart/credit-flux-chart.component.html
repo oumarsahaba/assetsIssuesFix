@@ -1,3 +1,14 @@
-<div class="h-[300px] md:h-[600px]">
+<div class="container">
+    <div>
+    <label for="periodSelect" class="sr-only">Select Period&nbsp;&nbsp;:&nbsp;&nbsp;</label>
+    <select id="periodSelect" (change)="onPeriodChange($event)" class="dropdown">
+        <option value="30">Last 30 Days</option>
+        <option value="90">Last 3 Months</option>
+        <option value="180">Last 6 Months</option>
+    </select>
+</div>
+</div>
+<div class="h-[300px] md:h-[400px] lg:h-[500px]">
     <canvas id="creditFluxChart"></canvas>
 </div>
+

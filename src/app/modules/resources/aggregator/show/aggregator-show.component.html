@@ -11,16 +11,18 @@
             </div>
         </dl>
     </div>
+    <div class="px-4 sm:px-6 lg:px-8 mb-10">
 
-    <div class="px-4 sm:px-6 lg:px-8">
-        <app-account-operations *ngIf="aggregator.creditAccount.slug" [accountSlug]="aggregator.creditAccount.slug" title="Credit account"/>
+        <app-tab-container>
+            <app-tab-item tabTitle="Credit Account Operation">
+                <app-account-operations *ngIf="aggregator.creditAccount.slug " [accountSlug]="aggregator.creditAccount.slug"/>
+            </app-tab-item>
+            <app-tab-item tabTitle="Operations Commission">
+                <app-account-operations *ngIf="aggregator.commissionAccount.slug " [accountSlug]="aggregator.commissionAccount.slug"/>
+            </app-tab-item>
+            <app-tab-item tabTitle="Commission Plan">
+                <app-commission-plan-index [code]="aggregator.codeAggregator" [type]="Commissionable.aggregator"/>
+            </app-tab-item>
+        </app-tab-container>
     </div>
-    <div class="divide-amber-50 py-1 my-10"></div>
-
-    <div class="px-4 sm:px-6 lg:px-8">
-        <app-account-operations *ngIf="aggregator.commissionAccount.slug" [accountSlug]="aggregator.commissionAccount.slug" title="Commission account"/>
-    </div>
-    <div class="divide-amber-50 py-1 my-10"></div>
-
-    <app-commission-plan-index [code]="aggregator.codeAggregator" [type]="Commissionable.aggregator"/>
 </app-dashboard>
