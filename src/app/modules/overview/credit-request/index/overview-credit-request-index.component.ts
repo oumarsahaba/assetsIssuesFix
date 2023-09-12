@@ -16,8 +16,14 @@ export class OverviewCreditRequestIndexComponent implements OnInit{
 
     page: PaginatedResource<OverviewCreditRequest>;
 
+    codeAgent: string = '';
+    codeWholesaler: string = '';
+    data: string = '';
+
     constructor(private overviewService: OverviewService, private router: Router) {
     }
+
+
 
     ngOnInit(): void {
         this.goToPage()
@@ -40,5 +46,27 @@ export class OverviewCreditRequestIndexComponent implements OnInit{
             })
 
     }
+
+    validateData() {
+
+        this.overviewService.getCreditRequestsFilter(this.codeAgent, this.codeWholesaler)
+            .subscribe({
+                next: (response) => {
+                    console.log(this.codeAgent)
+                    console.log(this.codeWholesaler)
+                    console.log(response)
+                    this.page = response.data as PaginatedResource<OverviewCreditRequest>
+                },
+                error: (err: AppError) => {
+                    if (err instanceof NotFoundError) {
+                        this.router.navigate(['/not-found']);
+                    }
+                    if (err instanceof ForbiddenError) {
+                        this.router.navigate(['/forbidden']);
+                    }
+                },
+            });
+    }
+
 
 }

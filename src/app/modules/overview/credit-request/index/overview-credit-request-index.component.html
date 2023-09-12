@@ -1,7 +1,17 @@
+
 <app-dashboard>
-    <div class="sm:flex-auto">
-        <h1 class="text-base font-semibold leading-6 text-gray-900">Credit request</h1>
-        <p class="mt-2 text-sm text-gray-700">A list of all credit requests.</p>
+    <div class="flex items-center">
+        <div class="flex items-center">
+            <label for="codeAgent" class="text-gray-700 font-bold mr-2">Code Agent</label>
+            <input id="codeAgent" [(ngModel)]="codeAgent" class="w-32 p-2 border rounded" type="text" placeholder="Enter Code Agent">
+        </div>
+
+        <div class="flex items-center ml-4">
+            <label for="codeWholesaler" class="text-gray-700 font-bold mr-2">Code Wholesaler</label>
+            <input id="codeWholesaler" [(ngModel)]="codeWholesaler" class="w-32 p-2 border rounded" type="text" placeholder="Enter Code Wholesale">
+        </div>
+
+        <button (click)="validateData()" class="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Validate</button>
     </div>
 
     <app-shared-paginated-resource [(page)]="page" (pageChange)="goToPage($event.number)">
