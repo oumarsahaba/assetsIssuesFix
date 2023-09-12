@@ -5,11 +5,11 @@ import { AppError } from "../../../commons/errors/app-error";
 import { CreditRequestChart } from "../../../commons/interfaces/credit-request-chart";
 
 @Component({
-    selector: 'app-credit-flux-chart',
-    templateUrl: './credit-flux-chart.component.html',
-    styleUrls: ['./credit-flux-chart.component.css']
+    selector: 'app-credit-flux-by-agent-chart',
+    templateUrl: './credit-flux-by-agent-chart.component.html',
+    styleUrls: ['./credit-flux-by-agent-chart.component.css']
 })
-export class CreditFluxChartComponent implements OnInit {
+export class CreditFluxByAgentChartComponent implements OnInit {
     selectedPeriod: number = 30; // Default period
     chart: Chart | null = null; // Store the chart instance
 
@@ -26,7 +26,7 @@ export class CreditFluxChartComponent implements OnInit {
     }
 
     private updateChart(dayBefore: number) {
-        this.dashboardService.getCreditFluxChartData(dayBefore).subscribe({
+        this.dashboardService.getCreditFluxByAgentChartData(dayBefore).subscribe({
             next: (response) => {
                 let chartData = response.data as CreditRequestChart;
                 chartData.labels.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
@@ -46,14 +46,14 @@ export class CreditFluxChartComponent implements OnInit {
 
     private createChart(labels: string[], values: number[]) {
         const chartTitle = this.getChartTitle(this.selectedPeriod.toString());
-        this.chart = new Chart("creditFluxChart", {
+        this.chart = new Chart("creditFluxByAgentChart", {
             type: 'bar',
             data: {
                 labels: labels,
                 datasets: [{
-                    label: chartTitle, // Set the label dynamically
+                    label: chartTitle,
                     data: values,
-                    backgroundColor: 'rgba(168, 24, 53, 0.6)',
+                    backgroundColor: 'rgba(168, 24, 53, 0.7)',
                     borderColor: 'rgb(255, 45, 50)',
                     borderRadius: 15
                 }]
@@ -73,11 +73,11 @@ export class CreditFluxChartComponent implements OnInit {
     private getChartTitle(period: string): string {
         switch (period) {
             case '30':
-                return 'Credit Request Flux in Last 30 Days';
+                return 'Credit Request flux by agent in Last 30 Days';
             case '90':
-                return 'Credit Request Flux in Last 3 Months';
+                return 'Credit Request flux by agent in Last 3 Months';
             case '180':
-                return 'Credit Request Flux in Last 6 Months';
+                return 'Credit Request flux by agent in Last 6 Months';
             default:
                 return '';
         }

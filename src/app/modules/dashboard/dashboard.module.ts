@@ -7,13 +7,17 @@ import {SharedModule} from "../shared/shared.module";
 import { CreditCountChartComponent } from './credit-count-chart/credit-count-chart.component';
 import {CreditFluxChartComponent} from "./credit-flux-chart/credit-flux-chart.component";
 import {FormsModule} from "@angular/forms";
+import {CreditCountByAgentChartComponent} from "./credit-count-by-agent-chart/credit-count-by-agent-chart.component";
+import {CreditFluxByAgentChartComponent} from "./credit-flux-by-agent-chart/credit-flux-by-agent-chart.component";
 
 
 @NgModule({
     declarations: [
         DashboardIndexComponent,
         CreditCountChartComponent,
-        CreditFluxChartComponent
+        CreditCountByAgentChartComponent,
+        CreditFluxChartComponent,
+        CreditFluxByAgentChartComponent,
     ],
     imports: [
         CommonModule,
