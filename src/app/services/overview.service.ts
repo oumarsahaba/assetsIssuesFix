@@ -10,8 +10,8 @@ export class OverviewService extends BaseAPIService{
         return this.httpGetCall(`/overviews/credit/request?page=${page}&size=${size}`)
     }
 
-    getCreditRequestsFilter(codeAgent?: string, codeWholesaler?: string) {
-        return this.httpGetCall(`/overviews/credit/request/search?codeAgent=${codeAgent}&codeWholesaler=${codeWholesaler}`);
+    getCreditRequestsFilter(codeAgent?: string, codeWholesaler?: string,selectedStatus?: string) {
+        return this.httpGetCall(`/overviews/credit/request/search?codeAgent=${codeAgent}&codeWholesaler=${codeWholesaler}&selectedStatus=${selectedStatus}`);
     }
 
 

@@ -1,18 +1,46 @@
 
 <app-dashboard>
-    <div class="flex items-center">
-        <div class="flex items-center">
-            <label for="codeAgent" class="text-gray-700 font-bold mr-2">Code Agent</label>
-            <input id="codeAgent" [(ngModel)]="codeAgent" class="w-32 p-2 border rounded" type="text" placeholder="Enter Code Agent">
+    <div class="flex items-center justify-end">
+        <div class="flex flex-col items-center">
+            <label for="codeAgent" class="text-gray-700 font-serif text-sm mb-1">Code Agent</label>
+            <input id="codeAgent" [(ngModel)]="codeAgent" class="w-32 p-1.5 border rounded text-sm" type="text" placeholder="Enter Code Agent">
         </div>
 
-        <div class="flex items-center ml-4">
-            <label for="codeWholesaler" class="text-gray-700 font-bold mr-2">Code Wholesaler</label>
-            <input id="codeWholesaler" [(ngModel)]="codeWholesaler" class="w-32 p-2 border rounded" type="text" placeholder="Enter Code Wholesale">
+        <div class="flex flex-col items-center ml-4">
+            <label for="codeWholesaler" class="text-gray-700 font-serif text-sm mb-1">Code Wholesaler</label>
+            <input id="codeWholesaler" [(ngModel)]="codeWholesaler" class="w-32 p-1.5 border rounded text-sm" type="text" placeholder="Enter Code Wholesale">
         </div>
-
-        <button (click)="validateData()" class="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Validate</button>
+        <div class="flex flex-col items-center ml-4">
+            <label class="text-gray-700 font-serif text-sm mb-1">Status</label>
+            <select [(ngModel)]="selectedStatus" class="p-1.5 border rounded text-sm">
+                <option class="text-gray-700 font-serif text-sm" value="" disabled selected>Choose</option>
+                <option class="text-gray-700 font-serif text-sm" value="PENDING">PENDING</option>
+                <option class="text-gray-700 font-serif text-sm" value="VALIDATED">VALIDATED</option>
+                <option class="text-gray-700 font-serif text-sm" value="FAILED">FAILED</option>
+                <option class="text-gray-700 font-serif text-sm" value="REJECTED">REJECTED</option>
+                <option class="text-gray-700 font-serif text-sm" value="PAID">PAID</option>
+            </select>
+        </div>
+        <div class="flex flex-col items-center mt-6">
+            <button (click)="validateData()" class="ml-4 px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
+                <div class="flex items-center">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        class="h-4 w-4 mr-2"> <!-- Reduced icon size to 'h-4 w-4' -->
+                        <path
+                            fill-rule="evenodd"
+                            d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span>Search</span>
+                </div>
+            </button>
+        </div>
     </div>
+
+
 
     <app-shared-paginated-resource [(page)]="page" (pageChange)="goToPage($event.number)">
         <table class="min-w-full divide-y divide-gray-300">

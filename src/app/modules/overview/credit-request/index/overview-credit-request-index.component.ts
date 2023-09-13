@@ -18,12 +18,10 @@ export class OverviewCreditRequestIndexComponent implements OnInit{
 
     codeAgent: string = '';
     codeWholesaler: string = '';
-    data: string = '';
+    selectedStatus:string = '';
 
     constructor(private overviewService: OverviewService, private router: Router) {
     }
-
-
 
     ngOnInit(): void {
         this.goToPage()
@@ -39,23 +37,21 @@ export class OverviewCreditRequestIndexComponent implements OnInit{
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
-
                     if (err instanceof ForbiddenError)
                         this.router.navigate(['/forbidden'])
                 }
             })
 
     }
-
     validateData() {
-
-        this.overviewService.getCreditRequestsFilter(this.codeAgent, this.codeWholesaler)
+        this.overviewService.getCreditRequestsFilter(this.codeAgent, this.codeWholesaler,this.selectedStatus)
             .subscribe({
                 next: (response) => {
-                    console.log(this.codeAgent)
-                    console.log(this.codeWholesaler)
-                    console.log(response)
-                    this.page = response.data as PaginatedResource<OverviewCreditRequest>
+                    if (response.data && response.data.size > 0) {
+                        this.page = response.data as PaginatedResource<OverviewCreditRequest>;
+                    } else {
+                        this.page = null;
+                    }
                 },
                 error: (err: AppError) => {
                     if (err instanceof NotFoundError) {
