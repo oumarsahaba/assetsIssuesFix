@@ -28,6 +28,7 @@ export class OverviewCreditRequestIndexComponent implements OnInit{
         this.overviewService.getCreditRequests(page, 10)
             .subscribe({
                 next: (response) => {
+
                     this.page = response.data as PaginatedResource<OverviewCreditRequest>
                 },
                 error : (err: AppError) => {
