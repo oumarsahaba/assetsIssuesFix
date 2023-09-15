@@ -16,6 +16,10 @@ export class OverviewCreditRequestIndexComponent implements OnInit{
 
     page: PaginatedResource<OverviewCreditRequest>;
 
+    codeAgent: string = '';
+    codeWholesaler: string = '';
+    selectedStatus:string = '';
+
     constructor(private overviewService: OverviewService, private router: Router) {
     }
 
@@ -33,12 +37,32 @@ export class OverviewCreditRequestIndexComponent implements OnInit{
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
-
                     if (err instanceof ForbiddenError)
                         this.router.navigate(['/forbidden'])
                 }
             })
 
     }
+    validateData() {
+        this.overviewService.getCreditRequestsFilter(this.codeAgent, this.codeWholesaler,this.selectedStatus)
+            .subscribe({
+                next: (response) => {
+                    if (response.data && response.data.size > 0) {
+                        this.page = response.data as PaginatedResource<OverviewCreditRequest>;
+                    } else {
+                        this.page = null;
+                    }
+                },
+                error: (err: AppError) => {
+                    if (err instanceof NotFoundError) {
+                        this.router.navigate(['/not-found']);
+                    }
+                    if (err instanceof ForbiddenError) {
+                        this.router.navigate(['/forbidden']);
+                    }
+                },
+            });
+    }
+
 
 }
