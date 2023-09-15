@@ -54,7 +54,8 @@ export class CreditCountChartComponent implements OnInit {
                     label: chartTitle,
                     data: values,
                     fill: true,
-                    borderColor: 'rgb(75, 192, 192)',
+                    borderColor: 'rgb(39, 44, 92, 0.7)',
+                    backgroundColor: 'rgba(39, 44, 92, 0.3)',
                     tension: 0.5
                 }]
             },

@@ -13,7 +13,16 @@ export class DashboardService extends BaseAPIService {
   getCreditCountChartData(dayBefore: number){
       return this.httpGetCall(`/dashboard/stats/credit/count?dayBefore=${dayBefore}`)
   }
+
   getCreditFluxChartData(dayBefore: number){
       return this.httpGetCall(`/dashboard/stats/credit/flux?dayBefore=${dayBefore}`)
+  }
+
+  getCreditCountByAgentChartData(dayBefore: number){
+      return this.httpGetCall(`/dashboard/stats/credit/count/agent?dayBefore=${dayBefore}`)
+  }
+
+  getCreditFluxByAgentChartData(dayBefore: number){
+      return this.httpGetCall(`/dashboard/stats/credit/flux/agent?dayBefore=${dayBefore}`)
   }
 }

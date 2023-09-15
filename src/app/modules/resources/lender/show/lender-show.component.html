@@ -20,37 +20,5 @@
                 <app-commission-plan-index [code]="lender.codeLender" [type]="Commissionable.lender"/>
             </app-tab-item>
         </app-tab-container>
-
-        <!--<div class="border-b border-gray-200 dark:border-gray-700">
-            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
-                <li class="mr-2">
-                    <a (click)="tabService.showProvisionRequest()" [class.active]="tabService.activeTab === 'provision'" class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
-                        <svg class="w-4 h-4 mr-2 text-gray-400 {{ tabService.activeTab === 'provision' ? 'text-blue-500' : '' }} group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M3 2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm1 2v7h2V4H4zm2 9H4v2h2v-2zm6 0h-4v2h4v-2zm4-9h-2v7h2V4zm-1 5h-2V7h2v3z"/>
-                        </svg><span class="{{ tabService.activeTab === 'provision' ? 'font-bold text-blue-500' : 'text-sm font-medium leading-6 text-gray-900' }}"> Provisions Request</span>
-                    </a>
-                </li>&nbsp;&nbsp;&nbsp;&nbsp;
-                <li class="mr-2">
-                    <a (click)="tabService.showAccountOperations()" [class.active]="tabService.activeTab === 'accountOperation'" class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
-                        <svg class="w-4 h-4 mr-2 text-gray-400 {{ tabService.activeTab === 'accountOperation' ? 'text-blue-500' : '' }} group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm1-14.07a1 1 0 0 1 1.2.718l1.903 6.786 5.77 1.395a1 1 0 0 1 .608 1.676l-4.927 5.24 1.126 6.452a1 1 0 0 1-1.45 1.054l-5.62-3.05-5.62 3.05a1 1 0 0 1-1.45-1.054l1.125-6.452-4.927-5.24a1 1 0 0 1 .608-1.676l5.77-1.395 1.903-6.786a1 1 0 0 1 1.203-.718z"/>
-                        </svg><span class="{{ tabService.activeTab === 'accountOperation' ? 'font-bold text-blue-500' : ' font-medium leading-6 text-gray-900' }}">Accounts Operations</span>
-                    </a>
-                </li>
-                <li class="mr-2">
-                    <a (click)="tabService.showCommissionPlan()" [class.active]="tabService.activeTab === 'commissionPlan'" class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
-                        <svg class="w-4 h-4 mr-2 text-gray-400 {{ tabService.activeTab === 'commissionPlan' ? 'text-blue-500' : '' }} group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm1-14.07a1 1 0 0 1 1.2.718l1.903 6.786 5.77 1.395a1 1 0 0 1 .608 1.676l-4.927 5.24 1.126 6.452a1 1 0 0 1-1.45 1.054l-5.62-3.05-5.62 3.05a1 1 0 0 1-1.45-1.054l1.125-6.452-4.927-5.24a1 1 0 0 1 .608-1.676l5.77-1.395 1.903-6.786a1 1 0 0 1 1.203-.718z"/>
-                        </svg><span class="{{ tabService.activeTab === 'commissionPlan' ? 'font-bold text-blue-500' : ' font-medium leading-6 text-gray-900' }}">Commission Plan</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="mb-10">
-            <app-lender-provision-index *ngIf="tabService.activeTab === 'provision'" [codeLender]="lender.codeLender"/>
-            <app-account-operations *ngIf="accountSlug && tabService.activeTab === 'accountOperation'" [accountSlug]="accountSlug"/>
-            <app-commission-plan-index *ngIf="accountSlug && tabService.activeTab === 'commissionPlan'" [code]="lender.codeLender" [type]="Commissionable.lender"/>
-        </div>-->
     </div>
 </app-dashboard>

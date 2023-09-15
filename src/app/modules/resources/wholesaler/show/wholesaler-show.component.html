@@ -18,21 +18,21 @@
     <div class="px-4 sm:px-6 lg:px-8 mb-10">
 
         <app-tab-container>
-            <app-tab-item tabTitle="Provision Request">
-                <app-wholesaler-provision-index [codeWholesaler]="wholesaler.codeWholesaler"/>
-            </app-tab-item>
             <app-tab-item tabTitle="Loan request">
                 <app-loan-request-index *ngIf="wholesaler" [codeWholesaler]="wholesaler.codeWholesaler"></app-loan-request-index>
             </app-tab-item>
-            <app-tab-item tabTitle="Credit Account Operation">
+
+            <app-tab-item tabTitle="Provision Request">
+                <app-wholesaler-provision-index [codeWholesaler]="wholesaler.codeWholesaler"/>
+            </app-tab-item>
+            <app-tab-item tabTitle="Credit account's operations">
                 <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.creditAccount.slug" title="Credit account"/>
             </app-tab-item>
-        </app-tab-container>
-        <app-tab-container>
-            <app-tab-item tabTitle="Operations Commission">
+
+            <app-tab-item tabTitle="Commission account's operations">
                 <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.commissionAccount.slug" title="Commission account"/>
             </app-tab-item>
-            <app-tab-item tabTitle="Operations Agregator">
+            <app-tab-item tabTitle="Operational account's operations">
                 <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.aggregatorWholesaler.account.slug" title="Operational account"/>
             </app-tab-item>
             <app-tab-item tabTitle="Commission Plan">

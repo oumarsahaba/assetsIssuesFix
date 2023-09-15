@@ -7,7 +7,6 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {Commissionable} from "../../../../commons/enums/Commissionable";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
-import {TabsService} from "../../../shared/tabs/tabs/tabs.service";
 
 @Component({
   selector: 'app-aggregator-show',
@@ -23,8 +22,7 @@ export class AggregatorShowComponent {
 
     protected readonly Commissionable = Commissionable;
 
-    constructor(private router: Router, private route: ActivatedRoute, private aggregatorService: AggregatorService,
-                public tabService:TabsService) {
+    constructor(private router: Router, private route: ActivatedRoute, private aggregatorService: AggregatorService) {
         this.aggregator = null
         this.accountSlug = null
         this.operations = []
