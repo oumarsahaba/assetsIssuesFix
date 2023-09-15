@@ -1,28 +1,28 @@
 
 <app-dashboard>
-    <div class="flex items-center justify-end">
-        <div class="flex flex-col items-center">
-            <label for="codeAgent" class="text-gray-700 font-serif text-sm mb-1">Code Agent</label>
-            <input id="codeAgent" [(ngModel)]="codeAgent" class="w-32 p-1.5 border rounded text-sm" type="text" placeholder="Enter Code Agent">
+    <div class="flex justify-end gap-x-4">
+        <div class="flex flex-col">
+            <label for="codeWholesaler" class="text-gray-700 font-serif text-sm mb-1">Code Wholesaler</label>
+            <input id="codeWholesaler" [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm" type="text" placeholder="Code Wholesaler">
         </div>
 
-        <div class="flex flex-col items-center ml-4">
-            <label for="codeWholesaler" class="text-gray-700 font-serif text-sm mb-1">Code Wholesaler</label>
-            <input id="codeWholesaler" [(ngModel)]="codeWholesaler" class="w-32 p-1.5 border rounded text-sm" type="text" placeholder="Enter Code Wholesale">
+        <div class="flex flex-col">
+            <label for="codeAgent" class="text-gray-700 font-serif text-sm mb-1">Code Agent</label>
+            <input id="codeAgent" [(ngModel)]="codeAgent" class="p-1.5 border rounded text-sm" type="text" placeholder="Code Agent">
         </div>
-        <div class="flex flex-col items-center ml-4">
+
+
+        <div class="flex flex-col">
             <label class="text-gray-700 font-serif text-sm mb-1">Status</label>
-            <select [(ngModel)]="selectedStatus" class="p-1.5 border rounded text-sm">
-                <option class="text-gray-700 font-serif text-sm" value="" disabled selected>Choose</option>
-                <option class="text-gray-700 font-serif text-sm" value="PENDING">PENDING</option>
-                <option class="text-gray-700 font-serif text-sm" value="VALIDATED">VALIDATED</option>
-                <option class="text-gray-700 font-serif text-sm" value="FAILED">FAILED</option>
-                <option class="text-gray-700 font-serif text-sm" value="REJECTED">REJECTED</option>
-                <option class="text-gray-700 font-serif text-sm" value="PAID">PAID</option>
+            <select [(ngModel)]="status" class="py-1.5 pl-3 pr-10 border rounded text-sm">
+                <option class="text-gray-700" value="" selected>All</option>
+                <option class="text-gray-700 capitalize"
+                        *ngFor="let status of CreditRequestStatus | keyvalue" [value]="status.value">{{ status.key}}</option>
+
             </select>
         </div>
         <div class="flex flex-col items-center mt-6">
-            <button (click)="validateData()" class="ml-4 px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
+            <button (click)="goToPage()" class="px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
                 <div class="flex items-center">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-700">{{ creditRequest.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
             </tr>
             <tr *ngIf="page?.content.length == 0">
-                <td class="whitespace-nowrap py-2 text-center text-sm text-gray-500 sm:pl-0" colspan="6"> No data available </td>
+                <td class="whitespace-nowrap py-2 text-center text-sm text-gray-500 sm:pl-0" colspan="12"> No data available </td>
             </tr>
             </tbody>
         </table>

@@ -6,19 +6,20 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {Router} from "@angular/router";
 import {OverviewService} from "../../../../services/overview.service";
 import {OverviewCreditRequest} from "../../../../commons/interfaces/overview-credit-request";
+import {CreditRequestStatus} from "../../../../commons/enums/CreditRequestStatus";
 
 @Component({
-  selector: 'app-overview-credit-request-index-component',
-  templateUrl: './overview-credit-request-index.component.html',
-  styleUrls: ['./overview-credit-request-index.component.css']
+    selector: 'app-overview-credit-request-index-component',
+    templateUrl: './overview-credit-request-index.component.html',
+    styleUrls: ['./overview-credit-request-index.component.css']
 })
-export class OverviewCreditRequestIndexComponent implements OnInit{
+export class OverviewCreditRequestIndexComponent implements OnInit {
 
     page: PaginatedResource<OverviewCreditRequest>;
 
     codeAgent: string = '';
     codeWholesaler: string = '';
-    selectedStatus:string = '';
+    status:string = '';
 
     constructor(private overviewService: OverviewService, private router: Router) {
     }
@@ -29,10 +30,10 @@ export class OverviewCreditRequestIndexComponent implements OnInit{
 
     goToPage(page: number = 0) {
 
-        this.overviewService.getCreditRequests(page, 10)
+        this.overviewService.getCreditRequests(page, 10, this.codeAgent, this.codeWholesaler, this.status)
             .subscribe({
                 next: (response) => {
-                    this.page = response.data as PaginatedResource<OverviewCreditRequest>
+                    this.page = response.data as PaginatedResource<OverviewCreditRequest>;
                 },
                 error : (err: AppError) => {
                     if (err instanceof NotFoundError)
@@ -43,26 +44,6 @@ export class OverviewCreditRequestIndexComponent implements OnInit{
             })
 
     }
-    validateData() {
-        this.overviewService.getCreditRequestsFilter(this.codeAgent, this.codeWholesaler,this.selectedStatus)
-            .subscribe({
-                next: (response) => {
-                    if (response.data && response.data.size > 0) {
-                        this.page = response.data as PaginatedResource<OverviewCreditRequest>;
-                    } else {
-                        this.page = null;
-                    }
-                },
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError) {
-                        this.router.navigate(['/not-found']);
-                    }
-                    if (err instanceof ForbiddenError) {
-                        this.router.navigate(['/forbidden']);
-                    }
-                },
-            });
-    }
 
-
+    protected readonly CreditRequestStatus = CreditRequestStatus;
 }
