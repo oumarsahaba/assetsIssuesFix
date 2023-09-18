@@ -23,13 +23,14 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
     codeWholesaler: string = '';
     status:string = '';
 
+    protected readonly CreditRequestStatus = CreditRequestStatus;
+
     constructor(private overviewService: OverviewService, private router: Router) {
     }
 
     ngOnInit(): void {
         this.goToPage()
     }
-
     goToPage(page: number = 0) {
 
         this.overviewService.getCreditRequests(page, 10, this.codeAgent, this.codeWholesaler, this.status)
@@ -46,6 +47,7 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
             })
 
     }
+
     exportExcel() {
         this.overviewService.getAllCreditRequests(this.codeWholesaler, this.codeAgent, this.status)
             .subscribe({
@@ -59,39 +61,39 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
                         });
                         return;
                     }
-                 else{
-                    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-                    const worksheet: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet([]);
-                    const headerRow = [
-                        'Aggregator Code', 'Aggregator Description',
-                        'Wholesaler Code', 'Wholesaler Description',
-                        'Agent Code', 'Agent Description',
-                        'Amount', 'Fees',
-                        'Recovered Amount', 'Outstanding Balance',
-                        'Status', 'Type',
-                        'Created At'
-                    ];
-
-                    XLSX.utils.sheet_add_aoa(worksheet, [headerRow], { origin: -1 });
-                    // Iterate over the data and add the fields to the worksheet
-                    for (let i = 0; i < response.data.length; i++) {
-                        const data = response.data[i];
-                        const row = [
-                            data.agent.wholesaler.aggregator.codeAggregator, data.agent.wholesaler.aggregator.description,
-                            data.agent.wholesaler.codeWholesaler, data.agent.wholesaler.description,
-                            data.agent.codeAgent, data.agent.description,
-                            data.amount, data.fees,
-                            data.recoveredAmount, data.outstandingBalance,
-                            data.status, data.type,
-                            data.createdAt
+                    else{
+                        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+                        const worksheet: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet([]);
+                        const headerRow = [
+                            'Aggregator Code', 'Aggregator Description',
+                            'Wholesaler Code', 'Wholesaler Description',
+                            'Agent Code', 'Agent Description',
+                            'Amount', 'Fees',
+                            'Recovered Amount', 'Outstanding Balance',
+                            'Status', 'Type',
+                            'Created At'
                         ];
 
-                        XLSX.utils.sheet_add_aoa(worksheet, [row], { origin: -1 });
-                    }
-                    XLSX.utils.book_append_sheet(wb, worksheet, 'Sheet1');
-                    // Save the Excel spreadsheet
-                    XLSX.writeFile(wb, 'credit_request.xlsx');
-                }},
+                        XLSX.utils.sheet_add_aoa(worksheet, [headerRow], { origin: -1 });
+                        // Iterate over the data and add the fields to the worksheet
+                        for (let i = 0; i < response.data.length; i++) {
+                            const data = response.data[i];
+                            const row = [
+                                data.agent.wholesaler.aggregator.codeAggregator, data.agent.wholesaler.aggregator.description,
+                                data.agent.wholesaler.codeWholesaler, data.agent.wholesaler.description,
+                                data.agent.codeAgent, data.agent.description,
+                                data.amount, data.fees,
+                                data.recoveredAmount, data.outstandingBalance,
+                                data.status, data.type,
+                                data.createdAt
+                            ];
+
+                            XLSX.utils.sheet_add_aoa(worksheet, [row], { origin: -1 });
+                        }
+                        XLSX.utils.book_append_sheet(wb, worksheet, 'Sheet1');
+                        // Save the Excel spreadsheet
+                        XLSX.writeFile(wb, 'credit_request.xlsx');
+                    }},
                 error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found']);
@@ -100,9 +102,4 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
                 }
             });
     }
-
-
-
-
-    protected readonly CreditRequestStatus = CreditRequestStatus;
 }
