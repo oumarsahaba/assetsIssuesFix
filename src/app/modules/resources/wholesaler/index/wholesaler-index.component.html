@@ -15,13 +15,13 @@
                 <thead class="bg-gray-50">
                 <tr>
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Code</th>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Aggregator</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Description</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden md:table-cell lg:table-cell xl:table-cell">Aggregator</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden md:table-cell lg:table-cell xl:table-cell">Description</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Active</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Credit Balance</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Commission Balance</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Operational Balance</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Created at</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden sm:table-cell md:table-cell lg:table-cell xl:table-cell">Credit Balance</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden sm:table-cell md:table-cell lg:table-cell xl:table-cell">Commission Balance</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden sm:table-cell md:table-cell lg:table-cell xl:table-cell">Operational Balance</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden lg:table-cell xl:table-cell">Created at</th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                         <span class="sr-only">Actions</span>
                     </th>
@@ -29,8 +29,8 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                 <tr *ngFor="let wholesaler of page?.content">
-                    <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ wholesaler.codeWholesaler }}</td>
-                    <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ wholesaler.aggregator.description }}</td>
+                    <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6 hidden md:table-cell lg:table-cell xl:table-cell">{{ wholesaler.codeWholesaler }}</td>
+                    <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6 hidden md:table-cell lg:table-cell xl:table-cell">{{ wholesaler.aggregator.description }}</td>
                     <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.description }}</td>
                     <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
                         <span *ngIf="wholesaler.active" class="inline-flex items-center gap-x-1.5 rounded-full bg-green-100 px-1.5 py-0.5 text-xs font-medium text-green-600">
@@ -41,13 +41,13 @@
                         <span *ngIf="!wholesaler.active" class="inline-flex items-center gap-x-1.5 rounded-full bg-red-100 px-1.5 py-0.5 text-xs font-medium text-red-700">
                             <svg class="h-1.5 w-1.5 fill-red-500" viewBox="0 0 6 6" aria-hidden="true">
                                 <circle cx="3" cy="3" r="3" />
-                            </svg> Deactivated
+                            </svg> Desactivated
                         </span>
                     </td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.creditAccount.balance | number: '.0-2' }}</td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.commissionAccount.balance | number: '.0-2' }}</td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.aggregatorWholesaler.account.balance | number: '.0-2' }}</td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500 hidden sm:table-cell md:table-cell lg:table-cell xl:table-cell">{{ wholesaler.creditAccount.balance | number: '.0-2' }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500 hidden sm:table-cell md:table-cell lg:table-cell xl:table-cell">{{ wholesaler.commissionAccount.balance | number: '.0-2' }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500 hidden sm:table-cell md:table-cell lg:table-cell xl:table-cell">{{ wholesaler.aggregatorWholesaler.account.balance | number: '.0-2' }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500 hidden lg:table-cell xl:table-cell">{{ wholesaler.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
                     <td class="relative whitespace-nowrap py-2 pl-2 pr-4 text-right text-sm font-medium sm:pr-6">
                         <div class="inline-flex shadow-sm">
                             <button type="button"

@@ -15,8 +15,8 @@
                 <tr>
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Code</th>
                     <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Description</th>
-                    <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Balance</th>
-                    <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">created at</th>
+                    <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 hidden lg:table-cell xl:table-cell">Balance</th>
+                    <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 hidden lg:table-cell xl:table-cell">created at</th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                         <span class="sr-only">Actions</span>
                     </th>
@@ -26,8 +26,8 @@
                 <tr *ngFor="let lender of page?.content">
                     <td class="whitespace-nowrap py-2 pl-4 text-sm font-medium text-gray-900 sm:pl-6">{{ lender.codeLender }}</td>
                     <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ lender.description }}</td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ lender.creditAccount.balance | number: '.0-2' }}</td>
-                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ lender.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500 hidden lg:table-cell xl:table-cell">{{ lender.creditAccount.balance | number: '.0-2' }}</td>
+                    <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500 hidden lg:table-cell xl:table-cell">{{ lender.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
                     <td class="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                         <div class="inline-flex shadow-sm">
                             <button type="button"
