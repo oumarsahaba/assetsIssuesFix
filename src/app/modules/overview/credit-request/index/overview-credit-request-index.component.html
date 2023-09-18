@@ -56,16 +56,16 @@
             <thead class="bg-gray-50 divide-y divide-gray-200">
                 <tr class="divide-x divide-gray-200">
                     <!-- Element to hide on small screens (less than 640px) and display on medium and larger screens (greater than or equal to 768px) -->
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 sm:hidden md:table-cell" colspan="2">Aggregator</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden md:visible" colspan="2">Aggregator</th>
 
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 sm:hidden md:table-cell" colspan="2">Wholesaler</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6  hidden md:visible" colspan="2">Wholesaler</th>
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" colspan="8">Credit Request</th>
                 </tr>
                 <tr class="divide-x divide-gray-200">
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 sm:hidden md:table-cell">Code</th>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 sm:hidden md:table-cell">Description</th>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 sm:hidden md:table-cell">Code</th>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 sm:hidden md:table-cell">Description</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6  sm:hidden">Code</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6  sm:hidden">Description</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6  sm:hidden">Code</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6  sm:hidden">Description</th>
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Agent</th>
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Type</th>
                     <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">amount</th>
@@ -78,10 +78,11 @@
             </thead>
             <tbody>
             <tr *ngFor="let creditRequest of page?.content" class="divide-x divide-gray-200">
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6 lg-hidden lg:table-cell">{{ creditRequest.agent.wholesaler.aggregator.codeAggregator }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6 lg-hidden lg:table-cell">{{ creditRequest.agent.wholesaler.aggregator.description }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6 lg-hidden lg:table-cell">{{ creditRequest.agent.wholesaler.codeWholesaler }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6 lg-hidden lg:table-cell">{{ creditRequest.agent.wholesaler.description }}</td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6 md:visible">{{ creditRequest.agent.wholesaler.aggregator.codeAggregator }}</td>
+
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6 md:visible">{{ creditRequest.agent.wholesaler.aggregator.description }}</td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6 md:visible">{{ creditRequest.agent.wholesaler.codeWholesaler }}</td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6 md:visible">{{ creditRequest.agent.wholesaler.description }}</td>
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6">
                     <a routerLink="/agent/{{ creditRequest.agent.codeAgent }}"
                      class="text-blue-600 underline">{{ creditRequest.agent.codeAgent }}</a>
