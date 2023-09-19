@@ -1,24 +1,21 @@
 <app-dashboard>
-    <div class="flex flex-wrap justify-between items-center gap-4 sm:flex-nowrap">
-        <div class="flex flex-col w-full sm:w-auto">
+    <div class="flex flex-col gap-y-4 lg:flex-row lg:justify-end lg:gap-x-4">
+        <div class="flex flex-col">
             <label for="codeWholesaler" class="text-gray-700 font-serif text-sm mb-1">Code Wholesaler</label>
             <input id="codeWholesaler" [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm" type="text" placeholder="Code Wholesaler">
         </div>
-
-        <div class="flex flex-col w-full sm:w-auto">
+        <div class="flex flex-col">
             <label for="codeAgent" class="text-gray-700 font-serif text-sm mb-1">Code Agent</label>
             <input id="codeAgent" [(ngModel)]="codeAgent" class="p-1.5 border rounded text-sm" type="text" placeholder="Code Agent">
         </div>
-
-        <div class="flex flex-col w-full sm:w-auto">
+        <div class="flex flex-col">
             <label class="text-gray-700 font-serif text-sm mb-1">Status</label>
             <select [(ngModel)]="status" class="py-1.5 pl-3 pr-10 border rounded text-sm">
                 <option class="text-gray-700" value="" selected>All</option>
                 <option class="text-gray-700 capitalize" *ngFor="let status of CreditRequestStatus | keyvalue" [value]="status.value">{{ status.key}}</option>
             </select>
         </div>
-
-        <div class="flex w-full h-auto sm:w-auto mt-5">
+        <div class="flex items-end gap-2">
             <button (click)="goToPage()" class="px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm ">
                 <div class="flex items-center">
                     <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
@@ -28,7 +25,7 @@
                 </div>
             </button>
 
-            <button (click)="exportExcel()" class="px-3 py-1.5 ml-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm ">
+            <button (click)="exportExcel()" class="px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm ">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512" fill="currentColor">
                         <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z"/>
