@@ -10,6 +10,10 @@ export class OverviewService extends BaseAPIService {
         return this.httpGetCall(`/overviews/credit/request/search?page=${page}&size=${size}&codeWholesaler=${codeWholesaler}&codeAgent=${codeAgent}&status=${status}`);
     }
 
+    getRefundRequests(page: number = 0, size: number = 10, codeAgent?: string, status?: string) {
+        return this.httpGetCall(`/overviews/refund/request/search?page=${page}&size=${size}&codeAgent=${codeAgent}&status=${status}`);
+    }
+
     getAllCreditRequests(codeWholesaler?: string,codeAgent?: string,  status?: string) {
         return this.httpGetCall(`/overviews/credit/request/search?codeWholesaler=${codeWholesaler}&codeAgent=${codeAgent}&status=${status}`);
     }
