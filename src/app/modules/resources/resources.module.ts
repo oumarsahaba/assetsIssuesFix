@@ -37,6 +37,7 @@ import {WholesalerProvisionCreateComponent} from "./wholesaler-provision/create/
 import {
     WholesalerProvisionValidationComponent
 } from "./wholesaler-provision/validation/wholesaler-provision-validation.component";
+import { ActiveBadgeComponent } from '../shared/active-badge/active-badge.component';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import {
         WholesalerProvisionValidationComponent,
         CreditRequestValidationComponent,
         WholesalerUpdateComponent,
+        ActiveBadgeComponent,
     ],
     imports: [
         CommonModule,

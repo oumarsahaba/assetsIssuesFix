@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {WholesalerService} from "../../../../services/wholesaler.service";
@@ -11,7 +11,7 @@ import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
     templateUrl: './wholesaler-update.component.html',
     styleUrls: ['./wholesaler-update.component.css']
 })
-export class WholesalerUpdateComponent implements OnInit {
+export class WholesalerUpdateComponent implements OnChanges {
 
     @Input()
     wholesaler: Wholesaler
@@ -23,7 +23,7 @@ export class WholesalerUpdateComponent implements OnInit {
                 private router: Router) {
     }
 
-    ngOnInit(): void {
+    ngOnChanges(changes:SimpleChanges): void {
         this.form = new FormGroup({
             description: new FormControl('', Validators.required),
             active: new FormControl('', Validators.required),
@@ -31,11 +31,10 @@ export class WholesalerUpdateComponent implements OnInit {
 
         this.displayModal = false
 
-        this.form.get('active').setValue(this.wholesaler.active)
-        this.form.get('description').setValue(this.wholesaler.description)
-
-        this.displayModal = false
-
+        if (changes.hasOwnProperty('wholesaler')) {
+            this.form.get('active').setValue(this.wholesaler.active)
+            this.form.get('description').setValue(this.wholesaler.description)
+        }
     }
 
     update() {
