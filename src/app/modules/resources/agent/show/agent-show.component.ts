@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnChanges, SimpleChanges} from '@angular/core';
 import {Operation} from "../../../../commons/interfaces/operation";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AppError} from "../../../../commons/errors/app-error";

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AgentService} from "../../../../services/agent.service";
@@ -11,7 +11,7 @@ import {Agent} from "../../../../commons/interfaces/agent";
     templateUrl: './agent-update.component.html',
     styleUrls: ['./agent-update.component.css']
 })
-export class AgentUpdateComponent implements OnInit {
+export class AgentUpdateComponent implements OnChanges {
     @Input()
     agent: Agent
 
@@ -20,9 +20,8 @@ export class AgentUpdateComponent implements OnInit {
 
     constructor(private agentService: AgentService, private router: Router) {}
 
-    ngOnInit(): void {
+    ngOnChanges(changes: SimpleChanges){
         this.form = new FormGroup({
-            //codeAgent: new FormControl('', Validators.required),
             overdraftMaxDailyCount: new FormControl('', Validators.required),
             overdraftLimitAmount: new FormControl('', Validators.required),
             penaltyDelayInDays: new FormControl('', Validators.required),
@@ -30,14 +29,16 @@ export class AgentUpdateComponent implements OnInit {
             active: new FormControl('', Validators.required)
         })
 
-        console.log('agent: ', this.agent)
+        if(changes.hasOwnProperty('agent')) {
+            this.form.get('active').setValue(this.agent?.active)
+            this.form.get('description').setValue(this.agent?.description)
+            this.form.get('overdraftMaxDailyCount').setValue(this.agent?.overdraftMaxDailyCount)
+            this.form.get('overdraftLimitAmount').setValue(this.agent?.overdraftLimitAmount)
+            this.form.get('penaltyDelayInDays').setValue(this.agent?.penaltyDelayInDays)
+        }
 
-        this.form.get('active').setValue(this.agent.active)
-        this.form.get('description').setValue(this.agent.description)
-        this.form.get('overdraftMaxDailyCount').setValue(this.agent.overdraftMaxDailyCount)
-        this.form.get('overdraftLimitAmount').setValue(this.agent.overdraftLimitAmount)
-        this.form.get('penaltyDelayInDays').setValue(this.agent.penaltyDelayInDays)
         this.displayModal = false
+
     }
 
     update() {
@@ -58,11 +59,5 @@ export class AgentUpdateComponent implements OnInit {
 
     toggleModal() {
         this.displayModal = !this.displayModal
-    }
-
-    changeWholesaler($event: any) {
-        this.form.get('codeWholesaler')?.setValue($event.target.value, {
-            onlySelf: true,
-        })
     }
 }
