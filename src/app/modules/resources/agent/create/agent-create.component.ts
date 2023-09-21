@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {WholesalerService} from "../../../../services/wholesaler.service";
 import {Router} from "@angular/router";
@@ -16,6 +16,8 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
     styleUrls: ['./agent-create.component.css']
 })
 export class AgentCreateComponent implements OnInit {
+    @Input()
+
     form : FormGroup
     displayModal: any;
     wholesalers: SimpleWholesaler[]

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { DashboardService } from "../../../services/dashboard.service";
 import { AppError } from "../../../commons/errors/app-error";
-import { CreditRequestChart } from "../../../commons/interfaces/credit-request-chart";
+import { ChartDataset } from "../../../commons/interfaces/chart-dataset";
 
 @Component({
     selector: 'app-credit-flux-chart',
@@ -28,7 +28,7 @@ export class CreditFluxChartComponent implements OnInit {
     private updateChart(dayBefore: number) {
         this.dashboardService.getCreditFluxChartData(dayBefore).subscribe({
             next: (response) => {
-                let chartData = response.data as CreditRequestChart;
+                let chartData = response.data as ChartDataset;
                 chartData.labels.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
 
                 // Destroy the previous chart if it exists
