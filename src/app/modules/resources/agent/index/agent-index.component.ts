@@ -26,6 +26,8 @@ export class AgentIndexComponent implements OnInit{
         last: false
     }
 
+    codeAgent : string = "";
+    codeWholesaler : string = "";
     constructor(private agentService: AgentService,
                 private wholesalerService: WholesalerService,
                 private router: Router) {}
@@ -62,7 +64,9 @@ export class AgentIndexComponent implements OnInit{
     }
 
     goToPage(page: number = 0) {
-        this.agentService.getAll(page)
+        console.log(this.codeAgent, this.codeWholesaler);
+        
+        this.agentService.getAll(this.codeWholesaler, this.codeAgent,page)
             .subscribe({
                 next: (response) => {
                     this.page = response.data as PaginatedResource<Agent>
