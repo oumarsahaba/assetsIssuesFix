@@ -17,6 +17,7 @@ import Swal from "sweetalert2";
 export class WholesalerIndexComponent implements OnInit {
 
     page : PaginatedResource<Wholesaler>
+    codeWholesaler : string = ""
 
     constructor(private wholesalerService: WholesalerService, private router: Router ) {
     }
@@ -26,7 +27,7 @@ export class WholesalerIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.wholesalerService.getPage(page)
+        this.wholesalerService.getPage(this.codeWholesaler, page)
             .subscribe({
                 next: (response) => {
                     this.page = response.data as PaginatedResource<Wholesaler>

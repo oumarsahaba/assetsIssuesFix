@@ -21,6 +21,8 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
     data: OverviewCreditRequest[];
     codeAgent: string = '';
     codeWholesaler: string = '';
+    startDate: string = '';
+    endDate: string = '';
     status:string = '';
 
     protected readonly CreditRequestStatus = CreditRequestStatus;
@@ -32,8 +34,8 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
         this.goToPage()
     }
     goToPage(page: number = 0) {
-
-        this.overviewService.getCreditRequests(page, 10, this.codeAgent, this.codeWholesaler, this.status)
+        console.log(this.startDate, this.endDate)
+        this.overviewService.getCreditRequests(page, 10, this.codeAgent, this.codeWholesaler, this.status, this.startDate, this.endDate)
             .subscribe({
                 next: (response) => {
                     this.page = response.data as PaginatedResource<OverviewCreditRequest>;

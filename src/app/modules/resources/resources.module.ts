@@ -29,7 +29,7 @@ import {WholesalerUpdateComponent} from "./wholesaler/update/wholesaler-update.c
 
 import { ResourcesRoutingModule } from './resources-routing.module';
 import {SharedModule} from "../shared/shared.module";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AccountModule} from "../account/account.module";
 import {NgxDropzoneModule} from "ngx-dropzone";
 import {WholesalerProvisionIndexComponent} from "./wholesaler-provision/index/wholesaler-provision-index.component";
@@ -78,7 +78,8 @@ import { ActiveBadgeComponent } from '../shared/active-badge/active-badge.compon
         ResourcesRoutingModule,
         ReactiveFormsModule,
         AccountModule,
-        NgxDropzoneModule
+        NgxDropzoneModule,
+        FormsModule
     ]
 })
 export class ResourcesModule { }
