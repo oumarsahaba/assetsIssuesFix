@@ -12,6 +12,7 @@ import {NavbarComponent} from "./layouts/partials/navbar/navbar.component";
 import {MainComponent} from "./layouts/main/main.component";
 import { TabContainerComponent } from './tabs/container/tab-container.component';
 import { TabItemComponent } from './tabs/item/tab-item.component';
+import { DetailCardsComponent } from './detail-cards/detail-cards.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { TabItemComponent } from './tabs/item/tab-item.component';
         NavbarComponent,
         MainComponent,
         TabContainerComponent,
-        TabItemComponent
+        TabItemComponent,
+        DetailCardsComponent
     ],
     imports: [
         CommonModule,
@@ -39,7 +41,8 @@ import { TabItemComponent } from './tabs/item/tab-item.component';
         ForbiddenComponent,
         MainComponent,
         TabContainerComponent,
-        TabItemComponent
+        TabItemComponent,
+        DetailCardsComponent
     ],
 })
 export class SharedModule { }
