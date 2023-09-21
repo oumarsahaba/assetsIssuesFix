@@ -19,8 +19,12 @@
                 </div>
                 <div body>
                     <div class="flex justify-between gap-x-4 py-2">
-                        <dt class="text-gray-500">Code Lender</dt>
+                        <dt class="text-gray-500">Code Aggregatordt>
                         <dd class="text-gray-700" *ngIf="aggregator">{{aggregator.codeAggregator}}</dd>
+                    </div>
+                    <div class="flex justify-between gap-x-4 py-2">
+                        <dt class="text-gray-500">Aggregator souscription</dt>
+                        <dd class="text-gray-700" *ngIf="aggregator">{{aggregator.createdAt | date}}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Description</dt>

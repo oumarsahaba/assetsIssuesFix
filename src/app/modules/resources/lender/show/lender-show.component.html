@@ -23,6 +23,10 @@
                         <dd class="text-gray-700" *ngIf="lender">{{lender.codeLender}}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
+                        <dt class="text-gray-500">Lender souscription</dt>
+                        <dd class="text-gray-700" *ngIf="lender">{{lender.createdAt | date}}</dd>
+                    </div>
+                    <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Description</dt>
                         <dd class="text-gray-700" *ngIf="lender">{{lender.description}}</dd>
                     </div>
