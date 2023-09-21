@@ -7,6 +7,8 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {Commissionable} from "../../../../commons/enums/Commissionable";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
+import { Observable } from 'rxjs';
+import { Response } from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-lender-show',
@@ -16,6 +18,7 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 export class LenderShowComponent implements OnInit {
 
     lender: Lender | null
+    lender$: Observable<Response<Lender>>
     accountSlug: string | null
     operations: Operation[]
 
@@ -30,8 +33,8 @@ export class LenderShowComponent implements OnInit {
     ngOnInit(): void {
         if (this.route.snapshot.paramMap.get('codeLender') != null) {
             // @ts-ignore
-            this.lenderService.show(this.route.snapshot.paramMap.get('codeLender'))
-                .subscribe({
+            this.lender$= this.lenderService.show(this.route.snapshot.paramMap.get('codeLender'))
+            this.lender$.subscribe({
                     next: (response) => {
                         this.lender = response.data as Lender
                         this.accountSlug = this.lender.creditAccount.slug
