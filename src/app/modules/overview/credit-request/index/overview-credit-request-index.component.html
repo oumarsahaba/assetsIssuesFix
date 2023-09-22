@@ -45,7 +45,7 @@
     </div>
 
 
-    <app-shared-paginated-resource [(page)]="page" (pageChange)="goToPage($event.number)" *ngIf="page$ | async as pageResponse ; else itemsloader ">
+    <app-shared-paginated-resource [(page)]="pageResponse.data" (pageChange)="goToPage($event.number)" *ngIf="page$ | async as pageResponse ; else itemsloader ">
         <table class="min-w-full divide-y divide-gray-300">
             <thead class="bg-gray-50 divide-y divide-gray-200">
             <tr class="divide-x divide-gray-200">
@@ -94,14 +94,6 @@
         </table>
     </app-shared-paginated-resource>
     <ng-template #itemsloader>
-        <div role="status" class="w-full animate-pulse mt-6">
-            <div class="h-8 bg-gray-200 rounded-full dark:bg-gray-700 w-ful mb-6"></div>
-            <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
-            <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
-            <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
-            <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
-            <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
-            <span class="sr-only">Loading...</span>
-        </div>      
+        <app-table-loader></app-table-loader>      
     </ng-template>
 </app-dashboard>

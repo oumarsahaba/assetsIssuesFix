@@ -24,6 +24,8 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
     data: OverviewRefundRequest[];
     codeAgent: string = '';
     status:string = '';
+    startDate: string;
+    endDate: string;
     page$: Observable<Response<PaginatedResource<OverviewRefundRequest>>>;
 
 
@@ -36,7 +38,7 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
         this.goToPage()
     }
     goToPage(page: number = 0) {
-        this.page$ = this.overviewService.getRefundRequests(page, 10, this.codeAgent, this.status)
+        this.page$ = this.overviewService.getRefundRequests(page, 10, this.codeAgent, this.status, this.startDate, this.endDate)
         this.overviewService.getRefundRequests(page, 10, this.codeAgent, this.status)
             .subscribe({
                 next: (response) => {
