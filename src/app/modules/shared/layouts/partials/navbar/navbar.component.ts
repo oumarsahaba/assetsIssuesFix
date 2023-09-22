@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { KeycloakService, KeycloakEventType } from 'keycloak-angular';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent  {
     profileDropdown: boolean;
     @Output() openSidebar = new EventEmitter();
 
@@ -22,17 +22,6 @@ export class NavbarComponent implements OnInit {
         })
     }
 
-    ngOnInit(): void {
-        this.keycloakService.keycloakEvents$.subscribe({
-            next: (event) => {
-                console.log("Component Initialized")
-                if (event.type === KeycloakEventType.OnTokenExpired) {
-                    // Token has expired, redirect to the login page
-                    this.keycloakService.logout().then(() => this.keycloakService.clearToken());
-                }
-            }
-        });
-    }
     toggleDropdown() {
         this.profileDropdown = !this.profileDropdown;
     }
