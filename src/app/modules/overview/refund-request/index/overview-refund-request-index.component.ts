@@ -6,9 +6,6 @@ import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {Router} from "@angular/router";
 import {OverviewService} from "../../../../services/overview.service";
-import {CreditRequestStatus} from "../../../../commons/enums/CreditRequestStatus";
-import * as XLSX from 'xlsx';
-import Swal from "sweetalert2";
 import {RefundRequestStatus} from "../../../../commons/enums/RefundRequestStatus";
 
 @Component({
