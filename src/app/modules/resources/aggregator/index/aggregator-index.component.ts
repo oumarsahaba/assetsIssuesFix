@@ -8,6 +8,9 @@ import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
+import { Agent } from 'src/app/commons/interfaces/agent';
+import { Observable } from 'rxjs';
+import { Response } from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-aggregator-index',
@@ -16,6 +19,7 @@ import Swal from "sweetalert2";
 })
 export class AggregatorIndexComponent implements OnInit {
     page : PaginatedResource<Aggregator>
+    page$: Observable<Response<PaginatedResource<Aggregator>>>
 
     constructor(private aggregatorService: AggregatorService, private router: Router ) {}
 
@@ -24,6 +28,7 @@ export class AggregatorIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
+        this.page$= this.aggregatorService.getPage(page)
         this.aggregatorService.getPage(page)
             .subscribe({
                 next: (response) => {

@@ -8,6 +8,9 @@ import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
+import { Observable } from 'rxjs';
+import { ApiResponse } from 'src/app/commons/interfaces/api-response';
+import { Response } from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-lender-index',
@@ -17,7 +20,7 @@ import Swal from "sweetalert2";
 export class LenderIndexComponent implements OnInit {
 
     page: PaginatedResource<Lender>;
-
+    page$: Observable<Response<PaginatedResource<Lender>>>;
     constructor(private lenderService: LenderService, private router: Router ) {
     }
 
@@ -26,6 +29,7 @@ export class LenderIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
+        this.page$=this.lenderService.getPage(page)
         this.lenderService.getPage(page)
             .subscribe({
                 next: (response) => {

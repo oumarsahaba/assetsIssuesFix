@@ -10,6 +10,8 @@ import {CreditRequestStatus} from "../../../../commons/enums/CreditRequestStatus
 import * as XLSX from 'xlsx';
 import Swal from "sweetalert2";
 import {RefundRequestStatus} from "../../../../commons/enums/RefundRequestStatus";
+import { Observable } from 'rxjs';
+import { Response } from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-overview-refund-request-index-component',
@@ -22,6 +24,8 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
     data: OverviewRefundRequest[];
     codeAgent: string = '';
     status:string = '';
+    page$: Observable<Response<PaginatedResource<OverviewRefundRequest>>>;
+
 
     protected readonly RefundRequestStatus = RefundRequestStatus;
 
@@ -32,7 +36,7 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
         this.goToPage()
     }
     goToPage(page: number = 0) {
-
+        this.page$ = this.overviewService.getRefundRequests(page, 10, this.codeAgent, this.status)
         this.overviewService.getRefundRequests(page, 10, this.codeAgent, this.status)
             .subscribe({
                 next: (response) => {

@@ -8,6 +8,8 @@ import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
+import { Observable } from 'rxjs';
+import { Response } from 'src/app/commons/models/response';
 
 @Component({
   selector: 'app-wholesaler-index',
@@ -17,6 +19,7 @@ import Swal from "sweetalert2";
 export class WholesalerIndexComponent implements OnInit {
 
     page : PaginatedResource<Wholesaler>
+    page$: Observable<Response<PaginatedResource<Wholesaler>>>
     codeWholesaler : string = ""
 
     constructor(private wholesalerService: WholesalerService, private router: Router ) {
@@ -27,6 +30,7 @@ export class WholesalerIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
+        this.page$ = this.wholesalerService.getPage(this.codeWholesaler, page)
         this.wholesalerService.getPage(this.codeWholesaler, page)
             .subscribe({
                 next: (response) => {

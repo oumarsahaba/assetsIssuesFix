@@ -9,6 +9,8 @@ import {OverviewCreditRequest} from "../../../../commons/interfaces/overview-cre
 import {CreditRequestStatus} from "../../../../commons/enums/CreditRequestStatus";
 import * as XLSX from 'xlsx';
 import Swal from "sweetalert2";
+import { Response } from 'src/app/commons/models/response';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-overview-credit-request-index-component',
@@ -24,6 +26,7 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
     startDate: string = '';
     endDate: string = '';
     status:string = '';
+    page$: Observable<Response<PaginatedResource<OverviewCreditRequest>>>;
 
     protected readonly CreditRequestStatus = CreditRequestStatus;
 
@@ -34,7 +37,7 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
         this.goToPage()
     }
     goToPage(page: number = 0) {
-        console.log(this.startDate, this.endDate)
+        this.page$ = this.overviewService.getCreditRequests(page, 10, this.codeAgent, this.codeWholesaler, this.status, this.startDate, this.endDate)
         this.overviewService.getCreditRequests(page, 10, this.codeAgent, this.codeWholesaler, this.status, this.startDate, this.endDate)
             .subscribe({
                 next: (response) => {

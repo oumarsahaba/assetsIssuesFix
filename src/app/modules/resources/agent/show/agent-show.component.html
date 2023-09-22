@@ -8,30 +8,30 @@
                     </svg>
                     <div class="text-sm font-medium leading-6 text-gray-900">Agent Info</div>
                     <div class="text-sm font-medium leading-6 text-gray-900">
-                        <app-agent-update [agent]="agent"/>
+                        <app-agent-update *ngIf="agent$ | async as agentResponse ; else textLoader" [agent]="agentResponse?.data"/>
                     </div>
                 </div>
                 <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Code Agent</dt>
-                        <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/10">{{ agent?.codeAgent }}</dd>
+                        <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/10" *ngIf="agent$ | async as agentResponse ; else textLoader">{{ agentResponse?.data?.codeAgent }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Description</dt>
-                        <dd class="text-gray-700">{{ agent?.description }}</dd>
+                        <dd class="text-gray-700" *ngIf="agent$ | async as agentResponse ; else textLoader">{{ agentResponse?.data?.description }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Code Wholesaler</dt>
-                        <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/10">{{ agent?.wholesaler.codeWholesaler }}</dd>
+                        <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/10" *ngIf="agent$ | async as agentResponse ; else textLoader">{{ agentResponse?.data?.wholesaler?.codeWholesaler }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Description</dt>
-                        <dd class="text-gray-700">{{ agent?.wholesaler.description }}</dd>
+                        <dd class="text-gray-700" *ngIf="agent$ | async as agentResponse ; else textLoader">{{ agentResponse?.data?.wholesaler?.description }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Active</dt>
-                        <dd class="text-gray-700">
-                            <app-active-badge [active]="agent?.active"></app-active-badge>
+                        <dd class="text-gray-700" *ngIf="agent$ | async as agentResponse ; else textLoader">
+                            <app-active-badge [active]="agentResponse?.data?.active"></app-active-badge>
                         </dd>
                     </div>
                 </dl>
@@ -46,19 +46,19 @@
                 <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Overdraft Threshold</dt>
-                        <dd class="text-gray-700">{{ agent?.overdraftLimitAmount }}</dd>
+                        <dd class="text-gray-700" *ngIf="agent$ | async as agentResponse ; else textLoader">{{ agentResponse?.data?.overdraftLimitAmount }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Overdraft daily count</dt>
-                        <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-gray-700 bg-gray-50 ring-gray-600/10">{{ agent?.overdraftMaxDailyCount }}</dd>
+                        <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-gray-700 bg-gray-50 ring-gray-600/10" *ngIf="agent$ | async as agentResponse ; else textLoader">{{ agentResponse?.data?.overdraftMaxDailyCount }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Penalty Delay (In days)</dt>
-                        <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-gray-700 bg-gray-50 ring-gray-600/10">{{ agent?.penaltyDelayInDays }}</dd>
+                        <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-gray-700 bg-gray-50 ring-gray-600/10" *ngIf="agent$ | async as agentResponse ; else textLoader">{{ agentResponse?.data?.penaltyDelayInDays }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Balance</dt>
-                        <dd class="rounded-md py-1 text-xl font-medium">{{ agent?.account.balance | number: '.0-2' }}</dd>
+                        <dd class="rounded-md py-1 text-xl font-medium" *ngIf="agent$ | async as agentResponse ; else textLoader">{{ agentResponse?.data?.account.balance | number: '.0-2' }}</dd>
                     </div>
                 </dl>
             </li>
@@ -68,11 +68,28 @@
 
         <app-tab-container>
             <app-tab-item tabTitle="Overdraft requests">
-                <app-overdraft-request-index *ngIf="agent" [codeAgent]="agent?.codeAgent"></app-overdraft-request-index>
+                <app-overdraft-request-index *ngIf="agent$ | async as agentResponse ; else itemsloader" [codeAgent]="agentResponse?.data?.codeAgent"></app-overdraft-request-index>
             </app-tab-item>
             <app-tab-item tabTitle="Account's operations">
-                <app-account-operations *ngIf="agent" [accountSlug]="agent?.account.slug"/>
+                <app-account-operations *ngIf="agent$ | async as agentResponse ; else itemsloader" [accountSlug]="agentResponse?.data?.account.slug"/>
             </app-tab-item>
         </app-tab-container>
     </div>
 </app-dashboard>
+<ng-template #textLoader>
+    <div role="status" class="max-w-sm animate-pulse">
+        <div class="h-6 bg-gray-200 rounded-full dark:bg-gray-700 w-20 mb-2.5"></div>
+    </div>        
+</ng-template>
+
+<ng-template #itemsloader>
+    <div role="status" class="max-w-sm animate-pulse">
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-ful mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <span class="sr-only">Loading...</span>
+    </div>      
+</ng-template>

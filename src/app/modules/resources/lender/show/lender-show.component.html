@@ -1,26 +1,25 @@
 <app-dashboard>
-    <div *ngIf="lender$ | async as lenderResponse" class="px-4 sm:px-6 lg:px-8 mb-10">
+    <div  class="px-4 sm:px-6 lg:px-8 mb-10">
         <ul role="list" class="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-2 xl:gap-x-8">
             <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-1">
-                <app-detail-cards>
-                    <div header-title class="flex gap-x-1">
-                        <svg class="w-6 h-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-                        </svg>
-                        <span>Lender info</span>
+                <app-detail-cards title="Lender informations">
+                    <div header-icon>
+                            <svg class="w-6 h-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                            </svg>
                     </div>
                     <div body>
                         <div class="flex justify-between gap-x-4 py-2">
                             <dt class="text-gray-500">Code Lender</dt>
-                            <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/10">{{lenderResponse?.data?.codeLender}}</dd>
+                            <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/10" *ngIf="lender$ | async as lenderResponse ; else textLoader">{{lenderResponse?.data?.codeLender}}</dd>
+                        </div>
+                        <div class="flex justify-between gap-x-4 py-2">
+                            <dt class="text-gray-500">Lender souscription</dt>
+                            <dd class="text-gray-700" *ngIf="lender$ | async as lenderResponse ; else textLoader">{{lenderResponse?.data?.createdAt | date}}</dd>
                         </div>
                         <div class="flex justify-between gap-x-4 py-2">
                             <dt class="text-gray-500">Description</dt>
-                            <dd class="text-gray-700">{{lenderResponse?.data?.description}}</dd>
-                        </div>
-                        <div class="flex justify-between gap-x-4 py-2">
-                            <dt class="text-gray-500">Created At</dt>
-                            <dd class="text-gray-700">{{lenderResponse?.data?.createdAt | date}}</dd>
+                            <dd class="text-gray-700"*ngIf="lender$ | async as lenderResponse ; else textLoader">{{lenderResponse?.data?.description}}</dd>
                         </div>
                     </div>
                 </app-detail-cards>
@@ -28,27 +27,50 @@
             <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                     <dt class="truncate text-sm font-medium text-gray-500">Credit Balance</dt>
-                    <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ lenderResponse?.data?.creditAccount?.balance | number: '.0-2' }}</dd>
+                    <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"*ngIf="lender$ | async as lenderResponse ; else textLoader">{{ lenderResponse?.data?.creditAccount?.balance | number: '.0-2' }}</dd>
                 </div>
                 <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                     <dt class="truncate text-sm font-medium text-gray-500">Commission Balance</dt>
-                    <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ lenderResponse?.data?.commissionAccount?.balance | number: '.0-2' }}</dd>
+                    <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"*ngIf="lender$ | async as lenderResponse ; else textLoader">{{ lenderResponse?.data?.commissionAccount?.balance | number: '.0-2' }}</dd>
                 </div>
             </dl>
         </ul>
     </div>
+   
     <div class="px-4 sm:px-6 lg:px-8 mb-10">
 
-        <app-tab-container *ngIf="lender$ | async as lenderResponse">
+        <app-tab-container >
             <app-tab-item tabTitle="Provision account">
-                <app-lender-provision-index [codeLender]="lenderResponse?.data?.codeLender"/>
+                <app-lender-provision-index *ngIf="lender$ | async as lenderResponse ; else itemsloader " [codeLender]="lenderResponse?.data?.codeLender"/>
             </app-tab-item>
             <app-tab-item  tabTitle="Accounts Operations">
-                <app-account-operations [accountSlug]="lenderResponse?.data?.creditAccount?.slug"/>
+                <app-account-operations *ngIf="lender$ | async as lenderResponse ; else itemsloader" [accountSlug]="lenderResponse?.data?.creditAccount?.slug"/>
             </app-tab-item>
             <app-tab-item tabTitle="Commission plans">
-                <app-commission-plan-index [code]="lenderResponse?.data?.codeLender" [type]="Commissionable.lender"/>
+                <app-commission-plan-index *ngIf="lender$ | async as lenderResponse ; else itemsloader" [code]="lenderResponse?.data?.codeLender" [type]="Commissionable.lender"/>
             </app-tab-item>
         </app-tab-container>
+
     </div>
+
+
 </app-dashboard>
+
+
+<ng-template #textLoader>
+    <div role="status" class="max-w-sm animate-pulse">
+        <div class="h-6 bg-gray-200 rounded-full dark:bg-gray-700 w-20 mb-2.5"></div>
+    </div>        
+</ng-template>
+
+<ng-template #itemsloader>
+    <div role="status" class="max-w-sm animate-pulse">
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-ful mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <span class="sr-only">Loading...</span>
+    </div>      
+</ng-template>

@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <app-shared-paginated-resource [(page)]="page" (pageChange)="goToPage($event.number)">
+        <app-shared-paginated-resource [(page)]="page" (pageChange)="goToPage($event.number)" *ngIf="page$ | async as pageResponse ; else itemsloader">
             <table class="min-w-full divide-y divide-gray-300">
                 <thead class="bg-gray-50">
                 <tr>
@@ -46,7 +46,7 @@
                 </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
-                <tr *ngFor="let wholesaler of page?.content">
+                <tr *ngFor="let wholesaler of pageResponse?.data?.content">
                     <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6 hidden md:table-cell lg:table-cell xl:table-cell">{{ wholesaler.codeWholesaler }}</td>
                     <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6 hidden md:table-cell lg:table-cell xl:table-cell">{{ wholesaler.aggregator.description }}</td>
                     <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ wholesaler.description }}</td>
@@ -88,6 +88,17 @@
                 </tbody>
             </table>
         </app-shared-paginated-resource>
+        <ng-template #itemsloader>
+            <div role="status" class="w-full animate-pulse mt-6">
+                <div class="h-8 bg-gray-200 rounded-full dark:bg-gray-700 w-ful mb-6"></div>
+                <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+                <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+                <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+                <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+                <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+                <span class="sr-only">Loading...</span>
+            </div>      
+        </ng-template>
 
     </div>
 </app-dashboard>

@@ -7,6 +7,8 @@ import {AgentService} from "../../../../services/agent.service";
 import {Agent} from "../../../../commons/interfaces/agent";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {Commissionable} from "../../../../commons/enums/Commissionable";
+import { Observable } from 'rxjs';
+import { Response } from 'src/app/commons/models/response';
 
 @Component({
   selector: 'app-agent-show',
@@ -18,6 +20,8 @@ export class AgentShowComponent {
     agent: Agent | null
     accountSlug: string | null
     operations: Operation[]
+    agent$: Observable<Response<Agent>>
+
 
     constructor(private router: Router, private route: ActivatedRoute, private agentService: AgentService) {
         this.agent = null
@@ -27,6 +31,7 @@ export class AgentShowComponent {
 
     ngOnInit(): void {
         if (this.route.snapshot.paramMap.get('codeAgent') != null) {
+            this.agent$ = this.agentService.show(this.route.snapshot.paramMap.get('codeAgent'))
             // @ts-ignore
             this.agentService.show(this.route.snapshot.paramMap.get('codeAgent'))
                 .subscribe({

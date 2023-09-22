@@ -9,25 +9,25 @@
                         </svg>
                     </span>
                     <div class="text-sm font-medium leading-6 text-gray-900">Wholesaler info</div>
-                    <app-wholesaler-update [wholesaler]="wholesaler"/>
+                    <app-wholesaler-update *ngIf="wholesaler$ | async as wholesalerResponse ; else textLoader" [wholesaler]="wholesalerResponse?.data" />
                 </div>
                 <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Code Wholesaler</dt>
-                        <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/10">{{ wholesaler.codeWholesaler }}</dd>
+                        <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/10" *ngIf="wholesaler$ | async as wholesalerResponse ; else textLoader">{{ wholesalerResponse?.data?.codeWholesaler }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Description</dt>
-                        <dd class="text-gray-700">{{ wholesaler.description }}</dd>
+                        <dd class="text-gray-700" *ngIf="wholesaler$ | async as wholesalerResponse ; else textLoader">{{ wholesalerResponse?.data?.description }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Created At</dt>
-                        <dd class="text-gray-700">{{ wholesaler.createdAt | date:'dd/MM/yy HH:mm:ss' }}</dd>
+                        <dd class="text-gray-700" *ngIf="wholesaler$ | async as wholesalerResponse ; else textLoader">{{ wholesalerResponse?.data?.createdAt | date:'dd/MM/yy HH:mm:ss' }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Active</dt>
-                        <dd class="text-gray-700">
-                            <app-active-badge [active]="wholesaler.active"></app-active-badge>
+                        <dd class="text-gray-700" *ngIf="wholesaler$ | async as wholesalerResponse ; else textLoader">
+                            <app-active-badge [active]="wholesalerResponse?.data?.active"></app-active-badge>
                         </dd>
                     </div>
                 </dl>
@@ -44,15 +44,15 @@
                 <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
                     <div class="flex justify-between gap-x-4 py-3">
                         <dt class="text-gray-500">Credit Account</dt>
-                        <dd class="text-gray-700 text-lg font-bold">{{ wholesaler.creditAccount.balance | number: '.0-2'  }}</dd>
+                        <dd class="text-gray-700 text-lg font-bold" *ngIf="wholesaler$ | async as wholesalerResponse ; else textLoader">{{ wholesalerResponse?.data?.creditAccount.balance | number: '.0-2'  }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-3">
                         <dt class="text-gray-500">Commission Account</dt>
-                        <dd class="text-gray-700 text-lg font-bold">{{ wholesaler.commissionAccount.balance | number: '.0-2'  }}</dd>
+                        <dd class="text-gray-700 text-lg font-bold" *ngIf="wholesaler$ | async as wholesalerResponse ; else textLoader">{{ wholesalerResponse?.data?.commissionAccount.balance | number: '.0-2'  }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-3">
                         <dt class="text-gray-500">Operational Account</dt>
-                        <dd class="text-gray-700 text-lg font-bold">{{ wholesaler?.aggregatorWholesaler.account?.balance | number: '.0-2'  }}</dd>
+                        <dd class="text-gray-700 text-lg font-bold" *ngIf="wholesaler$ | async as wholesalerResponse ; else textLoader">{{ wholesalerResponse?.data?.aggregatorWholesaler.account?.balance | number: '.0-2'  }}</dd>
                     </div>
                 </dl>
             </li>
@@ -62,25 +62,42 @@
     <div class="px-4 sm:px-6 lg:px-8 mb-10">
         <app-tab-container>
             <app-tab-item tabTitle="Loan request">
-                <app-loan-request-index *ngIf="wholesaler" [codeWholesaler]="wholesaler.codeWholesaler"></app-loan-request-index>
+                <app-loan-request-index *ngIf="wholesaler$ | async as wholesalerResponse ; else itemsloader" [codeWholesaler]="wholesalerResponse?.data?.codeWholesaler"></app-loan-request-index>
             </app-tab-item>
 
             <app-tab-item tabTitle="Provision Request">
-                <app-wholesaler-provision-index [codeWholesaler]="wholesaler.codeWholesaler"/>
+                <app-wholesaler-provision-index *ngIf="wholesaler$ | async as wholesalerResponse ; else itemsloader" [codeWholesaler]="wholesalerResponse?.data?.codeWholesaler"/>
             </app-tab-item>
             <app-tab-item tabTitle="Credit account's operations">
-                <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.creditAccount.slug" title="Credit account"/>
+                <app-account-operations *ngIf="wholesaler$ | async as wholesalerResponse ; else itemsloader" [accountSlug]="wholesalerResponse?.data?.creditAccount?.slug" title="Credit account"/>
             </app-tab-item>
 
             <app-tab-item tabTitle="Commission account's operations">
-                <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.commissionAccount.slug" title="Commission account"/>
+                <app-account-operations *ngIf="wholesaler$ | async as wholesalerResponse ; else itemsloader" [accountSlug]="wholesalerResponse?.data?.commissionAccount?.slug" title="Commission account"/>
             </app-tab-item>
             <app-tab-item tabTitle="Operational account's operations">
-                <app-account-operations *ngIf="wholesaler" [accountSlug]="wholesaler.aggregatorWholesaler.account.slug" title="Operational account"/>
+                <app-account-operations *ngIf="wholesaler$ | async as wholesalerResponse ; else itemsloader" [accountSlug]="wholesalerResponse?.data?.aggregatorWholesaler?.account?.slug" title="Operational account"/>
             </app-tab-item>
             <app-tab-item tabTitle="Commission Plan">
-                <app-commission-plan-index [code]="wholesaler.codeWholesaler" [type]="Commissionable.wholesaler"/>
+                <app-commission-plan-index *ngIf="wholesaler$ | async as wholesalerResponse ; else itemsloader" [code]="wholesalerResponse?.data?.codeWholesaler" [type]="Commissionable.wholesaler"/>
             </app-tab-item>
         </app-tab-container>
     </div>
 </app-dashboard>
+<ng-template #textLoader>
+    <div role="status" class="max-w-sm animate-pulse">
+        <div class="h-6 bg-gray-200 rounded-full dark:bg-gray-700 w-20 mb-2.5"></div>
+    </div>        
+</ng-template>
+
+<ng-template #itemsloader>
+    <div role="status" class="max-w-sm animate-pulse">
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-ful mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
+        <span class="sr-only">Loading...</span>
+    </div>      
+</ng-template>
