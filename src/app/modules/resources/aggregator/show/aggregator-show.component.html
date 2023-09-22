@@ -1,6 +1,6 @@
 <app-dashboard>
     <div class="px-4 sm:px-6 lg:px-8 mb-10">
-        <ul role="list" class="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-2 xl:gap-x-8">
+        <div role="list" class="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-2 xl:gap-x-8">
             <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-1">
                 <app-detail-cards title="Aggregator informations">
                     <div header-icon>
@@ -21,10 +21,14 @@
                             <dt class="text-gray-500">Description</dt>
                             <dd class="text-gray-700" *ngIf="aggregator$ | async as aggregatorResponse ; else textLoader " >{{aggregatorResponse?.data?.description}}</dd>
                         </div>
+                        <div class="flex justify-between gap-x-4 py-2">
+                            <dt class="text-gray-500">Created At</dt>
+                            <dd class="text-gray-700" *ngIf="aggregator">{{aggregator.createdAt | date}}</dd>
+                        </div>
                     </div>
                 </app-detail-cards>
             </dl>
-        
+
             <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                     <dt class="truncate text-sm font-medium text-gray-500">Credit Balance</dt>
@@ -35,8 +39,7 @@
                     <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900" *ngIf="aggregator$ | async as aggregatorResponse ; else textLoader ">{{ aggregatorResponse?.data?.commissionAccount?.balance | number: '.0-2' }}</dd>
                 </div>
             </dl>
-            
-        </ul>
+        </div>
     </div>
     <div class="px-4 sm:px-6 lg:px-8 mb-10">
 
