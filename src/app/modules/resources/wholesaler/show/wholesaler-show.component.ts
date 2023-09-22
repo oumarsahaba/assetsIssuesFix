@@ -7,6 +7,8 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {Commissionable} from "../../../../commons/enums/Commissionable";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
+import { Observable } from 'rxjs';
+import { Response } from 'src/app/commons/models/response';
 
 @Component({
   selector: 'app-wholesaler-show',
@@ -17,6 +19,7 @@ export class WholesalerShowComponent {
     wholesaler: Wholesaler | null
     accountSlug: string | null
     operations: Operation[]
+    wholesaler$: Observable<Response<Wholesaler>>
 
     protected readonly Commissionable = Commissionable;
 
@@ -28,6 +31,7 @@ export class WholesalerShowComponent {
 
     ngOnInit(): void {
         if (this.route.snapshot.paramMap.get('codeWholesaler') != null) {
+            this.wholesaler$ = this.wholesalerService.show(this.route.snapshot.paramMap.get('codeWholesaler'))
             this.wholesalerService.show(this.route.snapshot.paramMap.get('codeWholesaler'))
                 .subscribe({
                     next: (response) => {

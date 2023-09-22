@@ -7,6 +7,8 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {Commissionable} from "../../../../commons/enums/Commissionable";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
+import { Observable } from 'rxjs';
+import { Response } from 'src/app/commons/models/response';
 
 @Component({
   selector: 'app-aggregator-show',
@@ -19,6 +21,7 @@ export class AggregatorShowComponent {
     aggregator: Aggregator | null
     accountSlug: string | null
     operations: Operation[]
+    aggregator$: Observable<Response<Aggregator>>
 
     protected readonly Commissionable = Commissionable;
 
@@ -32,6 +35,7 @@ export class AggregatorShowComponent {
     ngOnInit(): void {
         if (this.route.snapshot.paramMap.get('codeAggregator') != null) {
             // @ts-ignore
+            this.aggregator$ = this.aggregatorService.show(this.route.snapshot.paramMap.get('codeAggregator'))
             this.aggregatorService.show(this.route.snapshot.paramMap.get('codeAggregator'))
                 .subscribe({
                     next: (response) => {

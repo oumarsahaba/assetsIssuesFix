@@ -30,8 +30,7 @@ import {NgxDropzoneModule} from "ngx-dropzone";
         HttpClientModule,
         KeycloakAngularModule,
         AppRoutingModule,
-        NgxDropzoneModule,
-
+        NgxDropzoneModule
 
     ],
     providers: [
