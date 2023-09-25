@@ -6,6 +6,8 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {CommissionPlan} from "../../../../commons/interfaces/commission-plan";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
+import { Observable } from 'rxjs';
+import { Response } from 'src/app/commons/models/response';
 
 @Component({
   selector: 'app-commission-plan-index',
@@ -22,6 +24,8 @@ export class CommissionPlanIndexComponent implements OnInit {
         first: true,
         last: false
     }
+    page$: Observable<Response<PaginatedResource<CommissionPlan>>>;
+
 
     @Input()
     code: string
@@ -37,6 +41,7 @@ export class CommissionPlanIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
+        this.page$ = this.commissionPlanService.getAll(this.code, this.type, page);
         this.commissionPlanService.getAll(this.code, this.type, page)
             .subscribe({
                 next: (response) => {

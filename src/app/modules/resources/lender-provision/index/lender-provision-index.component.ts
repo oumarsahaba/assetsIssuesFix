@@ -6,6 +6,8 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {LenderProvision} from "../../../../commons/interfaces/lender-provision";
+import { Response } from 'src/app/commons/models/response';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-lender-provision-index',
@@ -17,6 +19,8 @@ export class LenderProvisionIndexComponent implements OnInit {
     @Input()
     codeLender: any
     page: PaginatedResource<LenderProvision>;
+    page$: Observable<Response<PaginatedResource<LenderProvision>>>;
+
 
     constructor(private provisionRequestService: LenderProvisionService, private router: Router) {
     }
@@ -26,7 +30,7 @@ export class LenderProvisionIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-
+        this.page$ = this.provisionRequestService.getAll(this.codeLender, page, 5);
         this.provisionRequestService.getAll(this.codeLender, page, 5)
             .subscribe({
                 next: (response) => {
