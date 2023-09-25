@@ -6,6 +6,8 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {WholesalerProvision} from "../../../../commons/interfaces/wholesaler-provision";
+import { Observable } from 'rxjs/internal/Observable';
+import { Response } from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-wholesaler-provision-index',
@@ -17,6 +19,8 @@ export class WholesalerProvisionIndexComponent implements OnInit {
     @Input()
     codeWholesaler: any
     page: PaginatedResource<WholesalerProvision>;
+    page$: Observable<Response<PaginatedResource<WholesalerProvision>>>;
+
 
     constructor(private provisionRequestService: WholesalerProvisionService, private router: Router) {
     }
@@ -26,7 +30,7 @@ export class WholesalerProvisionIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-
+        this.page$ = this.provisionRequestService.getAll(this.codeWholesaler, page, 5);
         this.provisionRequestService.getAll(this.codeWholesaler, page, 5)
             .subscribe({
                 next: (response) => {

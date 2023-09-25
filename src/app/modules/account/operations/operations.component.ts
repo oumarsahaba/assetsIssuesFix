@@ -6,6 +6,8 @@ import {OperationService} from "../../../services/operation.service";
 import {PaginatedResource} from "../../../commons/interfaces/paginated-resource";
 import {Router} from "@angular/router";
 import {ForbiddenError} from "../../../commons/errors/forbidden-error";
+import { Observable } from 'rxjs';
+import { Response } from 'src/app/commons/models/response';
 
 @Component({
   selector: 'app-account-operations',
@@ -19,6 +21,8 @@ export class OperationsComponent implements OnInit {
     title: string
 
     page: PaginatedResource<Operation>;
+    page$: Observable<Response<PaginatedResource<Operation>>>;
+
 
     constructor(private router: Router, private operationService: OperationService) {
         this.accountSlug = ''
@@ -30,6 +34,7 @@ export class OperationsComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
+        this.page$ = this.operationService.getAccountOperations(this.accountSlug, page);
         this.operationService.getAccountOperations(this.accountSlug, page)
             .subscribe({
                 next: (response) => {
