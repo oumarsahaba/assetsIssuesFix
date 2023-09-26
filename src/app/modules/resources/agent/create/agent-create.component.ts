@@ -9,6 +9,7 @@ import {SimpleWholesaler} from "../../../../commons/interfaces/simple-wholesaler
 import {BaseSimpleWholesaler} from "../../../../commons/models/simple-wholesaler";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-agent-create',
@@ -24,6 +25,7 @@ export class AgentCreateComponent implements OnInit {
 
     constructor(private agentService: AgentService,
                 private wholesalerService: WholesalerService,
+                private toastr: ToastrService,
                 private router: Router) {
 
         this.form = new FormGroup({
@@ -67,10 +69,18 @@ export class AgentCreateComponent implements OnInit {
             this.form.get('penaltyDelayInDays')?.value,
         ).subscribe({
             next: (response) => {
-                navigateBack(this.router)
+                if (response.statusCode == 200) {
+                    this.toastr.success('Agent created successfully', 'Success');
+                    navigateBack(this.router)
+                }
+                else{
+                    this.toastr.error('Agent created failed', 'Error');
+                }
             },
-            error : (err: AppError) => handleFormError(err, this.form)
-        })
+            error: (err: AppError) => {
+                handleFormError(err, this.form);
+            }
+        });
     }
 
     toggleModal() {

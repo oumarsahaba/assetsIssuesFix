@@ -5,6 +5,7 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {Router} from "@angular/router";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {Lender} from "../../../../commons/interfaces/lender";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'app-lender-update',
@@ -18,7 +19,9 @@ export class LenderUpdateComponent implements OnInit {
     form : FormGroup
     displayModal: boolean
 
-    constructor(private lenderService: LenderService, private router: Router) {
+    constructor(private lenderService: LenderService, private router: Router,
+                private toastr: ToastrService,
+    ) {
     }
 
     ngOnInit(): void {
@@ -37,8 +40,13 @@ export class LenderUpdateComponent implements OnInit {
             this.form.get('description')?.value
         ).subscribe({
             next: (response) => {
-                if (response.statusCode == 200)
+                if (response.statusCode == 200) {
+                    this.toastr.success('Lender updated successfully', 'Success');
                     navigateBack(this.router)
+                }
+                else{
+                    this.toastr.error('Lender updated failed', 'Error');
+                }
             },
             error : (err: AppError) => handleFormError(err, this.form)
         })

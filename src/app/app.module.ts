@@ -11,6 +11,8 @@ import {initializeKeycloak} from "./commons/keycloak-init.factory";
 import {RouteReuseStrategy} from "@angular/router";
 import {CustomRouteReuseStrategy} from "./commons/custom-route-reuse-strategy";
 import {NgxDropzoneModule} from "ngx-dropzone";
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 
@@ -30,6 +32,8 @@ import {NgxDropzoneModule} from "ngx-dropzone";
         HttpClientModule,
         KeycloakAngularModule,
         AppRoutingModule,
+        ToastrModule.forRoot(),
+        BrowserAnimationsModule,
         NgxDropzoneModule
 
     ],
