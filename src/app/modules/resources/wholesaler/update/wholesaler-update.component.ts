@@ -5,6 +5,7 @@ import {WholesalerService} from "../../../../services/wholesaler.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'app-wholesaler-update',
@@ -20,7 +21,9 @@ export class WholesalerUpdateComponent implements OnChanges {
     displayModal: any;
 
     constructor(private wholesalerService: WholesalerService,
-                private router: Router) {
+                private router: Router,
+                private toastr: ToastrService,
+    ) {
     }
 
     ngOnChanges(changes:SimpleChanges): void {
@@ -44,7 +47,13 @@ export class WholesalerUpdateComponent implements OnChanges {
             this.form.get('active')?.value
         ).subscribe({
             next: (response) => {
-                navigateBack(this.router)
+                if (response.statusCode == 200) {
+                    this.toastr.success('WholeSaler updated successfully', 'Success');
+                    navigateBack(this.router)
+                }
+                else{
+                    this.toastr.error('WholeSaler updated failed', 'Error');
+                }
             },
             error : (err: AppError) => handleFormError(err, this.form)
         })

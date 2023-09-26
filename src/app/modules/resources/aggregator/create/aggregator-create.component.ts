@@ -4,6 +4,7 @@ import {AggregatorService} from "../../../../services/aggregator.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {Router} from "@angular/router";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'app-aggregator-create',
@@ -14,7 +15,9 @@ export class AggregatorCreateComponent {
     form : FormGroup
     displayModal: boolean
 
-    constructor(private aggregatorService: AggregatorService, private router: Router) {
+    constructor(private aggregatorService: AggregatorService, private router: Router,
+                private toastr: ToastrService,
+    ) {
         this.form = new FormGroup({
             codeAggregator: new FormControl('', Validators.required),
             webhook: new FormControl('', Validators.required),
@@ -31,10 +34,17 @@ export class AggregatorCreateComponent {
             this.form.get('description')?.value
         ).subscribe({
             next: (response) => {
-                if (response.statusCode == 200)
+                if (response.statusCode == 200) {
+                    this.toastr.success('Agregator created successfully', 'Success');
                     navigateBack(this.router)
+                }
+                else{
+                    this.toastr.error('Agregator created failed', 'Error');
+                }
             },
-            error : (err: AppError) => handleFormError(err, this.form)
+            error: (err: AppError) => {
+                handleFormError(err, this.form);
+            }
         })
     }
 

@@ -5,6 +5,7 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {Router} from "@angular/router";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {Aggregator} from "../../../../commons/interfaces/aggregator";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'app-aggregator-update',
@@ -19,7 +20,9 @@ export class AggregatorUpdateComponent implements OnInit {
     form : FormGroup
     displayModal: boolean
 
-    constructor(private aggregatorService: AggregatorService, private router: Router) {
+    constructor(private aggregatorService: AggregatorService, private router: Router,
+                private toastr: ToastrService,
+    ) {
     }
 
     ngOnInit(): void {
@@ -42,10 +45,18 @@ export class AggregatorUpdateComponent implements OnInit {
             this.form.get('description')?.value
         ).subscribe({
             next: (response) => {
-                if (response.statusCode == 200)
+                if (response.statusCode == 200) {
+                    this.toastr.success('Agregator updated successfully', 'Success');
                     navigateBack(this.router)
+                }
+                else {
+                    this.toastr.error('Agregator updated failed', 'Error');
+                }
             },
-            error : (err: AppError) => handleFormError(err, this.form)
+            error: (err: AppError) => {
+                handleFormError(err, this.form);
+
+            }
         })
     }
 

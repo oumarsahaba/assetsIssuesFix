@@ -5,7 +5,7 @@ import {AgentService} from "../../../../services/agent.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {Agent} from "../../../../commons/interfaces/agent";
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
     selector: 'app-agent-update',
     templateUrl: './agent-update.component.html',
@@ -18,7 +18,9 @@ export class AgentUpdateComponent implements OnChanges {
     form : FormGroup
     displayModal: any;
 
-    constructor(private agentService: AgentService, private router: Router) {}
+    constructor(private agentService: AgentService, private router: Router,
+                private toastr: ToastrService,
+                ) {}
 
     ngOnChanges(changes: SimpleChanges){
         this.form = new FormGroup({
@@ -51,9 +53,18 @@ export class AgentUpdateComponent implements OnChanges {
             this.form.get('active')?.value,
         ).subscribe({
             next: (response) => {
-                navigateBack(this.router)
+                if (response.statusCode == 200) {
+                    this.toastr.success('Agent updated successfully', 'Success');
+                    navigateBack(this.router)
+                }
+                else{
+                    this.toastr.error('Agent updated failed', 'Error');
+                }
             },
-            error : (err: AppError) => handleFormError(err, this.form)
+            error: (err: AppError) => {
+                handleFormError(err, this.form);
+                this.toastr.error('Agent updated failed', 'Error');
+            }
         })
     }
 
