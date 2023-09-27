@@ -6,6 +6,8 @@ import {Router} from "@angular/router";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {Lender} from "../../../../commons/interfaces/lender";
 import {ToastrService} from "ngx-toastr";
+import {HttpErrorResponse} from "@angular/common/http";
+import {BadRequestError} from "../../../../commons/errors/bad-request-error";
 
 @Component({
     selector: 'app-lender-update',
@@ -26,9 +28,10 @@ export class LenderUpdateComponent implements OnInit {
 
     ngOnInit(): void {
         this.form = new FormGroup({
+            codeLender: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
         })
-
+        this.form.get('codeLender').setValue(this.lender.codeLender)
         this.form.get('description').setValue(this.lender.description)
 
         this.displayModal = false
@@ -37,6 +40,7 @@ export class LenderUpdateComponent implements OnInit {
     update() {
         this.lenderService.update(
             this.lender.codeLender,
+            this.form.get('codeLender')?.value,
             this.form.get('description')?.value
         ).subscribe({
             next: (response) => {
@@ -44,11 +48,26 @@ export class LenderUpdateComponent implements OnInit {
                     this.toastr.success('Lender updated successfully', 'Success');
                     navigateBack(this.router)
                 }
-                else{
-                    this.toastr.error('Lender updated failed', 'Error');
+                if (response.statusCode == 400) {
+                    this.toastr.success('Error', 'Success');
+                    navigateBack(this.router)
                 }
             },
-            error : (err: AppError) => handleFormError(err, this.form)
+
+            error: (err: HttpErrorResponse | AppError) => {
+                if (err instanceof BadRequestError && (err as BadRequestError).originalError instanceof HttpErrorResponse) {
+                    const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
+                    this.toastr.error(httpError.error.errors.message, 'Error');
+                } else {
+                    // Handle other types of errors
+                    handleFormError(err as AppError, this.form);
+                }
+
+
+        }
+
+
+
         })
     }
 

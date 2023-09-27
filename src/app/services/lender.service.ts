@@ -20,8 +20,9 @@ export class LenderService extends BaseAPIService {
         })
     }
 
-    update(code: string, description: string) {
+    update(code: string,codeLender: string, description: string) {
         return this.httpPutCall('/lender/update/' + code, {
+            codeLender : codeLender,
             description : description
         })
     }

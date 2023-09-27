@@ -26,18 +26,20 @@ export class AgentService extends BaseAPIService {
         })
     }
 
-    update(codeAgent: string,
+    update(code: string,
            description: string,
            overdraftMaxDailyCount: string,
            overdraftLimitAmount: number,
            penaltyDelayInDays: number,
-           active: boolean) {
-        return this.httpPutCall('/agent/update/' + codeAgent, {
+           active: boolean,
+           codeAgent: string) {
+        return this.httpPutCall('/agent/update/' + code, {
             description : description,
             overdraftMaxDailyCount: overdraftMaxDailyCount,
             overdraftLimitAmount: overdraftLimitAmount,
             penaltyDelayInDays: penaltyDelayInDays,
             active: active,
+            codeAgent: codeAgent
         })
     }
 

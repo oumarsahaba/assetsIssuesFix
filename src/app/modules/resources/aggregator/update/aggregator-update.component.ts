@@ -6,6 +6,8 @@ import {Router} from "@angular/router";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {Aggregator} from "../../../../commons/interfaces/aggregator";
 import {ToastrService} from "ngx-toastr";
+import {HttpErrorResponse} from "@angular/common/http";
+import {BadRequestError} from "../../../../commons/errors/bad-request-error";
 
 @Component({
     selector: 'app-aggregator-update',
@@ -27,11 +29,12 @@ export class AggregatorUpdateComponent implements OnInit {
 
     ngOnInit(): void {
         this.form = new FormGroup({
-            //codeAggregator: new FormControl('', Validators.required),
+            codeAggregator: new FormControl('', Validators.required),
             webhook: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
         })
 
+        this.form.get('codeAggregator').setValue(this.aggregator.codeAggregator)
         this.form.get('webhook').setValue(this.aggregator.webhook)
         this.form.get('description').setValue(this.aggregator.description)
 
@@ -42,7 +45,8 @@ export class AggregatorUpdateComponent implements OnInit {
         this.aggregatorService.update(
             this.aggregator.codeAggregator,
             this.form.get('webhook')?.value,
-            this.form.get('description')?.value
+            this.form.get('description')?.value,
+            this.form.get('codeAggregator')?.value,
         ).subscribe({
             next: (response) => {
                 if (response.statusCode == 200) {
@@ -53,8 +57,15 @@ export class AggregatorUpdateComponent implements OnInit {
                     this.toastr.error('Agregator updated failed', 'Error');
                 }
             },
-            error: (err: AppError) => {
-                handleFormError(err, this.form);
+            error: (err: HttpErrorResponse | AppError) => {
+                if (err instanceof BadRequestError && (err as BadRequestError).originalError instanceof HttpErrorResponse) {
+                    const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
+                    this.toastr.error(httpError.error.errors.message, 'Error');
+                } else {
+                    // Handle other types of errors
+                    handleFormError(err as AppError, this.form);
+                }
+
 
             }
         })
