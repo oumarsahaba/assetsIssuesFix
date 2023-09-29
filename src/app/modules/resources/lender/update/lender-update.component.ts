@@ -47,11 +47,10 @@ export class LenderUpdateComponent implements OnInit {
                 }
             },
             error: (err: HttpErrorResponse | AppError) => {
-                if (err instanceof BadRequestError && (err as BadRequestError).originalError instanceof HttpErrorResponse) {
                     const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
                     this.formError = httpError.error.errors.message
                     handleFormError(err as AppError, this.form);
-                }
+
             }
         })
     }
