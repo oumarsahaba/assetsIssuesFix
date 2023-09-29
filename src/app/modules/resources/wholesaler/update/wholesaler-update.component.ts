@@ -21,6 +21,7 @@ export class WholesalerUpdateComponent implements OnChanges {
 
     form : FormGroup
     displayModal: any;
+    formError: string | null = null;
 
     constructor(private wholesalerService: WholesalerService,
                 private router: Router,
@@ -54,18 +55,14 @@ export class WholesalerUpdateComponent implements OnChanges {
             next: (response) => {
                 if (response.statusCode == 200) {
                     this.toastr.success('Wholesaler updated successfully', 'Success');
+                    this.formError = null;
                     navigateBack(this.router)
-                }
-                else{
-                    this.toastr.error('Wholesaler updated failed', 'Error');
                 }
             },
             error: (err: HttpErrorResponse | AppError) => {
                 if (err instanceof BadRequestError && (err as BadRequestError).originalError instanceof HttpErrorResponse) {
                     const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
-                    this.toastr.error(httpError.error.errors.message, 'Error');
-                } else {
-                    // Handle other types of errors
+                    this.formError = httpError.error.errors.message
                     handleFormError(err as AppError, this.form);
                 }
 

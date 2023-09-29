@@ -5,9 +5,10 @@ import {AgentService} from "../../../../services/agent.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {Agent} from "../../../../commons/interfaces/agent";
-import { ToastrService } from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
 import {HttpErrorResponse} from "@angular/common/http";
 import {BadRequestError} from "../../../../commons/errors/bad-request-error";
+
 @Component({
     selector: 'app-agent-update',
     templateUrl: './agent-update.component.html',
@@ -16,15 +17,15 @@ import {BadRequestError} from "../../../../commons/errors/bad-request-error";
 export class AgentUpdateComponent implements OnChanges {
     @Input()
     agent: Agent
-
-    form : FormGroup
+    form: FormGroup
     displayModal: any;
+    formError: string | null = null;
 
     constructor(private agentService: AgentService, private router: Router,
-                private toastr: ToastrService,
-                ) {}
+                private toastr: ToastrService) {
+    }
 
-    ngOnChanges(changes: SimpleChanges){
+    ngOnChanges(changes: SimpleChanges) {
         this.form = new FormGroup({
             codeAgent: new FormControl('', Validators.required),
             overdraftMaxDailyCount: new FormControl('', Validators.required),
@@ -34,7 +35,7 @@ export class AgentUpdateComponent implements OnChanges {
             active: new FormControl('', Validators.required)
         })
 
-        if(changes.hasOwnProperty('agent')) {
+        if (changes.hasOwnProperty('agent')) {
             this.form.get('active').setValue(this.agent?.active)
             this.form.get('description').setValue(this.agent?.description)
             this.form.get('overdraftMaxDailyCount').setValue(this.agent?.overdraftMaxDailyCount)
@@ -42,9 +43,7 @@ export class AgentUpdateComponent implements OnChanges {
             this.form.get('penaltyDelayInDays').setValue(this.agent?.penaltyDelayInDays)
             this.form.get('codeAgent').setValue(this.agent?.codeAgent)
         }
-
         this.displayModal = false
-
     }
 
     update() {
@@ -59,27 +58,20 @@ export class AgentUpdateComponent implements OnChanges {
         ).subscribe({
             next: (response) => {
                 if (response.statusCode == 200) {
+                    this.formError =null
                     this.toastr.success('Agent updated successfully', 'Success');
                     navigateBack(this.router)
-                }
-                else{
-                    this.toastr.error('Agent updated failed', 'Error');
                 }
             },
             error: (err: HttpErrorResponse | AppError) => {
                 if (err instanceof BadRequestError && (err as BadRequestError).originalError instanceof HttpErrorResponse) {
                     const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
-                    this.toastr.error(httpError.error.errors.message, 'Error');
-                } else {
-                    // Handle other types of errors
+                    this.formError = httpError.error.errors.message
                     handleFormError(err as AppError, this.form);
                 }
-
-
             }
         })
     }
-
     toggleModal() {
         this.displayModal = !this.displayModal
     }

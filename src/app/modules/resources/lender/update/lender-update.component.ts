@@ -17,15 +17,13 @@ import {BadRequestError} from "../../../../commons/errors/bad-request-error";
 export class LenderUpdateComponent implements OnInit {
     @Input()
     lender: Lender
-
-    form : FormGroup
+    form: FormGroup
     displayModal: boolean
-
+    formError: string | null = null;
     constructor(private lenderService: LenderService, private router: Router,
                 private toastr: ToastrService,
     ) {
     }
-
     ngOnInit(): void {
         this.form = new FormGroup({
             codeLender: new FormControl('', Validators.required),
@@ -33,10 +31,8 @@ export class LenderUpdateComponent implements OnInit {
         })
         this.form.get('codeLender').setValue(this.lender.codeLender)
         this.form.get('description').setValue(this.lender.description)
-
         this.displayModal = false
     }
-
     update() {
         this.lenderService.update(
             this.lender.codeLender,
@@ -45,32 +41,20 @@ export class LenderUpdateComponent implements OnInit {
         ).subscribe({
             next: (response) => {
                 if (response.statusCode == 200) {
+                    this.formError = null;
                     this.toastr.success('Lender updated successfully', 'Success');
                     navigateBack(this.router)
                 }
-                if (response.statusCode == 400) {
-                    this.toastr.success('Error', 'Success');
-                    navigateBack(this.router)
-                }
             },
-
             error: (err: HttpErrorResponse | AppError) => {
                 if (err instanceof BadRequestError && (err as BadRequestError).originalError instanceof HttpErrorResponse) {
                     const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
-                    this.toastr.error(httpError.error.errors.message, 'Error');
-                } else {
-                    // Handle other types of errors
+                    this.formError = httpError.error.errors.message
                     handleFormError(err as AppError, this.form);
                 }
-
-
-        }
-
-
-
+            }
         })
     }
-
     toggleModal() {
         this.displayModal = !this.displayModal
     }

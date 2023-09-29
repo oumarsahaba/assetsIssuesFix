@@ -18,9 +18,9 @@ export class AggregatorUpdateComponent implements OnInit {
 
     @Input()
     aggregator: Aggregator
-
     form : FormGroup
     displayModal: boolean
+    formError: string | null = null;
 
     constructor(private aggregatorService: AggregatorService, private router: Router,
                 private toastr: ToastrService,
@@ -50,23 +50,17 @@ export class AggregatorUpdateComponent implements OnInit {
         ).subscribe({
             next: (response) => {
                 if (response.statusCode == 200) {
+                    this.formError = null
                     this.toastr.success('Agregator updated successfully', 'Success');
                     navigateBack(this.router)
-                }
-                else {
-                    this.toastr.error('Agregator updated failed', 'Error');
                 }
             },
             error: (err: HttpErrorResponse | AppError) => {
                 if (err instanceof BadRequestError && (err as BadRequestError).originalError instanceof HttpErrorResponse) {
                     const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
-                    this.toastr.error(httpError.error.errors.message, 'Error');
-                } else {
-                    // Handle other types of errors
+                    this.formError = httpError.error.errors.message
                     handleFormError(err as AppError, this.form);
                 }
-
-
             }
         })
     }
