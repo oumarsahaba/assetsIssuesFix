@@ -8,21 +8,21 @@ import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
-import { Observable } from 'rxjs';
-import { Response } from 'src/app/commons/models/response';
+import {Observable} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
 
 @Component({
-  selector: 'app-wholesaler-index',
-  templateUrl: './wholesaler-index.component.html',
-  styleUrls: ['./wholesaler-index.component.css']
+    selector: 'app-wholesaler-index',
+    templateUrl: './wholesaler-index.component.html',
+    styleUrls: ['./wholesaler-index.component.css']
 })
 export class WholesalerIndexComponent implements OnInit {
 
-    page : PaginatedResource<Wholesaler>
+    page: PaginatedResource<Wholesaler>
     page$: Observable<Response<PaginatedResource<Wholesaler>>>
-    codeWholesaler : string = ""
+    codeWholesaler: string = ""
 
-    constructor(private wholesalerService: WholesalerService, private router: Router ) {
+    constructor(private wholesalerService: WholesalerService, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -36,7 +36,7 @@ export class WholesalerIndexComponent implements OnInit {
                 next: (response) => {
                     this.page = response.data as PaginatedResource<Wholesaler>
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
 
@@ -45,6 +45,7 @@ export class WholesalerIndexComponent implements OnInit {
                 }
             })
     }
+
     confirmDelete(codeAgent: string) {
         Swal.fire({
             title: 'Are you sure?',
@@ -63,13 +64,15 @@ export class WholesalerIndexComponent implements OnInit {
             }
         });
     }
+
     delete(codeWholesaler: string) {
         this.wholesalerService.delete(codeWholesaler).subscribe({
             next: (response) => {
                 if (response.statusCode == 200)
                     navigateBack(this.router)
             },
-            error: () => {}
+            error: () => {
+            }
         })
     }
 }

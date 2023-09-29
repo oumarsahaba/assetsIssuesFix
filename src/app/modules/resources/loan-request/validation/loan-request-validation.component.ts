@@ -18,7 +18,7 @@ export class LoanRequestValidationComponent {
     token: string
     @Input()
     disabled: boolean
-    form : FormGroup
+    form: FormGroup
     displayModal: boolean
 
     constructor(private loanRequestService: LoanRequestService, private router: Router) {
@@ -36,7 +36,7 @@ export class LoanRequestValidationComponent {
                 next: (response) => {
                     navigateBack(this.router)
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
 

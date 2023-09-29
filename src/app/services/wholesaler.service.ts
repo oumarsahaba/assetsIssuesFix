@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {BaseAPIService} from "./base-api.service";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
-export class WholesalerService extends BaseAPIService{
+export class WholesalerService extends BaseAPIService {
     getAll() {
         return this.httpGetCall(`/wholesaler`)
     }
@@ -15,17 +15,17 @@ export class WholesalerService extends BaseAPIService{
 
     create(codeWholesaler: string, codeAggregator: string, description: string) {
         return this.httpPostCall('/wholesaler/store', {
-            codeWholesaler : codeWholesaler,
-            codeAggregator : codeAggregator,
-            description : description
+            codeWholesaler: codeWholesaler,
+            codeAggregator: codeAggregator,
+            description: description
         })
     }
 
-    update(code: string,codeWholesaler: string, description: string, active: string) {
+    update(code: string, codeWholesaler: string, description: string, active: string) {
         return this.httpPutCall('/wholesaler/update/' + code, {
-            codeWholesaler : codeWholesaler,
+            codeWholesaler: codeWholesaler,
             active: active,
-            description : description
+            description: description
         })
     }
 

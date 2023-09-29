@@ -12,8 +12,8 @@ export class CreditRequestService extends BaseAPIService {
 
     create(codeAgent: string, amount: number, recoveryPeriodInDays: number, recoveryAmountByPeriod: number) {
         return this.httpPostCall('/credit/request/store', {
-            codeAgent : codeAgent,
-            amount : amount,
+            codeAgent: codeAgent,
+            amount: amount,
             recoveryPeriodInDays: recoveryPeriodInDays,
             recoveryAmountByPeriod: recoveryAmountByPeriod
         })

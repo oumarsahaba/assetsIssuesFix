@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CreditCountByAgentChartComponent } from './credit-count-by-agent-chart.component';
+import {CreditCountByAgentChartComponent} from './credit-count-by-agent-chart.component';
 
 describe('CreditChartComponent', () => {
-  let component: CreditCountByAgentChartComponent;
-  let fixture: ComponentFixture<CreditCountByAgentChartComponent>;
+    let component: CreditCountByAgentChartComponent;
+    let fixture: ComponentFixture<CreditCountByAgentChartComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ CreditCountByAgentChartComponent ]
-    })
-    .compileComponents();
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [CreditCountByAgentChartComponent]
+        })
+            .compileComponents();
 
-    fixture = TestBed.createComponent(CreditCountByAgentChartComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(CreditCountByAgentChartComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

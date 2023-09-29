@@ -9,8 +9,8 @@ import {OverviewCreditRequest} from "../../../../commons/interfaces/overview-cre
 import {CreditRequestStatus} from "../../../../commons/enums/CreditRequestStatus";
 import * as XLSX from 'xlsx';
 import Swal from "sweetalert2";
-import { Response } from 'src/app/commons/models/response';
-import { Observable } from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'app-overview-credit-request-index-component',
@@ -25,7 +25,7 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
     codeWholesaler: string = '';
     startDate: string = '';
     endDate: string = '';
-    status:string = '';
+    status: string = '';
     page$: Observable<Response<PaginatedResource<OverviewCreditRequest>>>;
 
     protected readonly CreditRequestStatus = CreditRequestStatus;
@@ -36,6 +36,7 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
     ngOnInit(): void {
         this.goToPage()
     }
+
     goToPage(page: number = 0) {
         this.page$ = this.overviewService.getCreditRequests(page, 10, this.codeAgent, this.codeWholesaler, this.status, this.startDate, this.endDate)
         this.overviewService.getCreditRequests(page, 10, this.codeAgent, this.codeWholesaler, this.status, this.startDate, this.endDate)
@@ -43,7 +44,7 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
                 next: (response) => {
                     this.page = response.data as PaginatedResource<OverviewCreditRequest>;
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
                     if (err instanceof ForbiddenError)
@@ -65,8 +66,7 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
                             text: 'There is no data available for this Credit Request.',
                         });
                         return;
-                    }
-                    else{
+                    } else {
                         const wb: XLSX.WorkBook = XLSX.utils.book_new();
                         const worksheet: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet([]);
                         const headerRow = [
@@ -79,7 +79,7 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
                             'Created At'
                         ];
 
-                        XLSX.utils.sheet_add_aoa(worksheet, [headerRow], { origin: -1 });
+                        XLSX.utils.sheet_add_aoa(worksheet, [headerRow], {origin: -1});
                         // Iterate over the data and add the fields to the worksheet
                         for (let i = 0; i < response.data.length; i++) {
                             const data = response.data[i];
@@ -93,12 +93,13 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
                                 data.createdAt
                             ];
 
-                            XLSX.utils.sheet_add_aoa(worksheet, [row], { origin: -1 });
+                            XLSX.utils.sheet_add_aoa(worksheet, [row], {origin: -1});
                         }
                         XLSX.utils.book_append_sheet(wb, worksheet, 'Sheet1');
                         // Save the Excel spreadsheet
                         XLSX.writeFile(wb, 'credit_request.xlsx');
-                    }},
+                    }
+                },
                 error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found']);

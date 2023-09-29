@@ -6,18 +6,18 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {CommissionPlan} from "../../../../commons/interfaces/commission-plan";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
-import { Observable } from 'rxjs';
-import { Response } from 'src/app/commons/models/response';
+import {Observable} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
 
 @Component({
-  selector: 'app-commission-plan-index',
-  templateUrl: './commission-plan-index.component.html',
-  styleUrls: ['./commission-plan-index.component.css']
+    selector: 'app-commission-plan-index',
+    templateUrl: './commission-plan-index.component.html',
+    styleUrls: ['./commission-plan-index.component.css']
 })
 export class CommissionPlanIndexComponent implements OnInit {
 
-    page : PaginatedResource<CommissionPlan> = {
-        content : [],
+    page: PaginatedResource<CommissionPlan> = {
+        content: [],
         totalElements: 0,
         totalPages: 0,
         number: 0,
@@ -34,7 +34,8 @@ export class CommissionPlanIndexComponent implements OnInit {
     type: string
 
     constructor(private commissionPlanService: CommissionPlanService,
-                private router: Router) {}
+                private router: Router) {
+    }
 
     ngOnInit(): void {
         this.goToPage()
@@ -47,7 +48,7 @@ export class CommissionPlanIndexComponent implements OnInit {
                 next: (response) => {
                     this.page = response.data as PaginatedResource<CommissionPlan>
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
 

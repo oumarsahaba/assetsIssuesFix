@@ -8,9 +8,9 @@ import {PaginatedResource} from "../../../../commons/interfaces/paginated-resour
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 
 @Component({
-  selector: 'app-loan-request-index',
-  templateUrl: './loan-request-index.component.html',
-  styleUrls: ['./loan-request-index.component.css']
+    selector: 'app-loan-request-index',
+    templateUrl: './loan-request-index.component.html',
+    styleUrls: ['./loan-request-index.component.css']
 })
 export class LoanRequestIndexComponent implements OnInit {
 
@@ -31,7 +31,7 @@ export class LoanRequestIndexComponent implements OnInit {
                 next: (response) => {
                     this.page = response.data as PaginatedResource<LoanRequest>
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
 

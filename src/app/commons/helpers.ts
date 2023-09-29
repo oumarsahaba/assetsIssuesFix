@@ -47,7 +47,7 @@ export function handleFormError(err: AppError, form: FormGroup) {
 export function navigateBack(router: Router) {
     const currentRoute = router.url;
 
-    router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
         router.navigate([currentRoute]);
     });
 }

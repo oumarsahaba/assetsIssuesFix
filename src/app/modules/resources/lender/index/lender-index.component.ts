@@ -8,9 +8,8 @@ import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
-import { Observable } from 'rxjs';
-import { ApiResponse } from 'src/app/commons/interfaces/api-response';
-import { Response } from 'src/app/commons/models/response';
+import {Observable} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-lender-index',
@@ -21,7 +20,8 @@ export class LenderIndexComponent implements OnInit {
 
     page: PaginatedResource<Lender>;
     page$: Observable<Response<PaginatedResource<Lender>>>;
-    constructor(private lenderService: LenderService, private router: Router ) {
+
+    constructor(private lenderService: LenderService, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -29,13 +29,13 @@ export class LenderIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.page$=this.lenderService.getPage(page)
+        this.page$ = this.lenderService.getPage(page)
         this.lenderService.getPage(page)
             .subscribe({
                 next: (response) => {
                     this.page = response.data as PaginatedResource<Lender>
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
 
@@ -64,6 +64,7 @@ export class LenderIndexComponent implements OnInit {
             }
         });
     }
+
     delete(codeLender: string) {
         this.lenderService.delete(codeLender).subscribe({
             next: (response) => {

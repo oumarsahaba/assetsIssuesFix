@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Chart, registerables } from 'chart.js';
-import { DashboardService } from "../../../services/dashboard.service";
-import { AppError } from "../../../commons/errors/app-error";
-import { ChartDataset } from "../../../commons/interfaces/chart-dataset";
+import {Component, OnInit} from '@angular/core';
+import {Chart, registerables} from 'chart.js';
+import {DashboardService} from "../../../services/dashboard.service";
+import {AppError} from "../../../commons/errors/app-error";
+import {ChartDataset} from "../../../commons/interfaces/chart-dataset";
 
 @Component({
     selector: 'app-credit-flux-by-agent-chart',
@@ -13,7 +13,8 @@ export class CreditFluxByAgentChartComponent implements OnInit {
     selectedPeriod: number = 30; // Default period
     chart: Chart | null = null; // Store the chart instance
 
-    constructor(private dashboardService: DashboardService) {}
+    constructor(private dashboardService: DashboardService) {
+    }
 
     ngOnInit(): void {
         Chart.register(...registerables);

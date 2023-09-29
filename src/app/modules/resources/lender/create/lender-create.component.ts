@@ -11,8 +11,8 @@ import {ToastrService} from "ngx-toastr";
     templateUrl: './lender-create.component.html',
     styleUrls: ['./lender-create.component.css']
 })
-export class LenderCreateComponent  {
-    form : FormGroup
+export class LenderCreateComponent {
+    form: FormGroup
     displayModal: boolean
 
     constructor(private lenderService: LenderService, private router: Router,
@@ -35,12 +35,11 @@ export class LenderCreateComponent  {
                 if (response.statusCode == 200) {
                     this.toastr.success('Lender created successfully', 'Success');
                     navigateBack(this.router)
-                }
-                else{
+                } else {
                     this.toastr.error('Lender created failed', 'Error');
                 }
             },
-            error : (err: AppError) => handleFormError(err, this.form)
+            error: (err: AppError) => handleFormError(err, this.form)
         })
     }
 

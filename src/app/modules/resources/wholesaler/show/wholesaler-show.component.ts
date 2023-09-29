@@ -7,13 +7,13 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {Commissionable} from "../../../../commons/enums/Commissionable";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
-import { Observable } from 'rxjs';
-import { Response } from 'src/app/commons/models/response';
+import {Observable} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
 
 @Component({
-  selector: 'app-wholesaler-show',
-  templateUrl: './wholesaler-show.component.html',
-  styleUrls: ['./wholesaler-show.component.css']
+    selector: 'app-wholesaler-show',
+    templateUrl: './wholesaler-show.component.html',
+    styleUrls: ['./wholesaler-show.component.css']
 })
 export class WholesalerShowComponent {
     wholesaler: Wholesaler | null
@@ -38,7 +38,7 @@ export class WholesalerShowComponent {
                         this.wholesaler = response.data as Wholesaler
                         this.accountSlug = this.wholesaler.creditAccount.slug
                     },
-                    error : (err: AppError) => {
+                    error: (err: AppError) => {
                         if (err instanceof NotFoundError)
                             this.router.navigate(['/not-found'])
 

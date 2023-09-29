@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {BaseAPIService} from "./base-api.service";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
-export class AggregatorService extends BaseAPIService{
+export class AggregatorService extends BaseAPIService {
     getAll() {
         return this.httpGetCall(`/aggregator`)
     }
@@ -15,17 +15,17 @@ export class AggregatorService extends BaseAPIService{
 
     create(code: string, webhook: string, description: string) {
         return this.httpPostCall('/aggregator/store', {
-            codeAggregator : code,
-            webhook : webhook,
-            description : description
+            codeAggregator: code,
+            webhook: webhook,
+            description: description
         })
     }
 
-    update(code: string, webhook: string, description: string,codeAggregator :string) {
+    update(code: string, webhook: string, description: string, codeAggregator: string) {
         return this.httpPutCall('/aggregator/update/' + code, {
-            webhook : webhook,
-            description : description,
-            codeAggregator : codeAggregator,
+            webhook: webhook,
+            description: description,
+            codeAggregator: codeAggregator,
         })
     }
 

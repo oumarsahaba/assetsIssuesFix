@@ -7,18 +7,21 @@
         <app-loan-request-create [codeWholesaler]="codeWholesaler"/>
     </div>
 </div>
-<app-shared-paginated-resource [(page)]="page" (pageChange)="goToPage($event.number)">
+<app-shared-paginated-resource (pageChange)="goToPage($event.number)" [(page)]="page">
     <table class="min-w-full divide-y divide-gray-300">
         <thead class="bg-gray-50">
         <tr>
-            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Lender</th>
-            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">amount</th>
-            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">fees</th>
-            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Recovered amount</th>
-            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Outstanding balance</th>
-            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Status</th>
-            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Created At</th>
-            <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900"></th>
+            <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" scope="col">Lender</th>
+            <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" scope="col">amount</th>
+            <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" scope="col">fees</th>
+            <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" scope="col">Recovered amount
+            </th>
+            <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" scope="col">Outstanding
+                balance
+            </th>
+            <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900" scope="col">Status</th>
+            <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900" scope="col">Created At</th>
+            <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900" scope="col"></th>
         </tr>
         </thead>
         <tbody class="divide-y divide-gray-200 bg-white">
@@ -31,11 +34,14 @@
             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ loanRequest.status }}</td>
             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ loanRequest.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                <app-loan-request-validation [token]="loanRequest.token" [disabled]="loanRequest.status !== 'INITIATED'"/>
+                <app-loan-request-validation [disabled]="loanRequest.status !== 'INITIATED'"
+                                             [token]="loanRequest.token"/>
             </td>
         </tr>
         <tr *ngIf="page?.content.length == 0">
-            <td class="whitespace-nowrap py-2 text-center text-sm text-gray-500 sm:pl-0" colspan="6"> No data available </td>
+            <td class="whitespace-nowrap py-2 text-center text-sm text-gray-500 sm:pl-0" colspan="6"> No data
+                available
+            </td>
         </tr>
         </tbody>
     </table>

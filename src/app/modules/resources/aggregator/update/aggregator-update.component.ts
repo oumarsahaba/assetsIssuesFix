@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AggregatorService} from "../../../../services/aggregator.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {Router} from "@angular/router";
-import {handleFormError, navigateBack} from "../../../../commons/helpers";
+import {handleFormError} from "../../../../commons/helpers";
 import {Aggregator} from "../../../../commons/interfaces/aggregator";
 import {ToastrService} from "ngx-toastr";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -18,7 +18,7 @@ export class AggregatorUpdateComponent implements OnInit {
 
     @Input()
     aggregator: Aggregator
-    form : FormGroup
+    form: FormGroup
     displayModal: boolean
     formError: string | null = null;
 
@@ -50,15 +50,17 @@ export class AggregatorUpdateComponent implements OnInit {
         ).subscribe({
             next: (response) => {
                 if (response.statusCode == 200) {
+                    let aggregator: Aggregator = response.data as Aggregator
+
+                    this.router.navigate([`/aggregator/${aggregator.codeAggregator}`])
                     this.formError = null
-                    this.toastr.success('Agregator updated successfully', 'Success');
-                    navigateBack(this.router)
+                    this.toastr.success('Aggregator updated successfully', 'Success');
                 }
             },
             error: (err: HttpErrorResponse | AppError) => {
-                    const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
-                    this.formError = httpError.error.errors.message
-                    handleFormError(err as AppError, this.form);
+                const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
+                this.formError = httpError.error.errors.message
+                handleFormError(err as AppError, this.form);
             }
         })
     }
