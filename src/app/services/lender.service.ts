@@ -15,14 +15,15 @@ export class LenderService extends BaseAPIService {
 
     create(code: string, description: string) {
         return this.httpPostCall('/lender/store', {
-            codeLender : code,
-            description : description
+            codeLender: code,
+            description: description
         })
     }
 
-    update(code: string, description: string) {
+    update(code: string, codeLender: string, description: string) {
         return this.httpPutCall('/lender/update/' + code, {
-            description : description
+            codeLender: codeLender,
+            description: description
         })
     }
 

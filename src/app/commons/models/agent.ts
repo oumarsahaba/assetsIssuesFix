@@ -19,7 +19,7 @@ export class BaseAgent implements Agent {
     constructor(agent: Agent) {
         this.codeAgent = agent.codeAgent
         this.wholesaler = new BaseSimpleWholesaler(agent.wholesaler)
-        this.account  = new BaseAccount(agent.account)
+        this.account = new BaseAccount(agent.account)
         this.overdraftLimitAmount = agent.overdraftLimitAmount
         this.overdraftMaxDailyCount = agent.overdraftMaxDailyCount
         this.overdraftBillingOccurrence = agent.overdraftBillingOccurrence

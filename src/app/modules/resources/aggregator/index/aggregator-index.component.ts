@@ -8,9 +8,8 @@ import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
-import { Agent } from 'src/app/commons/interfaces/agent';
-import { Observable } from 'rxjs';
-import { Response } from 'src/app/commons/models/response';
+import {Observable} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-aggregator-index',
@@ -18,23 +17,24 @@ import { Response } from 'src/app/commons/models/response';
     styleUrls: ['./aggregator-index.component.css']
 })
 export class AggregatorIndexComponent implements OnInit {
-    page : PaginatedResource<Aggregator>
+    page: PaginatedResource<Aggregator>
     page$: Observable<Response<PaginatedResource<Aggregator>>>
 
-    constructor(private aggregatorService: AggregatorService, private router: Router ) {}
+    constructor(private aggregatorService: AggregatorService, private router: Router) {
+    }
 
     ngOnInit(): void {
         this.goToPage()
     }
 
     goToPage(page: number = 0) {
-        this.page$= this.aggregatorService.getPage(page)
+        this.page$ = this.aggregatorService.getPage(page)
         this.aggregatorService.getPage(page)
             .subscribe({
                 next: (response) => {
                     this.page = response.data as PaginatedResource<Aggregator>
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
 
@@ -69,7 +69,8 @@ export class AggregatorIndexComponent implements OnInit {
                 if (response.statusCode == 200)
                     navigateBack(this.router)
             },
-            error: () => {}
+            error: () => {
+            }
         })
     }
 }

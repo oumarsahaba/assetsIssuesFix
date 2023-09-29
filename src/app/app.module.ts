@@ -15,10 +15,6 @@ import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
-
-
-
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -48,8 +44,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
             provide: RouteReuseStrategy,
             useClass: CustomRouteReuseStrategy
         },
-        { provide: ErrorHandler, useClass: AppErrorHandler}
+        {provide: ErrorHandler, useClass: AppErrorHandler}
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

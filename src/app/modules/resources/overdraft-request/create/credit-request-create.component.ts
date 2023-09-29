@@ -6,13 +6,13 @@ import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {CreditRequestService} from "../../../../services/credit-request.service";
 
 @Component({
-  selector: 'app-credit-request-create',
-  templateUrl: './credit-request-create.component.html',
-  styleUrls: ['./credit-request-create.component.css']
+    selector: 'app-credit-request-create',
+    templateUrl: './credit-request-create.component.html',
+    styleUrls: ['./credit-request-create.component.css']
 })
 export class CreditRequestCreateComponent {
     displayModal: any;
-    form : FormGroup
+    form: FormGroup
 
     @Input()
     codeAgent: string
@@ -42,7 +42,7 @@ export class CreditRequestCreateComponent {
             next: (response) => {
                 navigateBack(this.router)
             },
-            error : (err: AppError) => handleFormError(err, this.form)
+            error: (err: AppError) => handleFormError(err, this.form)
         })
     }
 }

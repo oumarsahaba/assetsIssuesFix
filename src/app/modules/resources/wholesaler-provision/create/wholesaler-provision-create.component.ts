@@ -13,7 +13,7 @@ import {NgxDropzoneChangeEvent} from "ngx-dropzone";
 })
 export class WholesalerProvisionCreateComponent {
     displayModal: any;
-    form : FormGroup
+    form: FormGroup
 
     @Input()
     codeWholesaler: string
@@ -44,7 +44,7 @@ export class WholesalerProvisionCreateComponent {
                 this.files = [];
                 navigateBack(this.router)
             },
-            error : (err: AppError) => handleFormError(err, this.form)
+            error: (err: AppError) => handleFormError(err, this.form)
         })
     }
 

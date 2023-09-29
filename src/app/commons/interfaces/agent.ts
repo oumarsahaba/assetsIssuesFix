@@ -11,5 +11,6 @@ export interface Agent {
     penaltyDelayInDays: number,
     description: string
     active: boolean
-    createdAt: Date
+    createdAt: Date,
+
 }

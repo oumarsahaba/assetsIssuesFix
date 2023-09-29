@@ -12,7 +12,7 @@ import {ToastrService} from "ngx-toastr";
     styleUrls: ['./aggregator-create.component.css']
 })
 export class AggregatorCreateComponent {
-    form : FormGroup
+    form: FormGroup
     displayModal: boolean
 
     constructor(private aggregatorService: AggregatorService, private router: Router,
@@ -37,8 +37,7 @@ export class AggregatorCreateComponent {
                 if (response.statusCode == 200) {
                     this.toastr.success('Agregator created successfully', 'Success');
                     navigateBack(this.router)
-                }
-                else{
+                } else {
                     this.toastr.error('Agregator created failed', 'Error');
                 }
             },

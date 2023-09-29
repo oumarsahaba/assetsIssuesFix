@@ -14,6 +14,6 @@ export function initializeKeycloak(keycloak: KeycloakService) {
                 checkLoginIframe: false,
                 redirectUri: environment.keycloak.redirectUri
             },
-            loadUserProfileAtStartUp : true
+            loadUserProfileAtStartUp: true
         });
 }

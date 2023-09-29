@@ -16,15 +16,14 @@ import {ToastrService} from "ngx-toastr";
     templateUrl: './wholesaler-create.component.html',
     styleUrls: ['./wholesaler-create.component.css']
 })
-export class WholesalerCreateComponent implements OnInit{
-    form : FormGroup
+export class WholesalerCreateComponent implements OnInit {
+    form: FormGroup
     displayModal: any;
     aggregators: Aggregator[]
 
     constructor(private wholesalerService: WholesalerService,
                 private aggregatorService: AggregatorService,
                 private toastr: ToastrService,
-
                 private router: Router) {
         this.form = new FormGroup({
             codeWholesaler: new FormControl('', Validators.required),
@@ -43,7 +42,7 @@ export class WholesalerCreateComponent implements OnInit{
                     this.aggregators = (response.data as Aggregator[])
                         .map((aggregator) => new BaseAggregator(aggregator))
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
 
@@ -63,12 +62,11 @@ export class WholesalerCreateComponent implements OnInit{
                 if (response.statusCode == 200) {
                     this.toastr.success('WholeSaler created successfully', 'Success');
                     navigateBack(this.router)
-                }
-                else{
+                } else {
                     this.toastr.error('WholeSaler created failed', 'Error');
                 }
             },
-            error : (err: AppError) => handleFormError(err, this.form)
+            error: (err: AppError) => handleFormError(err, this.form)
         })
     }
 

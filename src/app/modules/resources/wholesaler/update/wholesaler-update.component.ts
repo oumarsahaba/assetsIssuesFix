@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {WholesalerService} from "../../../../services/wholesaler.service";
@@ -6,6 +6,8 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 import {ToastrService} from "ngx-toastr";
+import {HttpErrorResponse} from "@angular/common/http";
+import {BadRequestError} from "../../../../commons/errors/bad-request-error";
 
 @Component({
     selector: 'app-wholesaler-update',
@@ -17,8 +19,9 @@ export class WholesalerUpdateComponent implements OnChanges {
     @Input()
     wholesaler: Wholesaler
 
-    form : FormGroup
+    form: FormGroup
     displayModal: any;
+    formError: string | null = null;
 
     constructor(private wholesalerService: WholesalerService,
                 private router: Router,
@@ -26,8 +29,9 @@ export class WholesalerUpdateComponent implements OnChanges {
     ) {
     }
 
-    ngOnChanges(changes:SimpleChanges): void {
+    ngOnChanges(changes: SimpleChanges): void {
         this.form = new FormGroup({
+            codeWholesaler: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
             active: new FormControl('', Validators.required),
         })
@@ -35,6 +39,7 @@ export class WholesalerUpdateComponent implements OnChanges {
         this.displayModal = false
 
         if (changes.hasOwnProperty('wholesaler')) {
+            this.form.get('codeWholesaler').setValue(this.wholesaler.codeWholesaler)
             this.form.get('active').setValue(this.wholesaler.active)
             this.form.get('description').setValue(this.wholesaler.description)
         }
@@ -43,19 +48,22 @@ export class WholesalerUpdateComponent implements OnChanges {
     update() {
         this.wholesalerService.update(
             this.wholesaler.codeWholesaler,
+            this.form.get('codeWholesaler')?.value,
             this.form.get('description')?.value,
             this.form.get('active')?.value
         ).subscribe({
             next: (response) => {
                 if (response.statusCode == 200) {
-                    this.toastr.success('WholeSaler updated successfully', 'Success');
+                    this.toastr.success('Wholesaler updated successfully', 'Success');
+                    this.formError = null;
                     navigateBack(this.router)
                 }
-                else{
-                    this.toastr.error('WholeSaler updated failed', 'Error');
-                }
             },
-            error : (err: AppError) => handleFormError(err, this.form)
+            error: (err: HttpErrorResponse | AppError) => {
+                const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
+                this.formError = httpError.error.errors.message
+                handleFormError(err as AppError, this.form);
+            }
         })
     }
 
