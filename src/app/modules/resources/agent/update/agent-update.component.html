@@ -14,7 +14,65 @@
             <div class="space-y-12">
                 <div class="border-b border-gray-900/10 pb-12">
                     <h2 class="text-base font-semibold leading-7 text-gray-900">Update agent</h2>
+                    <div class="grid grid-cols-2 gap-5 mt-5">
+                        <div>
+                            <label for="overdraftMaxDailyCount" class="block text-sm font-medium leading-6 text-gray-900">Max daily overdraft count</label>
+                            <div class="mt-2">
+                                <input type="text" id="overdraftMaxDailyCount"
+                                       formControlName="overdraftMaxDailyCount"
+                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                                <p class="text-xs text-red-500" *ngIf="form.get('overdraftMaxDailyCount')?.errors?.['serverError']">
+                                    {{ form.get('overdraftMaxDailyCount')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="overdraftLimitAmount" class="block text-sm font-medium leading-6 text-gray-900">Overdraft limit amount</label>
+                            <div class="mt-2">
+                                <input type="text" id="overdraftLimitAmount"
+                                       formControlName="overdraftLimitAmount"
+                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                                <p class="text-xs text-red-500" *ngIf="form.get('overdraftLimitAmount')?.errors?.['serverError']">
+                                    {{ form.get('overdraftLimitAmount')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="overdraftLimitAmount" class="block text-sm font-medium leading-6 text-gray-900">Overdraft Billing Occurrence</label>
+                            <div class="mt-2">
+                                <input type="text" id="overdraftBillingOccurrence"
+                                       formControlName="overdraftBillingOccurrence"
+                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                                <p class="text-xs text-red-500" *ngIf="form.get('overdraftBillingOccurrence')?.errors?.['serverError']">
+                                    {{ form.get('overdraftBillingOccurrence')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="penaltyDelayInDays" class="block text-sm font-medium leading-6 text-gray-900">Penalty Delay (In days)</label>
+                            <div class="mt-2">
+                                <input type="text" id="penaltyDelayInDays"
+                                       formControlName="penaltyDelayInDays"
+                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                                <p class="text-xs text-red-500" *ngIf="form.get('penaltyDelayInDays')?.errors?.['serverError']">
+                                    {{ form.get('penaltyDelayInDays')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-span-2">
+                            <label for="description" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
+                            <div class="mt-2">
+                                <textarea id="description" rows="3"
+                                          formControlName="description"
+                                          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"></textarea>
+                                <p class="text-xs text-red-500" *ngIf="form.get('description')?.errors?.['serverError']">
+                                    {{ form.get('description')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
 
+<!--
                     <div class="mt-5">
                         <label for="overdraftMaxDailyCount" class="block text-sm font-medium leading-6 text-gray-900">Max daily overdraft count</label>
                         <div class="mt-2">
@@ -74,6 +132,7 @@
                             </div>
                         </div>
                     </div>
+-->
 
                 </div>
             </div>

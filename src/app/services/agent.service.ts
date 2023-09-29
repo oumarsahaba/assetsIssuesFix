@@ -15,6 +15,7 @@ export class AgentService extends BaseAPIService {
            description: string,
            overdraftMaxDailyCount: string,
            overdraftLimitAmount: number,
+           overdraftBillingOccurrence: number,
            penaltyDelayInDays: number) {
         return this.httpPostCall('/agent/store', {
             codeAgent : codeAgent,
@@ -22,6 +23,7 @@ export class AgentService extends BaseAPIService {
             description : description,
             overdraftMaxDailyCount: overdraftMaxDailyCount,
             overdraftLimitAmount: overdraftLimitAmount,
+            overdraftBillingOccurrence: overdraftBillingOccurrence,
             penaltyDelayInDays: penaltyDelayInDays,
         })
     }
@@ -30,12 +32,14 @@ export class AgentService extends BaseAPIService {
            description: string,
            overdraftMaxDailyCount: string,
            overdraftLimitAmount: number,
+           overdraftBillingOccurrence: number,
            penaltyDelayInDays: number,
            active: boolean) {
         return this.httpPutCall('/agent/update/' + codeAgent, {
             description : description,
             overdraftMaxDailyCount: overdraftMaxDailyCount,
             overdraftLimitAmount: overdraftLimitAmount,
+            overdraftBillingOccurrence: overdraftBillingOccurrence,
             penaltyDelayInDays: penaltyDelayInDays,
             active: active,
         })

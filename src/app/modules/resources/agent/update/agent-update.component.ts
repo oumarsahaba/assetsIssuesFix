@@ -18,14 +18,13 @@ export class AgentUpdateComponent implements OnChanges {
     form : FormGroup
     displayModal: any;
 
-    constructor(private agentService: AgentService, private router: Router,
-                private toastr: ToastrService,
-                ) {}
+    constructor(private agentService: AgentService, private router: Router, private toastr: ToastrService) {}
 
     ngOnChanges(changes: SimpleChanges){
         this.form = new FormGroup({
             overdraftMaxDailyCount: new FormControl('', Validators.required),
             overdraftLimitAmount: new FormControl('', Validators.required),
+            overdraftBillingOccurrence: new FormControl('', Validators.required),
             penaltyDelayInDays: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
             active: new FormControl('', Validators.required)
@@ -36,6 +35,7 @@ export class AgentUpdateComponent implements OnChanges {
             this.form.get('description').setValue(this.agent?.description)
             this.form.get('overdraftMaxDailyCount').setValue(this.agent?.overdraftMaxDailyCount)
             this.form.get('overdraftLimitAmount').setValue(this.agent?.overdraftLimitAmount)
+            this.form.get('overdraftBillingOccurrence').setValue(this.agent?.overdraftBillingOccurrence)
             this.form.get('penaltyDelayInDays').setValue(this.agent?.penaltyDelayInDays)
         }
 
@@ -49,6 +49,7 @@ export class AgentUpdateComponent implements OnChanges {
             this.form.get('description')?.value,
             this.form.get('overdraftMaxDailyCount')?.value,
             this.form.get('overdraftLimitAmount')?.value,
+            this.form.get('overdraftBillingOccurrence')?.value,
             this.form.get('penaltyDelayInDays')?.value,
             this.form.get('active')?.value,
         ).subscribe({

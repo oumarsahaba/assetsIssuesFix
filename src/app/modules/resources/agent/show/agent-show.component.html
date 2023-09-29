@@ -55,6 +55,10 @@
                         <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-gray-700 bg-gray-50 ring-gray-600/10">{{ agent?.overdraftMaxDailyCount }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
+                        <dt class="text-gray-500">Overdraft Billing Occurrence</dt>
+                        <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-gray-600 bg-blue-200 ring-gray-600/10">Every {{ agent?.overdraftBillingOccurrence }} overdraft(s)</dd>
+                    </div>
+                    <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Penalty Delay (In days)</dt>
                         <dd class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-gray-700 bg-gray-50 ring-gray-600/10">{{ agent?.penaltyDelayInDays }}</dd>
                     </div>
@@ -142,7 +146,7 @@
 <ng-template #textLoader>
     <div role="status" class="max-w-sm animate-pulse">
         <div class="h-6 bg-gray-200 rounded-full dark:bg-gray-700 w-20 mb-2.5"></div>
-    </div>        
+    </div>
 </ng-template>
 
 <ng-template #itemsloader>
@@ -154,5 +158,5 @@
         <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
         <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
         <span class="sr-only">Loading...</span>
-    </div>      
+    </div>
 </ng-template>
