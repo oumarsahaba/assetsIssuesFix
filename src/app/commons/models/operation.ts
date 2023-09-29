@@ -9,7 +9,7 @@ export class BaseOperation implements Operation {
     token: string;
     type: string;
 
-    constructor(operation : Operation) {
+    constructor(operation: Operation) {
         this.amount = operation.amount
         this.balanceAfter = operation.balanceAfter
         this.balanceBefore = operation.balanceBefore

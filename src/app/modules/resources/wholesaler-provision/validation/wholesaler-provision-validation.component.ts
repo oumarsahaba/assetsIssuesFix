@@ -9,16 +9,16 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {WholesalerProvision} from "../../../../commons/interfaces/wholesaler-provision";
 
 @Component({
-  selector: 'app-wholesaler-provision-validation',
-  templateUrl: './wholesaler-provision-validation.component.html',
-  styleUrls: ['./wholesaler-provision-validation.component.css']
+    selector: 'app-wholesaler-provision-validation',
+    templateUrl: './wholesaler-provision-validation.component.html',
+    styleUrls: ['./wholesaler-provision-validation.component.css']
 })
 export class WholesalerProvisionValidationComponent {
     @Input()
     provisionRequest: WholesalerProvision
     @Input()
     disabled: boolean
-    form : FormGroup
+    form: FormGroup
     displayModal: boolean
 
     constructor(private provisionRequestService: WholesalerProvisionService, private router: Router) {
@@ -35,7 +35,7 @@ export class WholesalerProvisionValidationComponent {
                 next: (response) => {
                     navigateBack(this.router)
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
 

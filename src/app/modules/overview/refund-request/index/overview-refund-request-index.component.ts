@@ -7,8 +7,8 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {Router} from "@angular/router";
 import {OverviewService} from "../../../../services/overview.service";
 import {RefundRequestStatus} from "../../../../commons/enums/RefundRequestStatus";
-import { Observable } from 'rxjs';
-import { Response } from 'src/app/commons/models/response';
+import {Observable} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-overview-refund-request-index-component',
@@ -20,7 +20,7 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
     page: PaginatedResource<OverviewRefundRequest>;
     data: OverviewRefundRequest[];
     codeAgent: string = '';
-    status:string = '';
+    status: string = '';
     startDate: string;
     endDate: string;
     page$: Observable<Response<PaginatedResource<OverviewRefundRequest>>>;
@@ -34,6 +34,7 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
     ngOnInit(): void {
         this.goToPage()
     }
+
     goToPage(page: number = 0) {
         this.page$ = this.overviewService.getRefundRequests(page, 10, this.codeAgent, this.status, this.startDate, this.endDate)
         this.overviewService.getRefundRequests(page, 10, this.codeAgent, this.status)
@@ -41,7 +42,7 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
                 next: (response) => {
                     this.page = response.data as PaginatedResource<OverviewRefundRequest>;
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
                     if (err instanceof ForbiddenError)

@@ -6,19 +6,18 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {LenderProvision} from "../../../../commons/interfaces/lender-provision";
-import { Response } from 'src/app/commons/models/response';
-import { Observable } from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'app-lender-provision-index',
-  templateUrl: './lender-provision-index.component.html',
-  styleUrls: ['./lender-provision-index.component.css']
+    templateUrl: './lender-provision-index.component.html',
+    styleUrls: ['./lender-provision-index.component.css']
 })
 export class LenderProvisionIndexComponent implements OnInit {
 
     @Input()
     codeLender: any
-    page: PaginatedResource<LenderProvision>;
     page$: Observable<Response<PaginatedResource<LenderProvision>>>;
 
 
@@ -31,19 +30,16 @@ export class LenderProvisionIndexComponent implements OnInit {
 
     goToPage(page: number = 0) {
         this.page$ = this.provisionRequestService.getAll(this.codeLender, page, 5);
-        this.provisionRequestService.getAll(this.codeLender, page, 5)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<LenderProvision>
-                },
-                error : (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
 
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+        this.page$.subscribe({
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
+
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
 
     }
 

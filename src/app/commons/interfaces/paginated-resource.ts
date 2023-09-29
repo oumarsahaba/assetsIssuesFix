@@ -1,4 +1,4 @@
-export interface PaginatedResource<Resource>{
+export interface PaginatedResource<Resource> {
     content: Resource[]
     totalElements: number
     totalPages: number

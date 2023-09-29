@@ -9,18 +9,18 @@ import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from 'sweetalert2'
-import { Observable } from 'rxjs';
-import { Response } from 'src/app/commons/models/response';
+import {Observable} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
 
 
 @Component({
-  selector: 'app-agent-index',
-  templateUrl: './agent-index.component.html',
-  styleUrls: ['./agent-index.component.css']
+    selector: 'app-agent-index',
+    templateUrl: './agent-index.component.html',
+    styleUrls: ['./agent-index.component.css']
 })
-export class AgentIndexComponent implements OnInit{
-    page : PaginatedResource<Agent> = {
-        content : [],
+export class AgentIndexComponent implements OnInit {
+    page: PaginatedResource<Agent> = {
+        content: [],
         totalElements: 0,
         totalPages: 0,
         number: 0,
@@ -28,15 +28,19 @@ export class AgentIndexComponent implements OnInit{
         last: false
     }
     page$: Observable<Response<PaginatedResource<Agent>>>
-    codeAgent : string = "";
-    codeWholesaler : string = "";
+    codeAgent: string = "";
+    codeWholesaler: string = "";
+    protected readonly console = console;
+
     constructor(private agentService: AgentService,
                 private wholesalerService: WholesalerService,
-                private router: Router) {}
+                private router: Router) {
+    }
 
     ngOnInit(): void {
         this.goToPage()
     }
+
     confirmDelete(codeAgent: string) {
         Swal.fire({
             title: 'Are you sure?',
@@ -55,25 +59,27 @@ export class AgentIndexComponent implements OnInit{
             }
         });
     }
+
     delete(codeAgent: string) {
         this.agentService.delete(codeAgent).subscribe({
             next: (response) => {
                 if (response.statusCode == 200)
                     navigateBack(this.router)
             },
-            error: () => {}
+            error: () => {
+            }
         })
     }
 
     goToPage(page: number = 0) {
         console.log(this.codeAgent, this.codeWholesaler);
-        this.page$ = this.agentService.getAll(this.codeWholesaler, this.codeAgent,page);
-        this.agentService.getAll(this.codeWholesaler, this.codeAgent,page)
+        this.page$ = this.agentService.getAll(this.codeWholesaler, this.codeAgent, page);
+        this.agentService.getAll(this.codeWholesaler, this.codeAgent, page)
             .subscribe({
                 next: (response) => {
                     this.page = response.data as PaginatedResource<Agent>
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/'])
 
@@ -83,6 +89,4 @@ export class AgentIndexComponent implements OnInit{
             })
 
     }
-
-    protected readonly console = console;
 }

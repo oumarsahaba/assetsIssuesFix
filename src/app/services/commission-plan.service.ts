@@ -3,7 +3,7 @@ import {BaseAPIService} from "./base-api.service";
 import {CommissionPlan} from "../commons/interfaces/commission-plan";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class CommissionPlanService extends BaseAPIService {
 

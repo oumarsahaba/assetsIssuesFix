@@ -1,6 +1,6 @@
-export interface Response<T>{
+export interface Response<T> {
     data: T
-    errors : []
+    errors: []
     message: string
     statusCode: number
 }

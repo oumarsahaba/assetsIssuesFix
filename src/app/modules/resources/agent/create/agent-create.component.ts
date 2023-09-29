@@ -9,7 +9,7 @@ import {SimpleWholesaler} from "../../../../commons/interfaces/simple-wholesaler
 import {BaseSimpleWholesaler} from "../../../../commons/models/simple-wholesaler";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
-import { ToastrService } from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'app-agent-create',
@@ -19,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AgentCreateComponent implements OnInit {
     @Input()
 
-    form : FormGroup
+    form: FormGroup
     displayModal: any;
     wholesalers: SimpleWholesaler[]
 
@@ -33,6 +33,7 @@ export class AgentCreateComponent implements OnInit {
             codeWholesaler: new FormControl('', Validators.required),
             overdraftMaxDailyCount: new FormControl('', Validators.required),
             overdraftLimitAmount: new FormControl('', Validators.required),
+            overdraftBillingOccurrence: new FormControl('', Validators.required),
             penaltyDelayInDays: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
         })
@@ -49,7 +50,7 @@ export class AgentCreateComponent implements OnInit {
                     this.wholesalers = (response.data as SimpleWholesaler[])
                         .map((wholesaler) => new BaseSimpleWholesaler(wholesaler))
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
 
@@ -66,14 +67,14 @@ export class AgentCreateComponent implements OnInit {
             this.form.get('description')?.value,
             this.form.get('overdraftMaxDailyCount')?.value,
             this.form.get('overdraftLimitAmount')?.value,
+            this.form.get('overdraftBillingOccurrence')?.value,
             this.form.get('penaltyDelayInDays')?.value,
         ).subscribe({
             next: (response) => {
                 if (response.statusCode == 200) {
                     this.toastr.success('Agent created successfully', 'Success');
                     navigateBack(this.router)
-                }
-                else{
+                } else {
                     this.toastr.error('Agent created failed', 'Error');
                 }
             },

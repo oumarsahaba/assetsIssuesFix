@@ -3,9 +3,11 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AggregatorService} from "../../../../services/aggregator.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {Router} from "@angular/router";
-import {handleFormError, navigateBack} from "../../../../commons/helpers";
+import {handleFormError} from "../../../../commons/helpers";
 import {Aggregator} from "../../../../commons/interfaces/aggregator";
 import {ToastrService} from "ngx-toastr";
+import {HttpErrorResponse} from "@angular/common/http";
+import {BadRequestError} from "../../../../commons/errors/bad-request-error";
 
 @Component({
     selector: 'app-aggregator-update',
@@ -16,9 +18,9 @@ export class AggregatorUpdateComponent implements OnInit {
 
     @Input()
     aggregator: Aggregator
-
-    form : FormGroup
+    form: FormGroup
     displayModal: boolean
+    formError: string | null = null;
 
     constructor(private aggregatorService: AggregatorService, private router: Router,
                 private toastr: ToastrService,
@@ -27,11 +29,12 @@ export class AggregatorUpdateComponent implements OnInit {
 
     ngOnInit(): void {
         this.form = new FormGroup({
-            //codeAggregator: new FormControl('', Validators.required),
+            codeAggregator: new FormControl('', Validators.required),
             webhook: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
         })
 
+        this.form.get('codeAggregator').setValue(this.aggregator.codeAggregator)
         this.form.get('webhook').setValue(this.aggregator.webhook)
         this.form.get('description').setValue(this.aggregator.description)
 
@@ -42,20 +45,22 @@ export class AggregatorUpdateComponent implements OnInit {
         this.aggregatorService.update(
             this.aggregator.codeAggregator,
             this.form.get('webhook')?.value,
-            this.form.get('description')?.value
+            this.form.get('description')?.value,
+            this.form.get('codeAggregator')?.value,
         ).subscribe({
             next: (response) => {
                 if (response.statusCode == 200) {
-                    this.toastr.success('Agregator updated successfully', 'Success');
-                    navigateBack(this.router)
-                }
-                else {
-                    this.toastr.error('Agregator updated failed', 'Error');
+                    let aggregator: Aggregator = response.data as Aggregator
+
+                    this.router.navigate([`/aggregator/${aggregator.codeAggregator}`])
+                    this.formError = null
+                    this.toastr.success('Aggregator updated successfully', 'Success');
                 }
             },
-            error: (err: AppError) => {
-                handleFormError(err, this.form);
-
+            error: (err: HttpErrorResponse | AppError) => {
+                const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
+                this.formError = httpError.error.errors.message
+                handleFormError(err as AppError, this.form);
             }
         })
     }

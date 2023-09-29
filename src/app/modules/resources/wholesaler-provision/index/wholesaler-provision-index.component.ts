@@ -6,13 +6,13 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {WholesalerProvision} from "../../../../commons/interfaces/wholesaler-provision";
-import { Observable } from 'rxjs/internal/Observable';
-import { Response } from 'src/app/commons/models/response';
+import {Observable} from 'rxjs/internal/Observable';
+import {Response} from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-wholesaler-provision-index',
-  templateUrl: './wholesaler-provision-index.component.html',
-  styleUrls: ['./wholesaler-provision-index.component.css']
+    templateUrl: './wholesaler-provision-index.component.html',
+    styleUrls: ['./wholesaler-provision-index.component.css']
 })
 export class WholesalerProvisionIndexComponent implements OnInit {
 
@@ -36,7 +36,7 @@ export class WholesalerProvisionIndexComponent implements OnInit {
                 next: (response) => {
                     this.page = response.data as PaginatedResource<WholesalerProvision>
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
 

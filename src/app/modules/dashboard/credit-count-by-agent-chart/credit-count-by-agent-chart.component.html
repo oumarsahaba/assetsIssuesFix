@@ -1,6 +1,6 @@
 <div class="flex justify-end">
-    <label for="periodSelect" class="sr-only">Select Period: </label>
-    <select id="periodSelect" (change)="onPeriodChange($event)" class="rounded-md">
+    <label class="sr-only" for="periodSelect">Select Period: </label>
+    <select (change)="onPeriodChange($event)" class="rounded-md" id="periodSelect">
 
         <option value="30">Last 30 Days</option>
         <option value="90">Last 3 Months</option>
