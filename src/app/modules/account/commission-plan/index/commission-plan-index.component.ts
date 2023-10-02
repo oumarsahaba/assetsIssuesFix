@@ -43,11 +43,7 @@ export class CommissionPlanIndexComponent implements OnInit {
 
     goToPage(page: number = 0) {
         this.page$ = this.commissionPlanService.getAll(this.code, this.type, page);
-        this.commissionPlanService.getAll(this.code, this.type, page)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<CommissionPlan>
-                },
+        this.page$.subscribe({
                 error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])

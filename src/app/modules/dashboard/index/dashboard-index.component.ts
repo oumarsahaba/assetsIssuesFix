@@ -24,11 +24,7 @@ export class DashboardIndexComponent implements OnInit {
 
     ngOnInit(): void {
         this.metrics$ = this.dashboardService.getMetrics()
-        this.dashboardService.getMetrics()
-            .subscribe({
-                next: (response) => {
-                    this.metrics = response.data as DashboardMetrics
-                },
+        this.metrics$.subscribe({
                 error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])

@@ -72,10 +72,8 @@ export class AgentIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        console.log(this.codeAgent, this.codeWholesaler);
         this.page$ = this.agentService.getAll(this.codeWholesaler, this.codeAgent, page);
-        this.agentService.getAll(this.codeWholesaler, this.codeAgent, page)
-            .subscribe({
+        this.page$.subscribe({
                 next: (response) => {
                     this.page = response.data as PaginatedResource<Agent>
                 },

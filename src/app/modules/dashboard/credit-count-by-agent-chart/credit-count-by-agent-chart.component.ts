@@ -1,20 +1,25 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Chart, registerables} from 'chart.js';
 import {DashboardService} from "../../../services/dashboard.service";
 import {AppError} from "../../../commons/errors/app-error";
 import {ChartDataset} from "../../../commons/interfaces/chart-dataset";
+import { Observable } from 'rxjs';
+import { Response } from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-credit-count-by-agent-chart',
     templateUrl: './credit-count-by-agent-chart.component.html',
     styleUrls: ['./credit-count-by-agent-chart.component.css']
 })
-export class CreditCountByAgentChartComponent implements OnInit {
+export class CreditCountByAgentChartComponent implements OnInit{
     selectedPeriod: number = 30; // Default period
     chart: Chart | null = null; // Store the chart instance
+    data$: Observable<Response<ChartDataset>>
+
 
     constructor(private dashboardService: DashboardService) {
     }
+    
 
     ngOnInit(): void {
         Chart.register(...registerables);
@@ -27,7 +32,8 @@ export class CreditCountByAgentChartComponent implements OnInit {
     }
 
     private updateChart(dayBefore: number) {
-        this.dashboardService.getCreditCountByAgentChartData(dayBefore).subscribe({
+        this.data$ = this.dashboardService.getCreditCountByAgentChartData(dayBefore)
+        this.data$.subscribe({
             next: (response) => {
                 let chartData = response.data as ChartDataset;
                 chartData.labels.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
@@ -36,8 +42,12 @@ export class CreditCountByAgentChartComponent implements OnInit {
                 if (this.chart) {
                     this.chart.destroy();
                 }
-
-                this.createChart(chartData.labels, chartData.values);
+                if (chartData) {
+                    console.log(chartData);
+                    
+                    this.createChart(chartData.labels, chartData.values);
+                }
+                
             },
             error: (err: AppError) => {
                 // Handle error
@@ -68,7 +78,8 @@ export class CreditCountByAgentChartComponent implements OnInit {
                     }
                 }
             }
-        });
+        }); 
+        
     }
 
     private getChartTitle(period: string): string {
@@ -82,5 +93,12 @@ export class CreditCountByAgentChartComponent implements OnInit {
             default:
                 return '';
         }
+    }
+
+    addElement(): any {
+        const canvas = document.createElement("canvas");
+        canvas.setAttribute("id", "creditCountByAgentChart");
+        const containerDiv = document.getElementById("creditCountByAgentChartContainer")      
+        containerDiv.appendChild(canvas);
     }
 }

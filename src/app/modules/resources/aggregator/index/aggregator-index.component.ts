@@ -29,11 +29,7 @@ export class AggregatorIndexComponent implements OnInit {
 
     goToPage(page: number = 0) {
         this.page$ = this.aggregatorService.getPage(page)
-        this.aggregatorService.getPage(page)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<Aggregator>
-                },
+        this.page$.subscribe({
                 error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])

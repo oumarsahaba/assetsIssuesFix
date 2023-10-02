@@ -6,6 +6,8 @@ import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {Router} from "@angular/router";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
+import { Observable } from 'rxjs';
+import { Response } from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-loan-request-index',
@@ -17,6 +19,7 @@ export class LoanRequestIndexComponent implements OnInit {
     @Input()
     codeWholesaler: any
     page: PaginatedResource<LoanRequest>;
+    page$: Observable<Response<PaginatedResource<LoanRequest>>>;
 
     constructor(private loanRequestService: LoanRequestService, private router: Router) {
     }
@@ -26,11 +29,9 @@ export class LoanRequestIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.loanRequestService.getAll(this.codeWholesaler, page)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<LoanRequest>
-                },
+        this.page$ = this.loanRequestService.getAll(this.codeWholesaler, page)
+        this.page$.subscribe({
+                
                 error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])

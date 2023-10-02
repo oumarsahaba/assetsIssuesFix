@@ -30,11 +30,7 @@ export class LenderIndexComponent implements OnInit {
 
     goToPage(page: number = 0) {
         this.page$ = this.lenderService.getPage(page)
-        this.lenderService.getPage(page)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<Lender>
-                },
+        this.page$.subscribe({
                 error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])

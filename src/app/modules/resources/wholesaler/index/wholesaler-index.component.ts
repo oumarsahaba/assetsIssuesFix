@@ -31,11 +31,7 @@ export class WholesalerIndexComponent implements OnInit {
 
     goToPage(page: number = 0) {
         this.page$ = this.wholesalerService.getPage(this.codeWholesaler, page)
-        this.wholesalerService.getPage(this.codeWholesaler, page)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<Wholesaler>
-                },
+        this.page$.subscribe({
                 error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])

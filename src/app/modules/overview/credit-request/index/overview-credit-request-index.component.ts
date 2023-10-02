@@ -39,11 +39,7 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
 
     goToPage(page: number = 0) {
         this.page$ = this.overviewService.getCreditRequests(page, 10, this.codeAgent, this.codeWholesaler, this.status, this.startDate, this.endDate)
-        this.overviewService.getCreditRequests(page, 10, this.codeAgent, this.codeWholesaler, this.status, this.startDate, this.endDate)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<OverviewCreditRequest>;
-                },
+        this.page$ .subscribe({
                 error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])

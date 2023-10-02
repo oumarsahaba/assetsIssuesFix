@@ -32,12 +32,7 @@ export class WholesalerShowComponent {
     ngOnInit(): void {
         if (this.route.snapshot.paramMap.get('codeWholesaler') != null) {
             this.wholesaler$ = this.wholesalerService.show(this.route.snapshot.paramMap.get('codeWholesaler'))
-            this.wholesalerService.show(this.route.snapshot.paramMap.get('codeWholesaler'))
-                .subscribe({
-                    next: (response) => {
-                        this.wholesaler = response.data as Wholesaler
-                        this.accountSlug = this.wholesaler.creditAccount.slug
-                    },
+            this.wholesaler$.subscribe({
                     error: (err: AppError) => {
                         if (err instanceof NotFoundError)
                             this.router.navigate(['/not-found'])
