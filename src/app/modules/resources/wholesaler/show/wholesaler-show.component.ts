@@ -7,7 +7,7 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {Commissionable} from "../../../../commons/enums/Commissionable";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
-import {Observable} from 'rxjs';
+import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 
 @Component({
@@ -31,7 +31,7 @@ export class WholesalerShowComponent {
 
     ngOnInit(): void {
         if (this.route.snapshot.paramMap.get('codeWholesaler') != null) {
-            this.wholesaler$ = this.wholesalerService.show(this.route.snapshot.paramMap.get('codeWholesaler'))
+            this.wholesaler$ = this.wholesalerService.show(this.route.snapshot.paramMap.get('codeWholesaler')).pipe(share())
             this.wholesaler$.subscribe({
                     error: (err: AppError) => {
                         if (err instanceof NotFoundError)

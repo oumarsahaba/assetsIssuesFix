@@ -6,7 +6,7 @@ import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {Router} from "@angular/router";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
-import { Observable } from 'rxjs';
+import { Observable, share } from 'rxjs';
 import { Response } from 'src/app/commons/models/response';
 
 @Component({
@@ -29,7 +29,7 @@ export class LoanRequestIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.page$ = this.loanRequestService.getAll(this.codeWholesaler, page)
+        this.page$ = this.loanRequestService.getAll(this.codeWholesaler, page).pipe(share())
         this.page$.subscribe({
                 
                 error: (err: AppError) => {

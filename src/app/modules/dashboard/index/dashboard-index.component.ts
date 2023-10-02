@@ -6,7 +6,7 @@ import {ForbiddenError} from "../../../commons/errors/forbidden-error";
 import {Router} from "@angular/router";
 import {DashboardMetrics} from "../../../commons/interfaces/dashboard-metrics";
 import {Response} from 'src/app/commons/models/response';
-import {Observable} from 'rxjs';
+import {Observable, share} from 'rxjs';
 
 @Component({
     selector: 'app-dashboard-index',
@@ -23,7 +23,7 @@ export class DashboardIndexComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.metrics$ = this.dashboardService.getMetrics()
+        this.metrics$ = this.dashboardService.getMetrics().pipe(share())
         this.metrics$.subscribe({
                 error: (err: AppError) => {
                     if (err instanceof NotFoundError)

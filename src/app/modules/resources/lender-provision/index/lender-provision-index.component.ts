@@ -7,7 +7,7 @@ import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {LenderProvision} from "../../../../commons/interfaces/lender-provision";
 import {Response} from 'src/app/commons/models/response';
-import {Observable} from 'rxjs';
+import {Observable, share} from 'rxjs';
 
 @Component({
     selector: 'app-lender-provision-index',
@@ -29,7 +29,7 @@ export class LenderProvisionIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.page$ = this.provisionRequestService.getAll(this.codeLender, page, 5);
+        this.page$ = this.provisionRequestService.getAll(this.codeLender, page, 5).pipe(share());
 
         this.page$.subscribe({
             error: (err: AppError) => {

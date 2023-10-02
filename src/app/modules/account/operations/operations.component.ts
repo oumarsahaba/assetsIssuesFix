@@ -6,7 +6,7 @@ import {OperationService} from "../../../services/operation.service";
 import {PaginatedResource} from "../../../commons/interfaces/paginated-resource";
 import {Router} from "@angular/router";
 import {ForbiddenError} from "../../../commons/errors/forbidden-error";
-import {Observable} from 'rxjs';
+import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 
 @Component({
@@ -34,7 +34,7 @@ export class OperationsComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.page$ = this.operationService.getAccountOperations(this.accountSlug, page);
+        this.page$ = this.operationService.getAccountOperations(this.accountSlug, page).pipe(share());
 
         this.page$.subscribe({
             error: (err: AppError) => {
