@@ -8,7 +8,7 @@ import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
-import {Observable} from 'rxjs';
+import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 
 @Component({
@@ -29,20 +29,16 @@ export class LenderIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.page$ = this.lenderService.getPage(page)
-        this.lenderService.getPage(page)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<Lender>
-                },
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
+        this.page$ = this.lenderService.getPage(page).pipe(share())
+        this.page$.subscribe({
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
 
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
 
     }
 

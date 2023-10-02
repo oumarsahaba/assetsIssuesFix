@@ -8,6 +8,7 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {WholesalerProvision} from "../../../../commons/interfaces/wholesaler-provision";
 import {Observable} from 'rxjs/internal/Observable';
 import {Response} from 'src/app/commons/models/response';
+import {share} from 'rxjs';
 
 @Component({
     selector: 'app-wholesaler-provision-index',
@@ -30,20 +31,16 @@ export class WholesalerProvisionIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.page$ = this.provisionRequestService.getAll(this.codeWholesaler, page, 5);
-        this.provisionRequestService.getAll(this.codeWholesaler, page, 5)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<WholesalerProvision>
-                },
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
+        this.page$ = this.provisionRequestService.getAll(this.codeWholesaler, page, 5).pipe(share());
+        this.page$.subscribe({
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
 
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
 
     }
 

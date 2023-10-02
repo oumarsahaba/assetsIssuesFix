@@ -3,6 +3,8 @@ import {Chart, registerables} from 'chart.js';
 import {DashboardService} from "../../../services/dashboard.service";
 import {AppError} from "../../../commons/errors/app-error";
 import {ChartDataset} from "../../../commons/interfaces/chart-dataset";
+import {Observable, share} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-credit-flux-chart',
@@ -12,6 +14,7 @@ import {ChartDataset} from "../../../commons/interfaces/chart-dataset";
 export class CreditFluxChartComponent implements OnInit {
     selectedPeriod: number = 30; // Default period
     chart: Chart | null = null; // Store the chart instance
+    data$: Observable<Response<ChartDataset>>
 
     constructor(private dashboardService: DashboardService) {
     }
@@ -27,7 +30,8 @@ export class CreditFluxChartComponent implements OnInit {
     }
 
     private updateChart(dayBefore: number) {
-        this.dashboardService.getCreditFluxChartData(dayBefore).subscribe({
+        this.data$ = this.dashboardService.getCreditFluxChartData(dayBefore).pipe(share())
+        this.data$.subscribe({
             next: (response) => {
                 let chartData = response.data as ChartDataset;
                 chartData.labels.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());

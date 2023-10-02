@@ -6,7 +6,7 @@ import {Lender} from "../../../../commons/interfaces/lender";
 import {AppError} from "../../../../commons/errors/app-error";
 import {Commissionable} from "../../../../commons/enums/Commissionable";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
-import {Observable} from 'rxjs';
+import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 import {BadRequestError} from "../../../../commons/errors/bad-request-error";
 
@@ -30,6 +30,8 @@ export class LenderShowComponent implements OnInit {
     ngOnInit(): void {
         if (this.route.snapshot.paramMap.get('codeLender') != null) {
             this.lender$ = this.lenderService.show(this.route.snapshot.paramMap.get('codeLender'))
+                .pipe(share())
+
             this.lender$.subscribe({
                 error: (err: AppError) => {
                     if (err instanceof BadRequestError)

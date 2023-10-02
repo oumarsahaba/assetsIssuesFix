@@ -37,18 +37,14 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
 
     goToPage(page: number = 0) {
         this.page$ = this.overviewService.getRefundRequests(page, 10, this.codeAgent, this.status, this.startDate, this.endDate)
-        this.overviewService.getRefundRequests(page, 10, this.codeAgent, this.status)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<OverviewRefundRequest>;
-                },
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+        this.page$.subscribe({
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
 
     }
 }

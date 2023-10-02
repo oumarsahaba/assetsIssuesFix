@@ -6,7 +6,7 @@ import {CreditRequest} from "../../../../commons/interfaces/credit-request";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {OverdraftService} from "../../../../services/overdraft.service";
-import {Observable} from 'rxjs';
+import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 
 @Component({
@@ -28,7 +28,7 @@ export class OverdraftRequestIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.page$ = this.overdraftService.getAll(this.codeAgent, page, 5);
+        this.page$ = this.overdraftService.getAll(this.codeAgent, page, 5).pipe(share());
 
         this.page$.subscribe({
             error: (err: AppError) => {

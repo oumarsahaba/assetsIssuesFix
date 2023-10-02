@@ -14,6 +14,7 @@ import {TabContainerComponent} from './tabs/container/tab-container.component';
 import {TabItemComponent} from './tabs/item/tab-item.component';
 import {DetailCardsComponent} from './detail-cards/detail-cards.component';
 import {TableLoaderComponent} from './table-loader/table-loader.component';
+import {ChartLoaderComponent} from './chart-loader/chart-loader.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {TableLoaderComponent} from './table-loader/table-loader.component';
         TabContainerComponent,
         TabItemComponent,
         DetailCardsComponent,
-        TableLoaderComponent
+        TableLoaderComponent,
+        ChartLoaderComponent
     ],
     imports: [
         CommonModule,
@@ -45,7 +47,8 @@ import {TableLoaderComponent} from './table-loader/table-loader.component';
         TabContainerComponent,
         TabItemComponent,
         DetailCardsComponent,
-        TableLoaderComponent
+        TableLoaderComponent,
+        ChartLoaderComponent
     ],
 })
 export class SharedModule {

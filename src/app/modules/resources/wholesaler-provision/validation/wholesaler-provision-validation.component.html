@@ -50,9 +50,10 @@
                     <div class="mt-5">
                         <label class="block text-sm font-medium leading-6 text-gray-900" for="status">Status</label>
                         <div class="mt-2">
-                            <select class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
-                                    formControlName="status"
-                                    id="status">
+                            <select
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                                formControlName="status"
+                                id="status">
                                 <option value="">Select a status</option>
                                 <option value="validated">Validate</option>
                                 <option value="rejected">Reject</option>
@@ -68,11 +69,12 @@
 
             <div class="flex items-center justify-end gap-x-6">
                 <button
-                        (click)="toggleModal()"
-                        class="text-sm font-semibold leading-6 text-gray-900" type="button">Cancel
+                    (click)="toggleModal()"
+                    class="text-sm font-semibold leading-6 text-gray-900" type="button">Cancel
                 </button>
-                <button class="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                        type="submit">
+                <button
+                    class="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                    type="submit">
                     Save
                 </button>
             </div>

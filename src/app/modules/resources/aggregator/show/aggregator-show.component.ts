@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Aggregator} from "../../../../commons/interfaces/aggregator";
 import {AggregatorService} from "../../../../services/aggregator.service";
 import {Commissionable} from "../../../../commons/enums/Commissionable";
-import {Observable} from 'rxjs';
+import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 import {AppError} from "../../../../commons/errors/app-error";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
@@ -30,7 +30,7 @@ export class AggregatorShowComponent {
 
     ngOnInit(): void {
         if (this.route.snapshot.paramMap.get('codeAggregator') != null) {
-            this.aggregator$ = this.aggregatorService.show(this.route.snapshot.paramMap.get('codeAggregator'))
+            this.aggregator$ = this.aggregatorService.show(this.route.snapshot.paramMap.get('codeAggregator')).pipe(share())
 
             this.aggregator$
                 .subscribe({
