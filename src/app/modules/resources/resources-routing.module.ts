@@ -9,6 +9,8 @@ import {WholesalerIndexComponent} from "./wholesaler/index/wholesaler-index.comp
 import {WholesalerShowComponent} from "./wholesaler/show/wholesaler-show.component";
 import {AgentIndexComponent} from "./agent/index/agent-index.component";
 import {AgentShowComponent} from "./agent/show/agent-show.component";
+import {AgentsByAggregatorComponent} from "./agent/agents-by-aggregator/agents-by-aggregator.component";
+import {ShowAgentByAggregatorComponent} from "./agent/show-agent-by-aggregator/show-agent-by-aggregator.component";
 
 const routes: Routes = [
     {path: 'lender', component: LenderIndexComponent, canActivate: [AuthGuard], data: {roles: ['admin']} },
@@ -22,6 +24,9 @@ const routes: Routes = [
 
     {path: 'agent', component: AgentIndexComponent, canActivate: [AuthGuard], data: {roles: ['admin', 'aggregator', 'wholesaler']} },
     {path: 'agent/:codeAgent', component: AgentShowComponent, canActivate: [AuthGuard], data: {roles: ['admin', 'aggregator', 'wholesaler']} },
+
+    {path: 'agentByAggregator', component: AgentsByAggregatorComponent, canActivate: [AuthGuard], data: {roles: ['admin', 'aggregator', 'wholesaler']} },
+    {path: 'agents/:codeAggregator', component: ShowAgentByAggregatorComponent, canActivate: [AuthGuard], data: {roles: ['admin', 'aggregator', 'wholesaler']} },
 ];
 
 @NgModule({

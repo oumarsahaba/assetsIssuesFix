@@ -38,6 +38,8 @@ import {
     WholesalerProvisionValidationComponent
 } from "./wholesaler-provision/validation/wholesaler-provision-validation.component";
 import { ActiveBadgeComponent } from '../shared/active-badge/active-badge.component';
+import { AgentsByAggregatorComponent } from './agent/agents-by-aggregator/agents-by-aggregator.component';
+import { ShowAgentByAggregatorComponent } from './agent/show-agent-by-aggregator/show-agent-by-aggregator.component';
 
 
 
@@ -72,6 +74,8 @@ import { ActiveBadgeComponent } from '../shared/active-badge/active-badge.compon
         CreditRequestValidationComponent,
         WholesalerUpdateComponent,
         ActiveBadgeComponent,
+        AgentsByAggregatorComponent,
+        ShowAgentByAggregatorComponent,
     ],
     imports: [
         CommonModule,

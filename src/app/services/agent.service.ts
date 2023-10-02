@@ -10,6 +10,10 @@ export class AgentService extends BaseAPIService {
         return this.httpGetCall(`/agent?page=${page}&size=${size}&codeAgent=${codeAgent}&codeWholesaler=${codeWholesaler}`)
     }
 
+    getAllAgentByAggregator(codeAggregator: string, codeWholesaler: string, codeAgent: number, page: number = 0, size: number = 10) {
+        return this.httpGetCall(`/agent?page=${page}&size=${size}&codeAgent=${codeAgent}&codeWholesaler=${codeWholesaler}&codeAggregator=${codeAggregator}`)
+    }
+
     create(codeAgent: string,
            codeWholesaler: string,
            description: string,
