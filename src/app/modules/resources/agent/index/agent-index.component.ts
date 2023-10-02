@@ -74,17 +74,17 @@ export class AgentIndexComponent implements OnInit {
     goToPage(page: number = 0) {
         this.page$ = this.agentService.getAll(this.codeWholesaler, this.codeAgent, page).pipe(share());
         this.page$.subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<Agent>
-                },
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/'])
+            next: (response) => {
+                this.page = response.data as PaginatedResource<Agent>
+            },
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/'])
 
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
 
     }
 }

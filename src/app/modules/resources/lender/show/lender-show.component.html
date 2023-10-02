@@ -15,23 +15,23 @@
                         </div>
                         <div>
                             <app-lender-update
-                                               [lender]="lenderResponse?.data"/>
+                                [lender]="lenderResponse?.data"/>
                         </div>
                     </div>
                     <div body>
                         <div class="flex justify-between gap-x-4 py-2">
                             <dt class="text-gray-500">Code Lender</dt>
-                            <dd 
+                            <dd
                                 class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/10">{{lenderResponse?.data?.codeLender}}</dd>
                         </div>
                         <div class="flex justify-between gap-x-4 py-2">
                             <dt class="text-gray-500">Description</dt>
-                            <dd 
+                            <dd
                                 class="text-gray-700">{{lenderResponse?.data?.description}}</dd>
                         </div>
                         <div class="flex justify-between gap-x-4 py-2">
                             <dt class="text-gray-500">Created At</dt>
-                            <dd 
+                            <dd
                                 class="text-gray-700">{{lenderResponse?.data?.createdAt | date}}</dd>
                         </div>
                     </div>
@@ -40,12 +40,12 @@
             <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                     <dt class="truncate text-sm font-medium text-gray-500">Credit Balance</dt>
-                    <dd 
+                    <dd
                         class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ lenderResponse?.data?.creditAccount?.balance | number: '.0-2' }}</dd>
                 </div>
                 <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                     <dt class="truncate text-sm font-medium text-gray-500">Commission Balance</dt>
-                    <dd 
+                    <dd
                         class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ lenderResponse?.data?.commissionAccount?.balance | number: '.0-2' }}</dd>
                 </div>
             </dl>
@@ -56,16 +56,16 @@
 
         <app-tab-container>
             <app-tab-item tabTitle="Provision account">
-                <app-lender-provision-index 
-                                            [codeLender]="lenderResponse?.data?.codeLender"/>
+                <app-lender-provision-index
+                    [codeLender]="lenderResponse?.data?.codeLender"/>
             </app-tab-item>
             <app-tab-item tabTitle="Accounts Operations">
-                <app-account-operations 
-                                        [accountSlug]="lenderResponse?.data?.creditAccount?.slug"/>
+                <app-account-operations
+                    [accountSlug]="lenderResponse?.data?.creditAccount?.slug"/>
             </app-tab-item>
             <app-tab-item tabTitle="Commission plans">
-                <app-commission-plan-index 
-                                           [code]="lenderResponse?.data?.codeLender" [type]="Commissionable.lender"/>
+                <app-commission-plan-index
+                    [code]="lenderResponse?.data?.codeLender" [type]="Commissionable.lender"/>
             </app-tab-item>
         </app-tab-container>
 
@@ -122,9 +122,9 @@
                 </dl>
             </ul>
         </div>
-    
+
         <div class="px-4 sm:px-6 lg:px-8 mb-10">
-    
+
             <app-tab-container>
                 <app-tab-item tabTitle="Provision account">
                     <ng-container *ngTemplateOutlet="itemsloader"></ng-container>
@@ -136,10 +136,10 @@
                     <ng-container *ngTemplateOutlet="itemsloader"></ng-container>
                 </app-tab-item>
             </app-tab-container>
-    
+
         </div>
-    
-    
+
+
     </app-dashboard>
 </ng-template>
 <ng-template #textLoader>

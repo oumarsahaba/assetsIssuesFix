@@ -25,14 +25,14 @@ export class DashboardIndexComponent implements OnInit {
     ngOnInit(): void {
         this.metrics$ = this.dashboardService.getMetrics().pipe(share())
         this.metrics$.subscribe({
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
 
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
 
     }
 }

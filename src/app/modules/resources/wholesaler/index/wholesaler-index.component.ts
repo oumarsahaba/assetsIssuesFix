@@ -32,14 +32,14 @@ export class WholesalerIndexComponent implements OnInit {
     goToPage(page: number = 0) {
         this.page$ = this.wholesalerService.getPage(this.codeWholesaler, page).pipe(share())
         this.page$.subscribe({
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
 
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
     }
 
     confirmDelete(codeAgent: string) {

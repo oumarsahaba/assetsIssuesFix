@@ -38,7 +38,8 @@
     </div>
 
 
-    <app-shared-paginated-resource (pageChange)="goToPage($event.number)" *ngIf="page$ | async as pageResponse; else itemsloader "
+    <app-shared-paginated-resource (pageChange)="goToPage($event.number)"
+                                   *ngIf="page$ | async as pageResponse; else itemsloader "
                                    [(page)]="pageResponse.data">
         <table class="min-w-full divide-y divide-gray-300">
             <thead class="bg-gray-50 divide-y divide-gray-200">

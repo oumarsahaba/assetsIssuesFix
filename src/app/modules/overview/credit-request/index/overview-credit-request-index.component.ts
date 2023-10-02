@@ -39,14 +39,14 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
 
     goToPage(page: number = 0) {
         this.page$ = this.overviewService.getCreditRequests(page, 10, this.codeAgent, this.codeWholesaler, this.status, this.startDate, this.endDate)
-        this.page$ .subscribe({
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+        this.page$.subscribe({
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
 
     }
 

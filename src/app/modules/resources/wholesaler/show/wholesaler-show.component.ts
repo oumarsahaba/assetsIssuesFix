@@ -33,15 +33,15 @@ export class WholesalerShowComponent {
         if (this.route.snapshot.paramMap.get('codeWholesaler') != null) {
             this.wholesaler$ = this.wholesalerService.show(this.route.snapshot.paramMap.get('codeWholesaler')).pipe(share())
             this.wholesaler$.subscribe({
-                    error: (err: AppError) => {
-                        if (err instanceof NotFoundError)
-                            this.router.navigate(['/not-found'])
+                error: (err: AppError) => {
+                    if (err instanceof NotFoundError)
+                        this.router.navigate(['/not-found'])
 
-                        if (err instanceof ForbiddenError)
-                            this.router.navigate(['/forbidden'])
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden'])
 
-                    }
-                })
+                }
+            })
         }
     }
 }
