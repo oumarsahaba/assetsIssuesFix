@@ -39,8 +39,9 @@ export class AgentIndexComponent implements OnInit{
                 private router: Router) {}
 
     ngOnInit(): void {
+        this.codeAggregator = null;
+        this.page$ = this.agentService.getAll(this.codeAggregator , this.codeAgent, this.codeWholesaler);
         this.getAllAggregators()
-        this.goToPage()
     }
     confirmDelete(codeAgent: string) {
         Swal.fire({
