@@ -110,6 +110,19 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="col-span-2">
+                            <div class="relative flex gap-x-3">
+                                <div class="flex h-6 items-center">
+                                    <input id="active" formControlName="active" [defaultChecked]="form.get('active').value"
+                                           name="active" type="checkbox" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-600">
+                                </div>
+                                <div class="text-sm leading-6">
+                                    <label for="active" class="font-medium text-gray-900">Active</label>
+                                    <p class="text-gray-500">Allow to activate or deactivate the wholesaler.</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
