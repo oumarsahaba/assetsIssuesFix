@@ -13,30 +13,30 @@
                         <span>Wholesaler Info</span>
                     </div>
                     <div>
-                        <app-wholesaler-update 
-                                               [wholesaler]="wholesalerResponse?.data"/>
+                        <app-wholesaler-update
+                            [wholesaler]="wholesalerResponse?.data"/>
                     </div>
                 </div>
 
                 <div body>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Code Wholesaler</dt>
-                        <dd 
+                        <dd
                             class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/10">{{ wholesalerResponse?.data?.codeWholesaler }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Description</dt>
-                        <dd 
+                        <dd
                             class="text-gray-700">{{ wholesalerResponse?.data?.description }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Created At</dt>
-                        <dd 
+                        <dd
                             class="text-gray-700">{{ wholesalerResponse?.data?.createdAt | date:'dd/MM/yy HH:mm:ss' }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Active</dt>
-                        <dd  class="text-gray-700">
+                        <dd class="text-gray-700">
                             <app-active-badge [active]="wholesalerResponse?.data?.active"></app-active-badge>
                         </dd>
                     </div>
@@ -47,25 +47,27 @@
 
                     <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="1.5"
                          viewBox="0 0 24 24">
-                        <path d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" stroke-linecap="round"
-                              stroke-linejoin="round"/>
+                        <path
+                            d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"/>
                     </svg>
                     <span>Accounts Balances</span>
                 </div>
                 <div body>
                     <div class="flex justify-between gap-x-4 py-3">
                         <dt class="text-gray-500">Credit Account</dt>
-                        <dd 
+                        <dd
                             class="text-gray-700 text-lg font-bold">{{ wholesalerResponse?.data?.creditAccount.balance | number: '.0-2'  }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-3">
                         <dt class="text-gray-500">Commission Account</dt>
-                        <dd 
+                        <dd
                             class="text-gray-700 text-lg font-bold">{{ wholesalerResponse?.data?.commissionAccount.balance | number: '.0-2'  }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-3">
                         <dt class="text-gray-500">Operational Account</dt>
-                        <dd 
+                        <dd
                             class="text-gray-700 text-lg font-bold">{{ wholesalerResponse?.data?.aggregatorWholesaler.account?.balance | number: '.0-2'  }}</dd>
                     </div>
                 </div>
@@ -76,34 +78,34 @@
     <div class="px-4 sm:px-6 lg:px-8 mb-10">
         <app-tab-container>
             <app-tab-item tabTitle="Loan request">
-                <app-loan-request-index 
-                                        [codeWholesaler]="wholesalerResponse?.data?.codeWholesaler"></app-loan-request-index>
+                <app-loan-request-index
+                    [codeWholesaler]="wholesalerResponse?.data?.codeWholesaler"></app-loan-request-index>
             </app-tab-item>
 
             <app-tab-item tabTitle="Provision Request">
-                <app-wholesaler-provision-index 
-                                                [codeWholesaler]="wholesalerResponse?.data?.codeWholesaler"/>
+                <app-wholesaler-provision-index
+                    [codeWholesaler]="wholesalerResponse?.data?.codeWholesaler"/>
             </app-tab-item>
             <app-tab-item tabTitle="Credit account's operations">
-                <app-account-operations 
-                                        [accountSlug]="wholesalerResponse?.data?.creditAccount?.slug"
-                                        title="Credit account"/>
+                <app-account-operations
+                    [accountSlug]="wholesalerResponse?.data?.creditAccount?.slug"
+                    title="Credit account"/>
             </app-tab-item>
 
             <app-tab-item tabTitle="Commission account's operations">
-                <app-account-operations 
-                                        [accountSlug]="wholesalerResponse?.data?.commissionAccount?.slug"
-                                        title="Commission account"/>
+                <app-account-operations
+                    [accountSlug]="wholesalerResponse?.data?.commissionAccount?.slug"
+                    title="Commission account"/>
             </app-tab-item>
             <app-tab-item tabTitle="Operational account's operations">
-                <app-account-operations 
-                                        [accountSlug]="wholesalerResponse?.data?.aggregatorWholesaler?.account?.slug"
-                                        title="Operational account"/>
+                <app-account-operations
+                    [accountSlug]="wholesalerResponse?.data?.aggregatorWholesaler?.account?.slug"
+                    title="Operational account"/>
             </app-tab-item>
             <app-tab-item tabTitle="Commission Plan">
-                <app-commission-plan-index 
-                                           [code]="wholesalerResponse?.data?.codeWholesaler"
-                                           [type]="Commissionable.wholesaler"/>
+                <app-commission-plan-index
+                    [code]="wholesalerResponse?.data?.codeWholesaler"
+                    [type]="Commissionable.wholesaler"/>
             </app-tab-item>
         </app-tab-container>
     </div>
@@ -128,7 +130,7 @@
                             <ng-container *ngTemplateOutlet="textLoader"></ng-container>
                         </div>
                     </div>
-    
+
                     <div body>
                         <div class="flex justify-between gap-x-4 py-2">
                             <dt class="text-gray-500">Code Wholesaler</dt>
@@ -150,11 +152,13 @@
                 </app-detail-cards>
                 <app-detail-cards>
                     <div class="flex gap-x-2" header-title>
-    
+
                         <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="1.5"
                              viewBox="0 0 24 24">
-                            <path d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" stroke-linecap="round"
-                                  stroke-linejoin="round"/>
+                            <path
+                                d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"/>
                         </svg>
                         <span>Accounts Balances</span>
                     </div>
@@ -175,20 +179,20 @@
                 </app-detail-cards>
             </ul>
         </div>
-    
+
         <div class="px-4 sm:px-6 lg:px-8 mb-10">
             <app-tab-container>
                 <app-tab-item tabTitle="Loan request">
                     <ng-container *ngTemplateOutlet="itemsloader"></ng-container>
                 </app-tab-item>
-    
+
                 <app-tab-item tabTitle="Provision Request">
                     <ng-container *ngTemplateOutlet="itemsloader"></ng-container>
                 </app-tab-item>
                 <app-tab-item tabTitle="Credit account's operations">
                     <ng-container *ngTemplateOutlet="itemsloader"></ng-container>
                 </app-tab-item>
-    
+
                 <app-tab-item tabTitle="Commission account's operations">
                     <ng-container *ngTemplateOutlet="itemsloader"></ng-container>
                 </app-tab-item>

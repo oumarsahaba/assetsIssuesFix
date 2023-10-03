@@ -38,7 +38,9 @@ export class LenderShowComponent implements OnInit {
         this.breadcrumbService.setItems(this.items);
         this.breadcrumbService.setHome(this.home)
         if (this.route.snapshot.paramMap.get('codeLender') != null) {
-            this.lender$ = this.lenderService.show(this.route.snapshot.paramMap.get('codeLender')).pipe(share())
+            this.lender$ = this.lenderService.show(this.route.snapshot.paramMap.get('codeLender'))
+                .pipe(share())
+
             this.lender$.subscribe({
                 error: (err: AppError) => {
                     if (err instanceof BadRequestError)

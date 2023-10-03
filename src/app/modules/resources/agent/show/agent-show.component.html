@@ -13,19 +13,19 @@
                         <span>Agent Info</span>
                     </div>
                     <div>
-                        <app-agent-update 
-                                          [agent]="agentResponse.data"/>
+                        <app-agent-update
+                            [agent]="agentResponse.data"/>
                     </div>
                 </div>
                 <div body>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Code Agent</dt>
-                        <dd 
+                        <dd
                             class="rounded-md py-1 px-2 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/10">{{ agentResponse.data?.codeAgent }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Description</dt>
-                        <dd 
+                        <dd
                             class="text-gray-700">{{ agentResponse.data?.description }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
@@ -35,14 +35,14 @@
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Description</dt>
-                        <dd 
+                        <dd
                             class="text-gray-700">{{ agentResponse.data?.wholesaler.description }}</dd>
                     </div>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Active</dt>
                         <dd class="text-gray-700">
                             <app-active-badge
-                                    [active]="agentResponse.data?.active"></app-active-badge>
+                                [active]="agentResponse.data?.active"></app-active-badge>
                         </dd>
                     </div>
                 </div>
@@ -51,8 +51,10 @@
                 <div class="flex gap-x-2" header-title>
                     <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="1.5"
                          viewBox="0 0 24 24">
-                        <path d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" stroke-linecap="round"
-                              stroke-linejoin="round"/>
+                        <path
+                            d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"/>
                     </svg>
                     <span>Account info</span>
                 </div>
@@ -93,11 +95,11 @@
         <app-tab-container>
             <app-tab-item tabTitle="Overdraft requests">
                 <app-overdraft-request-index
-                                             [codeAgent]="agentResponse?.data?.codeAgent"></app-overdraft-request-index>
+                    [codeAgent]="agentResponse?.data?.codeAgent"></app-overdraft-request-index>
             </app-tab-item>
             <app-tab-item tabTitle="Account's operations">
                 <app-account-operations
-                                        [accountSlug]="agentResponse?.data?.account.slug"/>
+                    [accountSlug]="agentResponse?.data?.account.slug"/>
             </app-tab-item>
         </app-tab-container>
     </div>
@@ -133,10 +135,12 @@
                         </div>
                         <div class="flex justify-between gap-x-4 py-2">
                             <dt class="text-gray-500">Code Wholesaler</dt>
-                            <ng-container *ngTemplateOutlet="textLoader"></ng-container>                        </div>
+                            <ng-container *ngTemplateOutlet="textLoader"></ng-container>
+                        </div>
                         <div class="flex justify-between gap-x-4 py-2">
                             <dt class="text-gray-500">Description</dt>
-                            <ng-container *ngTemplateOutlet="textLoader"></ng-container>                        </div>
+                            <ng-container *ngTemplateOutlet="textLoader"></ng-container>
+                        </div>
                         <div class="flex justify-between gap-x-4 py-2">
                             <dt class="text-gray-500">Active</dt>
                             <ng-container *ngTemplateOutlet="textLoader"></ng-container>
@@ -147,34 +151,40 @@
                     <div class="flex gap-x-2" header-title>
                         <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="1.5"
                              viewBox="0 0 24 24">
-                            <path d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" stroke-linecap="round"
-                                  stroke-linejoin="round"/>
+                            <path
+                                d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"/>
                         </svg>
                         <span>Account info</span>
                     </div>
                     <div body>
                         <div class="flex justify-between gap-x-4 py-2">
                             <dt class="text-gray-500">Overdraft Threshold</dt>
-                            <ng-container *ngTemplateOutlet="textLoader"></ng-container>                        </div>
+                            <ng-container *ngTemplateOutlet="textLoader"></ng-container>
+                        </div>
                         <div class="flex justify-between gap-x-4 py-2">
                             <dt class="text-gray-500">Overdraft daily count</dt>
-                            <ng-container *ngTemplateOutlet="textLoader"></ng-container>                        </div>
+                            <ng-container *ngTemplateOutlet="textLoader"></ng-container>
+                        </div>
                         <div class="flex justify-between gap-x-4 py-2">
                             <dt class="text-gray-500">Overdraft Billing Occurrence</dt>
                             <ng-container *ngTemplateOutlet="textLoader"></ng-container>
                         </div>
                         <div class="flex justify-between gap-x-4 py-2">
                             <dt class="text-gray-500">Penalty Delay (In days)</dt>
-                            <ng-container *ngTemplateOutlet="textLoader"></ng-container>                        </div>
+                            <ng-container *ngTemplateOutlet="textLoader"></ng-container>
+                        </div>
                         <div class="flex justify-between gap-x-4 py-2">
                             <dt class="text-gray-500">Balance</dt>
-                            <ng-container *ngTemplateOutlet="textLoader"></ng-container>                        </div>
+                            <ng-container *ngTemplateOutlet="textLoader"></ng-container>
+                        </div>
                     </div>
                 </app-detail-cards>
             </div>
         </div>
         <div class="px-4 sm:px-6 lg:px-8 mb-10">
-    
+
             <app-tab-container>
                 <app-tab-item tabTitle="Overdraft requests">
                     <ng-container *ngTemplateOutlet="itemsloader"></ng-container>

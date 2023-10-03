@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Chart, registerables} from 'chart.js';
 import {DashboardService} from "../../../services/dashboard.service";
 import {AppError} from "../../../commons/errors/app-error";
@@ -11,7 +11,7 @@ import { Response } from 'src/app/commons/models/response';
     templateUrl: './credit-count-by-agent-chart.component.html',
     styleUrls: ['./credit-count-by-agent-chart.component.css']
 })
-export class CreditCountByAgentChartComponent implements OnInit{
+export class CreditCountByAgentChartComponent implements OnInit {
     selectedPeriod: number = 30; // Default period
     chart: Chart | null = null; // Store the chart instance
     data$: Observable<Response<ChartDataset>>
@@ -19,7 +19,7 @@ export class CreditCountByAgentChartComponent implements OnInit{
 
     constructor(private dashboardService: DashboardService) {
     }
-    
+
 
     ngOnInit(): void {
         Chart.register(...registerables);
@@ -29,6 +29,13 @@ export class CreditCountByAgentChartComponent implements OnInit{
     onPeriodChange(event: any) {
         this.selectedPeriod = event.target.value;
         this.updateChart(this.selectedPeriod); // Update chart when period changes
+    }
+
+    addElement(): any {
+        const canvas = document.createElement("canvas");
+        canvas.setAttribute("id", "creditCountByAgentChart");
+        const containerDiv = document.getElementById("creditCountByAgentChartContainer")
+        containerDiv.appendChild(canvas);
     }
 
     private updateChart(dayBefore: number) {
@@ -44,10 +51,10 @@ export class CreditCountByAgentChartComponent implements OnInit{
                 }
                 if (chartData) {
                     console.log(chartData);
-                    
+
                     this.createChart(chartData.labels, chartData.values);
                 }
-                
+
             },
             error: (err: AppError) => {
                 // Handle error
@@ -78,8 +85,8 @@ export class CreditCountByAgentChartComponent implements OnInit{
                     }
                 }
             }
-        }); 
-        
+        });
+
     }
 
     private getChartTitle(period: string): string {
@@ -93,12 +100,5 @@ export class CreditCountByAgentChartComponent implements OnInit{
             default:
                 return '';
         }
-    }
-
-    addElement(): any {
-        const canvas = document.createElement("canvas");
-        canvas.setAttribute("id", "creditCountByAgentChart");
-        const containerDiv = document.getElementById("creditCountByAgentChartContainer")      
-        containerDiv.appendChild(canvas);
     }
 }

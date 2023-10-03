@@ -2,7 +2,8 @@
     <div class="flex flex-col gap-y-4 lg:flex-row lg:justify-end lg:gap-x-4">
         <div class="flex flex-col">
             <label class="text-gray-700 font-serif text-sm mb-1" for="codeWholesaler">Code Wholesaler</label>
-            <input [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm" id="codeWholesaler" placeholder="Code Wholesaler"
+            <input [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm" id="codeWholesaler"
+                   placeholder="Code Wholesaler"
                    type="text">
         </div>
         <div class="flex flex-col">
@@ -42,7 +43,8 @@
                     class="px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm ">
                 <div class="flex items-center">
                     <svg fill="currentColor" height="1em" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z"/>
+                        <path
+                            d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z"/>
                     </svg>
                     <span class="ml-1">Export</span>
                 </div>
@@ -51,7 +53,8 @@
     </div>
 
 
-    <app-shared-paginated-resource (pageChange)="goToPage($event.number)" *ngIf="page$ | async as pageResponse ; else itemsloader "
+    <app-shared-paginated-resource (pageChange)="goToPage($event.number)"
+                                   *ngIf="page$ | async as pageResponse ; else itemsloader "
                                    [(page)]="pageResponse.data">
         <table class="min-w-full divide-y divide-gray-300">
             <thead class="bg-gray-50 divide-y divide-gray-200">

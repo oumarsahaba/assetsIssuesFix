@@ -6,7 +6,7 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {CommissionPlan} from "../../../../commons/interfaces/commission-plan";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
-import {Observable} from 'rxjs';
+import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 
 @Component({
@@ -42,16 +42,16 @@ export class CommissionPlanIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.page$ = this.commissionPlanService.getAll(this.code, this.type, page);
+        this.page$ = this.commissionPlanService.getAll(this.code, this.type, page).pipe(share());
         this.page$.subscribe({
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
 
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
 
     }
 

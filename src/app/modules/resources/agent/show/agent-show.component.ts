@@ -5,7 +5,7 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {AgentService} from "../../../../services/agent.service";
 import {Agent} from "../../../../commons/interfaces/agent";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
-import {Observable} from 'rxjs';
+import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 import {BadRequestError} from "../../../../commons/errors/bad-request-error";
 import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
@@ -38,7 +38,7 @@ export class AgentShowComponent {
         this.breadcrumbService.setItems(this.items);
         this.breadcrumbService.setHome(this.home)
         if (this.route.snapshot.paramMap.get('codeAgent') != null) {
-            this.agent$ = this.agentService.show(this.route.snapshot.paramMap.get('codeAgent'))
+            this.agent$ = this.agentService.show(this.route.snapshot.paramMap.get('codeAgent')).pipe(share())
 
             this.agent$.subscribe({
                 error: (err: AppError) => {

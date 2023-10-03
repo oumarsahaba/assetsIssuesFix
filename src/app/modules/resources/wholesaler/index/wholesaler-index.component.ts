@@ -8,7 +8,7 @@ import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
-import {Observable} from 'rxjs';
+import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
 import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
@@ -37,16 +37,16 @@ export class WholesalerIndexComponent implements OnInit {
     goToPage(page: number = 0) {
         this.breadcrumbService.setItems(this.items);
         this.breadcrumbService.setHome(this.home)
-        this.page$ = this.wholesalerService.getPage(this.codeWholesaler, page)
+        this.page$ = this.wholesalerService.getPage(this.codeWholesaler, page).pipe(share())
         this.page$.subscribe({
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
 
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
     }
 
     confirmDelete(codeAgent: string) {
