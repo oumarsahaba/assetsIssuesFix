@@ -13,6 +13,8 @@ import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 import {Breadcrumb} from 'src/app/commons/interfaces/breadcrumb';
 import {BreadcrumbService} from 'src/app/commons/services/breadcrumb.service';
+import {SimpleWholesaler} from "../../../../commons/interfaces/simple-wholesaler";
+import {BaseSimpleWholesaler} from "../../../../commons/models/simple-wholesaler";
 
 
 @Component({
@@ -32,22 +34,43 @@ export class AgentIndexComponent implements OnInit {
     page$: Observable<Response<PaginatedResource<Agent>>>
     codeAgent: string = "";
     codeWholesaler: string = "";
+
     protected readonly console = console;
+
     items: Breadcrumb[] = [
-        {label: "Agents"}]
+        {label: "Agents"}
+    ]
     home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
+
+    wholesalers: SimpleWholesaler[]
 
     constructor(private agentService: AgentService,
                 private wholesalerService: WholesalerService,
                 private router: Router,
                 private breadcrumbService: BreadcrumbService) {
-
     }
 
     ngOnInit(): void {
         this.goToPage()
         this.breadcrumbService.setItems(this.items)
         this.breadcrumbService.setHome(this.home)
+
+        this.wholesalerService.getAll()
+            .subscribe({
+                next: (response) => {
+                    console.log(response)
+                    this.wholesalers = (response.data as SimpleWholesaler[])
+                        .map((wholesaler) => new BaseSimpleWholesaler(wholesaler))
+                },
+                error: (err: AppError) => {
+                    if (err instanceof NotFoundError)
+                        this.router.navigate(['/not-found'])
+
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden'])
+                }
+            })
+
     }
 
     confirmDelete(codeAgent: string) {
