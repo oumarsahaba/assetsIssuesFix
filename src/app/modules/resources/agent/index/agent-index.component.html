@@ -90,7 +90,7 @@
                         </div>
                     </td>
                 </tr>
-                <tr >
+                <tr *ngIf="pageResponse?.data?.content.length == 0">
                     <td class="whitespace-nowrap py-2 text-center text-sm text-gray-500 sm:pl-0" colspan="6"> No data available </td>
                 </tr>
                 </tbody>
