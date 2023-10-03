@@ -85,11 +85,11 @@
                     <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500 hidden sm:table-cell md:table-cell lg:table-cell xl:table-cell">{{ wholesaler.aggregatorWholesaler.account.balance | number: '.0-2' }}</td>
                     <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500 hidden lg:table-cell xl:table-cell">{{ wholesaler.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
                     <td class="relative whitespace-nowrap py-2 pl-2 pr-4 text-right text-sm font-medium sm:pr-6">
-                        <div class="inline-flex shadow-sm">
-                            <app-actions-dropdown>
+                        <div class="shadow-sm">
+                            <app-actions-dropdown class="flex flex-wrap">
 
                                 <button
-                                    class="relative inline-flex items-center rounded-l-md bg-white px-2.5 py-1.5 text-xs font-semibold gap-x-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+                                    class="relative flex flex-row-reverse items-center rounded-l-md bg-white px-2.5 py-1.5 text-xs font-semibold gap-x-1.5 text-gray-900 ml-1 hover:bg-gray-50 focus:z-10"
                                     routerLink="/wholesaler/{{ wholesaler.codeWholesaler }}"
                                     type="button">
                                     Voir
@@ -106,7 +106,7 @@
                                 <app-wholesaler-update [wholesaler]="wholesaler"/>
                                 <button
                                     (click)="confirmDelete(wholesaler.codeWholesaler)"
-                                    class="relative -ml-px inline-flex items-center rounded-r-md bg-white px-2.5 py-1.5 text-xs font-semibold gap-x-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+                                    class="relative -ml-px flex flex-row-reverse items-center rounded-r-md bg-white px-2.5 py-1.5 text-xs font-semibold gap-x-1.5 text-gray-900 ml-1 hover:bg-gray-50 focus:z-10"
                                     type="button">
                                     Delete
                                     <svg class="w-5 h-5 text-orange-600 font-bold" fill="none" stroke="currentColor"

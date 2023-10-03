@@ -1,5 +1,5 @@
 <app-dashboard>
-    <div class="px-4 sm:px-6 lg:px-8">
+    <div class="px-4 sm:px-6 lg:px-8 ">
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
                 <div class="flex gap-2">
@@ -81,7 +81,7 @@
 
                             <app-actions-dropdown>
                                 <button
-                                    class="relative inline-flex items-center rounded-l-md bg-white px-2.5 py-1.5 text-sm font-semibold gap-x-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+                                    class="relative flex flex-row-reverse items-center rounded-l-md bg-white px-2.5 py-1.5 text-sm font-semibold gap-x-1.5 text-gray-900 ml-1 hover:bg-gray-50 focus:z-10"
                                     routerLink="/agent/{{ agent.codeAgent }}"
                                     type="button">
                                     Voir
@@ -98,7 +98,7 @@
                                 <app-agent-update [agent]="agent"/>
                                 <button
                                     (click)="confirmDelete(agent.codeAgent)"
-                                    class="relative -ml-px inline-flex items-center rounded-r-md bg-white px-2.5 py-1.5 text-sm font-semibold gap-x-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+                                    class="relative -ml-px flex flex-row-reverse items-center rounded-r-md bg-white px-2.5 py-1.5 text-sm font-semibold gap-x-1.5 text-gray-900 ml-1 hover:bg-gray-50 focus:z-10"
                                     type="button"
                                 >
                                     Delete
