@@ -1,7 +1,7 @@
 <app-dashboard>
     <div class="px-4 sm:px-6 lg:px-8">
         <div class="sm:flex sm:items-center">
-            <div class="sm:flex-auto">
+            <div class="sm:flex-auto" >
                 <div class="flex gap-2">
                     <h1 class="text-base font-semibold leading-6 text-gray-900">Agent</h1>
                     <app-agent-create/>
@@ -10,7 +10,7 @@
             </div>
             <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                 <div class="flex flex-col gap-y-4 lg:flex-row lg:justify-end lg:gap-x-4">
-                    <div class="flex flex-col">
+                    <div class="flex flex-col" *ngIf="keycloakService.isUserInRole('admin')">
                         <label for="codeAggregator" class=" ml-1.5 text-gray-700 font-serif text-sm mb-1">Code Aggregator</label>
                         <select id="codeAggregator"  (change)="onAggregatorChange($event)" class="pl-5  border rounded text-sm h-8.1">
                             <option selected >Select Code Aggregator</option>

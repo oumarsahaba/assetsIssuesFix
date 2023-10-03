@@ -11,6 +11,7 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from 'sweetalert2'
 import { Observable } from 'rxjs';
 import { Response } from 'src/app/commons/models/response';
+import {KeycloakService} from "keycloak-angular";
 
 
 @Component({
@@ -36,6 +37,7 @@ export class AgentIndexComponent implements OnInit{
     aggregators: any[];
     constructor(private agentService: AgentService,
                 private wholesalerService: WholesalerService,
+                public keycloakService: KeycloakService,
                 private router: Router) {}
 
     ngOnInit(): void {
