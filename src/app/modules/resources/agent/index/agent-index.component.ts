@@ -11,6 +11,8 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from 'sweetalert2'
 import {Observable} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
+import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
+import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
 
 
 @Component({
@@ -31,14 +33,22 @@ export class AgentIndexComponent implements OnInit {
     codeAgent: string = "";
     codeWholesaler: string = "";
     protected readonly console = console;
+    items: Breadcrumb[]=[
+        {label: "Agents"}    ]
+    home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
     constructor(private agentService: AgentService,
                 private wholesalerService: WholesalerService,
-                private router: Router) {
-    }
+                private router: Router,
+                private breadcrumbService: BreadcrumbService) {
+                    
+                }
 
     ngOnInit(): void {
         this.goToPage()
+        this.breadcrumbService.setItems(this.items)
+        this.breadcrumbService.setHome(this.home)
+
     }
 
     confirmDelete(codeAgent: string) {
