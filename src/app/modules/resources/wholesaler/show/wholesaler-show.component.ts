@@ -24,7 +24,7 @@ export class WholesalerShowComponent {
     wholesaler$: Observable<Response<Wholesaler>>
     items: Breadcrumb[]=[
         {label: "Wholesalers", routerLink: '/wholesaler'},
-        {label: "Wholesaler Details"}
+        {label: "Details"}
     ]
     home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 

@@ -25,7 +25,7 @@ export class AggregatorShowComponent {
     protected readonly Commissionable = Commissionable;
     items: Breadcrumb[]=[
         {label: "Aggregators", routerLink: '/aggregator'},
-        {label: "Aggregator Details"}
+        {label: "Details"}
         ]
     home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 

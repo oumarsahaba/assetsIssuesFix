@@ -23,15 +23,15 @@ export class AgentShowComponent {
     agent$: Observable<Response<Agent>>
     items: Breadcrumb[]=[
         {label: "Agents", routerLink: "/agent"},
-        {label: "Agent Details"}   ]
-        
+        {label: "Details"}   ]
+
     home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
     constructor(private router: Router, private route: ActivatedRoute, private agentService: AgentService, private breadcrumbService: BreadcrumbService) {
         this.accountSlug = null
-        this.operations = []    
+        this.operations = []
         console.log("show");
-           
+
     }
 
     ngOnInit(): void {

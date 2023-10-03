@@ -11,6 +11,8 @@ import * as XLSX from 'xlsx';
 import Swal from "sweetalert2";
 import {Response} from 'src/app/commons/models/response';
 import {Observable} from 'rxjs';
+import {BreadcrumbService} from "../../../../commons/services/breadcrumb.service";
+import {Breadcrumb} from "../../../../commons/interfaces/breadcrumb";
 
 @Component({
     selector: 'app-overview-credit-request-index-component',
@@ -30,11 +32,19 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
 
     protected readonly CreditRequestStatus = CreditRequestStatus;
 
-    constructor(private overviewService: OverviewService, private router: Router) {
+    items: Breadcrumb[] = [
+        {label: "Credit requests"},
+    ]
+
+    home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
+
+    constructor(private overviewService: OverviewService, private router: Router, private breadcrumbService: BreadcrumbService) {
     }
 
     ngOnInit(): void {
         this.goToPage()
+        this.breadcrumbService.setItems(this.items);
+        this.breadcrumbService.setHome(this.home)
     }
 
     goToPage(page: number = 0) {
