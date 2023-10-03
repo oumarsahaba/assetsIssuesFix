@@ -12,7 +12,7 @@
                 <div class="flex flex-col gap-y-4 lg:flex-row lg:justify-end lg:gap-x-4">
                     <div class="flex flex-col">
                         <label for="codeAggregator" class="text-gray-700 font-serif text-sm mb-1">Code Aggregator</label>
-                        <select id="codeAggregator" [(ngModel)]="selectedAggregator" (change)="onAggregatorChange(selectedAggregator)" class="p-1.5 border rounded text-sm">
+                        <select id="codeAggregator" [(ngModel)]="selectedAggregator" (change)="onAggregatorChange($event)" class="p-1.5 border rounded text-sm">
                             <option [ngValue]="null">Select Code Aggregator</option>
                             <option *ngFor="let aggregator of aggregators" [value]="aggregator.codeAggregator">{{ aggregator.codeAggregator }}</option>
                         </select>

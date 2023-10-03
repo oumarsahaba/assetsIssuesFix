@@ -7,7 +7,7 @@ import {BaseAPIService} from "./base-api.service";
 export class AgentService extends BaseAPIService {
 
 
-    getAll(codeAggregator: any[],  codeAgent: string,codeWholesaler: string, page: number = 0, size: number = 10) {
+    getAll(codeAggregator: string,  codeAgent: string,codeWholesaler: string, page: number = 0, size: number = 10) {
         return this.httpGetCall(`/agent?page=${page}&size=${size}&codeAggregator=${codeAggregator}&codeAgent=${codeAgent}&codeWholesaler=${codeWholesaler}`)
     }
 

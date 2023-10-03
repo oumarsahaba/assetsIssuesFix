@@ -30,6 +30,7 @@ export class AgentIndexComponent implements OnInit{
     page$: Observable<Response<PaginatedResource<Agent>>>
     codeAgent : string = "";
     codeWholesaler : string = "";
+    codeAggregator : string = "";
     selectedAggregator: any = null;
 
     aggregators: any[];
@@ -68,31 +69,14 @@ export class AgentIndexComponent implements OnInit{
             error: () => {}
         })
     }
-    onAggregatorChange(selectedValue: any) {
-        if (selectedValue === undefined) {
-            selectedValue = null;
-        }
-        this.page$ = this.agentService.getAll(selectedValue, this.codeWholesaler, this.codeAgent, 0);
+    onAggregatorChange(event: any) {
+        this.codeAggregator = event.target.value;
+        this.page$ = this.agentService.getAll(this.codeAggregator, this.codeWholesaler, this.codeAgent, 0);
     }
 
+
     goToPage(page: number = 0) {
-        this.page$ = this.agentService.getAll(this.aggregators , this.codeAgent, this.codeWholesaler,page);
-        this.agentService.getAll(this.aggregators , this.codeAgent, this.codeWholesaler,page)
-            .subscribe({
-                next: (response) => {
-                    console.log(response)
-                    this.page = response.data as PaginatedResource<Agent>
-                },
-                error : (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/'])
-
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
-
-
+        this.page$ = this.agentService.getAll(this.codeAggregator , this.codeAgent, this.codeWholesaler,page);
     }
     getAllAggregators(){
         this.agentService.getAggregators()
