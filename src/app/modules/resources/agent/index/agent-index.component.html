@@ -11,6 +11,13 @@
             <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                 <div class="flex flex-col gap-y-4 lg:flex-row lg:justify-end lg:gap-x-4">
                     <div class="flex flex-col">
+                        <label for="codeAggregator" class="text-gray-700 font-serif text-sm mb-1">Code Aggregator</label>
+                        <select id="codeAggregator" [(ngModel)]="selectedAggregator" (change)="onAggregatorChange(selectedAggregator)" class="p-1.5 border rounded text-sm">
+                            <option [ngValue]="null">Select Code Aggregator</option>
+                            <option *ngFor="let aggregator of aggregators" [value]="aggregator.codeAggregator">{{ aggregator.codeAggregator }}</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col">
                         <label for="codeWholesaler" class="text-gray-700 font-serif text-sm mb-1">Code Wholesaler</label>
                         <input id="codeWholesaler" [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm" type="text" placeholder="Code Wholesaler">
                     </div>
@@ -90,7 +97,7 @@
             </table>
         </app-shared-paginated-resource>
         <ng-template #itemsloader>
-            <app-table-loader></app-table-loader>      
+            <app-table-loader></app-table-loader>
         </ng-template>
     </div>
 </app-dashboard>
@@ -98,7 +105,7 @@
 <ng-template #textLoader>
     <div role="status" class="max-w-sm animate-pulse">
         <div class="h-6 bg-gray-200 rounded-full dark:bg-gray-700 w-20 mb-2.5"></div>
-    </div>        
+    </div>
 </ng-template>
 
 <ng-template #itemsloader>
@@ -110,5 +117,5 @@
         <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
         <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
         <span class="sr-only">Loading...</span>
-    </div>      
+    </div>
 </ng-template>

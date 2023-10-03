@@ -6,12 +6,9 @@ import {BaseAPIService} from "./base-api.service";
 })
 export class AgentService extends BaseAPIService {
 
-    getAll(codeWholesaler: string, codeAgent: string, page: number = 0, size: number = 10) {
-        return this.httpGetCall(`/agent?page=${page}&size=${size}&codeAgent=${codeAgent}&codeWholesaler=${codeWholesaler}`)
-    }
 
-    getAllAgentByAggregator(codeAggregator: string, codeWholesaler: string, codeAgent: number, page: number = 0, size: number = 10) {
-        return this.httpGetCall(`/agent?page=${page}&size=${size}&codeAgent=${codeAgent}&codeWholesaler=${codeWholesaler}&codeAggregator=${codeAggregator}`)
+    getAll(codeAggregator: any[],  codeAgent: string,codeWholesaler: string, page: number = 0, size: number = 10) {
+        return this.httpGetCall(`/agent?page=${page}&size=${size}&codeAggregator=${codeAggregator}&codeAgent=${codeAgent}&codeWholesaler=${codeWholesaler}`)
     }
 
     create(codeAgent: string,
@@ -53,5 +50,9 @@ export class AgentService extends BaseAPIService {
 
     delete(code: string) {
         return this.httpDeleteCall('/agent/delete/' + code)
+    }
+
+    getAggregators() {
+        return this.httpGetCall('/aggregator');
     }
 }

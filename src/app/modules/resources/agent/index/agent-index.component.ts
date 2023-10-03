@@ -30,11 +30,15 @@ export class AgentIndexComponent implements OnInit{
     page$: Observable<Response<PaginatedResource<Agent>>>
     codeAgent : string = "";
     codeWholesaler : string = "";
+    selectedAggregator: any = null;
+
+    aggregators: any[];
     constructor(private agentService: AgentService,
                 private wholesalerService: WholesalerService,
                 private router: Router) {}
 
     ngOnInit(): void {
+        this.getAllAggregators()
         this.goToPage()
     }
     confirmDelete(codeAgent: string) {
@@ -64,13 +68,19 @@ export class AgentIndexComponent implements OnInit{
             error: () => {}
         })
     }
+    onAggregatorChange(selectedValue: any) {
+        if (selectedValue === undefined) {
+            selectedValue = null;
+        }
+        this.page$ = this.agentService.getAll(selectedValue, this.codeWholesaler, this.codeAgent, 0);
+    }
 
     goToPage(page: number = 0) {
-        console.log(this.codeAgent, this.codeWholesaler);
-        this.page$ = this.agentService.getAll(this.codeWholesaler, this.codeAgent,page);
-        this.agentService.getAll(this.codeWholesaler, this.codeAgent,page)
+        this.page$ = this.agentService.getAll(this.aggregators , this.codeAgent, this.codeWholesaler,page);
+        this.agentService.getAll(this.aggregators , this.codeAgent, this.codeWholesaler,page)
             .subscribe({
                 next: (response) => {
+                    console.log(response)
                     this.page = response.data as PaginatedResource<Agent>
                 },
                 error : (err: AppError) => {
@@ -82,6 +92,22 @@ export class AgentIndexComponent implements OnInit{
                 }
             })
 
+
+    }
+    getAllAggregators(){
+        this.agentService.getAggregators()
+            .subscribe({
+                next: (response) => {
+                    this.aggregators = response.data ;
+                },
+                error : (err: AppError) => {
+                    if (err instanceof NotFoundError)
+                        this.router.navigate(['/'])
+
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden'])
+                }
+            })
     }
 
     protected readonly console = console;
