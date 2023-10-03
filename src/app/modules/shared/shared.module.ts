@@ -14,7 +14,8 @@ import {TabContainerComponent} from './tabs/container/tab-container.component';
 import {TabItemComponent} from './tabs/item/tab-item.component';
 import {DetailCardsComponent} from './detail-cards/detail-cards.component';
 import {TableLoaderComponent} from './table-loader/table-loader.component';
-import {ChartLoaderComponent} from './chart-loader/chart-loader.component';
+import { ChartLoaderComponent } from './chart-loader/chart-loader.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb/breadcrumb.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {ChartLoaderComponent} from './chart-loader/chart-loader.component';
         TabItemComponent,
         DetailCardsComponent,
         TableLoaderComponent,
-        ChartLoaderComponent
+        ChartLoaderComponent,
+        BreadcrumbComponent
     ],
     imports: [
         CommonModule,

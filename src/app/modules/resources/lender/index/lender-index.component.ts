@@ -10,6 +10,8 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
 import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
+import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
+import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
 
 @Component({
     selector: 'app-lender-index',
@@ -20,11 +22,16 @@ export class LenderIndexComponent implements OnInit {
 
     page: PaginatedResource<Lender>;
     page$: Observable<Response<PaginatedResource<Lender>>>;
+    items: Breadcrumb[]=[
+        {label: "Lenders"}    ]
+    home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
-    constructor(private lenderService: LenderService, private router: Router) {
+    constructor(private lenderService: LenderService, private router: Router, private breadcrumbService: BreadcrumbService) {
     }
 
     ngOnInit(): void {
+        this.breadcrumbService.setItems(this.items);
+        this.breadcrumbService.setHome(this.home)
         this.goToPage()
     }
 

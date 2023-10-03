@@ -9,6 +9,8 @@ import {OverviewService} from "../../../../services/overview.service";
 import {RefundRequestStatus} from "../../../../commons/enums/RefundRequestStatus";
 import {Observable} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
+import {Breadcrumb} from "../../../../commons/interfaces/breadcrumb";
+import {BreadcrumbService} from "../../../../commons/services/breadcrumb.service";
 
 @Component({
     selector: 'app-overview-refund-request-index-component',
@@ -26,13 +28,21 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
     page$: Observable<Response<PaginatedResource<OverviewRefundRequest>>>;
 
 
+    items: Breadcrumb[] = [
+        {label: "Refund requests"},
+    ]
+
+    home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
+
     protected readonly RefundRequestStatus = RefundRequestStatus;
 
-    constructor(private overviewService: OverviewService, private router: Router) {
+    constructor(private overviewService: OverviewService, private router: Router, private breadcrumbService: BreadcrumbService) {
     }
 
     ngOnInit(): void {
         this.goToPage()
+        this.breadcrumbService.setItems(this.items)
+        this.breadcrumbService.setHome(this.home)
     }
 
     goToPage(page: number = 0) {

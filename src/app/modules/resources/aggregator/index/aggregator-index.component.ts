@@ -10,6 +10,8 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
 import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
+import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
+import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
 
 @Component({
     selector: 'app-aggregator-index',
@@ -19,12 +21,17 @@ import {Response} from 'src/app/commons/models/response';
 export class AggregatorIndexComponent implements OnInit {
     page: PaginatedResource<Aggregator>
     page$: Observable<Response<PaginatedResource<Aggregator>>>
+    items: Breadcrumb[]=[
+        {label: "Aggregators"}    ]
+    home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
-    constructor(private aggregatorService: AggregatorService, private router: Router) {
+    constructor(private aggregatorService: AggregatorService, private router: Router, private breadcrumbService: BreadcrumbService) {
     }
 
     ngOnInit(): void {
         this.goToPage()
+        this.breadcrumbService.setItems(this.items);
+        this.breadcrumbService.setHome(this.home)
     }
 
     goToPage(page: number = 0) {

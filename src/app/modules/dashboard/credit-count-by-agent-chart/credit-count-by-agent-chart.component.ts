@@ -3,8 +3,8 @@ import {Chart, registerables} from 'chart.js';
 import {DashboardService} from "../../../services/dashboard.service";
 import {AppError} from "../../../commons/errors/app-error";
 import {ChartDataset} from "../../../commons/interfaces/chart-dataset";
-import {Observable} from 'rxjs';
-import {Response} from 'src/app/commons/models/response';
+import { Observable, share } from 'rxjs';
+import { Response } from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-credit-count-by-agent-chart',
@@ -39,7 +39,7 @@ export class CreditCountByAgentChartComponent implements OnInit {
     }
 
     private updateChart(dayBefore: number) {
-        this.data$ = this.dashboardService.getCreditCountByAgentChartData(dayBefore)
+        this.data$ = this.dashboardService.getCreditCountByAgentChartData(dayBefore).pipe(share())
         this.data$.subscribe({
             next: (response) => {
                 let chartData = response.data as ChartDataset;

@@ -8,6 +8,8 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 import {BadRequestError} from "../../../../commons/errors/bad-request-error";
+import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
+import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
 
 @Component({
     selector: 'app-agent-show',
@@ -19,14 +21,22 @@ export class AgentShowComponent {
     accountSlug: string | null
     operations: Operation[]
     agent$: Observable<Response<Agent>>
+    items: Breadcrumb[]=[
+        {label: "Agents", routerLink: "/agent"},
+        {label: "Details"}   ]
 
+    home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
-    constructor(private router: Router, private route: ActivatedRoute, private agentService: AgentService) {
+    constructor(private router: Router, private route: ActivatedRoute, private agentService: AgentService, private breadcrumbService: BreadcrumbService) {
         this.accountSlug = null
         this.operations = []
+        console.log("show");
+
     }
 
     ngOnInit(): void {
+        this.breadcrumbService.setItems(this.items);
+        this.breadcrumbService.setHome(this.home)
         if (this.route.snapshot.paramMap.get('codeAgent') != null) {
             this.agent$ = this.agentService.show(this.route.snapshot.paramMap.get('codeAgent')).pipe(share())
 

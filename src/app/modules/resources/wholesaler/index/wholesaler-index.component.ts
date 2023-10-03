@@ -10,6 +10,8 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
 import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
+import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
+import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
 
 @Component({
     selector: 'app-wholesaler-index',
@@ -21,8 +23,11 @@ export class WholesalerIndexComponent implements OnInit {
     page: PaginatedResource<Wholesaler>
     page$: Observable<Response<PaginatedResource<Wholesaler>>>
     codeWholesaler: string = ""
+    items: Breadcrumb[]=[
+        {label: "Wholesalers"}    ]
+    home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
-    constructor(private wholesalerService: WholesalerService, private router: Router) {
+    constructor(private wholesalerService: WholesalerService, private router: Router, private breadcrumbService: BreadcrumbService) {
     }
 
     ngOnInit(): void {
@@ -30,6 +35,8 @@ export class WholesalerIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
+        this.breadcrumbService.setItems(this.items);
+        this.breadcrumbService.setHome(this.home)
         this.page$ = this.wholesalerService.getPage(this.codeWholesaler, page).pipe(share())
         this.page$.subscribe({
             error: (err: AppError) => {

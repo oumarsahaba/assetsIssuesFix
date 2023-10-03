@@ -9,6 +9,8 @@ import {Commissionable} from "../../../../commons/enums/Commissionable";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
+import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
+import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
 
 @Component({
     selector: 'app-wholesaler-show',
@@ -20,16 +22,23 @@ export class WholesalerShowComponent {
     accountSlug: string | null
     operations: Operation[]
     wholesaler$: Observable<Response<Wholesaler>>
+    items: Breadcrumb[]=[
+        {label: "Wholesalers", routerLink: '/wholesaler'},
+        {label: "Details"}
+    ]
+    home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
     protected readonly Commissionable = Commissionable;
 
-    constructor(private router: Router, private route: ActivatedRoute, private wholesalerService: WholesalerService) {
+    constructor(private router: Router, private route: ActivatedRoute, private wholesalerService: WholesalerService, private breadcrumbService: BreadcrumbService) {
         this.wholesaler = null
         this.accountSlug = null
         this.operations = []
     }
 
     ngOnInit(): void {
+        this.breadcrumbService.setItems(this.items);
+        this.breadcrumbService.setHome(this.home)
         if (this.route.snapshot.paramMap.get('codeWholesaler') != null) {
             this.wholesaler$ = this.wholesalerService.show(this.route.snapshot.paramMap.get('codeWholesaler')).pipe(share())
             this.wholesaler$.subscribe({
