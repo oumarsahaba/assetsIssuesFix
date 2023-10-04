@@ -32,6 +32,7 @@ export class WholesalerUpdateComponent implements OnChanges {
     ngOnChanges(changes: SimpleChanges): void {
         this.form = new FormGroup({
             codeWholesaler: new FormControl('', Validators.required),
+            codeAggregator: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
             active: new FormControl('', Validators.required),
         })
@@ -40,6 +41,7 @@ export class WholesalerUpdateComponent implements OnChanges {
 
         if (changes.hasOwnProperty('wholesaler')) {
             this.form.get('codeWholesaler').setValue(this.wholesaler.codeWholesaler)
+            this.form.get('codeAggregator').setValue(this.wholesaler.aggregator.codeAggregator)
             this.form.get('active').setValue(this.wholesaler.active)
             this.form.get('description').setValue(this.wholesaler.description)
         }
@@ -49,6 +51,7 @@ export class WholesalerUpdateComponent implements OnChanges {
         this.wholesalerService.update(
             this.wholesaler.codeWholesaler,
             this.form.get('codeWholesaler')?.value,
+            this.form.get('codeAggregator')?.value,
             this.form.get('description')?.value,
             this.form.get('active')?.value
         ).subscribe({
