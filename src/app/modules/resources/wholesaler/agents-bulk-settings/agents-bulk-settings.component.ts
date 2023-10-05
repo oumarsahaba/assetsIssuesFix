@@ -38,7 +38,7 @@ export class AgentsBulkSettingsComponent implements OnChanges {
 
         })
 
-        if (changes.hasOwnProperty('agent')) {
+        if (changes.hasOwnProperty('wholesaler')) {
             this.form.get('overdraftMaxDailyCount').setValue(this.agent?.overdraftMaxDailyCount)
             this.form.get('overdraftLimitAmount').setValue(this.agent?.overdraftLimitAmount)
             this.form.get('penaltyDelayInDays').setValue(this.agent?.penaltyDelayInDays)
@@ -57,8 +57,6 @@ export class AgentsBulkSettingsComponent implements OnChanges {
         ).subscribe({
             next: (response) => {
                 if (response.statusCode == 200) {
-                    console.log("response");
-                    console.log(response);
                     this.formError =null
                     this.toastr.success('Agents updated successfully', 'Success');
                     navigateBack(this.router)
@@ -67,6 +65,7 @@ export class AgentsBulkSettingsComponent implements OnChanges {
             error: (err: HttpErrorResponse | AppError) => {
                 const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
                 this.formError = httpError.error.errors.message
+                console.log(this.formError);
                 handleFormError(err as AppError, this.form);
             }
         })
