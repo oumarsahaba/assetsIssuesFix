@@ -36,8 +36,18 @@
             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ loanRequest.status }}</td>
             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ loanRequest.createdAt | date:'dd/MM/yy HH:mm:ss' }}</td>
             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                <app-loan-request-validation [disabled]="loanRequest.status !== 'INITIATED'"
-                                             [token]="loanRequest.token"/>
+
+                <div class="flex space-x-2">
+                    <app-loan-request-validation
+                        [disabled]="loanRequest.status !== 'INITIATED'"
+                        [token]="loanRequest.token"/>
+
+                    <app-loan-request-repay
+                        [disabled]="loanRequest.status !== 'VALIDATED'"
+                        [token]="loanRequest.token"/>
+
+                </div>
+
             </td>
         </tr>
         <tr *ngIf="pageResponse?.data?.content.length == 0">
