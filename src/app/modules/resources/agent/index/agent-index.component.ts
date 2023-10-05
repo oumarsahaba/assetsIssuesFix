@@ -13,6 +13,8 @@ import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 import {Breadcrumb} from 'src/app/commons/interfaces/breadcrumb';
 import {BreadcrumbService} from 'src/app/commons/services/breadcrumb.service';
+import {SimpleWholesaler} from "../../../../commons/interfaces/simple-wholesaler";
+import {BaseSimpleWholesaler} from "../../../../commons/models/simple-wholesaler";
 
 @Component({
     selector: 'app-agent-index',
