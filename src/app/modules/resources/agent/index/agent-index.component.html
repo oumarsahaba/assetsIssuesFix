@@ -11,27 +11,26 @@
             <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                 <div class="flex flex-col gap-y-4 lg:flex-row lg:justify-end lg:gap-x-4">
                     <div class="flex flex-col" *ngIf="keycloakService.isUserInRole('admin')">
-                        <label for="codeAggregator" class=" ml-1.5 text-gray-700 font-serif text-sm mb-1">Code Aggregator</label>
-                        <select id="codeAggregator"  (change)="onAggregatorChange($event)" class="pl-5  border rounded text-sm h-8.1">
-                            <option selected >Select Code Aggregator</option>
+                        <label for="codeAggregator" class="ml-1.5 text-gray-700 font-serif text-sm mb-1">Code Aggregator</label>
+                        <select id="codeAggregator" (change)="onAggregatorChange($event)" class="pl-5 border rounded text-sm h-9">
+                            <option selected>Select Code Aggregator</option>
                             <option *ngFor="let aggregator of aggregators" [value]="aggregator.codeAggregator">{{ aggregator.codeAggregator }}</option>
                         </select>
                     </div>
+
                     <div class="flex flex-col">
-                        <label class="text-gray-700 font-serif text-sm mb-1" for="codeWholesaler">Code
-                            Wholesaler</label>
-                        <input [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm" id="codeWholesaler"
-                               placeholder="Code Wholesaler" type="text">
+                        <label class="text-gray-700 font-serif text-sm mb-1" for="codeWholesaler">Code Wholesaler</label>
+                        <input [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm h-9" id="codeWholesaler" placeholder="Code Wholesaler" type="text">
                     </div>
+
                     <div class="flex flex-col">
                         <label class="text-gray-700 font-serif text-sm mb-1" for="codeAgent">Code Agent</label>
-                        <input [(ngModel)]="codeAgent" class="p-1.5 border rounded text-sm" id="codeAgent"
-                               placeholder="Code Agent"
-                               type="text">
+                        <input [(ngModel)]="codeAgent" class="p-1.5 border rounded text-sm h-9" id="codeAgent" placeholder="Code Agent" type="text">
                     </div>
+
                     <div class="flex items-end gap-2">
                         <button (click)="goToPage()"
-                                class="px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm ">
+                                class="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm ">
                             <div class="flex items-center">
                                 <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                     <path clip-rule="evenodd"
@@ -42,6 +41,7 @@
                             </div>
                         </button>
                     </div>
+
                 </div>
             </div>
         </div>
