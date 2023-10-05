@@ -73,12 +73,9 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
                 next: (response) => {
                     if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
                         // Show a SweetAlert for no data available
-                        Swal.fire({
-                            icon: 'info',
-                            title: 'No Data Available',
-                            text: 'There is no data available for this Credit Request.',
-                        });
-                        return;
+                        this.toastr.warning('There is no data available.', 'No Data Available', {
+                            timeOut: 3000,
+                          });;
                     } else {
                         const headers = ['Token', 'Amount', 'Status','Refund date creation',
                         'Credit request token', 'Credit request amount', 'Credit request fees', 'Credit request outstanding balance',
