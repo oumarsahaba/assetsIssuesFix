@@ -10,7 +10,10 @@
                         <div class="text-sm font-medium leading-6 text-gray-900">Wholesaler info</div>
                         <app-wholesaler-update *ngIf="wholesaler$ | async as wholesalerResponse ; else textLoader" [wholesaler]="wholesalerResponse?.data" />
                     </div>
+                    <div class="text-sm font-medium leading-6 text-gray-900">Agents</div>
+                    <app-update-agent *ngIf="wholesaler$ | async as wholesalerResponse ; else textLoader" [wholesaler]="wholesalerResponse?.data" />
                 </div>
+
                 <div body>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Code Wholesaler</dt>
@@ -86,7 +89,7 @@
 <ng-template #textLoader>
     <div role="status" class="max-w-sm animate-pulse">
         <div class="h-6 bg-gray-200 rounded-full dark:bg-gray-700 w-20 mb-2.5"></div>
-    </div>        
+    </div>
 </ng-template>
 
 <ng-template #itemsloader>
@@ -98,5 +101,5 @@
         <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
         <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-4"></div>
         <span class="sr-only">Loading...</span>
-    </div>      
+    </div>
 </ng-template>

@@ -2,6 +2,7 @@ import {Account} from "./account";
 import {SimpleWholesaler} from "./simple-wholesaler";
 
 export interface Agent {
+    overdraftBillingOccurrence: number;
     codeAgent: string
     wholesaler: SimpleWholesaler
     account: Account

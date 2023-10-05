@@ -36,4 +36,16 @@ export class WholesalerService extends BaseAPIService{
     delete(code: string) {
         return this.httpDeleteCall('/wholesaler/delete/' + code)
     }
+
+    updateAgent(codeWholesaler: string, overdraftLimitAmount: number,
+                overdraftMaxDailyCount: number,overdraftBillingOccurrence: number,penaltyDelayInDays: number) {
+        return this.httpPutCall('/agent/wholesaler/' + codeWholesaler, {
+            codeWholesaler : codeWholesaler,
+            overdraftLimitAmount : overdraftLimitAmount,
+            overdraftMaxDailyCount: overdraftMaxDailyCount,
+            overdraftBillingOccurrence : overdraftBillingOccurrence,
+            penaltyDelayInDays : penaltyDelayInDays,
+
+        })
+    }
 }
