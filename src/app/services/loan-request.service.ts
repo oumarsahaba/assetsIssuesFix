@@ -26,4 +26,11 @@ export class LoanRequestService extends BaseAPIService {
             status: status
         })
     }
+
+    repay(token: string, amount: number) {
+        return this.httpPostCall('/loan/request/repay', {
+            token: token,
+            amount: amount
+        })
+    }
 }

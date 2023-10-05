@@ -48,7 +48,7 @@ export class AgentsBulkSettingsComponent implements OnChanges {
     }
 
     update() {
-        this.wholesalerService.updateAgent(
+        this.wholesalerService.bulkSettings(
             this.wholesaler?.codeWholesaler,
             this.form.get('overdraftMaxDailyCount')?.value,
             this.form.get('overdraftLimitAmount')?.value,
