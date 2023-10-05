@@ -10,6 +10,7 @@ import {WholesalerShowComponent} from "./wholesaler/show/wholesaler-show.compone
 import {AgentIndexComponent} from "./agent/index/agent-index.component";
 import {AgentShowComponent} from "./agent/show/agent-show.component";
 
+
 const routes: Routes = [
     {path: 'lender', component: LenderIndexComponent, canActivate: [AuthGuard], data: {roles: ['admin']}},
     {path: 'lender/:codeLender', component: LenderShowComponent, canActivate: [AuthGuard], data: {roles: ['admin']}},
