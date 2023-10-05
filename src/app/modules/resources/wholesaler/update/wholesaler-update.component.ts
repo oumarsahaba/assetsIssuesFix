@@ -8,7 +8,6 @@ import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 import {ToastrService} from "ngx-toastr";
 import {HttpErrorResponse} from "@angular/common/http";
 import {BadRequestError} from "../../../../commons/errors/bad-request-error";
-import {Agent} from "../../../../commons/interfaces/agent";
 
 @Component({
     selector: 'app-wholesaler-update',
@@ -19,7 +18,6 @@ export class WholesalerUpdateComponent implements OnChanges {
 
     @Input()
     wholesaler: Wholesaler
-    agent:Agent
 
     form: FormGroup
     displayModal: any;
@@ -37,10 +35,6 @@ export class WholesalerUpdateComponent implements OnChanges {
             codeAggregator: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
             active: new FormControl('', Validators.required),
-            overdraftLimitAmount: new FormControl('', Validators.required),
-            overdraftMaxDailyCount: new FormControl('', Validators.required),
-            overdraftBillingOccurrence: new FormControl('', Validators.required),
-            overdraftCount: new FormControl('', Validators.required),
         })
 
         this.displayModal = false
