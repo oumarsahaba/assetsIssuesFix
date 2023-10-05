@@ -10,7 +10,7 @@
                         <div class="text-sm font-medium leading-6 text-gray-900">Wholesaler info</div>
                         <app-wholesaler-update *ngIf="wholesaler$ | async as wholesalerResponse ; else textLoader" [wholesaler]="wholesalerResponse?.data" />
                     </div>
-                    <app-update-agent *ngIf="wholesaler$ | async as wholesalerResponse ; else textLoader" [wholesaler]="wholesalerResponse?.data" />
+                    <app-agents-bulk-settings *ngIf="wholesaler$ | async as wholesalerResponse ; else textLoader" [wholesaler]="wholesalerResponse?.data" />
                 </div>
 
                 <div body>

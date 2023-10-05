@@ -11,11 +11,11 @@ import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 import {WholesalerService} from "../../../../services/wholesaler.service";
 
 @Component({
-  selector: 'app-update-agent',
-  templateUrl: './update-agent.component.html',
-  styleUrls: ['./update-agent.component.css']
+  selector: 'app-agents-bulk-settings',
+  templateUrl: './agents-bulk-settings.component.html',
+  styleUrls: ['./agents-bulk-settings.component.css']
 })
-export class UpdateAgentComponent implements OnChanges {
+export class AgentsBulkSettingsComponent implements OnChanges {
 
     @Input()
     wholesaler:Wholesaler

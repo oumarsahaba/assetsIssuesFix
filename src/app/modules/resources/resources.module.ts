@@ -38,7 +38,7 @@ import {
     WholesalerProvisionValidationComponent
 } from "./wholesaler-provision/validation/wholesaler-provision-validation.component";
 import { ActiveBadgeComponent } from '../shared/active-badge/active-badge.component';
-import { UpdateAgentComponent } from './wholesaler/update-agent/update-agent.component';
+import { AgentsBulkSettingsComponent } from './wholesaler/agents-bulk-settings/agents-bulk-settings.component';
 
 
 @NgModule({
@@ -72,7 +72,7 @@ import { UpdateAgentComponent } from './wholesaler/update-agent/update-agent.com
         CreditRequestValidationComponent,
         WholesalerUpdateComponent,
         ActiveBadgeComponent,
-        UpdateAgentComponent,
+        AgentsBulkSettingsComponent,
     ],
     imports: [
         CommonModule,

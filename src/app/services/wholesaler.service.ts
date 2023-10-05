@@ -39,7 +39,7 @@ export class WholesalerService extends BaseAPIService{
 
     updateAgent(codeWholesaler: string, overdraftLimitAmount: number,
                 overdraftMaxDailyCount: number,overdraftBillingOccurrence: number,penaltyDelayInDays: number) {
-        return this.httpPutCall('/agent/wholesaler/' + codeWholesaler, {
+        return this.httpPostCall('/wholesaler/bulk/settings', {
             codeWholesaler : codeWholesaler,
             overdraftLimitAmount : overdraftLimitAmount,
             overdraftMaxDailyCount: overdraftMaxDailyCount,
