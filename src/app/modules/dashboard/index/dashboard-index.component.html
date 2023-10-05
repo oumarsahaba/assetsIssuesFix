@@ -1,30 +1,30 @@
-<app-dashboard>
+<app-dashboard *ngIf="metrics$ | async as metricResponse; else loader">
     <div>
         <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-5">
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">System Balance</dt>
-                <dd *ngIf="metrics$ | async as metricResponse; else textLoader"
+                <dd
                     class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.systemBalance | number: '.0-2' }}</dd>
             </div>
 
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Lender Count</dt>
-                <dd *ngIf="metrics$ | async as metricResponse; else textLoader"
+                <dd
                     class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.lenderCount }}</dd>
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Aggregator Count</dt>
-                <dd *ngIf="metrics$ | async as metricResponse; else textLoader"
+                <dd
                     class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.aggregatorCount }}</dd>
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Wholesaler Count</dt>
-                <dd *ngIf="metrics$ | async as metricResponse; else textLoader"
+                <dd
                     class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.wholesalerCount }}</dd>
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Agent Count</dt>
-                <dd *ngIf="metrics$ | async as metricResponse; else textLoader"
+                <dd
                     class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.agentCount }}</dd>
             </div>
         </div>
@@ -34,26 +34,78 @@
     <div class="rounded-lg bg-white mt-5">
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div class="sm:col-span-1 py-5 px-3 border border-gray-50 rounded shadow">
-                <app-credit-count-chart *ngIf="metrics$ | async; else graphLoader"/>
+                <app-credit-count-chart />
             </div>
             <div class="sm:col-span-1 py-5 px-3 border border-gray-50 rounded shadow">
-                <app-credit-flux-chart *ngIf="metrics$ | async; else graphLoader"/>
+                <app-credit-flux-chart />
             </div>
             <div class="sm:col-span-1 py-5 px-3 border border-gray-50 rounded shadow">
-                <app-credit-count-by-agent-chart *ngIf="metrics$ | async; else graphLoader"/>
+                <app-credit-count-by-wholesaler-chart />
             </div>
             <div class="sm:col-span-1 py-5 px-3 border border-gray-50 rounded shadow">
-                <app-credit-flux-by-agent-chart *ngIf="metrics$ | async; else graphLoader"/>
+                <app-credit-flux-by-wholesaler-chart />
             </div>
         </div>
     </div>
 
-    <ng-template #textLoader>
-        <div class="max-w-sm animate-pulse" role="status">
-            <div class="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-20 mb-2.5"></div>
-        </div>
-    </ng-template>
-    <ng-template #graphLoader>
-        <app-chart-loader></app-chart-loader>
-    </ng-template>
+    
 </app-dashboard>
+
+<ng-template #loader>
+    <app-dashboard>
+        <div>
+            <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-5">
+                <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                    <dt class="truncate text-sm font-medium text-gray-500">System Balance</dt>
+                    <ng-container *ngTemplateOutlet="textLoader"></ng-container>
+                </div>
+    
+                <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                    <dt class="truncate text-sm font-medium text-gray-500">Lender Count</dt>
+                    <ng-container *ngTemplateOutlet="textLoader"></ng-container>
+                </div>
+                <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                    <dt class="truncate text-sm font-medium text-gray-500">Aggregator Count</dt>
+                    <ng-container *ngTemplateOutlet="textLoader"></ng-container>
+                </div>
+                <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                    <dt class="truncate text-sm font-medium text-gray-500">Wholesaler Count</dt>
+                    <ng-container *ngTemplateOutlet="textLoader"></ng-container>
+                </div>
+                <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                    <dt class="truncate text-sm font-medium text-gray-500">Agent Count</dt>
+                    <ng-container *ngTemplateOutlet="textLoader"></ng-container>
+                </div>
+            </div>
+        </div>
+    
+    
+        <div class="rounded-lg bg-white mt-5">
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <div class="sm:col-span-1 py-5 px-3 border border-gray-50 rounded shadow">
+                    <ng-container *ngTemplateOutlet="graphLoader"></ng-container>
+                </div>
+                <div class="sm:col-span-1 py-5 px-3 border border-gray-50 rounded shadow">
+                    <ng-container *ngTemplateOutlet="graphLoader"></ng-container>
+                </div>
+                <div class="sm:col-span-1 py-5 px-3 border border-gray-50 rounded shadow">
+                    <ng-container *ngTemplateOutlet="graphLoader"></ng-container>
+                </div>
+                <div class="sm:col-span-1 py-5 px-3 border border-gray-50 rounded shadow">
+                    <ng-container *ngTemplateOutlet="graphLoader"></ng-container>
+                </div>
+            </div>
+        </div>
+    
+        
+    </app-dashboard>
+</ng-template>
+
+<ng-template #textLoader>
+    <div class="max-w-sm animate-pulse" role="status">
+        <div class="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-20 mb-2.5"></div>
+    </div>
+</ng-template>
+<ng-template #graphLoader>
+    <app-chart-loader></app-chart-loader>
+</ng-template>

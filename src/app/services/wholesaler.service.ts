@@ -21,9 +21,10 @@ export class WholesalerService extends BaseAPIService {
         })
     }
 
-    update(code: string, codeWholesaler: string, description: string, active: string) {
+    update(code: string, codeWholesaler: string, codeAggregator: string, description: string, active: string) {
         return this.httpPutCall('/wholesaler/update/' + code, {
             codeWholesaler: codeWholesaler,
+            codeAggregator: codeAggregator,
             active: active,
             description: description
         })
@@ -35,5 +36,17 @@ export class WholesalerService extends BaseAPIService {
 
     delete(code: string) {
         return this.httpDeleteCall('/wholesaler/delete/' + code)
+    }
+
+    bulkSettings(codeWholesaler: string, overdraftMaxDailyCount: number, overdraftLimitAmount: number,
+                 overdraftBillingOccurrence: number, penaltyDelayInDays: number) {
+        return this.httpPostCall('/wholesaler/bulk/settings', {
+            codeWholesaler : codeWholesaler,
+            overdraftLimitAmount : overdraftLimitAmount,
+            overdraftMaxDailyCount: overdraftMaxDailyCount,
+            overdraftBillingOccurrence : overdraftBillingOccurrence,
+            penaltyDelayInDays : penaltyDelayInDays,
+
+        })
     }
 }
