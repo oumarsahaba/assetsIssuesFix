@@ -11,6 +11,11 @@ import {Observable} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 import {Breadcrumb} from "../../../../commons/interfaces/breadcrumb";
 import {BreadcrumbService} from "../../../../commons/services/breadcrumb.service";
+import Swal from 'sweetalert2';
+import { exportExcelFile } from 'src/app/commons/helpers';
+import {ToastrService} from "ngx-toastr";
+import { ClientError } from 'src/app/commons/errors/client-error';
+
 
 @Component({
     selector: 'app-overview-refund-request-index-component',
@@ -36,7 +41,11 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
 
     protected readonly RefundRequestStatus = RefundRequestStatus;
 
-    constructor(private overviewService: OverviewService, private router: Router, private breadcrumbService: BreadcrumbService) {
+    constructor(private overviewService: OverviewService, 
+        private router: Router, 
+        private breadcrumbService: BreadcrumbService,
+        private toastr: ToastrService,
+        ) {
     }
 
     ngOnInit(): void {
@@ -56,5 +65,50 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
             }
         })
 
+    }
+
+    exportExcel() {
+        this.overviewService.getAllRefundRequests(this.codeAgent, this.status,this.startDate, this.endDate)
+            .subscribe({
+                next: (response) => {
+                    if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
+                        // Show a SweetAlert for no data available
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'No Data Available',
+                            text: 'There is no data available for this Credit Request.',
+                        });
+                        return;
+                    } else {
+                        const headers = ['Token', 'Amount', 'Status','Refund date creation',
+                        'Credit request token', 'Credit request amount', 'Credit request fees', 'Credit request outstanding balance',
+                        'Credit request recovered amount', 'Credit request status', 'Credit request type', 'Credit request date creation',
+                        'Agent code', 'Agent description' ]
+                        const dataset = response.data.map(data=>[data.token, data.amount, data.status,data.createdAt,
+                            data.creditRequest.token, data.creditRequest.amount, data.creditRequest.fees, 
+                            data.creditRequest.outstandingBalance, data.creditRequest.recoveredAmount, data.creditRequest.status,
+                            data.creditRequest.type, data.creditRequest.createdAt,
+                            data.creditRequest.agent.codeAgent, data.creditRequest.agent.description
+                            ])
+                            try {
+                                this.toastr.info('File will be exported soon. Check downloads', 'File exportation', {
+                                    timeOut: 3000,
+                                  });
+                                exportExcelFile(dataset, headers,'Refund_Request')
+
+                            } catch (err) {
+                                this.toastr.error('Cannot export excel file. Contact your manager for more ingormations', 'File download error', {
+                                    timeOut: 3000,
+                                  });
+                            }
+                    }
+                },
+                error: (err: AppError) => {
+                    if (err instanceof NotFoundError)
+                        this.router.navigate(['/not-found']);
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden']);                    
+                }
+            });
     }
 }

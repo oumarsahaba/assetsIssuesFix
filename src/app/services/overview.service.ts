@@ -17,4 +17,8 @@ export class OverviewService extends BaseAPIService {
     getAllCreditRequests(codeWholesaler?: string, codeAgent?: string, status?: string) {
         return this.httpGetCall(`/overviews/credit/request/search?codeWholesaler=${codeWholesaler}&codeAgent=${codeAgent}&status=${status}`);
     }
+
+    getAllRefundRequests(codeAgent?: string, status?: string, startDate?: string, endDate?: string) {
+        return this.httpGetCall(`/overviews/refund/request/index/list?codeAgent=${codeAgent}&status=${status}&startDate=${startDate}&endDate=${endDate}`);
+    }
 }
