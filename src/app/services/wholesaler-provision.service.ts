@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BaseAPIService} from "./base-api.service";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
-export class WholesalerProvisionService extends BaseAPIService{
+export class WholesalerProvisionService extends BaseAPIService {
 
     getAll(codeWholesaler: string, page: number = 0, size: number = 5) {
         return this.httpGetCall(`/wholesaler/provision/${codeWholesaler}?page=${page}&size=${size}`)

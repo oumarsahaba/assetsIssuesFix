@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
 import {LenderCreateComponent} from './lender/create/lender-create.component';
 import {LenderIndexComponent} from './lender/index/lender-index.component';
@@ -27,7 +27,7 @@ import {LenderProvisionValidationComponent} from './lender-provision/validation/
 import {CreditRequestValidationComponent} from './overdraft-request/validation/credit-request-validation.component';
 import {WholesalerUpdateComponent} from "./wholesaler/update/wholesaler-update.component";
 
-import { ResourcesRoutingModule } from './resources-routing.module';
+import {ResourcesRoutingModule} from './resources-routing.module';
 import {SharedModule} from "../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AccountModule} from "../account/account.module";
@@ -37,8 +37,7 @@ import {WholesalerProvisionCreateComponent} from "./wholesaler-provision/create/
 import {
     WholesalerProvisionValidationComponent
 } from "./wholesaler-provision/validation/wholesaler-provision-validation.component";
-import { ActiveBadgeComponent } from '../shared/active-badge/active-badge.component';
-
+import {ActiveBadgeComponent} from '../shared/active-badge/active-badge.component';
 
 @NgModule({
     declarations: [
@@ -82,4 +81,5 @@ import { ActiveBadgeComponent } from '../shared/active-badge/active-badge.compon
         FormsModule
     ]
 })
-export class ResourcesModule { }
+export class ResourcesModule {
+}

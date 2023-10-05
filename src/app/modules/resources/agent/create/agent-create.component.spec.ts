@@ -3,21 +3,21 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {AgentCreateComponent} from './agent-create.component';
 
 describe('CreateComponent', () => {
-  let component: AgentCreateComponent;
-  let fixture: ComponentFixture<AgentCreateComponent>;
+    let component: AgentCreateComponent;
+    let fixture: ComponentFixture<AgentCreateComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ AgentCreateComponent ]
-    })
-    .compileComponents();
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [AgentCreateComponent]
+        })
+            .compileComponents();
 
-    fixture = TestBed.createComponent(AgentCreateComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(AgentCreateComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

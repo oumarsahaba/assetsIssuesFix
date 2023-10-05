@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {Agent} from "../../../commons/interfaces/agent";
 
 @Component({
     selector: 'app-active-badge',

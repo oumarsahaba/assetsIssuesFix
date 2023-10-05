@@ -1,7 +1,7 @@
 import {Media} from "./media";
 import {SimpleWholesaler} from "./simple-wholesaler";
 
-export interface WholesalerProvision{
+export interface WholesalerProvision {
     token: string
     amount: number
     fees: number

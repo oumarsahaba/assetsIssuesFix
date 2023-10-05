@@ -8,9 +8,10 @@ import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
-import { Agent } from 'src/app/commons/interfaces/agent';
-import { Observable } from 'rxjs';
-import { Response } from 'src/app/commons/models/response';
+import {Observable, share} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
+import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
+import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
 
 @Component({
     selector: 'app-aggregator-index',
@@ -18,30 +19,32 @@ import { Response } from 'src/app/commons/models/response';
     styleUrls: ['./aggregator-index.component.css']
 })
 export class AggregatorIndexComponent implements OnInit {
-    page : PaginatedResource<Aggregator>
+    page: PaginatedResource<Aggregator>
     page$: Observable<Response<PaginatedResource<Aggregator>>>
+    items: Breadcrumb[]=[
+        {label: "Aggregators"}    ]
+    home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
-    constructor(private aggregatorService: AggregatorService, private router: Router ) {}
+    constructor(private aggregatorService: AggregatorService, private router: Router, private breadcrumbService: BreadcrumbService) {
+    }
 
     ngOnInit(): void {
         this.goToPage()
+        this.breadcrumbService.setItems(this.items);
+        this.breadcrumbService.setHome(this.home)
     }
 
     goToPage(page: number = 0) {
-        this.page$= this.aggregatorService.getPage(page)
-        this.aggregatorService.getPage(page)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<Aggregator>
-                },
-                error : (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
+        this.page$ = this.aggregatorService.getPage(page).pipe(share())
+        this.page$.subscribe({
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
 
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
     }
 
     confirmDelete(codeAgent: string) {
@@ -69,7 +72,8 @@ export class AggregatorIndexComponent implements OnInit {
                 if (response.statusCode == 200)
                     navigateBack(this.router)
             },
-            error: () => {}
+            error: () => {
+            }
         })
     }
 }

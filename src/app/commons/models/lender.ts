@@ -12,8 +12,8 @@ export class BaseLender implements Lender {
     constructor(lender: Lender) {
         this.codeLender = lender.codeLender
         this.description = lender.description
-        this.creditAccount  = new BaseAccount(lender.commissionAccount)
-        this.commissionAccount  = new BaseAccount(lender.creditAccount)
+        this.creditAccount = new BaseAccount(lender.commissionAccount)
+        this.commissionAccount = new BaseAccount(lender.creditAccount)
         this.createdAt = new Date(lender.createdAt)
     }
 }

@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BaseAPIService} from "./base-api.service";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class OverdraftService extends BaseAPIService {
     getAll(codeAgent: string, page: number = 0, size: number = 5) {

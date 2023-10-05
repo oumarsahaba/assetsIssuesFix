@@ -7,11 +7,12 @@ import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
-import Swal from 'sweetalert2'
-import {Observable} from 'rxjs';
-import {Response} from 'src/app/commons/models/response';
+import Swal from 'sweetalert2';
 import {KeycloakService} from "keycloak-angular";
-
+import {Observable, share} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
+import {Breadcrumb} from 'src/app/commons/interfaces/breadcrumb';
+import {BreadcrumbService} from 'src/app/commons/services/breadcrumb.service';
 
 @Component({
     selector: 'app-agent-index',
@@ -27,8 +28,9 @@ export class AgentIndexComponent implements OnInit {
 
     aggregators: any[];
 
-    constructor(private agentService: AgentService,
-                public keycloakService: KeycloakService,
+    constructor(public keycloakService: KeycloakService,
+                private agentService: AgentService,
+                private breadcrumbService: BreadcrumbService,
                 private router: Router) {
     }
 
@@ -93,6 +95,4 @@ export class AgentIndexComponent implements OnInit {
                 }
             })
     }
-
-    protected readonly console = console;
 }

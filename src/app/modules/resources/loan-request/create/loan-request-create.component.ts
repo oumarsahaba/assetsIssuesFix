@@ -18,7 +18,7 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 })
 export class LoanRequestCreateComponent implements OnInit {
     displayModal: any;
-    form : FormGroup
+    form: FormGroup
 
     @Input()
     codeWholesaler: string
@@ -80,7 +80,7 @@ export class LoanRequestCreateComponent implements OnInit {
             next: (response) => {
                 navigateBack(this.router)
             },
-            error : (err: AppError) => handleFormError(err, this.form)
+            error: (err: AppError) => handleFormError(err, this.form)
         })
     }
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {WholesalerService} from "../../../../services/wholesaler.service";
@@ -19,7 +19,7 @@ export class WholesalerUpdateComponent implements OnChanges {
     @Input()
     wholesaler: Wholesaler
 
-    form : FormGroup
+    form: FormGroup
     displayModal: any;
     formError: string | null = null;
 
@@ -29,7 +29,7 @@ export class WholesalerUpdateComponent implements OnChanges {
     ) {
     }
 
-    ngOnChanges(changes:SimpleChanges): void {
+    ngOnChanges(changes: SimpleChanges): void {
         this.form = new FormGroup({
             codeWholesaler: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
@@ -60,9 +60,9 @@ export class WholesalerUpdateComponent implements OnChanges {
                 }
             },
             error: (err: HttpErrorResponse | AppError) => {
-                    const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
-                    this.formError = httpError.error.errors.message
-                    handleFormError(err as AppError, this.form);
+                const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
+                this.formError = httpError.error.errors.message
+                handleFormError(err as AppError, this.form);
             }
         })
     }

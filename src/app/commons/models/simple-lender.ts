@@ -1,6 +1,6 @@
 import {SimpleLender} from "../interfaces/simple-lender";
 
-export class BaseSimpleLender implements SimpleLender{
+export class BaseSimpleLender implements SimpleLender {
     codeLender: string;
     description: string;
 

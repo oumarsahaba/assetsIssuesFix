@@ -6,18 +6,18 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {CommissionPlan} from "../../../../commons/interfaces/commission-plan";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
-import { Observable } from 'rxjs';
-import { Response } from 'src/app/commons/models/response';
+import {Observable, share} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
 
 @Component({
-  selector: 'app-commission-plan-index',
-  templateUrl: './commission-plan-index.component.html',
-  styleUrls: ['./commission-plan-index.component.css']
+    selector: 'app-commission-plan-index',
+    templateUrl: './commission-plan-index.component.html',
+    styleUrls: ['./commission-plan-index.component.css']
 })
 export class CommissionPlanIndexComponent implements OnInit {
 
-    page : PaginatedResource<CommissionPlan> = {
-        content : [],
+    page: PaginatedResource<CommissionPlan> = {
+        content: [],
         totalElements: 0,
         totalPages: 0,
         number: 0,
@@ -34,27 +34,24 @@ export class CommissionPlanIndexComponent implements OnInit {
     type: string
 
     constructor(private commissionPlanService: CommissionPlanService,
-                private router: Router) {}
+                private router: Router) {
+    }
 
     ngOnInit(): void {
         this.goToPage()
     }
 
     goToPage(page: number = 0) {
-        this.page$ = this.commissionPlanService.getAll(this.code, this.type, page);
-        this.commissionPlanService.getAll(this.code, this.type, page)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<CommissionPlan>
-                },
-                error : (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
+        this.page$ = this.commissionPlanService.getAll(this.code, this.type, page).pipe(share());
+        this.page$.subscribe({
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
 
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
 
     }
 

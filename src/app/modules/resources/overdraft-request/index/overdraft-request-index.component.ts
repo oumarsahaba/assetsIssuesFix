@@ -6,19 +6,18 @@ import {CreditRequest} from "../../../../commons/interfaces/credit-request";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {OverdraftService} from "../../../../services/overdraft.service";
-import { Observable } from 'rxjs';
-import { Response } from 'src/app/commons/models/response';
+import {Observable, share} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
 
 @Component({
-  selector: 'app-overdraft-request-index',
-  templateUrl: './overdraft-request-index.component.html',
-  styleUrls: ['./overdraft-request-index.component.css']
+    selector: 'app-overdraft-request-index',
+    templateUrl: './overdraft-request-index.component.html',
+    styleUrls: ['./overdraft-request-index.component.css']
 })
 export class OverdraftRequestIndexComponent implements OnInit {
 
     @Input()
     codeAgent: any
-    page: PaginatedResource<CreditRequest>;
     page$: Observable<Response<PaginatedResource<CreditRequest>>>;
 
     constructor(private overdraftService: OverdraftService, private router: Router) {
@@ -29,20 +28,17 @@ export class OverdraftRequestIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.page$ = this.overdraftService.getAll(this.codeAgent, page, 5);
-        this.overdraftService.getAll(this.codeAgent, page, 5)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<CreditRequest>
-                },
-                error : (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
+        this.page$ = this.overdraftService.getAll(this.codeAgent, page, 5).pipe(share());
 
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+        this.page$.subscribe({
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
+
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
 
     }
 

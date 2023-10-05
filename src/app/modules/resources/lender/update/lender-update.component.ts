@@ -20,10 +20,12 @@ export class LenderUpdateComponent implements OnInit {
     form: FormGroup
     displayModal: boolean
     formError: string | null = null;
+
     constructor(private lenderService: LenderService, private router: Router,
                 private toastr: ToastrService,
     ) {
     }
+
     ngOnInit(): void {
         this.form = new FormGroup({
             codeLender: new FormControl('', Validators.required),
@@ -33,6 +35,7 @@ export class LenderUpdateComponent implements OnInit {
         this.form.get('description').setValue(this.lender.description)
         this.displayModal = false
     }
+
     update() {
         this.lenderService.update(
             this.lender.codeLender,
@@ -47,13 +50,14 @@ export class LenderUpdateComponent implements OnInit {
                 }
             },
             error: (err: HttpErrorResponse | AppError) => {
-                    const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
-                    this.formError = httpError.error.errors.message
-                    handleFormError(err as AppError, this.form);
+                const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
+                this.formError = httpError.error.errors.message
+                handleFormError(err as AppError, this.form);
 
             }
         })
     }
+
     toggleModal() {
         this.displayModal = !this.displayModal
     }

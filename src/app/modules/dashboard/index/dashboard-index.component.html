@@ -3,24 +3,29 @@
         <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-5">
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">System Balance</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900" *ngIf="metrics$ | async as metricResponse; else textLoader">{{ metricResponse?.data?.systemBalance | number: '.0-2' }}</dd>
+                <dd *ngIf="metrics$ | async as metricResponse; else textLoader"
+                    class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.systemBalance | number: '.0-2' }}</dd>
             </div>
 
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Lender Count</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"*ngIf="metrics$ | async as metricResponse; else textLoader">{{ metricResponse?.data?.lenderCount }}</dd>
+                <dd *ngIf="metrics$ | async as metricResponse; else textLoader"
+                    class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.lenderCount }}</dd>
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Aggregator Count</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"*ngIf="metrics$ | async as metricResponse; else textLoader">{{ metricResponse?.data?.aggregatorCount }}</dd>
+                <dd *ngIf="metrics$ | async as metricResponse; else textLoader"
+                    class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.aggregatorCount }}</dd>
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Wholesaler Count</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"*ngIf="metrics$ | async as metricResponse; else textLoader">{{ metricResponse?.data?.wholesalerCount }}</dd>
+                <dd *ngIf="metrics$ | async as metricResponse; else textLoader"
+                    class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.wholesalerCount }}</dd>
             </div>
             <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                 <dt class="truncate text-sm font-medium text-gray-500">Agent Count</dt>
-                <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900"*ngIf="metrics$ | async as metricResponse; else textLoader">{{ metricResponse?.data?.agentCount }}</dd>
+                <dd *ngIf="metrics$ | async as metricResponse; else textLoader"
+                    class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.agentCount }}</dd>
             </div>
         </div>
     </div>
@@ -44,26 +49,11 @@
     </div>
 
     <ng-template #textLoader>
-        <div role="status" class="max-w-sm animate-pulse">
-            <div class="h-6 bg-gray-200 rounded-full dark:bg-gray-700 w-20 mb-2.5"></div>
-        </div>        
+        <div class="max-w-sm animate-pulse" role="status">
+            <div class="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-20 mb-2.5"></div>
+        </div>
     </ng-template>
     <ng-template #graphLoader>
-        
-        <div role="status" class="max-w-sm p-4 animate-pulse md:p-6 dark:border-gray-700">
-            <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2.5"></div>
-            <div class="w-48 h-2 mb-10 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-            <div class="flex items-baseline mt-4 space-x-6">
-                <div class="w-full bg-gray-200 rounded-t-lg h-72 dark:bg-gray-700"></div>
-                <div class="w-full h-56 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                <div class="w-full bg-gray-200 rounded-t-lg h-72 dark:bg-gray-700"></div>
-                <div class="w-full h-64 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                <div class="w-full bg-gray-200 rounded-t-lg h-80 dark:bg-gray-700"></div>
-                <div class="w-full bg-gray-200 rounded-t-lg h-72 dark:bg-gray-700"></div>
-                <div class="w-full bg-gray-200 rounded-t-lg h-80 dark:bg-gray-700"></div>
-            </div>
-            <span class="sr-only">Loading...</span>
-        </div>
-        
+        <app-chart-loader></app-chart-loader>
     </ng-template>
 </app-dashboard>

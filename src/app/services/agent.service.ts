@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BaseAPIService} from "./base-api.service";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AgentService extends BaseAPIService {
 
@@ -16,31 +16,35 @@ export class AgentService extends BaseAPIService {
            description: string,
            overdraftMaxDailyCount: string,
            overdraftLimitAmount: number,
+           overdraftBillingOccurrence: number,
            penaltyDelayInDays: number) {
         return this.httpPostCall('/agent/store', {
-            codeAgent : codeAgent,
-            codeWholesaler : codeWholesaler,
-            description : description,
+            codeAgent: codeAgent,
+            codeWholesaler: codeWholesaler,
+            description: description,
             overdraftMaxDailyCount: overdraftMaxDailyCount,
             overdraftLimitAmount: overdraftLimitAmount,
+            overdraftBillingOccurrence: overdraftBillingOccurrence,
             penaltyDelayInDays: penaltyDelayInDays,
         })
     }
 
     update(code: string,
+           codeAgent: string,
            description: string,
            overdraftMaxDailyCount: string,
            overdraftLimitAmount: number,
+           overdraftBillingOccurrence: number,
            penaltyDelayInDays: number,
-           active: boolean,
-           codeAgent: string) {
+           active: boolean) {
         return this.httpPutCall('/agent/update/' + code, {
-            description : description,
+            codeAgent: codeAgent,
+            description: description,
             overdraftMaxDailyCount: overdraftMaxDailyCount,
             overdraftLimitAmount: overdraftLimitAmount,
+            overdraftBillingOccurrence: overdraftBillingOccurrence,
             penaltyDelayInDays: penaltyDelayInDays,
-            active: active,
-            codeAgent: codeAgent
+            active: active
         })
     }
 

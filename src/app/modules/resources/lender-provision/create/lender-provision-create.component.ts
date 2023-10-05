@@ -13,7 +13,7 @@ import {NgxDropzoneChangeEvent} from "ngx-dropzone";
 })
 export class LenderProvisionCreateComponent {
     displayModal: any;
-    form : FormGroup
+    form: FormGroup
 
     @Input()
     codeLender: string
@@ -44,7 +44,7 @@ export class LenderProvisionCreateComponent {
                 this.files = [];
                 navigateBack(this.router)
             },
-            error : (err: AppError) => handleFormError(err, this.form)
+            error: (err: AppError) => handleFormError(err, this.form)
         })
     }
 
