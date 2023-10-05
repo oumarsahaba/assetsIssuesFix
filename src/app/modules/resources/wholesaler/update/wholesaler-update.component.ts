@@ -8,6 +8,11 @@ import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 import {ToastrService} from "ngx-toastr";
 import {HttpErrorResponse} from "@angular/common/http";
 import {BadRequestError} from "../../../../commons/errors/bad-request-error";
+import { Aggregator } from 'src/app/commons/interfaces/aggregator';
+import { AggregatorService } from 'src/app/services/aggregator.service';
+import { NotFoundError } from 'rxjs';
+import { ForbiddenError } from 'src/app/commons/errors/forbidden-error';
+import { BaseAggregator } from 'src/app/commons/models/aggregator';
 
 @Component({
     selector: 'app-wholesaler-update',
@@ -22,10 +27,12 @@ export class WholesalerUpdateComponent implements OnChanges {
     form: FormGroup
     displayModal: any;
     formError: string | null = null;
+    aggregators: Aggregator[] =[]
 
     constructor(private wholesalerService: WholesalerService,
                 private router: Router,
                 private toastr: ToastrService,
+                private aggregatorService: AggregatorService
     ) {
     }
 
@@ -45,6 +52,23 @@ export class WholesalerUpdateComponent implements OnChanges {
             this.form.get('active').setValue(this.wholesaler.active)
             this.form.get('description').setValue(this.wholesaler.description)
         }
+    }
+
+    ngOnInit(): void {
+        this.aggregatorService.getAll()
+            .subscribe({
+                next: (response) => {
+                    this.aggregators = (response.data as Aggregator[])
+                        .map((aggregator) => new BaseAggregator(aggregator))
+                },
+                error: (err: AppError) => {
+                    if (err instanceof NotFoundError)
+                        this.router.navigate(['/not-found'])
+
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden'])
+                }
+            })
     }
 
     update() {
@@ -72,5 +96,11 @@ export class WholesalerUpdateComponent implements OnChanges {
 
     toggleModal() {
         this.displayModal = !this.displayModal
+    }
+
+    changeAggregator($event: any) {
+        this.form.get('codeAggregator')?.setValue($event.target.value, {
+            onlySelf: true,
+        })
     }
 }
