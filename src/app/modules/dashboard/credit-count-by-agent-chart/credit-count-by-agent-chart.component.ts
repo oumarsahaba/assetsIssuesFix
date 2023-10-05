@@ -16,16 +16,12 @@ export class CreditCountByAgentChartComponent implements OnInit {
     chart: Chart | null = null; // Store the chart instance
     data$: Observable<Response<ChartDataset>>
 
-
-    constructor(private dashboardService: DashboardService) {
-    }
-
+    constructor(private dashboardService: DashboardService) {}
 
     ngOnInit(): void {
         Chart.register(...registerables);
         this.updateChart(this.selectedPeriod); // Initialize chart with default period
     }
-
     onPeriodChange(event: any) {
         this.selectedPeriod = event.target.value;
         this.updateChart(this.selectedPeriod); // Update chart when period changes
@@ -44,17 +40,12 @@ export class CreditCountByAgentChartComponent implements OnInit {
             next: (response) => {
                 let chartData = response.data as ChartDataset;
                 chartData.labels.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
-
                 // Destroy the previous chart if it exists
                 if (this.chart) {
                     this.chart.destroy();
                 }
-                if (chartData) {
-                    console.log(chartData);
 
-                    this.createChart(chartData.labels, chartData.values);
-                }
-
+                this.createChart(chartData.labels, chartData.values);
             },
             error: (err: AppError) => {
                 // Handle error
@@ -88,7 +79,6 @@ export class CreditCountByAgentChartComponent implements OnInit {
         });
 
     }
-
     private getChartTitle(period: string): string {
         switch (period) {
             case '30':

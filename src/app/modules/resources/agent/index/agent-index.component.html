@@ -1,7 +1,7 @@
 <app-dashboard>
     <div class="px-4 sm:px-6 lg:px-8 ">
         <div class="sm:flex sm:items-center">
-            <div class="sm:flex-auto">
+            <div class="sm:flex-auto" >
                 <div class="flex gap-2">
                     <h1 class="text-base font-semibold leading-6 text-gray-900">Agent</h1>
                     <app-agent-create/>
@@ -10,6 +10,13 @@
             </div>
             <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                 <div class="flex flex-col gap-y-4 lg:flex-row lg:justify-end lg:gap-x-4">
+                    <div class="flex flex-col" *ngIf="keycloakService.isUserInRole('admin')">
+                        <label for="codeAggregator" class=" ml-1.5 text-gray-700 font-serif text-sm mb-1">Code Aggregator</label>
+                        <select id="codeAggregator"  (change)="onAggregatorChange($event)" class="pl-5  border rounded text-sm h-8.1">
+                            <option selected >Select Code Aggregator</option>
+                            <option *ngFor="let aggregator of aggregators" [value]="aggregator.codeAggregator">{{ aggregator.codeAggregator }}</option>
+                        </select>
+                    </div>
                     <div class="flex flex-col">
                         <label class="text-gray-700 font-serif text-sm mb-1" for="codeWholesaler">Code
                             Wholesaler</label>
@@ -43,31 +50,27 @@
                                        *ngIf="page$ | async as pageResponse ; else itemsloader"
                                        [(page)]="pageResponse.data">
             <table class="min-w-full divide-y divide-gray-300">
-                <thead class="bg-gray-50">
-                <tr>
-                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden lg:table-cell"
-                        scope="col">
-                        Wholesaler
-                    </th>
-                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 " scope="col">
-                        Code
-                    </th>
-                    <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 " scope="col">Description</th>
-                    <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900" scope="col">Active</th>
-                    <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden lg:table-cell"
-                        scope="col">Balance
-                    </th>
-                    <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden lg:table-cell"
-                        scope="col">created
-                        at
-                    </th>
-                    <th class="relative py-3.5 pl-3 pr-4 sm:pr-6" scope="col">
+                <thead class="bg-gray-50 divide-y divide-gray-200">
+                <tr class="divide-x divide-gray-200">
+                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden lg:table-cell" colspan="2">Wholesaler</th>
+                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden lg:table-cell" colspan="6">Agent</th>
+                </tr>
+                <tr class="divide-x divide-gray-200">
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden lg:table-cell">Code</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden lg:table-cell">Description</th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 ">Code</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 ">Description</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Active</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden lg:table-cell">Balance</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden lg:table-cell">created at</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                         <span class="sr-only">Actions</span>
                     </th>
                 </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200 bg-white">
-                <tr *ngFor="let agent of pageResponse?.data?.content">
+                <tbody class="divide-y divide-gray-100 bg-white">
+                <tr *ngFor="let agent of pageResponse?.data?.content" class="divide-x divide-gray-200">
+                    <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6 hidden lg:table-cell">{{ agent.wholesaler.codeWholesaler }}</td>
                     <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6 hidden lg:table-cell">{{ agent.wholesaler.description }}</td>
                     <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ agent.codeAgent }}</td>
                     <td class="whitespace-nowrap py-2 pl-2 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ agent.description }}</td>
