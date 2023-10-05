@@ -52,6 +52,7 @@ export class WholesalerUpdateComponent implements OnChanges {
             this.form.get('active').setValue(this.wholesaler.active)
             this.form.get('description').setValue(this.wholesaler.description)
         }
+
     }
 
     ngOnInit(): void {
