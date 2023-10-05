@@ -30,6 +30,7 @@ export class AgentService extends BaseAPIService {
     }
 
     update(code: string,
+           codeWholesaler: string,
            codeAgent: string,
            description: string,
            overdraftMaxDailyCount: string,
@@ -38,6 +39,7 @@ export class AgentService extends BaseAPIService {
            penaltyDelayInDays: number,
            active: boolean) {
         return this.httpPutCall('/agent/update/' + code, {
+            codeWholesaler: codeWholesaler,
             codeAgent: codeAgent,
             description: description,
             overdraftMaxDailyCount: overdraftMaxDailyCount,

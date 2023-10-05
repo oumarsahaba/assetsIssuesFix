@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AgentService} from "../../../../services/agent.service";
@@ -8,25 +8,53 @@ import {Agent} from "../../../../commons/interfaces/agent";
 import {ToastrService} from 'ngx-toastr';
 import {HttpErrorResponse} from "@angular/common/http";
 import {BadRequestError} from "../../../../commons/errors/bad-request-error";
+import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
+import {WholesalerService} from "../../../../services/wholesaler.service";
+import {NotFoundError} from "rxjs";
+import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
+import {BaseSimpleWholesaler} from "../../../../commons/models/simple-wholesaler";
 
 @Component({
     selector: 'app-agent-update',
     templateUrl: './agent-update.component.html',
     styleUrls: ['./agent-update.component.css']
 })
-export class AgentUpdateComponent implements OnChanges {
+export class AgentUpdateComponent implements OnChanges, OnInit {
     @Input()
     agent: Agent
     form: FormGroup
     displayModal: any;
     formError: string | null = null;
+    wholesalers: BaseSimpleWholesaler[] = []
 
-    constructor(private agentService: AgentService, private router: Router, private toastr: ToastrService) {
+    constructor(private agentService: AgentService,
+                private wholesalerService: WholesalerService,
+                private router: Router,
+                private toastr: ToastrService) {
+    }
+
+    ngOnInit() {
+        this.wholesalerService.getAll()
+            .subscribe({
+                next: (response) => {
+                    this.wholesalers = (response.data as Wholesaler[])
+                        .map((wholesaler) => new BaseSimpleWholesaler(wholesaler))
+                },
+                error: (err: AppError) => {
+                    if (err instanceof NotFoundError)
+                        this.router.navigate(['/not-found'])
+
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden'])
+                }
+            })
+
     }
 
     ngOnChanges(changes: SimpleChanges) {
         this.form = new FormGroup({
             codeAgent: new FormControl('', Validators.required),
+            codeWholesaler: new FormControl('', Validators.required),
             overdraftMaxDailyCount: new FormControl('', Validators.required),
             overdraftLimitAmount: new FormControl('', Validators.required),
             overdraftBillingOccurrence: new FormControl('', Validators.required),
@@ -36,6 +64,7 @@ export class AgentUpdateComponent implements OnChanges {
         })
 
         if (changes.hasOwnProperty('agent')) {
+            this.form.get('codeWholesaler').setValue(this.agent?.wholesaler.codeWholesaler)
             this.form.get('codeAgent').setValue(this.agent?.codeAgent)
             this.form.get('description').setValue(this.agent?.description)
             this.form.get('overdraftMaxDailyCount').setValue(this.agent?.overdraftMaxDailyCount)
@@ -50,6 +79,7 @@ export class AgentUpdateComponent implements OnChanges {
     update() {
         this.agentService.update(
             this.agent.codeAgent,
+            this.form.get('codeWholesaler')?.value,
             this.form.get('codeAgent')?.value,
             this.form.get('description')?.value,
             this.form.get('overdraftMaxDailyCount')?.value,
@@ -73,6 +103,12 @@ export class AgentUpdateComponent implements OnChanges {
                 this.formError = httpError.error.errors.message
                 handleFormError(err as AppError, this.form);
             }
+        })
+    }
+
+    changeWholesaler($event: any) {
+        this.form.get('codeWholesaler')?.setValue($event.target.value, {
+            onlySelf: true,
         })
     }
 
