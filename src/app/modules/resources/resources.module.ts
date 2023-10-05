@@ -39,7 +39,6 @@ import {
 } from "./wholesaler-provision/validation/wholesaler-provision-validation.component";
 import {ActiveBadgeComponent} from '../shared/active-badge/active-badge.component';
 
-
 @NgModule({
     declarations: [
         LenderCreateComponent,

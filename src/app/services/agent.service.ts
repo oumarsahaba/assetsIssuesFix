@@ -6,8 +6,9 @@ import {BaseAPIService} from "./base-api.service";
 })
 export class AgentService extends BaseAPIService {
 
-    getAll(codeWholesaler: string, codeAgent: string, page: number = 0, size: number = 10) {
-        return this.httpGetCall(`/agent?page=${page}&size=${size}&codeAgent=${codeAgent}&codeWholesaler=${codeWholesaler}`)
+
+    getAll(codeAggregator: string,  codeAgent: string,codeWholesaler: string, page: number = 0, size: number = 10) {
+        return this.httpGetCall(`/agent?page=${page}&size=${size}&codeAggregator=${codeAggregator}&codeAgent=${codeAgent}&codeWholesaler=${codeWholesaler}`)
     }
 
     create(codeAgent: string,
@@ -29,6 +30,7 @@ export class AgentService extends BaseAPIService {
     }
 
     update(code: string,
+           codeWholesaler: string,
            codeAgent: string,
            description: string,
            overdraftMaxDailyCount: string,
@@ -37,6 +39,7 @@ export class AgentService extends BaseAPIService {
            penaltyDelayInDays: number,
            active: boolean) {
         return this.httpPutCall('/agent/update/' + code, {
+            codeWholesaler: codeWholesaler,
             codeAgent: codeAgent,
             description: description,
             overdraftMaxDailyCount: overdraftMaxDailyCount,
@@ -53,5 +56,9 @@ export class AgentService extends BaseAPIService {
 
     delete(code: string) {
         return this.httpDeleteCall('/agent/delete/' + code)
+    }
+
+    getAggregators() {
+        return this.httpGetCall('/aggregator');
     }
 }

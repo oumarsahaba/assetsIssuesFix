@@ -8,6 +8,11 @@ import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 import {ToastrService} from "ngx-toastr";
 import {HttpErrorResponse} from "@angular/common/http";
 import {BadRequestError} from "../../../../commons/errors/bad-request-error";
+import { Aggregator } from 'src/app/commons/interfaces/aggregator';
+import { AggregatorService } from 'src/app/services/aggregator.service';
+import { NotFoundError } from 'rxjs';
+import { ForbiddenError } from 'src/app/commons/errors/forbidden-error';
+import { BaseAggregator } from 'src/app/commons/models/aggregator';
 
 @Component({
     selector: 'app-wholesaler-update',
@@ -22,16 +27,19 @@ export class WholesalerUpdateComponent implements OnChanges {
     form: FormGroup
     displayModal: any;
     formError: string | null = null;
+    aggregators: Aggregator[] =[]
 
     constructor(private wholesalerService: WholesalerService,
                 private router: Router,
                 private toastr: ToastrService,
+                private aggregatorService: AggregatorService
     ) {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
         this.form = new FormGroup({
             codeWholesaler: new FormControl('', Validators.required),
+            codeAggregator: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
             active: new FormControl('', Validators.required),
         })
@@ -40,15 +48,34 @@ export class WholesalerUpdateComponent implements OnChanges {
 
         if (changes.hasOwnProperty('wholesaler')) {
             this.form.get('codeWholesaler').setValue(this.wholesaler.codeWholesaler)
+            this.form.get('codeAggregator').setValue(this.wholesaler.aggregator.codeAggregator)
             this.form.get('active').setValue(this.wholesaler.active)
             this.form.get('description').setValue(this.wholesaler.description)
         }
+    }
+
+    ngOnInit(): void {
+        this.aggregatorService.getAll()
+            .subscribe({
+                next: (response) => {
+                    this.aggregators = (response.data as Aggregator[])
+                        .map((aggregator) => new BaseAggregator(aggregator))
+                },
+                error: (err: AppError) => {
+                    if (err instanceof NotFoundError)
+                        this.router.navigate(['/not-found'])
+
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden'])
+                }
+            })
     }
 
     update() {
         this.wholesalerService.update(
             this.wholesaler.codeWholesaler,
             this.form.get('codeWholesaler')?.value,
+            this.form.get('codeAggregator')?.value,
             this.form.get('description')?.value,
             this.form.get('active')?.value
         ).subscribe({
@@ -69,5 +96,11 @@ export class WholesalerUpdateComponent implements OnChanges {
 
     toggleModal() {
         this.displayModal = !this.displayModal
+    }
+
+    changeAggregator($event: any) {
+        this.form.get('codeAggregator')?.setValue($event.target.value, {
+            onlySelf: true,
+        })
     }
 }
