@@ -6,13 +6,13 @@
                    type="text">
         </div>
         <div class="flex flex-col">
-            <label class="text-gray-700 font-serif text-sm mb-1" for="codeAgent">Start Date</label>
-            <input [(ngModel)]="startDate" class="p-1.5 border rounded text-sm" id="codeAgent" placeholder="Start Date"
+            <label class="text-gray-700 font-serif text-sm mb-1" for="startDate">Start Date</label>
+            <input [(ngModel)]="startDate" class="p-1.5 border rounded text-sm" id="startDate" placeholder="Start Date"
                    type="date">
         </div>
         <div class="flex flex-col">
-            <label class="text-gray-700 font-serif text-sm mb-1" for="codeAgent">End Date</label>
-            <input [(ngModel)]="endDate" class="p-1.5 border rounded text-sm" id="codeAgent" placeholder="End Date"
+            <label class="text-gray-700 font-serif text-sm mb-1" for="endDate">End Date</label>
+            <input [(ngModel)]="endDate" class="p-1.5 border rounded text-sm" id="endDate" placeholder="End Date"
                    type="date">
         </div>
         <div class="flex flex-col">
@@ -45,6 +45,7 @@
                 </div>
             </button>
         </div>
+    </div>
         <app-shared-paginated-resource (pageChange)="goToPage($event.number)"
                                        *ngIf="page$ | async as pageResponse; else itemsloader "
                                        [(page)]="pageResponse.data">
@@ -99,5 +100,4 @@
         <ng-template #itemsloader>
             <app-table-loader></app-table-loader>
         </ng-template>
-    </div>
 </app-dashboard>
