@@ -1,13 +1,13 @@
-import { Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { KeycloakService, KeycloakEventType } from 'keycloak-angular';
-import { Router } from '@angular/router';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {KeycloakService} from 'keycloak-angular';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent  {
+export class NavbarComponent {
     profileDropdown: boolean;
     @Output() openSidebar = new EventEmitter();
 
@@ -25,9 +25,11 @@ export class NavbarComponent  {
     toggleDropdown() {
         this.profileDropdown = !this.profileDropdown;
     }
+
     sideBarOpen() {
         this.openSidebar.emit();
     }
+
     logout() {
         this.keycloakService.logout().then(() => this.keycloakService.clearToken());
     }

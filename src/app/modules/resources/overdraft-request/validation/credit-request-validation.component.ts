@@ -9,16 +9,16 @@ import {UnprocessableEntityError} from "../../../../commons/errors/unprocessable
 import {CreditRequestService} from "../../../../services/credit-request.service";
 
 @Component({
-  selector: 'app-credit-request-validation',
-  templateUrl: './credit-request-validation.component.html',
-  styleUrls: ['./credit-request-validation.component.css']
+    selector: 'app-credit-request-validation',
+    templateUrl: './credit-request-validation.component.html',
+    styleUrls: ['./credit-request-validation.component.css']
 })
 export class CreditRequestValidationComponent {
     @Input()
     token: string
     @Input()
     disabled: boolean
-    form : FormGroup
+    form: FormGroup
     displayModal: boolean
 
     constructor(private creditRequestService: CreditRequestService, private router: Router) {
@@ -36,7 +36,7 @@ export class CreditRequestValidationComponent {
                 next: (response) => {
                     navigateBack(this.router)
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
 

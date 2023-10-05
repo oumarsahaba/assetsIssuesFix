@@ -3,7 +3,8 @@
     justify-content: flex-end;
     align-items: center;
 }
-.dropdown{
+
+.dropdown {
     height: 38px;
     width: 140px;
     font-size: 14px;

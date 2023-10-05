@@ -9,16 +9,16 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {LenderProvision} from "../../../../commons/interfaces/lender-provision";
 
 @Component({
-  selector: 'app-lender-provision-validation',
-  templateUrl: './lender-provision-validation.component.html',
-  styleUrls: ['./lender-provision-validation.component.css']
+    selector: 'app-lender-provision-validation',
+    templateUrl: './lender-provision-validation.component.html',
+    styleUrls: ['./lender-provision-validation.component.css']
 })
 export class LenderProvisionValidationComponent {
     @Input()
     provisionRequest: LenderProvision
     @Input()
     disabled: boolean
-    form : FormGroup
+    form: FormGroup
     displayModal: boolean
 
     constructor(private provisionRequestService: LenderProvisionService, private router: Router) {
@@ -35,7 +35,7 @@ export class LenderProvisionValidationComponent {
                 next: (response) => {
                     navigateBack(this.router)
                 },
-                error : (err: AppError) => {
+                error: (err: AppError) => {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found'])
 

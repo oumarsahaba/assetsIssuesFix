@@ -8,9 +8,10 @@ import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
-import { Observable } from 'rxjs';
-import { ApiResponse } from 'src/app/commons/interfaces/api-response';
-import { Response } from 'src/app/commons/models/response';
+import {Observable, share} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
+import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
+import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
 
 @Component({
     selector: 'app-lender-index',
@@ -21,28 +22,30 @@ export class LenderIndexComponent implements OnInit {
 
     page: PaginatedResource<Lender>;
     page$: Observable<Response<PaginatedResource<Lender>>>;
-    constructor(private lenderService: LenderService, private router: Router ) {
+    items: Breadcrumb[]=[
+        {label: "Lenders"}    ]
+    home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
+
+    constructor(private lenderService: LenderService, private router: Router, private breadcrumbService: BreadcrumbService) {
     }
 
     ngOnInit(): void {
+        this.breadcrumbService.setItems(this.items);
+        this.breadcrumbService.setHome(this.home)
         this.goToPage()
     }
 
     goToPage(page: number = 0) {
-        this.page$=this.lenderService.getPage(page)
-        this.lenderService.getPage(page)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<Lender>
-                },
-                error : (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
+        this.page$ = this.lenderService.getPage(page).pipe(share())
+        this.page$.subscribe({
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
 
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
 
     }
 
@@ -64,6 +67,7 @@ export class LenderIndexComponent implements OnInit {
             }
         });
     }
+
     delete(codeLender: string) {
         this.lenderService.delete(codeLender).subscribe({
             next: (response) => {

@@ -6,13 +6,13 @@ import {OperationService} from "../../../services/operation.service";
 import {PaginatedResource} from "../../../commons/interfaces/paginated-resource";
 import {Router} from "@angular/router";
 import {ForbiddenError} from "../../../commons/errors/forbidden-error";
-import { Observable } from 'rxjs';
-import { Response } from 'src/app/commons/models/response';
+import {Observable, share} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
 
 @Component({
-  selector: 'app-account-operations',
-  templateUrl: './operations.component.html',
-  styleUrls: ['./operations.component.css']
+    selector: 'app-account-operations',
+    templateUrl: './operations.component.html',
+    styleUrls: ['./operations.component.css']
 })
 export class OperationsComponent implements OnInit {
     @Input()
@@ -34,21 +34,17 @@ export class OperationsComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.page$ = this.operationService.getAccountOperations(this.accountSlug, page);
-        this.operationService.getAccountOperations(this.accountSlug, page)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<Operation>
-                },
-                error : (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
+        this.page$ = this.operationService.getAccountOperations(this.accountSlug, page).pipe(share());
 
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+        this.page$.subscribe({
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
 
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
     }
 
 }

@@ -1,19 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {PaginatedResourceComponent} from './paginated-resource/paginated-resource.component';
 import {ModalComponent} from './modal/modal.component';
 import {WarningComponent} from './warning/warning.component';
 import {NotFoundComponent} from "./not-found/not-found.component";
 import {ForbiddenComponent} from "./forbidden/forbidden.component";
 
-import { SharedRoutingModule } from './shared-routing.module';
+import {SharedRoutingModule} from './shared-routing.module';
 import {SidebarComponent} from "./layouts/partials/sidebar/sidebar.component";
 import {NavbarComponent} from "./layouts/partials/navbar/navbar.component";
 import {MainComponent} from "./layouts/main/main.component";
-import { TabContainerComponent } from './tabs/container/tab-container.component';
-import { TabItemComponent } from './tabs/item/tab-item.component';
-import { DetailCardsComponent } from './detail-cards/detail-cards.component';
-import { TableLoaderComponent } from './table-loader/table-loader.component';
+import {TabContainerComponent} from './tabs/container/tab-container.component';
+import {TabItemComponent} from './tabs/item/tab-item.component';
+import {DetailCardsComponent} from './detail-cards/detail-cards.component';
+import {TableLoaderComponent} from './table-loader/table-loader.component';
+import { ChartLoaderComponent } from './chart-loader/chart-loader.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb/breadcrumb.component';
+import {ActionsDropdownComponent} from "./actions-dropdown/actions-dropdown.component";
 
 
 @NgModule({
@@ -29,7 +32,10 @@ import { TableLoaderComponent } from './table-loader/table-loader.component';
         TabContainerComponent,
         TabItemComponent,
         DetailCardsComponent,
-        TableLoaderComponent
+        TableLoaderComponent,
+        ChartLoaderComponent,
+        BreadcrumbComponent,
+        ActionsDropdownComponent,
     ],
     imports: [
         CommonModule,
@@ -45,7 +51,10 @@ import { TableLoaderComponent } from './table-loader/table-loader.component';
         TabContainerComponent,
         TabItemComponent,
         DetailCardsComponent,
-        TableLoaderComponent
+        TableLoaderComponent,
+        ChartLoaderComponent,
+        ActionsDropdownComponent,
     ],
 })
-export class SharedModule { }
+export class SharedModule {
+}

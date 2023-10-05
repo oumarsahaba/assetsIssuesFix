@@ -5,12 +5,23 @@ import {OverviewCreditRequestIndexComponent} from "./credit-request/index/overvi
 import {OverviewRefundRequestIndexComponent} from "./refund-request/index/overview-refund-request-index.component";
 
 const routes: Routes = [
-    {path: 'overview/credit-request', component: OverviewCreditRequestIndexComponent, canActivate: [AuthGuard], data: {roles: ['admin']} },
-    {path: 'overview/refund-request', component: OverviewRefundRequestIndexComponent, canActivate: [AuthGuard], data: {roles: ['admin']} },
+    {
+        path: 'overview/credit-request',
+        component: OverviewCreditRequestIndexComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['admin']}
+    },
+    {
+        path: 'overview/refund-request',
+        component: OverviewRefundRequestIndexComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['admin']}
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
-export class OverviewRoutingModule { }
+export class OverviewRoutingModule {
+}

@@ -8,21 +8,26 @@ import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
-import { Observable } from 'rxjs';
-import { Response } from 'src/app/commons/models/response';
+import {Observable, share} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
+import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
+import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
 
 @Component({
-  selector: 'app-wholesaler-index',
-  templateUrl: './wholesaler-index.component.html',
-  styleUrls: ['./wholesaler-index.component.css']
+    selector: 'app-wholesaler-index',
+    templateUrl: './wholesaler-index.component.html',
+    styleUrls: ['./wholesaler-index.component.css']
 })
 export class WholesalerIndexComponent implements OnInit {
 
-    page : PaginatedResource<Wholesaler>
+    page: PaginatedResource<Wholesaler>
     page$: Observable<Response<PaginatedResource<Wholesaler>>>
-    codeWholesaler : string = ""
+    codeWholesaler: string = ""
+    items: Breadcrumb[]=[
+        {label: "Wholesalers"}    ]
+    home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
-    constructor(private wholesalerService: WholesalerService, private router: Router ) {
+    constructor(private wholesalerService: WholesalerService, private router: Router, private breadcrumbService: BreadcrumbService) {
     }
 
     ngOnInit(): void {
@@ -30,21 +35,20 @@ export class WholesalerIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.page$ = this.wholesalerService.getPage(this.codeWholesaler, page)
-        this.wholesalerService.getPage(this.codeWholesaler, page)
-            .subscribe({
-                next: (response) => {
-                    this.page = response.data as PaginatedResource<Wholesaler>
-                },
-                error : (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
+        this.breadcrumbService.setItems(this.items);
+        this.breadcrumbService.setHome(this.home)
+        this.page$ = this.wholesalerService.getPage(this.codeWholesaler, page).pipe(share())
+        this.page$.subscribe({
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError)
+                    this.router.navigate(['/not-found'])
 
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+                if (err instanceof ForbiddenError)
+                    this.router.navigate(['/forbidden'])
+            }
+        })
     }
+
     confirmDelete(codeAgent: string) {
         Swal.fire({
             title: 'Are you sure?',
@@ -63,13 +67,15 @@ export class WholesalerIndexComponent implements OnInit {
             }
         });
     }
+
     delete(codeWholesaler: string) {
         this.wholesalerService.delete(codeWholesaler).subscribe({
             next: (response) => {
                 if (response.statusCode == 200)
                     navigateBack(this.router)
             },
-            error: () => {}
+            error: () => {
+            }
         })
     }
 }

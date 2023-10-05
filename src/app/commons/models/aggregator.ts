@@ -13,8 +13,8 @@ export class BaseAggregator implements Aggregator {
     constructor(aggregator: Aggregator) {
         this.codeAggregator = aggregator.codeAggregator
         this.description = aggregator.description
-        this.creditAccount  = new BaseAccount(aggregator.commissionAccount)
-        this.commissionAccount  = new BaseAccount(aggregator.creditAccount)
+        this.creditAccount = new BaseAccount(aggregator.commissionAccount)
+        this.commissionAccount = new BaseAccount(aggregator.creditAccount)
         this.createdAt = new Date(aggregator.createdAt)
         this.webhook = aggregator.webhook
     }

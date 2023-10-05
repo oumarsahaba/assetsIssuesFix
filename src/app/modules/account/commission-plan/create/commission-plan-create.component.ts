@@ -7,12 +7,12 @@ import {AppError} from "../../../../commons/errors/app-error";
 import {OperationType} from "../../../../commons/enums/OperationType";
 
 @Component({
-  selector: 'app-commission-plan-create',
-  templateUrl: './commission-plan-create.component.html',
-  styleUrls: ['./commission-plan-create.component.css']
+    selector: 'app-commission-plan-create',
+    templateUrl: './commission-plan-create.component.html',
+    styleUrls: ['./commission-plan-create.component.css']
 })
 export class CommissionPlanCreateComponent {
-    form : FormGroup
+    form: FormGroup
     displayModal: boolean
 
     @Input()
@@ -22,6 +22,7 @@ export class CommissionPlanCreateComponent {
     type: string
 
     protected readonly OperationType = OperationType;
+    protected readonly Object = Object;
 
     constructor(private commissionPlanService: CommissionPlanService, private router: Router) {
         this.form = new FormGroup({
@@ -38,7 +39,6 @@ export class CommissionPlanCreateComponent {
 
         this.displayModal = false
     }
-
 
     create() {
         this.commissionPlanService.create({
@@ -58,7 +58,7 @@ export class CommissionPlanCreateComponent {
                 if (response.statusCode == 200)
                     navigateBack(this.router)
             },
-            error : (err: AppError) => handleFormError(err, this.form)
+            error: (err: AppError) => handleFormError(err, this.form)
         })
     }
 
@@ -69,6 +69,4 @@ export class CommissionPlanCreateComponent {
     changeOperationType($event: Event) {
 
     }
-
-    protected readonly Object = Object;
 }

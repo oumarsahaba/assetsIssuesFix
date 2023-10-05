@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {WholesalerService} from "../../../../services/wholesaler.service";
@@ -21,7 +21,7 @@ export class WholesalerUpdateComponent implements OnChanges {
     wholesaler: Wholesaler
     agent:Agent
 
-    form : FormGroup
+    form: FormGroup
     displayModal: any;
     formError: string | null = null;
 
@@ -31,9 +31,10 @@ export class WholesalerUpdateComponent implements OnChanges {
     ) {
     }
 
-    ngOnChanges(changes:SimpleChanges): void {
+    ngOnChanges(changes: SimpleChanges): void {
         this.form = new FormGroup({
             codeWholesaler: new FormControl('', Validators.required),
+            codeAggregator: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
             active: new FormControl('', Validators.required),
             overdraftLimitAmount: new FormControl('', Validators.required),
@@ -46,6 +47,7 @@ export class WholesalerUpdateComponent implements OnChanges {
 
         if (changes.hasOwnProperty('wholesaler')) {
             this.form.get('codeWholesaler').setValue(this.wholesaler.codeWholesaler)
+            this.form.get('codeAggregator').setValue(this.wholesaler.aggregator.codeAggregator)
             this.form.get('active').setValue(this.wholesaler.active)
             this.form.get('description').setValue(this.wholesaler.description)
         }
@@ -57,6 +59,7 @@ export class WholesalerUpdateComponent implements OnChanges {
         this.wholesalerService.update(
             this.wholesaler.codeWholesaler,
             this.form.get('codeWholesaler')?.value,
+            this.form.get('codeAggregator')?.value,
             this.form.get('description')?.value,
             this.form.get('active')?.value
         ).subscribe({
@@ -68,9 +71,9 @@ export class WholesalerUpdateComponent implements OnChanges {
                 }
             },
             error: (err: HttpErrorResponse | AppError) => {
-                    const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
-                    this.formError = httpError.error.errors.message
-                    handleFormError(err as AppError, this.form);
+                const httpError = (err as BadRequestError).originalError as HttpErrorResponse;
+                this.formError = httpError.error.errors.message
+                handleFormError(err as AppError, this.form);
             }
         })
     }

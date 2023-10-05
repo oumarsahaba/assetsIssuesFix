@@ -18,7 +18,7 @@ export abstract class BaseAPIService {
 
     private readonly baseUrl: string = environment.engine.baseUrl
 
-    private httpHeaders : HttpHeaders = new HttpHeaders()
+    private httpHeaders: HttpHeaders = new HttpHeaders()
 
     constructor(protected httpClient: HttpClient, private keycloakService: KeycloakService) {
         keycloakService.getToken().then((token) => {
@@ -29,7 +29,7 @@ export abstract class BaseAPIService {
 
     httpGetCall(pathUrl: string) {
         return this.httpClient
-            .get<ApiResponse>(this.baseUrl + pathUrl, { headers: this.httpHeaders })
+            .get<ApiResponse>(this.baseUrl + pathUrl, {headers: this.httpHeaders})
             .pipe(
                 catchError((err: Response) => this.handleError(err))
             )
@@ -37,7 +37,7 @@ export abstract class BaseAPIService {
 
     httpPostCall(pathUrl: string, body: any) {
         return this.httpClient
-            .post<ApiResponse>(this.baseUrl + pathUrl, body, { headers: this.httpHeaders})
+            .post<ApiResponse>(this.baseUrl + pathUrl, body, {headers: this.httpHeaders})
             .pipe(catchError((err: Response) => this.handleError(err)))
     }
 
@@ -45,19 +45,19 @@ export abstract class BaseAPIService {
         this.httpHeaders.set('Content-Type', 'multipart/form-data')
 
         return this.httpClient
-            .post<ApiResponse>(this.baseUrl + pathUrl, body, { headers: this.httpHeaders})
+            .post<ApiResponse>(this.baseUrl + pathUrl, body, {headers: this.httpHeaders})
             .pipe(catchError((err: Response) => this.handleError(err)))
     }
 
     httpPutCall(pathUrl: string, body: any) {
         return this.httpClient
-            .put<ApiResponse>(this.baseUrl + pathUrl, body, { headers: this.httpHeaders })
+            .put<ApiResponse>(this.baseUrl + pathUrl, body, {headers: this.httpHeaders})
             .pipe(catchError((err: Response) => this.handleError(err)))
     }
 
     httpDeleteCall(pathUrl: string) {
         return this.httpClient
-            .delete<ApiResponse>(this.baseUrl + pathUrl, { headers: this.httpHeaders })
+            .delete<ApiResponse>(this.baseUrl + pathUrl, {headers: this.httpHeaders})
             .pipe(catchError((err: Response) => this.handleError(err)))
     }
 
