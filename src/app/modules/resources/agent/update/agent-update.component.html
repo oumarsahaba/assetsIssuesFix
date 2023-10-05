@@ -21,6 +21,25 @@
                     <h2 class="text-base font-semibold leading-7 text-gray-900">Update agent</h2>
                     <div class="grid grid-cols-2 gap-5 mt-5">
                         <div class="col-span-2">
+                            <label class="block text-sm font-medium leading-6 text-gray-900" for="codeWholesaler">Wholesaler</label>
+                            <div class="mt-2">
+                                <select (change)="changeWholesaler($event)"
+                                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                                        formControlName="codeWholesaler"
+                                        id="codeWholesaler">
+                                    <option value="" selected>Select a wholesaler</option>
+                                    <option *ngFor="let wholesaler of wholesalers"
+                                            [value]="wholesaler.codeWholesaler">{{ wholesaler.description }}</option>
+                                </select>
+
+                                <p *ngIf="form.get('codeWholesaler')?.errors?.['serverError']"
+                                   class="text-xs text-red-500">
+                                    {{ form.get('codeWholesaler')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-span-2">
                             <label class="block text-sm font-medium leading-6 text-gray-900" for="codeAgent">Agent's
                                 Code</label>
                             <div class="mt-2">
