@@ -17,18 +17,17 @@
                             <option *ngFor="let aggregator of aggregators" [value]="aggregator.codeAggregator">{{ aggregator.codeAggregator }}</option>
                         </select>
                     </div>
+
                     <div class="flex flex-col">
-                        <label class="text-gray-700 font-serif text-sm mb-1" for="codeWholesaler">Code
-                            Wholesaler</label>
-                        <input [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm" id="codeWholesaler"
-                               placeholder="Code Wholesaler" type="text">
+                        <label class="text-gray-700 font-serif text-sm mb-1" for="codeWholesaler">Code Wholesaler</label>
+                        <input [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm h-9" id="codeWholesaler" placeholder="Code Wholesaler" type="text">
                     </div>
+
                     <div class="flex flex-col">
                         <label class="text-gray-700 font-serif text-sm mb-1" for="codeAgent">Code Agent</label>
-                        <input [(ngModel)]="codeAgent" class="p-1.5 border rounded text-sm" id="codeAgent"
-                               placeholder="Code Agent"
-                               type="text">
+                        <input [(ngModel)]="codeAgent" class="p-1.5 border rounded text-sm h-9" id="codeAgent" placeholder="Code Agent" type="text">
                     </div>
+
                     <div class="flex items-end gap-2">
                         <button (click)="goToPage()"
                                 class="px-3 py-1.5 bg-blue-500 text-white rounded hover:ring hover:bg-blue-600 text-sm ">
@@ -42,6 +41,7 @@
                             </div>
                         </button>
                     </div>
+
                 </div>
             </div>
         </div>
