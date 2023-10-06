@@ -20,12 +20,12 @@
 
                     <div class="flex flex-col">
                         <label class="text-gray-700 font-serif text-sm mb-1" for="codeWholesaler">Code Wholesaler</label>
-                        <input [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm h-9" id="codeWholesaler" placeholder="Code Wholesaler" type="text">
+                        <input [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm" id="codeWholesaler" placeholder="Code Wholesaler" type="text">
                     </div>
 
                     <div class="flex flex-col">
                         <label class="text-gray-700 font-serif text-sm mb-1" for="codeAgent">Code Agent</label>
-                        <input [(ngModel)]="codeAgent" class="p-1.5 border rounded text-sm h-9" id="codeAgent" placeholder="Code Agent" type="text">
+                        <input [(ngModel)]="codeAgent" class="p-1.5 border rounded text-sm" id="codeAgent" placeholder="Code Agent" type="text">
                     </div>
 
                     <div class="flex items-end gap-2">
@@ -44,11 +44,10 @@
                             <button (click)="exportExcel()"
                                     class="px-3 py-1.5 bg-blue-500 text-white rounded hover:ring hover:bg-blue-600 text-sm ">
                                 <div class="flex items-center">
-                                    <svg fill="currentColor" height="1em" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z"/>
+                                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                     </svg>
-                                    <span class="ml-1">Agents with Deficit</span>
+                                    <span class="ml-1">Agents with deficits</span>
                                 </div>
                             </button>
                         </div>
