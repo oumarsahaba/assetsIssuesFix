@@ -109,7 +109,7 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
                             this.toastr.info('File will be exported soon. Check downloads', 'File exportation', {
                                 timeOut: 3000,
                             });
-                            exportExcelFile(mappedRows, headerRow, 'Agents_With_Deficit')
+                            exportExcelFile(mappedRows, headerRow, 'Credit_Request')
 
                         } catch (err) {
                             this.toastr.error('Cannot export excel file. Contact your manager for more informations', 'File download error', {
