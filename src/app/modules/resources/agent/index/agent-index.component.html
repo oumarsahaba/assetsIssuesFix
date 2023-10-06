@@ -4,7 +4,7 @@
             <div class="sm:flex-auto" >
                 <div class="flex gap-2">
                     <h1 class="text-base font-semibold leading-6 text-gray-900">Agent</h1>
-                    <app-agent-create/>
+                    <app-agent-create  [wholesalers]="wholesalers"/>
                 </div>
                 <p class="mt-2 text-sm text-gray-700">A list of all agents.</p>
             </div>
@@ -110,7 +110,7 @@
                                               stroke-linejoin="round"/>
                                     </svg>
                                 </button>
-                                <app-agent-update [agent]="agent"/>
+                                <app-agent-update [wholesalers]="wholesalers" [agent]="agent"/>
                                 <button
                                     (click)="confirmDelete(agent.codeAgent)"
                                     class="relative -ml-px flex flex-row-reverse items-center rounded-r-md bg-white px-2.5 py-1.5 text-sm font-semibold gap-x-1.5 text-gray-900 ml-1 hover:bg-gray-50 focus:z-10"

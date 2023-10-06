@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Agent} from "../../../../commons/interfaces/agent";
 import {Router} from "@angular/router";
 import {AgentService} from "../../../../services/agent.service";
@@ -14,6 +14,10 @@ import {Response} from 'src/app/commons/models/response';
 import {BreadcrumbService} from 'src/app/commons/services/breadcrumb.service';
 import * as XLSX from "xlsx";
 import {ToastrService} from "ngx-toastr";
+import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
+import {BaseSimpleWholesaler} from "../../../../commons/models/simple-wholesaler";
+import {WholesalerService} from "../../../../services/wholesaler.service";
+import {SimpleWholesaler} from "../../../../commons/interfaces/simple-wholesaler";
 
 @Component({
     selector: 'app-agent-index',
@@ -21,7 +25,8 @@ import {ToastrService} from "ngx-toastr";
     styleUrls: ['./agent-index.component.css']
 })
 export class AgentIndexComponent implements OnInit {
-
+    wholesalers:SimpleWholesaler[]
+    wholesaler:BaseSimpleWholesaler[];
     page$: Observable<Response<PaginatedResource<Agent>>>
     codeAgent: string = "";
     codeWholesaler: string = "";
@@ -31,15 +36,34 @@ export class AgentIndexComponent implements OnInit {
 
     constructor(public keycloakService: KeycloakService,
                 private agentService: AgentService,
+                private wholesalerService: WholesalerService,
                 private breadcrumbService: BreadcrumbService,
                 private toastr: ToastrService,
                 private router: Router) {
     }
 
     ngOnInit(): void {
+        console.log("Ridial ioe")
         this.codeAggregator = null;
         this.page$ = this.agentService.getAll(this.codeAggregator, this.codeAgent, this.codeWholesaler);
         this.getAllAggregators()
+        this.wholesalerService.getAll()
+
+            .subscribe({
+                next: (response) => {
+                    console.log("Ridial ioe")
+                    console.log(response)
+                    this.wholesalers = (response.data as SimpleWholesaler[])
+                        .map((wholesaler) => new BaseSimpleWholesaler(wholesaler))
+                },
+                error: (err: AppError) => {
+                    if (err instanceof NotFoundError)
+                        this.router.navigate(['/not-found'])
+
+                    if (err instanceof ForbiddenError)
+                        this.router.navigate(['/forbidden'])
+                }
+            })
     }
 
     confirmDelete(codeAgent: string) {
