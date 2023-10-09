@@ -94,7 +94,7 @@ export class WholesalerUpdateComponent implements OnChanges {
         })
     }
 
-    toggleModal() {
+    toggleModal() {        
         this.displayModal = !this.displayModal
     }
 

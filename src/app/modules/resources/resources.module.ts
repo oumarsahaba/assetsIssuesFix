@@ -38,6 +38,7 @@ import {
     WholesalerProvisionValidationComponent
 } from "./wholesaler-provision/validation/wholesaler-provision-validation.component";
 import {ActiveBadgeComponent} from '../shared/active-badge/active-badge.component';
+import { ImportExcelComponent } from './agent/import-excel/import-excel.component';
 
 @NgModule({
     declarations: [
@@ -70,6 +71,7 @@ import {ActiveBadgeComponent} from '../shared/active-badge/active-badge.componen
         CreditRequestValidationComponent,
         WholesalerUpdateComponent,
         ActiveBadgeComponent,
+        ImportExcelComponent,
     ],
     imports: [
         CommonModule,
