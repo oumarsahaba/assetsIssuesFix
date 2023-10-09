@@ -2,18 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {WholesalerService} from "../../../../services/wholesaler.service";
 import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
-import {AppError} from "../../../../commons/errors/app-error";
-import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
-import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
 import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
-import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
-import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
+import {Breadcrumb} from 'src/app/commons/interfaces/breadcrumb';
+import {BreadcrumbService} from 'src/app/commons/services/breadcrumb.service';
 import {Aggregator} from "../../../../commons/interfaces/aggregator";
-import {BaseAggregator} from "../../../../commons/models/aggregator";
 import {AggregatorService} from "../../../../services/aggregator.service";
 
 @Component({
@@ -23,12 +19,14 @@ import {AggregatorService} from "../../../../services/aggregator.service";
 })
 export class WholesalerIndexComponent implements OnInit {
 
-    page: PaginatedResource<Wholesaler>
-    page$: Observable<Response<PaginatedResource<Wholesaler>>>
-    codeWholesaler: string = ""
+    wholesalers$: Observable<Response<PaginatedResource<Wholesaler>>>
     aggregators$: Observable<Response<Aggregator[]>>
-    items: Breadcrumb[]=[
-        {label: "Wholesalers"}    ]
+
+    codeWholesaler: string = ""
+
+    items: Breadcrumb[] = [
+        {label: "Wholesalers"}
+    ]
     home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
     constructor(private wholesalerService: WholesalerService,
@@ -37,23 +35,15 @@ export class WholesalerIndexComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.breadcrumbService.setItems(this.items);
+        this.breadcrumbService.setHome(this.home)
+
         this.goToPage()
         this.aggregators$ = this.aggregatorService.getAll().pipe(share())
     }
 
     goToPage(page: number = 0) {
-        this.breadcrumbService.setItems(this.items);
-        this.breadcrumbService.setHome(this.home)
-        this.page$ = this.wholesalerService.getPage(this.codeWholesaler, page).pipe(share())
-        this.page$.subscribe({
-            error: (err: AppError) => {
-                if (err instanceof NotFoundError)
-                    this.router.navigate(['/not-found'])
-
-                if (err instanceof ForbiddenError)
-                    this.router.navigate(['/forbidden'])
-            }
-        })
+        this.wholesalers$ = this.wholesalerService.getPage(this.codeWholesaler, page).pipe(share())
     }
 
     confirmDelete(codeAgent: string) {
