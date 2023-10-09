@@ -55,21 +55,15 @@ export class ImportExcelComponent implements OnInit, OnDestroy{
   
   }
   importFile(){    
-    console.log("here");
 
     if (this.form.valid) {
-      console.log("here2");
       
       this.agentService.uploadAgentsFromExcel(this.file,this.form.get('sheetName')?.value).subscribe(
         {next: event => {
           console.log(event);
-          
-        if (event.type === HttpEventType.DownloadProgress) {
-            this.uploadProgression = true
-            this.uploadCompleted = false
-            //this.form.disable()
+          this.uploadProgression = true
+          this.uploadCompleted = false
         
-        }
         if (event.type === HttpEventType.Response) {
           this.uploadCompleted = true
           this.uploadProgression = false
@@ -80,7 +74,14 @@ export class ImportExcelComponent implements OnInit, OnDestroy{
         },
         error: (err: AppError) => {
           if (err instanceof UnprocessableEntityError)
-          handleFormError(err, this.form)      }
+            handleFormError(err, this.form)  
+          setTimeout(() => {
+            this.uploadProgression = false
+          }, 2000);    
+          
+
+        }
+        
     })
     }
     
