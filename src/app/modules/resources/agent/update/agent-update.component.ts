@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AgentService} from "../../../../services/agent.service";
@@ -8,12 +8,8 @@ import {Agent} from "../../../../commons/interfaces/agent";
 import {ToastrService} from 'ngx-toastr';
 import {HttpErrorResponse} from "@angular/common/http";
 import {BadRequestError} from "../../../../commons/errors/bad-request-error";
-import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 import {WholesalerService} from "../../../../services/wholesaler.service";
-import {NotFoundError} from "rxjs";
-import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {BaseSimpleWholesaler} from "../../../../commons/models/simple-wholesaler";
-import {SimpleWholesaler} from "../../../../commons/interfaces/simple-wholesaler";
 
 @Component({
     selector: 'app-agent-update',

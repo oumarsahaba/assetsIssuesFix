@@ -19,9 +19,7 @@ export class WholesalerProvisionIndexComponent implements OnInit {
 
     @Input()
     codeWholesaler: any
-    page: PaginatedResource<WholesalerProvision>;
     page$: Observable<Response<PaginatedResource<WholesalerProvision>>>;
-
 
     constructor(private provisionRequestService: WholesalerProvisionService, private router: Router) {
     }
@@ -41,7 +39,6 @@ export class WholesalerProvisionIndexComponent implements OnInit {
                     this.router.navigate(['/forbidden'])
             }
         })
-
     }
 
 }

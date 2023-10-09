@@ -41,11 +41,11 @@ export class WholesalerService extends BaseAPIService {
     bulkSettings(codeWholesaler: string, overdraftMaxDailyCount: number, overdraftLimitAmount: number,
                  overdraftBillingOccurrence: number, penaltyDelayInDays: number) {
         return this.httpPostCall('/wholesaler/bulk/settings', {
-            codeWholesaler : codeWholesaler,
-            overdraftLimitAmount : overdraftLimitAmount,
+            codeWholesaler: codeWholesaler,
+            overdraftLimitAmount: overdraftLimitAmount,
             overdraftMaxDailyCount: overdraftMaxDailyCount,
-            overdraftBillingOccurrence : overdraftBillingOccurrence,
-            penaltyDelayInDays : penaltyDelayInDays,
+            overdraftBillingOccurrence: overdraftBillingOccurrence,
+            penaltyDelayInDays: penaltyDelayInDays,
 
         })
     }

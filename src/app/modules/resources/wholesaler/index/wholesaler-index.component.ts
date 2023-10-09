@@ -23,12 +23,13 @@ export class WholesalerIndexComponent implements OnInit {
     wholesalers$: Observable<Response<PaginatedResource<Wholesaler>>>
     aggregators$: Observable<Response<Aggregator[]>>
 
-    codeWholesaler: string = ""
+    codeWholesaler: string = ''
 
     items: Breadcrumb[] = [
         {label: "Wholesalers"}
     ]
     home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
+    protected readonly data = data;
 
     constructor(private wholesalerService: WholesalerService,
                 private router: Router, private breadcrumbService: BreadcrumbService,
@@ -76,6 +77,4 @@ export class WholesalerIndexComponent implements OnInit {
             }
         })
     }
-
-    protected readonly data = data;
 }

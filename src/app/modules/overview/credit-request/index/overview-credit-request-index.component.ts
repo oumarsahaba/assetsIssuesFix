@@ -23,27 +23,23 @@ import {ToastrService} from "ngx-toastr";
 })
 export class OverviewCreditRequestIndexComponent implements OnInit {
 
-    page: PaginatedResource<OverviewCreditRequest>;
     data: OverviewCreditRequest[];
-   search = {
-       codeAgent: '',
-       codeWholesaler:  '',
-       startDate: '',
-       endDate:  '',
-       status:  ''
-   }
+    search = {
+        codeAgent: '',
+        codeWholesaler: '',
+        startDate: '',
+        endDate: '',
+        status: ''
+    }
     page$: Observable<Response<PaginatedResource<OverviewCreditRequest>>>;
-
-    protected readonly CreditRequestStatus = CreditRequestStatus;
-
     items: Breadcrumb[] = [
         {label: "Credit requests"},
     ]
-
     home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
+    protected readonly CreditRequestStatus = CreditRequestStatus;
 
     constructor(private overviewService: OverviewService, private router: Router, private breadcrumbService: BreadcrumbService,
-                private toastr:ToastrService) {
+                private toastr: ToastrService) {
     }
 
     ngOnInit(): void {

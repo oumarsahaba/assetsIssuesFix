@@ -15,9 +15,7 @@ import {Observable, share} from 'rxjs';
 })
 export class DashboardIndexComponent implements OnInit {
 
-    metrics: DashboardMetrics
     metrics$: Observable<Response<DashboardMetrics>>;
-
 
     constructor(private dashboardService: DashboardService, private router: Router) {
     }

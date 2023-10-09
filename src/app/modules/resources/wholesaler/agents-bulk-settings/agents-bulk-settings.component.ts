@@ -11,22 +11,22 @@ import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 import {WholesalerService} from "../../../../services/wholesaler.service";
 
 @Component({
-  selector: 'app-agents-bulk-settings',
-  templateUrl: './agents-bulk-settings.component.html',
-  styleUrls: ['./agents-bulk-settings.component.css']
+    selector: 'app-agents-bulk-settings',
+    templateUrl: './agents-bulk-settings.component.html',
+    styleUrls: ['./agents-bulk-settings.component.css']
 })
 export class AgentsBulkSettingsComponent implements OnChanges {
 
     @Input()
-    wholesaler:Wholesaler
+    wholesaler: Wholesaler
     agent: Agent
     form: FormGroup
     displayModal: any;
     formError: string | null = null;
 
     constructor(
-                private wholesalerService: WholesalerService,private router: Router,
-                private toastr: ToastrService) {
+        private wholesalerService: WholesalerService, private router: Router,
+        private toastr: ToastrService) {
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -57,7 +57,7 @@ export class AgentsBulkSettingsComponent implements OnChanges {
         ).subscribe({
             next: (response) => {
                 if (response.statusCode == 200) {
-                    this.formError =null
+                    this.formError = null
                     this.toastr.success('Agents updated successfully', 'Success');
                     navigateBack(this.router)
                 }
@@ -70,6 +70,7 @@ export class AgentsBulkSettingsComponent implements OnChanges {
             }
         })
     }
+
     toggleModal() {
         this.displayModal = !this.displayModal
     }

@@ -7,12 +7,14 @@ import {BaseAPIService} from "./base-api.service";
 export class AgentService extends BaseAPIService {
 
 
-    getAll(codeAggregator: string,  codeAgent: string,codeWholesaler: string, page: number = 0, size: number = 10) {
+    getAll(codeAggregator: string, codeAgent: string, codeWholesaler: string, page: number = 0, size: number = 10) {
         return this.httpGetCall(`/agent?page=${page}&size=${size}&codeAggregator=${codeAggregator}&codeAgent=${codeAgent}&codeWholesaler=${codeWholesaler}`)
     }
-    getAllAgentWithDeficit( page: number = 0, size: number = 10) {
+
+    getAllAgentWithDeficit(page: number = 0, size: number = 10) {
         return this.httpGetCall(`/agent/deficit?page=${page}&size=${size}`)
     }
+
     create(codeAgent: string,
            codeWholesaler: string,
            description: string,

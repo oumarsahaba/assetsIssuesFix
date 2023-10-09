@@ -1,23 +1,18 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {WholesalerService} from "../../../../services/wholesaler.service";
 import {Router} from "@angular/router";
 import {AgentService} from "../../../../services/agent.service";
 import {AppError} from "../../../../commons/errors/app-error";
-import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {SimpleWholesaler} from "../../../../commons/interfaces/simple-wholesaler";
-import {BaseSimpleWholesaler} from "../../../../commons/models/simple-wholesaler";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
-import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {ToastrService} from 'ngx-toastr';
-import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 
 @Component({
     selector: 'app-agent-create',
     templateUrl: './agent-create.component.html',
     styleUrls: ['./agent-create.component.css']
 })
-export class AgentCreateComponent  {
+export class AgentCreateComponent {
     @Input()
     wholesalers: SimpleWholesaler[]
     form: FormGroup
@@ -40,7 +35,6 @@ export class AgentCreateComponent  {
 
         this.displayModal = false
     }
-
 
 
     create() {

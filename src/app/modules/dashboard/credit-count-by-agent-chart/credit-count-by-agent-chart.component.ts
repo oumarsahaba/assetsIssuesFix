@@ -3,8 +3,8 @@ import {Chart, registerables} from 'chart.js';
 import {DashboardService} from "../../../services/dashboard.service";
 import {AppError} from "../../../commons/errors/app-error";
 import {ChartDataset} from "../../../commons/interfaces/chart-dataset";
-import { Observable, share } from 'rxjs';
-import { Response } from 'src/app/commons/models/response';
+import {Observable, share} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-credit-count-by-agent-chart',
@@ -16,12 +16,14 @@ export class CreditCountByAgentChartComponent implements OnInit {
     chart: Chart | null = null; // Store the chart instance
     data$: Observable<Response<ChartDataset>>
 
-    constructor(private dashboardService: DashboardService) {}
+    constructor(private dashboardService: DashboardService) {
+    }
 
     ngOnInit(): void {
         Chart.register(...registerables);
         this.updateChart(this.selectedPeriod); // Initialize chart with default period
     }
+
     onPeriodChange(event: any) {
         this.selectedPeriod = event.target.value;
         this.updateChart(this.selectedPeriod); // Update chart when period changes
@@ -79,6 +81,7 @@ export class CreditCountByAgentChartComponent implements OnInit {
         });
 
     }
+
     private getChartTitle(period: string): string {
         switch (period) {
             case '30':

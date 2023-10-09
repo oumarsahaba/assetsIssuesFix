@@ -30,11 +30,11 @@ export class AgentIndexComponent implements OnInit {
     agents$: Observable<Response<PaginatedResource<Agent>>>
     aggregators$: Observable<Response<Aggregator[]>>
 
-   search ={
-       codeAgent:  "",
-       codeWholesaler:  "",
-       codeAggregator:  ""
-   }
+    search = {
+        codeAgent: '',
+        codeWholesaler: '',
+        codeAggregator: '',
+    }
 
     items: Breadcrumb[] = [
         {label: "Agents"}
@@ -61,7 +61,6 @@ export class AgentIndexComponent implements OnInit {
 
         this.search.codeAggregator = null;
     }
-
 
 
     confirmDelete(codeAgent: string) {

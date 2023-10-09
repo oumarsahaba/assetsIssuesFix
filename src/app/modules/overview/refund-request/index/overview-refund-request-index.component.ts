@@ -11,10 +11,8 @@ import {Observable} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 import {Breadcrumb} from "../../../../commons/interfaces/breadcrumb";
 import {BreadcrumbService} from "../../../../commons/services/breadcrumb.service";
-import Swal from 'sweetalert2';
-import { exportExcelFile } from 'src/app/commons/helpers';
+import {exportExcelFile} from 'src/app/commons/helpers';
 import {ToastrService} from "ngx-toastr";
-import { ClientError } from 'src/app/commons/errors/client-error';
 
 
 @Component({
@@ -24,16 +22,14 @@ import { ClientError } from 'src/app/commons/errors/client-error';
 })
 export class OverviewRefundRequestIndexComponent implements OnInit {
 
-    page: PaginatedResource<OverviewRefundRequest>;
-    data: OverviewRefundRequest[];
     search = {
-        codeAgent:  '',
-        status:  '',
+        codeAgent: '',
+        status: '',
         startDate: '',
         endDate: ''
     }
-    page$: Observable<Response<PaginatedResource<OverviewRefundRequest>>>;
 
+    page$: Observable<Response<PaginatedResource<OverviewRefundRequest>>>;
 
     items: Breadcrumb[] = [
         {label: "Refund requests"},
@@ -44,10 +40,10 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
     protected readonly RefundRequestStatus = RefundRequestStatus;
 
     constructor(private overviewService: OverviewService,
-        private router: Router,
-        private breadcrumbService: BreadcrumbService,
-        private toastr: ToastrService,
-        ) {
+                private router: Router,
+                private breadcrumbService: BreadcrumbService,
+                private toastr: ToastrService,
+    ) {
     }
 
     ngOnInit(): void {
@@ -70,36 +66,37 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
     }
 
     exportExcel() {
-        this.overviewService.getAllRefundRequests(this.search.codeAgent, this.search.status,this.search.startDate, this.search.endDate)
+        this.overviewService.getAllRefundRequests(this.search.codeAgent, this.search.status, this.search.startDate, this.search.endDate)
             .subscribe({
                 next: (response) => {
                     if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
                         // Show a SweetAlert for no data available
                         this.toastr.warning('There is no data available.', 'No Data Available', {
                             timeOut: 3000,
-                          });;
+                        });
+                        ;
                     } else {
-                        const headers = ['Token', 'Amount', 'Status','Refund date creation',
-                        'Credit request token', 'Credit request amount', 'Credit request fees', 'Credit request outstanding balance',
-                        'Credit request recovered amount', 'Credit request status', 'Credit request type', 'Credit request date creation',
-                        'Agent code', 'Agent description' ]
-                        const dataset = response.data.map(data=>[data.token, data.amount, data.status,data.createdAt,
+                        const headers = ['Token', 'Amount', 'Status', 'Refund date creation',
+                            'Credit request token', 'Credit request amount', 'Credit request fees', 'Credit request outstanding balance',
+                            'Credit request recovered amount', 'Credit request status', 'Credit request type', 'Credit request date creation',
+                            'Agent code', 'Agent description']
+                        const dataset = response.data.map(data => [data.token, data.amount, data.status, data.createdAt,
                             data.creditRequest.token, data.creditRequest.amount, data.creditRequest.fees,
                             data.creditRequest.outstandingBalance, data.creditRequest.recoveredAmount, data.creditRequest.status,
                             data.creditRequest.type, data.creditRequest.createdAt,
                             data.creditRequest.agent.codeAgent, data.creditRequest.agent.description
-                            ])
-                            try {
-                                this.toastr.info('File will be exported soon. Check downloads', 'File exportation', {
-                                    timeOut: 3000,
-                                  });
-                                exportExcelFile(dataset, headers,'Refund_Request')
+                        ])
+                        try {
+                            this.toastr.info('File will be exported soon. Check downloads', 'File exportation', {
+                                timeOut: 3000,
+                            });
+                            exportExcelFile(dataset, headers, 'Refund_Request')
 
-                            } catch (err) {
-                                this.toastr.error('Cannot export excel file. Contact your manager for more informations', 'File download error', {
-                                    timeOut: 3000,
-                                  });
-                            }
+                        } catch (err) {
+                            this.toastr.error('Cannot export excel file. Contact your manager for more informations', 'File download error', {
+                                timeOut: 3000,
+                            });
+                        }
                     }
                 },
                 error: (err: AppError) => {

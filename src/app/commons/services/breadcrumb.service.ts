@@ -7,9 +7,8 @@ import {Breadcrumb} from '../interfaces/breadcrumb';
 })
 export class BreadcrumbService {
     private itemsSource = new BehaviorSubject<Breadcrumb[]>(null);
-    private homeSource = new BehaviorSubject<Breadcrumb>(null);
-
     itemsHandler = this.itemsSource.asObservable();
+    private homeSource = new BehaviorSubject<Breadcrumb>(null);
     homeHandler = this.homeSource.asObservable();
 
     setItems(items: Breadcrumb[]) {

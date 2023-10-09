@@ -8,23 +8,19 @@ import {Wholesaler} from "../../../../commons/interfaces/wholesaler";
 import {ToastrService} from "ngx-toastr";
 import {HttpErrorResponse} from "@angular/common/http";
 import {BadRequestError} from "../../../../commons/errors/bad-request-error";
-import { Aggregator } from 'src/app/commons/interfaces/aggregator';
-import { AggregatorService } from 'src/app/services/aggregator.service';
-import { NotFoundError } from 'rxjs';
-import { ForbiddenError } from 'src/app/commons/errors/forbidden-error';
-import { BaseAggregator } from 'src/app/commons/models/aggregator';
+import {Aggregator} from 'src/app/commons/interfaces/aggregator';
 
 @Component({
     selector: 'app-wholesaler-update',
     templateUrl: './wholesaler-update.component.html',
     styleUrls: ['./wholesaler-update.component.css']
 })
-export class WholesalerUpdateComponent implements OnChanges{
+export class WholesalerUpdateComponent implements OnChanges {
 
     @Input()
     wholesaler: Wholesaler
     @Input()
-    aggregators$: Aggregator[] =[]
+    aggregators$: Aggregator[] = []
     form: FormGroup
     displayModal: any;
     formError: string | null = null;
@@ -35,6 +31,7 @@ export class WholesalerUpdateComponent implements OnChanges{
                 private toaster: ToastrService,
     ) {
     }
+
     ngOnChanges(changes: SimpleChanges): void {
         this.form = new FormGroup({
             codeWholesaler: new FormControl('', Validators.required),

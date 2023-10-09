@@ -14,8 +14,8 @@ import {TabContainerComponent} from './tabs/container/tab-container.component';
 import {TabItemComponent} from './tabs/item/tab-item.component';
 import {DetailCardsComponent} from './detail-cards/detail-cards.component';
 import {TableLoaderComponent} from './table-loader/table-loader.component';
-import { ChartLoaderComponent } from './chart-loader/chart-loader.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb/breadcrumb.component';
+import {ChartLoaderComponent} from './chart-loader/chart-loader.component';
+import {BreadcrumbComponent} from './breadcrumb/breadcrumb/breadcrumb.component';
 import {ActionsDropdownComponent} from "./actions-dropdown/actions-dropdown.component";
 
 

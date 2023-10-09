@@ -10,8 +10,8 @@ import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from "sweetalert2";
 import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
-import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
-import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
+import {Breadcrumb} from 'src/app/commons/interfaces/breadcrumb';
+import {BreadcrumbService} from 'src/app/commons/services/breadcrumb.service';
 
 @Component({
     selector: 'app-lender-index',
@@ -20,10 +20,9 @@ import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
 })
 export class LenderIndexComponent implements OnInit {
 
-    page: PaginatedResource<Lender>;
     page$: Observable<Response<PaginatedResource<Lender>>>;
-    items: Breadcrumb[]=[
-        {label: "Lenders"}    ]
+    items: Breadcrumb[] = [
+        {label: "Lenders"}]
     home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
     constructor(private lenderService: LenderService, private router: Router, private breadcrumbService: BreadcrumbService) {

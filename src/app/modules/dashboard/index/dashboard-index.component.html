@@ -34,21 +34,21 @@
     <div class="rounded-lg bg-white mt-5">
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div class="sm:col-span-1 py-5 px-3 border border-gray-50 rounded shadow">
-                <app-credit-count-chart />
+                <app-credit-count-chart/>
             </div>
             <div class="sm:col-span-1 py-5 px-3 border border-gray-50 rounded shadow">
-                <app-credit-flux-chart />
+                <app-credit-flux-chart/>
             </div>
             <div class="sm:col-span-1 py-5 px-3 border border-gray-50 rounded shadow">
-                <app-credit-count-by-wholesaler-chart />
+                <app-credit-count-by-wholesaler-chart/>
             </div>
             <div class="sm:col-span-1 py-5 px-3 border border-gray-50 rounded shadow">
-                <app-credit-flux-by-wholesaler-chart />
+                <app-credit-flux-by-wholesaler-chart/>
             </div>
         </div>
     </div>
 
-    
+
 </app-dashboard>
 
 <ng-template #loader>
@@ -59,7 +59,7 @@
                     <dt class="truncate text-sm font-medium text-gray-500">System Balance</dt>
                     <ng-container *ngTemplateOutlet="textLoader"></ng-container>
                 </div>
-    
+
                 <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
                     <dt class="truncate text-sm font-medium text-gray-500">Lender Count</dt>
                     <ng-container *ngTemplateOutlet="textLoader"></ng-container>
@@ -78,8 +78,8 @@
                 </div>
             </div>
         </div>
-    
-    
+
+
         <div class="rounded-lg bg-white mt-5">
             <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <div class="sm:col-span-1 py-5 px-3 border border-gray-50 rounded shadow">
@@ -96,8 +96,8 @@
                 </div>
             </div>
         </div>
-    
-        
+
+
     </app-dashboard>
 </ng-template>
 

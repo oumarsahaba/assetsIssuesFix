@@ -1,14 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {WholesalerService} from "../../../../services/wholesaler.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {Aggregator} from "../../../../commons/interfaces/aggregator";
 import {AggregatorService} from "../../../../services/aggregator.service";
-import {NotFoundError} from "../../../../commons/errors/not-found-error";
-import {BaseAggregator} from "../../../../commons/models/aggregator";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
-import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {ToastrService} from "ngx-toastr";
 
 @Component({
@@ -16,7 +13,7 @@ import {ToastrService} from "ngx-toastr";
     templateUrl: './wholesaler-create.component.html',
     styleUrls: ['./wholesaler-create.component.css']
 })
-export class WholesalerCreateComponent  {
+export class WholesalerCreateComponent {
     form: FormGroup
     displayModal: any;
     @Input()
@@ -35,7 +32,6 @@ export class WholesalerCreateComponent  {
         this.aggregators$ = []
         this.displayModal = false
     }
-
 
 
     create() {

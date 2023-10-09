@@ -9,8 +9,8 @@ import {Commissionable} from "../../../../commons/enums/Commissionable";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
-import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
-import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
+import {Breadcrumb} from 'src/app/commons/interfaces/breadcrumb';
+import {BreadcrumbService} from 'src/app/commons/services/breadcrumb.service';
 
 @Component({
     selector: 'app-wholesaler-show',
@@ -22,7 +22,7 @@ export class WholesalerShowComponent {
     accountSlug: string | null
     operations: Operation[]
     wholesaler$: Observable<Response<Wholesaler>>
-    items: Breadcrumb[]=[
+    items: Breadcrumb[] = [
         {label: "Wholesalers", routerLink: '/wholesaler'},
         {label: "Details"}
     ]
