@@ -12,6 +12,9 @@ import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
 import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
+import {Aggregator} from "../../../../commons/interfaces/aggregator";
+import {BaseAggregator} from "../../../../commons/models/aggregator";
+import {AggregatorService} from "../../../../services/aggregator.service";
 
 @Component({
     selector: 'app-wholesaler-index',
@@ -23,15 +26,19 @@ export class WholesalerIndexComponent implements OnInit {
     page: PaginatedResource<Wholesaler>
     page$: Observable<Response<PaginatedResource<Wholesaler>>>
     codeWholesaler: string = ""
+    aggregators$: Observable<Response<Aggregator[]>>
     items: Breadcrumb[]=[
         {label: "Wholesalers"}    ]
     home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
-    constructor(private wholesalerService: WholesalerService, private router: Router, private breadcrumbService: BreadcrumbService) {
+    constructor(private wholesalerService: WholesalerService,
+                private router: Router, private breadcrumbService: BreadcrumbService,
+                private aggregatorService: AggregatorService,) {
     }
 
     ngOnInit(): void {
         this.goToPage()
+        this.aggregators$ = this.aggregatorService.getAll().pipe(share())
     }
 
     goToPage(page: number = 0) {

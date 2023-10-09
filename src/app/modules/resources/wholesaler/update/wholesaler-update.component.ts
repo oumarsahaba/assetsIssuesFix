@@ -19,23 +19,22 @@ import { BaseAggregator } from 'src/app/commons/models/aggregator';
     templateUrl: './wholesaler-update.component.html',
     styleUrls: ['./wholesaler-update.component.css']
 })
-export class WholesalerUpdateComponent implements OnChanges {
+export class WholesalerUpdateComponent implements OnChanges{
 
     @Input()
     wholesaler: Wholesaler
-
+    @Input()
+    aggregators$: Aggregator[] =[]
     form: FormGroup
     displayModal: any;
     formError: string | null = null;
-    aggregators: Aggregator[] =[]
+
 
     constructor(private wholesalerService: WholesalerService,
                 private router: Router,
-                private toastr: ToastrService,
-                private aggregatorService: AggregatorService
+                private toaster: ToastrService,
     ) {
     }
-
     ngOnChanges(changes: SimpleChanges): void {
         this.form = new FormGroup({
             codeWholesaler: new FormControl('', Validators.required),
@@ -55,22 +54,6 @@ export class WholesalerUpdateComponent implements OnChanges {
 
     }
 
-    ngOnInit(): void {
-        this.aggregatorService.getAll()
-            .subscribe({
-                next: (response) => {
-                    this.aggregators = (response.data as Aggregator[])
-                        .map((aggregator) => new BaseAggregator(aggregator))
-                },
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
-
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
-    }
 
     update() {
         this.wholesalerService.update(
@@ -82,7 +65,7 @@ export class WholesalerUpdateComponent implements OnChanges {
         ).subscribe({
             next: (response) => {
                 if (response.statusCode == 200) {
-                    this.toastr.success('Wholesaler updated successfully', 'Success');
+                    this.toaster.success('Wholesaler updated successfully', 'Success');
                     this.formError = null;
                     navigateBack(this.router)
                 }

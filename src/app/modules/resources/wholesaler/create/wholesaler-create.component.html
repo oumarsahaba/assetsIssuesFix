@@ -38,7 +38,7 @@
                                     formControlName="codeAggregator"
                                     id="codeAggregator">
                                 <option value="">Select an aggregator</option>
-                                <option *ngFor="let aggregator of aggregators"
+                                <option *ngFor="let aggregator of aggregators$"
                                         [value]="aggregator.codeAggregator">{{ aggregator.description }}</option>
                             </select>
 
