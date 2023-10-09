@@ -1,31 +1,39 @@
 <app-dashboard>
     <div class="px-4 sm:px-6 lg:px-8 ">
         <div class="sm:flex sm:items-center">
-            <div class="sm:flex-auto" >
+            <div class="sm:flex-auto">
                 <div class="flex gap-2">
                     <h1 class="text-base font-semibold leading-6 text-gray-900">Agent</h1>
-                    <app-agent-create  [wholesalers]="wholesalers"/>
+                    <app-agent-create *ngIf="wholesalers$ | async as response" [wholesalers]="response.data"/>
                 </div>
                 <p class="mt-2 text-sm text-gray-700">A list of all agents.</p>
             </div>
             <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                 <div class="flex flex-col gap-y-4 lg:flex-row lg:justify-end lg:gap-x-4">
                     <div class="flex flex-col" *ngIf="keycloakService.isUserInRole('admin')">
-                        <label for="codeAggregator" class="text-gray-700 font-serif text-sm mb-1">Code Aggregator</label>
-                        <select id="codeAggregator"  (change)="onAggregatorChange($event)" class="pl-5 py-1.5 border rounded text-sm">
-                            <option>Select Code Aggregator</option>
-                            <option *ngFor="let aggregator of aggregators" [value]="aggregator.codeAggregator">{{ aggregator.codeAggregator }}</option>
+                        <label for="codeAggregator" class="text-gray-700 font-serif text-sm mb-1">Aggregator</label>
+                        <select id="codeAggregator"
+                                *ngIf="aggregators$ | async as response"
+                                (change)="onAggregatorChange($event)"
+                                class="pl-1.5 py-1.5 border rounded text-sm">
+                            <option>Select Aggregator</option>
+                            <option *ngFor="let aggregator of response.data"
+                                    [value]="aggregator.codeAggregator">{{ aggregator.description }}2
+                            </option>
                         </select>
                     </div>
 
                     <div class="flex flex-col">
-                        <label class="text-gray-700 font-serif text-sm mb-1" for="codeWholesaler">Code Wholesaler</label>
-                        <input [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm h-9" id="codeWholesaler" placeholder="Code Wholesaler" type="text">
+                        <label class="text-gray-700 font-serif text-sm mb-1" for="codeWholesaler">Code
+                            Wholesaler</label>
+                        <input [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm" id="codeWholesaler"
+                               placeholder="Code Wholesaler" type="text">
                     </div>
 
                     <div class="flex flex-col">
                         <label class="text-gray-700 font-serif text-sm mb-1" for="codeAgent">Code Agent</label>
-                        <input [(ngModel)]="codeAgent" class="p-1.5 border rounded text-sm h-9" id="codeAgent" placeholder="Code Agent" type="text">
+                        <input [(ngModel)]="codeAgent" class="p-1.5 border rounded text-sm" id="codeAgent"
+                               placeholder="Code Agent" type="text">
                     </div>
 
                     <div class="flex items-end gap-2">
@@ -44,7 +52,8 @@
                             <button (click)="exportExcel()"
                                     class="px-3 py-1.5 bg-blue-500 text-white rounded hover:ring hover:bg-blue-600 text-sm ">
                                 <div class="flex items-center">
-                                    <svg fill="currentColor" height="1em" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
+                                    <svg fill="currentColor" height="1em" viewBox="0 0 384 512"
+                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z"/>
                                     </svg>
@@ -59,22 +68,39 @@
         </div>
 
         <app-shared-paginated-resource (pageChange)="goToPage($event.number)"
-                                       *ngIf="page$ | async as pageResponse ; else itemsloader"
+                                       *ngIf="agents$ | async as pageResponse ; else itemsloader"
                                        [(page)]="pageResponse.data">
             <table class="min-w-full divide-y divide-gray-300">
                 <thead class="bg-gray-50 divide-y divide-gray-200">
                 <tr class="divide-x divide-gray-200">
-                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden lg:table-cell" colspan="2">Wholesaler</th>
-                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden lg:table-cell" colspan="6">Agent</th>
+                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden lg:table-cell"
+                        colspan="2">Wholesaler
+                    </th>
+                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden lg:table-cell"
+                        colspan="6">Agent
+                    </th>
                 </tr>
                 <tr class="divide-x divide-gray-200">
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden lg:table-cell">Code</th>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden lg:table-cell">Description</th>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 ">Code</th>
+                    <th scope="col"
+                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden lg:table-cell">
+                        Code
+                    </th>
+                    <th scope="col"
+                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 hidden lg:table-cell">
+                        Description
+                    </th>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 ">
+                        Code
+                    </th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 ">Description</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Active</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden lg:table-cell">Balance</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden lg:table-cell">created at</th>
+                    <th scope="col"
+                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden lg:table-cell">Balance
+                    </th>
+                    <th scope="col"
+                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden lg:table-cell">created
+                        at
+                    </th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                         <span class="sr-only">Actions</span>
                     </th>
@@ -110,10 +136,11 @@
                                               stroke-linejoin="round"/>
                                     </svg>
                                 </button>
-                                <app-agent-update [wholesalers]="wholesalers" [agent]="agent"/>
+                                <app-agent-update *ngIf="wholesalers$ | async as response" [wholesalers]="response.data"
+                                                  [agent]="agent"/>
                                 <button
                                     (click)="confirmDelete(agent.codeAgent)"
-                                    class="relative -ml-px flex flex-row-reverse items-center rounded-r-md bg-white px-2.5 py-1.5 text-sm font-semibold gap-x-1.5 text-gray-900 ml-1 hover:bg-gray-50 focus:z-10"
+                                    class="relative flex flex-row-reverse items-center rounded-r-md bg-white px-2.5 py-1.5 text-sm font-semibold gap-x-1.5 text-gray-900 ml-1 hover:bg-gray-50 focus:z-10"
                                     type="button"
                                 >
                                     Delete

@@ -37,7 +37,6 @@ export class AgentUpdateComponent implements OnChanges {
     }
 
 
-
     ngOnChanges(changes: SimpleChanges) {
         this.form = new FormGroup({
             codeAgent: new FormControl('', Validators.required),
