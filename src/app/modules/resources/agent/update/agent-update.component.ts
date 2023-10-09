@@ -13,19 +13,22 @@ import {WholesalerService} from "../../../../services/wholesaler.service";
 import {NotFoundError} from "rxjs";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {BaseSimpleWholesaler} from "../../../../commons/models/simple-wholesaler";
+import {SimpleWholesaler} from "../../../../commons/interfaces/simple-wholesaler";
 
 @Component({
     selector: 'app-agent-update',
     templateUrl: './agent-update.component.html',
     styleUrls: ['./agent-update.component.css']
 })
-export class AgentUpdateComponent implements OnChanges, OnInit {
+export class AgentUpdateComponent implements OnChanges {
+    @Input()
+    wholesalers: BaseSimpleWholesaler[] = []
     @Input()
     agent: Agent
     form: FormGroup
     displayModal: any;
     formError: string | null = null;
-    wholesalers: BaseSimpleWholesaler[] = []
+
 
     constructor(private agentService: AgentService,
                 private wholesalerService: WholesalerService,
@@ -33,23 +36,6 @@ export class AgentUpdateComponent implements OnChanges, OnInit {
                 private toastr: ToastrService) {
     }
 
-    ngOnInit() {
-        this.wholesalerService.getAll()
-            .subscribe({
-                next: (response) => {
-                    this.wholesalers = (response.data as Wholesaler[])
-                        .map((wholesaler) => new BaseSimpleWholesaler(wholesaler))
-                },
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
-
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
-
-    }
 
     ngOnChanges(changes: SimpleChanges) {
         this.form = new FormGroup({

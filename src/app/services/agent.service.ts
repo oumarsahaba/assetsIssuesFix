@@ -59,8 +59,4 @@ export class AgentService extends BaseAPIService {
     delete(code: string) {
         return this.httpDeleteCall('/agent/delete/' + code)
     }
-
-    getAggregators() {
-        return this.httpGetCall('/aggregator');
-    }
 }

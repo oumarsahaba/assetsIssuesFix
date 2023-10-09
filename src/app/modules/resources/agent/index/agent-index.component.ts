@@ -9,11 +9,16 @@ import {PaginatedResource} from "../../../../commons/interfaces/paginated-resour
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from 'sweetalert2';
 import {KeycloakService} from "keycloak-angular";
-import {Observable} from 'rxjs';
+import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
 import {BreadcrumbService} from 'src/app/commons/services/breadcrumb.service';
 import * as XLSX from "xlsx";
 import {ToastrService} from "ngx-toastr";
+import {WholesalerService} from "../../../../services/wholesaler.service";
+import {SimpleWholesaler} from "../../../../commons/interfaces/simple-wholesaler";
+import {Breadcrumb} from "../../../../commons/interfaces/breadcrumb";
+import {Aggregator} from "../../../../commons/interfaces/aggregator";
+import {AggregatorService} from "../../../../services/aggregator.service";
 
 @Component({
     selector: 'app-agent-index',
@@ -21,26 +26,41 @@ import {ToastrService} from "ngx-toastr";
     styleUrls: ['./agent-index.component.css']
 })
 export class AgentIndexComponent implements OnInit {
+    wholesalers$: Observable<Response<SimpleWholesaler[]>>
+    agents$: Observable<Response<PaginatedResource<Agent>>>
+    aggregators$: Observable<Response<Aggregator[]>>
 
-    page$: Observable<Response<PaginatedResource<Agent>>>
-    codeAgent: string = "";
-    codeWholesaler: string = "";
-    codeAggregator: string = "";
+    codeAgent: string = ""
+    codeWholesaler: string = ""
+    codeAggregator: string = ""
 
-    aggregators: any[];
+    items: Breadcrumb[] = [
+        {label: "Agents"}
+    ]
+
+    home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
     constructor(public keycloakService: KeycloakService,
                 private agentService: AgentService,
+                private aggregatorService: AggregatorService,
+                private wholesalerService: WholesalerService,
                 private breadcrumbService: BreadcrumbService,
                 private toastr: ToastrService,
                 private router: Router) {
     }
 
     ngOnInit(): void {
+        this.breadcrumbService.setItems(this.items)
+        this.breadcrumbService.setHome(this.home)
+
+        this.aggregators$ = this.aggregatorService.getAll().pipe(share())
+        this.wholesalers$ = this.wholesalerService.getAll().pipe(share())
+        this.agents$ = this.agentService.getAll(this.codeAggregator, this.codeAgent, this.codeWholesaler).pipe(share())
+
         this.codeAggregator = null;
-        this.page$ = this.agentService.getAll(this.codeAggregator, this.codeAgent, this.codeWholesaler);
-        this.getAllAggregators()
     }
+
+
 
     confirmDelete(codeAgent: string) {
         Swal.fire({
@@ -74,16 +94,16 @@ export class AgentIndexComponent implements OnInit {
 
     onAggregatorChange(event: any) {
         this.codeAggregator = event.target.value;
-        this.page$ = this.agentService.getAll(this.codeAggregator, this.codeWholesaler, this.codeAgent, 0);
+        this.agents$ = this.agentService.getAll(this.codeAggregator, this.codeWholesaler, this.codeAgent, 0);
     }
 
 
     goToPage(page: number = 0) {
-        this.page$ = this.agentService.getAll(this.codeAggregator, this.codeAgent, this.codeWholesaler, page);
+        this.agents$ = this.agentService.getAll(this.codeAggregator, this.codeAgent, this.codeWholesaler, page);
     }
 
     exportExcel(page: number = 0) {
-        this.page$ = this.agentService.getAllAgentWithDeficit(page);
+        this.agents$ = this.agentService.getAllAgentWithDeficit(page);
         this.agentService.getAllAgentWithDeficit(page).subscribe({
             next: (response) => {
                 if (!response.data ||
@@ -143,21 +163,5 @@ export class AgentIndexComponent implements OnInit {
                 if (err instanceof ForbiddenError) this.router.navigate(['/forbidden']);
             },
         });
-    }
-
-    getAllAggregators() {
-        this.agentService.getAggregators()
-            .subscribe({
-                next: (response) => {
-                    this.aggregators = response.data;
-                },
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/'])
-
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
     }
 }

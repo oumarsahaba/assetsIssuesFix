@@ -4,10 +4,8 @@ import {Router} from "@angular/router";
 import {BadRequestError} from "./errors/bad-request-error";
 import {UnprocessableEntityError} from "./errors/unprocessable-entity-error";
 import * as XLSX from 'xlsx';
-import { ClientError } from "./errors/client-error";
+import {ClientError} from "./errors/client-error";
 import * as FileSaver from "file-saver";
-
-
 
 
 export function handleFormError(err: AppError, form: FormGroup) {
@@ -58,13 +56,12 @@ export function navigateBack(router: Router) {
     });
 }
 
-
-export function exportExcelFile(dataset: any[],headers : string[], exportedFileName: string){
+export function exportExcelFile(dataset: any[], headers: string[], exportedFileName: string) {
     console.log(Object.values(dataset[0]), headers);
-    
-    if(Object.values(dataset[0]).length != headers.length)
+
+    if (Object.values(dataset[0]).length != headers.length)
         throw new ClientError("Cannot export excel file. Dataset columns and headers must be same length");
-        
+
     const worksheet: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet([]);
     //get the headers and sub headers
 
@@ -75,24 +72,24 @@ export function exportExcelFile(dataset: any[],headers : string[], exportedFileN
         const row = Object.values(data);
         XLSX.utils.sheet_add_aoa(worksheet, [row], {origin: -1});
     }
-    const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+    const workbook = {Sheets: {data: worksheet}, SheetNames: ["data"]};
     const excelBuffer: any = XLSX.write(workbook, {
         bookType: "xlsx",
         type: "array",
-      });
+    });
     saveAsExcelFile(excelBuffer, exportedFileName);
 
 }
-   
+
 function saveAsExcelFile(buffer: any, fileName: string): void {
     let EXCEL_TYPE =
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
     let EXCEL_EXTENSION = ".xlsx";
     const data: Blob = new Blob([buffer], {
-      type: EXCEL_TYPE,
+        type: EXCEL_TYPE,
     });
     FileSaver.saveAs(
-      data,
-      fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+        data,
+        fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
     );
-  }
+}
