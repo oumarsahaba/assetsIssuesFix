@@ -26,10 +26,12 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
 
     page: PaginatedResource<OverviewRefundRequest>;
     data: OverviewRefundRequest[];
-    codeAgent: string = '';
-    status: string = '';
-    startDate: string;
-    endDate: string;
+    search = {
+        codeAgent:  '',
+        status:  '',
+        startDate: '',
+        endDate: ''
+    }
     page$: Observable<Response<PaginatedResource<OverviewRefundRequest>>>;
 
 
@@ -55,7 +57,7 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.page$ = this.overviewService.getRefundRequests(page, 10, this.codeAgent, this.status, this.startDate, this.endDate)
+        this.page$ = this.overviewService.getRefundRequests(page, 10, this.search.codeAgent, this.search.status, this.search.startDate, this.search.endDate)
         this.page$.subscribe({
             error: (err: AppError) => {
                 if (err instanceof NotFoundError)
@@ -68,7 +70,7 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
     }
 
     exportExcel() {
-        this.overviewService.getAllRefundRequests(this.codeAgent, this.status,this.startDate, this.endDate)
+        this.overviewService.getAllRefundRequests(this.search.codeAgent, this.search.status,this.search.startDate, this.search.endDate)
             .subscribe({
                 next: (response) => {
                     if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {

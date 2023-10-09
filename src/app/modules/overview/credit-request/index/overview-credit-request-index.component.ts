@@ -25,11 +25,13 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
 
     page: PaginatedResource<OverviewCreditRequest>;
     data: OverviewCreditRequest[];
-    codeAgent: string = '';
-    codeWholesaler: string = '';
-    startDate: string = '';
-    endDate: string = '';
-    status: string = '';
+   search = {
+       codeAgent: '',
+       codeWholesaler:  '',
+       startDate: '',
+       endDate:  '',
+       status:  ''
+   }
     page$: Observable<Response<PaginatedResource<OverviewCreditRequest>>>;
 
     protected readonly CreditRequestStatus = CreditRequestStatus;
@@ -51,7 +53,7 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.page$ = this.overviewService.getCreditRequests(page, 10, this.codeAgent, this.codeWholesaler, this.status, this.startDate, this.endDate)
+        this.page$ = this.overviewService.getCreditRequests(page, 10, this.search.codeAgent, this.search.codeWholesaler, this.search.status, this.search.startDate, this.search.endDate)
         this.page$.subscribe({
             error: (err: AppError) => {
                 if (err instanceof NotFoundError)
@@ -64,7 +66,7 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
     }
 
     exportExcel() {
-        this.overviewService.getAllCreditRequests(this.codeWholesaler, this.codeAgent, this.status)
+        this.overviewService.getAllCreditRequests(this.search.codeWholesaler, this.search.codeAgent, this.search.status)
             .subscribe({
                 next: (response) => {
                     if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
