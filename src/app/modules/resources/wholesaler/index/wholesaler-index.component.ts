@@ -23,7 +23,10 @@ export class WholesalerIndexComponent implements OnInit {
     wholesalers$: Observable<Response<PaginatedResource<Wholesaler>>>
     aggregators$: Observable<Response<Aggregator[]>>
 
-    codeWholesaler: string = ''
+    search ={
+        codeWholesaler:  '',
+        codeAggregator: ''
+    }
 
     items: Breadcrumb[] = [
         {label: "Wholesalers"}
@@ -45,7 +48,7 @@ export class WholesalerIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.wholesalers$ = this.wholesalerService.getPage(this.codeWholesaler, page).pipe(share())
+        this.wholesalers$ = this.wholesalerService.getPage(this.search.codeWholesaler,this.search.codeAggregator ,page).pipe(share())
     }
 
     confirmDelete(codeAgent: string) {

@@ -12,9 +12,15 @@
             <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                 <div class="flex flex-col gap-y-4 lg:flex-row lg:justify-end lg:gap-x-4">
                     <div class="flex flex-col">
+                        <label class="text-gray-700 font-serif text-sm mb-1" for="codeAggregator">Code
+                            Aggregator</label>
+                        <input [(ngModel)]="search.codeAggregator" class="p-1.5 border rounded text-sm" id="codeAggregator"
+                               placeholder="Code Aggregator" type="text">
+                    </div>
+                    <div class="flex flex-col">
                         <label class="text-gray-700 font-serif text-sm mb-1" for="codeWholesaler">Code
                             Wholesaler</label>
-                        <input [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm" id="codeWholesaler"
+                        <input [(ngModel)]="search.codeWholesaler" class="p-1.5 border rounded text-sm" id="codeWholesaler"
                                placeholder="Code Wholesaler" type="text">
                     </div>
                     <div class="flex items-end gap-2">
