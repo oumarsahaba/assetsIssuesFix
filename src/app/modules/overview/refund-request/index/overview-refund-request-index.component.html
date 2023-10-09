@@ -2,22 +2,22 @@
     <div class="flex flex-col gap-y-4 lg:flex-row lg:justify-end lg:gap-x-4">
         <div class="flex flex-col">
             <label class="text-gray-700 font-serif text-sm mb-1" for="codeAgent">Code Agent</label>
-            <input [(ngModel)]="codeAgent" class="p-1.5 border rounded text-sm" id="codeAgent" placeholder="Code Agent"
+            <input [(ngModel)]="search.codeAgent" class="p-1.5 border rounded text-sm" id="codeAgent" placeholder="Code Agent"
                    type="text">
         </div>
         <div class="flex flex-col">
             <label class="text-gray-700 font-serif text-sm mb-1" for="startDate">Start Date</label>
-            <input [(ngModel)]="startDate" class="p-1.5 border rounded text-sm" id="startDate" placeholder="Start Date"
+            <input [(ngModel)]="search.startDate" class="p-1.5 border rounded text-sm" id="startDate" placeholder="Start Date"
                    type="date">
         </div>
         <div class="flex flex-col">
             <label class="text-gray-700 font-serif text-sm mb-1" for="endDate">End Date</label>
-            <input [(ngModel)]="endDate" class="p-1.5 border rounded text-sm" id="endDate" placeholder="End Date"
+            <input [(ngModel)]="search.endDate" class="p-1.5 border rounded text-sm" id="endDate" placeholder="End Date"
                    type="date">
         </div>
         <div class="flex flex-col">
             <label class="text-gray-700 font-serif text-sm mb-1">Status</label>
-            <select [(ngModel)]="status" class="py-1.5 pl-3 pr-10 border rounded text-sm">
+            <select [(ngModel)]="search.status" class="py-1.5 pl-3 pr-10 border rounded text-sm">
                 <option class="text-gray-700" selected value="">All</option>
                 <option *ngFor="let status of RefundRequestStatus | keyvalue" [value]="status.value"
                         class="text-gray-700 capitalize">{{ status.key}}</option>

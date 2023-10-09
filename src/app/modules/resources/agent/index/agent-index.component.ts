@@ -30,9 +30,11 @@ export class AgentIndexComponent implements OnInit {
     agents$: Observable<Response<PaginatedResource<Agent>>>
     aggregators$: Observable<Response<Aggregator[]>>
 
-    codeAgent: string = ""
-    codeWholesaler: string = ""
-    codeAggregator: string = ""
+   search ={
+       codeAgent:  "",
+       codeWholesaler:  "",
+       codeAggregator:  ""
+   }
 
     items: Breadcrumb[] = [
         {label: "Agents"}
@@ -55,9 +57,9 @@ export class AgentIndexComponent implements OnInit {
 
         this.aggregators$ = this.aggregatorService.getAll().pipe(share())
         this.wholesalers$ = this.wholesalerService.getAll().pipe(share())
-        this.agents$ = this.agentService.getAll(this.codeAggregator, this.codeAgent, this.codeWholesaler).pipe(share())
+        this.agents$ = this.agentService.getAll(this.search.codeAggregator, this.search.codeAgent, this.search.codeWholesaler).pipe(share())
 
-        this.codeAggregator = null;
+        this.search.codeAggregator = null;
     }
 
 
@@ -93,13 +95,13 @@ export class AgentIndexComponent implements OnInit {
     }
 
     onAggregatorChange(event: any) {
-        this.codeAggregator = event.target.value;
-        this.agents$ = this.agentService.getAll(this.codeAggregator, this.codeWholesaler, this.codeAgent, 0);
+        this.search.codeAggregator = event.target.value;
+        this.agents$ = this.agentService.getAll(this.search.codeAggregator, this.search.codeWholesaler, this.search.codeAgent, 0);
     }
 
 
     goToPage(page: number = 0) {
-        this.agents$ = this.agentService.getAll(this.codeAggregator, this.codeAgent, this.codeWholesaler, page);
+        this.agents$ = this.agentService.getAll(this.search.codeAggregator, this.search.codeAgent, this.search.codeWholesaler, page);
     }
 
     exportExcel(page: number = 0) {
