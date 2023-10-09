@@ -11,6 +11,7 @@ import {Breadcrumb} from 'src/app/commons/interfaces/breadcrumb';
 import {BreadcrumbService} from 'src/app/commons/services/breadcrumb.service';
 import {Aggregator} from "../../../../commons/interfaces/aggregator";
 import {AggregatorService} from "../../../../services/aggregator.service";
+import {data} from "autoprefixer";
 
 @Component({
     selector: 'app-wholesaler-index',
@@ -75,4 +76,6 @@ export class WholesalerIndexComponent implements OnInit {
             }
         })
     }
+
+    protected readonly data = data;
 }
