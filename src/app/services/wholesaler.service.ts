@@ -9,8 +9,8 @@ export class WholesalerService extends BaseAPIService {
         return this.httpGetCall(`/wholesaler`)
     }
 
-    getPage(codeWholesaler: string, page: number = 0, size: number = 10) {
-        return this.httpGetCall(`/wholesaler/getPage?page=${page}&size=${size}&codeWholesaler=${codeWholesaler}`)
+    getPage(codeWholesaler: string,codeAggregator: string, page: number = 0, size: number = 10) {
+        return this.httpGetCall(`/wholesaler/getPage?page=${page}&size=${size}&codeWholesaler=${codeWholesaler}&codeAggregator=${codeAggregator}`)
     }
 
     create(codeWholesaler: string, codeAggregator: string, description: string) {
