@@ -19,12 +19,12 @@ import { BaseAggregator } from 'src/app/commons/models/aggregator';
     templateUrl: './wholesaler-update.component.html',
     styleUrls: ['./wholesaler-update.component.css']
 })
-export class WholesalerUpdateComponent {
+export class WholesalerUpdateComponent implements OnChanges{
 
     @Input()
     wholesaler: Wholesaler
     @Input()
-    aggregators: Aggregator[] =[]
+    aggregators$: Aggregator[] =[]
     form: FormGroup
     displayModal: any;
     formError: string | null = null;

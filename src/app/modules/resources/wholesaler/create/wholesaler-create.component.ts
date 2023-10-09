@@ -20,7 +20,7 @@ export class WholesalerCreateComponent  {
     form: FormGroup
     displayModal: any;
     @Input()
-    aggregators: Aggregator[]
+    aggregators$: Aggregator[]
 
     constructor(private wholesalerService: WholesalerService,
                 private aggregatorService: AggregatorService,
@@ -32,7 +32,7 @@ export class WholesalerCreateComponent  {
             description: new FormControl('', Validators.required),
         })
 
-        this.aggregators = []
+        this.aggregators$ = []
         this.displayModal = false
     }
 

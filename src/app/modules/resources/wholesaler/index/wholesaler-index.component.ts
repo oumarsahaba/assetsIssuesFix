@@ -26,7 +26,7 @@ export class WholesalerIndexComponent implements OnInit {
     page: PaginatedResource<Wholesaler>
     page$: Observable<Response<PaginatedResource<Wholesaler>>>
     codeWholesaler: string = ""
-    aggregators:BaseAggregator[]
+    aggregators$: Observable<Response<Aggregator[]>>
     items: Breadcrumb[]=[
         {label: "Wholesalers"}    ]
     home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
@@ -38,20 +38,7 @@ export class WholesalerIndexComponent implements OnInit {
 
     ngOnInit(): void {
         this.goToPage()
-        this.aggregatorService.getAll()
-            .subscribe({
-                next: (response) => {
-                    this.aggregators = (response.data as Aggregator[])
-                        .map((aggregator) => new BaseAggregator(aggregator))
-                },
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
-
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
+        this.aggregators$ = this.aggregatorService.getAll().pipe(share())
     }
 
     goToPage(page: number = 0) {
