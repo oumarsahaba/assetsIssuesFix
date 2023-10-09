@@ -3,8 +3,8 @@ import {Chart, registerables} from 'chart.js';
 import {DashboardService} from "../../../services/dashboard.service";
 import {AppError} from "../../../commons/errors/app-error";
 import {ChartDataset} from "../../../commons/interfaces/chart-dataset";
-import { Observable, share } from 'rxjs';
-import { Response } from 'src/app/commons/models/response';
+import {Observable, share} from 'rxjs';
+import {Response} from 'src/app/commons/models/response';
 
 @Component({
     selector: 'app-credit-count-chart',

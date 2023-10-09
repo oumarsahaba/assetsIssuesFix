@@ -18,7 +18,6 @@ export class LoanRequestIndexComponent implements OnInit {
 
     @Input()
     codeWholesaler: any
-    page: PaginatedResource<LoanRequest>;
     page$: Observable<Response<PaginatedResource<LoanRequest>>>;
 
     constructor(private loanRequestService: LoanRequestService, private router: Router) {

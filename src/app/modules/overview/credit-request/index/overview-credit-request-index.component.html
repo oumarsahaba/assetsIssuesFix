@@ -3,33 +3,35 @@
         <div class="flex flex-col gap-y-4 lg:flex-row lg:justify-end lg:gap-x-4">
             <div class="flex flex-col">
                 <label class="text-gray-700 font-serif text-sm mb-1" for="codeWholesaler">Code Wholesaler</label>
-                <input [(ngModel)]="codeWholesaler" class="p-1.5 border rounded text-sm" id="codeWholesaler"
+                <input [(ngModel)]="search.codeWholesaler" class="p-1.5 border rounded text-sm" id="codeWholesaler"
                        placeholder="Code Wholesaler"
                        type="text">
             </div>
             <div class="flex flex-col">
                 <label class="text-gray-700 font-serif text-sm mb-1" for="codeAgent">Code Agent</label>
-                <input [(ngModel)]="codeAgent" class="p-1.5 border rounded text-sm" id="codeAgent" placeholder="Code Agent"
+                <input [(ngModel)]="search.codeAgent" class="p-1.5 border rounded text-sm" id="codeAgent"
+                       placeholder="Code Agent"
                        type="text">
             </div>
             <div class="flex flex-col">
                 <label class="text-gray-700 font-serif text-sm mb-1" for="startDate">Start Date</label>
-                <input [(ngModel)]="startDate" class="p-1.5 border rounded text-sm" id="startDate" type="date">
+                <input [(ngModel)]="search.startDate" class="p-1.5 border rounded text-sm" id="startDate" type="date">
             </div>
             <div class="flex flex-col">
                 <label class="text-gray-700 font-serif text-sm mb-1" for="endDate">End Date</label>
-                <input [(ngModel)]="endDate" class="p-1.5 border rounded text-sm" id="endDate" type="date">
+                <input [(ngModel)]="search.endDate" class="p-1.5 border rounded text-sm" id="endDate" type="date">
             </div>
             <div class="flex flex-col">
                 <label class="text-gray-700 font-serif text-sm mb-1">Status</label>
-                <select [(ngModel)]="status" class="py-1.5 pl-3 pr-10 border rounded text-sm">
+                <select [(ngModel)]="search.status" class="py-1.5 pl-3 pr-10 border rounded text-sm">
                     <option class="text-gray-700" selected value="">All</option>
                     <option *ngFor="let status of CreditRequestStatus | keyvalue" [value]="status.value"
                             class="text-gray-700 capitalize">{{ status.key}}</option>
                 </select>
             </div>
             <div class="flex items-end gap-2">
-                <button (click)="goToPage()" class="px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm ">
+                <button (click)="goToPage()"
+                        class="px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm ">
                     <div class="flex items-center">
                         <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                             <path clip-rule="evenodd"
@@ -45,7 +47,7 @@
                     <div class="flex items-center">
                         <svg fill="currentColor" height="1em" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z"/>
+                                    d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z"/>
                         </svg>
                         <span class="ml-1">Export</span>
                     </div>
@@ -90,13 +92,17 @@
                     </th>
                     <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" scope="col">Agent
                     </th>
-                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" scope="col">Type</th>
-                    <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" scope="col">amount</th>
+                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" scope="col">
+                        Type
+                    </th>
+                    <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" scope="col">amount
+                    </th>
                     <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" scope="col">fees</th>
                     <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" scope="col">Recovered
                         amount
                     </th>
-                    <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" scope="col">Outstanding
+                    <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6" scope="col">
+                        Outstanding
                         balance
                     </th>
                     <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900" scope="col">Status</th>

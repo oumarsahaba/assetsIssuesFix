@@ -1,14 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {WholesalerService} from "../../../../services/wholesaler.service";
 import {Router} from "@angular/router";
 import {AgentService} from "../../../../services/agent.service";
 import {AppError} from "../../../../commons/errors/app-error";
-import {NotFoundError} from "../../../../commons/errors/not-found-error";
 import {SimpleWholesaler} from "../../../../commons/interfaces/simple-wholesaler";
-import {BaseSimpleWholesaler} from "../../../../commons/models/simple-wholesaler";
 import {handleFormError, navigateBack} from "../../../../commons/helpers";
-import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -16,15 +12,13 @@ import {ToastrService} from 'ngx-toastr';
     templateUrl: './agent-create.component.html',
     styleUrls: ['./agent-create.component.css']
 })
-export class AgentCreateComponent implements OnInit {
+export class AgentCreateComponent {
     @Input()
-
+    wholesalers: SimpleWholesaler[]
     form: FormGroup
     displayModal: any;
-    wholesalers: SimpleWholesaler[]
 
     constructor(private agentService: AgentService,
-                private wholesalerService: WholesalerService,
                 private toastr: ToastrService,
                 private router: Router) {
 
@@ -38,27 +32,10 @@ export class AgentCreateComponent implements OnInit {
             description: new FormControl('', Validators.required),
         })
 
-        this.wholesalers = []
+
         this.displayModal = false
     }
 
-    ngOnInit(): void {
-        this.wholesalerService.getAll()
-            .subscribe({
-                next: (response) => {
-                    console.log(response)
-                    this.wholesalers = (response.data as SimpleWholesaler[])
-                        .map((wholesaler) => new BaseSimpleWholesaler(wholesaler))
-                },
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/not-found'])
-
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
-                }
-            })
-    }
 
     create() {
         this.agentService.create(

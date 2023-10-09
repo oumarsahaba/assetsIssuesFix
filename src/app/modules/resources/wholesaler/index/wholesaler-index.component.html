@@ -4,7 +4,8 @@
             <div class="sm:flex-auto">
                 <div class="flex gap-2">
                     <h1 class="text-base font-semibold leading-6 text-gray-900">Wholesaler</h1>
-                    <app-wholesaler-create/>
+                    <app-wholesaler-create *ngIf="aggregators$ | async as response ; else itemsloader  "
+                                           [aggregators$]="response.data"/>
                 </div>
                 
                 <p class="mt-2 text-sm text-gray-700">A list of all wholesalers.</p>
@@ -35,7 +36,7 @@
         </div>
 
         <app-shared-paginated-resource (pageChange)="goToPage($event.number)"
-                                       *ngIf="page$ | async as pageResponse ; else itemsloader"
+                                       *ngIf="wholesalers$ | async as pageResponse ; else itemsloader"
                                        [(page)]="pageResponse.data">
             <table class="min-w-full divide-y divide-gray-300">
                 <thead class="bg-gray-50">
@@ -93,7 +94,7 @@
                                     class="relative flex flex-row-reverse items-center rounded-l-md bg-white px-2.5 py-1.5 text-xs font-semibold gap-x-1.5 text-gray-900 ml-1 hover:bg-gray-50 focus:z-10"
                                     routerLink="/wholesaler/{{ wholesaler.codeWholesaler }}"
                                     type="button">
-                                    Voir
+                                    Show
                                     <svg class="w-5 h-5 text-blue-600 font-bold" fill="none" stroke="currentColor"
                                          stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -104,10 +105,11 @@
                                               stroke-linejoin="round"/>
                                     </svg>
                                 </button>
-                                <app-wholesaler-update [wholesaler]="wholesaler"/>
+                                <app-wholesaler-update *ngIf="aggregators$ | async as response ; else itemsloader  "
+                                                       [aggregators$]="response.data" [wholesaler]="wholesaler"/>
                                 <button
                                     (click)="confirmDelete(wholesaler.codeWholesaler)"
-                                    class="relative -ml-px flex flex-row-reverse items-center rounded-r-md bg-white px-2.5 py-1.5 text-xs font-semibold gap-x-1.5 text-gray-900 ml-1 hover:bg-gray-50 focus:z-10"
+                                    class="relative -ml-px flex flex-row-reverse items-center rounded-r-md bg-white px-2.5 py-1.5 text-xs font-semibold gap-x-1.5 text-gray-900 hover:bg-gray-50 focus:z-10"
                                     type="button">
                                     Delete
                                     <svg class="w-5 h-5 text-orange-600 font-bold" fill="none" stroke="currentColor"
@@ -120,10 +122,9 @@
                                 </button>
                             </app-actions-dropdown>
                         </div>
-
                     </td>
                 </tr>
-                <tr *ngIf="page?.content.length == 0">
+                <tr *ngIf="pageResponse?.data.content.length == 0">
                     <td class="whitespace-nowrap py-2 text-center text-sm text-gray-500 sm:pl-0" colspan="6"> No data
                         available
                     </td>

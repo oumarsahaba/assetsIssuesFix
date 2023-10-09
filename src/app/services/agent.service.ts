@@ -9,8 +9,12 @@ import { HttpEvent } from '@angular/common/http';
 export class AgentService extends BaseAPIService {
 
 
-    getAll(codeAggregator: string,  codeAgent: string,codeWholesaler: string, page: number = 0, size: number = 10) {
+    getAll(codeAggregator: string, codeAgent: string, codeWholesaler: string, page: number = 0, size: number = 10) {
         return this.httpGetCall(`/agent?page=${page}&size=${size}&codeAggregator=${codeAggregator}&codeAgent=${codeAgent}&codeWholesaler=${codeWholesaler}`)
+    }
+
+    getAllAgentWithDeficit(page: number = 0, size: number = 10) {
+        return this.httpGetCall(`/agent/deficit?page=${page}&size=${size}`)
     }
 
     create(codeAgent: string,
@@ -32,6 +36,7 @@ export class AgentService extends BaseAPIService {
     }
 
     update(code: string,
+           codeWholesaler: string,
            codeAgent: string,
            description: string,
            overdraftMaxDailyCount: string,
@@ -40,6 +45,7 @@ export class AgentService extends BaseAPIService {
            penaltyDelayInDays: number,
            active: boolean) {
         return this.httpPutCall('/agent/update/' + code, {
+            codeWholesaler: codeWholesaler,
             codeAgent: codeAgent,
             description: description,
             overdraftMaxDailyCount: overdraftMaxDailyCount,

@@ -21,6 +21,25 @@
                     <h2 class="text-base font-semibold leading-7 text-gray-900">Update agent</h2>
                     <div class="grid grid-cols-2 gap-5 mt-5">
                         <div class="col-span-2">
+                            <label class="block text-sm font-medium leading-6 text-gray-900" for="codeWholesaler">Wholesaler</label>
+                            <div class="mt-2">
+                                <select (change)="changeWholesaler($event)"
+                                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                                        formControlName="codeWholesaler"
+                                        id="codeWholesaler">
+                                    <option selected value="">Select a wholesaler</option>
+                                    <option *ngFor="let wholesaler of wholesalers"
+                                            [value]="wholesaler.codeWholesaler">{{ wholesaler.description }}</option>
+                                </select>
+
+                                <p *ngIf="form.get('codeWholesaler')?.errors?.['serverError']"
+                                   class="text-xs text-red-500">
+                                    {{ form.get('codeWholesaler')?.errors?.['serverError'] }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-span-2">
                             <label class="block text-sm font-medium leading-6 text-gray-900" for="codeAgent">Agent's
                                 Code</label>
                             <div class="mt-2">
@@ -113,11 +132,13 @@
                         <div class="col-span-2">
                             <div class="relative flex gap-x-3">
                                 <div class="flex h-6 items-center">
-                                    <input id="active" formControlName="active" [defaultChecked]="form.get('active').value"
-                                           name="active" type="checkbox" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-600">
+                                    <input [defaultChecked]="form.get('active').value" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                                           formControlName="active"
+                                           id="active" name="active"
+                                           type="checkbox">
                                 </div>
                                 <div class="text-sm leading-6">
-                                    <label for="active" class="font-medium text-gray-900">Active</label>
+                                    <label class="font-medium text-gray-900" for="active">Active</label>
                                     <p class="text-gray-500">Allow to activate or deactivate the wholesaler.</p>
                                 </div>
                             </div>

@@ -9,8 +9,12 @@ import {CreditFluxChartComponent} from "./credit-flux-chart/credit-flux-chart.co
 import {FormsModule} from "@angular/forms";
 import {CreditCountByAgentChartComponent} from "./credit-count-by-agent-chart/credit-count-by-agent-chart.component";
 import {CreditFluxByAgentChartComponent} from "./credit-flux-by-agent-chart/credit-flux-by-agent-chart.component";
-import { CreditCountByWholesalerChartComponent } from './credit-count-by-wholesaler-chart/credit-count-by-wholesaler-chart.component';
-import { CreditFluxByWholesalerChartComponent } from './credit-flux-by-wholesaler-chart/credit-flux-by-wholesaler-chart.component';
+import {
+    CreditCountByWholesalerChartComponent
+} from './credit-count-by-wholesaler-chart/credit-count-by-wholesaler-chart.component';
+import {
+    CreditFluxByWholesalerChartComponent
+} from './credit-flux-by-wholesaler-chart/credit-flux-by-wholesaler-chart.component';
 
 
 @NgModule({

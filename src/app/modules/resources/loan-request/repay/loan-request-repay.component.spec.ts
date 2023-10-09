@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ActionsDropdownComponent} from './actions-dropdown.component';
+import {LoanRequestRepayComponent} from './loan-request-repay.component';
 
-describe('ActionsDropdownComponent', () => {
-    let component: ActionsDropdownComponent;
-    let fixture: ComponentFixture<ActionsDropdownComponent>;
+describe('LoanRequestRepayComponent', () => {
+    let component: LoanRequestRepayComponent;
+    let fixture: ComponentFixture<LoanRequestRepayComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ActionsDropdownComponent]
+            declarations: [LoanRequestRepayComponent]
         })
             .compileComponents();
 
-        fixture = TestBed.createComponent(ActionsDropdownComponent);
+        fixture = TestBed.createComponent(LoanRequestRepayComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

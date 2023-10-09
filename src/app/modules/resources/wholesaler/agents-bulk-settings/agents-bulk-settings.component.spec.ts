@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ActionsDropdownComponent} from './actions-dropdown.component';
+import {AgentsBulkSettingsComponent} from './agents-bulk-settings.component';
 
-describe('ActionsDropdownComponent', () => {
-    let component: ActionsDropdownComponent;
-    let fixture: ComponentFixture<ActionsDropdownComponent>;
+describe('UpdateAgentComponent', () => {
+    let component: AgentsBulkSettingsComponent;
+    let fixture: ComponentFixture<AgentsBulkSettingsComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ActionsDropdownComponent]
+            declarations: [AgentsBulkSettingsComponent]
         })
             .compileComponents();
 
-        fixture = TestBed.createComponent(ActionsDropdownComponent);
+        fixture = TestBed.createComponent(AgentsBulkSettingsComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

@@ -9,8 +9,8 @@ import {Response} from 'src/app/commons/models/response';
 import {AppError} from "../../../../commons/errors/app-error";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import {BadRequestError} from "../../../../commons/errors/bad-request-error";
-import { Breadcrumb } from 'src/app/commons/interfaces/breadcrumb';
-import { BreadcrumbService } from 'src/app/commons/services/breadcrumb.service';
+import {Breadcrumb} from 'src/app/commons/interfaces/breadcrumb';
+import {BreadcrumbService} from 'src/app/commons/services/breadcrumb.service';
 
 @Component({
     selector: 'app-aggregator-show',
@@ -21,13 +21,12 @@ export class AggregatorShowComponent {
     accountSlug: string | null
     operations: Operation[]
     aggregator$: Observable<Response<Aggregator>>
-
-    protected readonly Commissionable = Commissionable;
-    items: Breadcrumb[]=[
+    items: Breadcrumb[] = [
         {label: "Aggregators", routerLink: '/aggregator'},
         {label: "Details"}
-        ]
+    ]
     home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
+    protected readonly Commissionable = Commissionable;
 
     constructor(private router: Router, private route: ActivatedRoute, private aggregatorService: AggregatorService, private breadcrumbService: BreadcrumbService) {
         this.accountSlug = null

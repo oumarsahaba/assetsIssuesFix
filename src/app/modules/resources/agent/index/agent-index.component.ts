@@ -4,17 +4,21 @@ import {Router} from "@angular/router";
 import {AgentService} from "../../../../services/agent.service";
 import {AppError} from "../../../../commons/errors/app-error";
 import {NotFoundError} from "../../../../commons/errors/not-found-error";
-import {navigateBack} from "../../../../commons/helpers";
+import {exportExcelFile, navigateBack} from "../../../../commons/helpers";
 import {PaginatedResource} from "../../../../commons/interfaces/paginated-resource";
 import {ForbiddenError} from "../../../../commons/errors/forbidden-error";
 import Swal from 'sweetalert2';
 import {KeycloakService} from "keycloak-angular";
 import {Observable, share} from 'rxjs';
 import {Response} from 'src/app/commons/models/response';
-import {Breadcrumb} from 'src/app/commons/interfaces/breadcrumb';
 import {BreadcrumbService} from 'src/app/commons/services/breadcrumb.service';
+import * as XLSX from "xlsx";
+import {ToastrService} from "ngx-toastr";
+import {WholesalerService} from "../../../../services/wholesaler.service";
 import {SimpleWholesaler} from "../../../../commons/interfaces/simple-wholesaler";
-import {BaseSimpleWholesaler} from "../../../../commons/models/simple-wholesaler";
+import {Breadcrumb} from "../../../../commons/interfaces/breadcrumb";
+import {Aggregator} from "../../../../commons/interfaces/aggregator";
+import {AggregatorService} from "../../../../services/aggregator.service";
 
 @Component({
     selector: 'app-agent-index',
@@ -22,25 +26,42 @@ import {BaseSimpleWholesaler} from "../../../../commons/models/simple-wholesaler
     styleUrls: ['./agent-index.component.css']
 })
 export class AgentIndexComponent implements OnInit {
+    wholesalers$: Observable<Response<SimpleWholesaler[]>>
+    agents$: Observable<Response<PaginatedResource<Agent>>>
+    aggregators$: Observable<Response<Aggregator[]>>
 
-    page$: Observable<Response<PaginatedResource<Agent>>>
-    codeAgent: string = "";
-    codeWholesaler: string = "";
-    codeAggregator: string = "";
+    search = {
+        codeAgent: '',
+        codeWholesaler: '',
+        codeAggregator: '',
+    }
 
-    aggregators: any[];
+    items: Breadcrumb[] = [
+        {label: "Agents"}
+    ]
+
+    home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
     constructor(public keycloakService: KeycloakService,
                 private agentService: AgentService,
+                private aggregatorService: AggregatorService,
+                private wholesalerService: WholesalerService,
                 private breadcrumbService: BreadcrumbService,
+                private toastr: ToastrService,
                 private router: Router) {
     }
 
     ngOnInit(): void {
-        this.codeAggregator = null;
-        this.page$ = this.agentService.getAll(this.codeAggregator, this.codeAgent, this.codeWholesaler);
-        this.getAllAggregators()
+        this.breadcrumbService.setItems(this.items)
+        this.breadcrumbService.setHome(this.home)
+
+        this.aggregators$ = this.aggregatorService.getAll().pipe(share())
+        this.wholesalers$ = this.wholesalerService.getAll().pipe(share())
+        this.agents$ = this.agentService.getAll(this.search.codeAggregator, this.search.codeAgent, this.search.codeWholesaler).pipe(share())
+
+        this.search.codeAggregator = null;
     }
+
 
     confirmDelete(codeAgent: string) {
         Swal.fire({
@@ -73,28 +94,75 @@ export class AgentIndexComponent implements OnInit {
     }
 
     onAggregatorChange(event: any) {
-        this.codeAggregator = event.target.value;
-        this.page$ = this.agentService.getAll(this.codeAggregator, this.codeWholesaler, this.codeAgent, 0);
+        this.search.codeAggregator = event.target.value;
+        this.agents$ = this.agentService.getAll(this.search.codeAggregator, this.search.codeWholesaler, this.search.codeAgent, 0);
     }
 
 
     goToPage(page: number = 0) {
-        this.page$ = this.agentService.getAll(this.codeAggregator, this.codeAgent, this.codeWholesaler, page);
+        this.agents$ = this.agentService.getAll(this.search.codeAggregator, this.search.codeAgent, this.search.codeWholesaler, page);
     }
 
-    getAllAggregators() {
-        this.agentService.getAggregators()
-            .subscribe({
-                next: (response) => {
-                    this.aggregators = response.data;
-                },
-                error: (err: AppError) => {
-                    if (err instanceof NotFoundError)
-                        this.router.navigate(['/'])
-
-                    if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden'])
+    exportExcel(page: number = 0) {
+        this.agents$ = this.agentService.getAllAgentWithDeficit(page);
+        this.agentService.getAllAgentWithDeficit(page).subscribe({
+            next: (response) => {
+                if (!response.data ||
+                    !response.data.content ||
+                    !Array.isArray(response.data.content) ||
+                    response.data.content.length === 0
+                ) {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'No Data Available',
+                        text: 'There is no data available for this Credit Request.',
+                    });
+                    return;
                 }
-            })
+                const wb: XLSX.WorkBook = XLSX.utils.book_new();
+                const worksheet: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet([]);
+                const headerRow = [
+                    'Wholesaler Code',
+                    'Wholesaler Description',
+                    'Agent Code',
+                    'Agent Description',
+                    'Balance',
+                    'Created At',
+                ];
+
+                XLSX.utils.sheet_add_aoa(worksheet, [headerRow], {origin: -1});
+                const mappedRows = response.data.content.map((data: {
+                    wholesaler: { codeWholesaler: any; description: any; };
+                    codeAgent: any;
+                    description: any;
+                    account: { balance: any; };
+                    createdAt: any;
+                }) => {
+                    return [
+                        data.wholesaler?.codeWholesaler || '',
+                        data.wholesaler?.description || '',
+                        data.codeAgent || '',
+                        data.description || '',
+                        data.account?.balance || '',
+                        data.createdAt || '',
+                    ];
+                });
+                try {
+                    this.toastr.info('File will be exported soon. Check downloads', 'File exportation', {
+                        timeOut: 3000,
+                    });
+                    exportExcelFile(mappedRows, headerRow, 'Agents_With_Deficit')
+
+                } catch (err) {
+                    this.toastr.error('Cannot export excel file. Contact your manager for more informations', 'File download error', {
+                        timeOut: 3000,
+                    });
+                }
+            },
+            error: (err: AppError) => {
+                if (err instanceof NotFoundError) this.router.navigate(['/not-found']);
+                if (err instanceof ForbiddenError) this.router.navigate(['/forbidden']);
+            },
+        });
     }
 }

@@ -8,6 +8,8 @@ import {Agent} from "../../../../commons/interfaces/agent";
 import {ToastrService} from 'ngx-toastr';
 import {HttpErrorResponse} from "@angular/common/http";
 import {BadRequestError} from "../../../../commons/errors/bad-request-error";
+import {WholesalerService} from "../../../../services/wholesaler.service";
+import {BaseSimpleWholesaler} from "../../../../commons/models/simple-wholesaler";
 
 @Component({
     selector: 'app-agent-update',
@@ -16,17 +18,25 @@ import {BadRequestError} from "../../../../commons/errors/bad-request-error";
 })
 export class AgentUpdateComponent implements OnChanges {
     @Input()
+    wholesalers: BaseSimpleWholesaler[] = []
+    @Input()
     agent: Agent
     form: FormGroup
     displayModal: any;
     formError: string | null = null;
 
-    constructor(private agentService: AgentService, private router: Router, private toastr: ToastrService) {
+
+    constructor(private agentService: AgentService,
+                private wholesalerService: WholesalerService,
+                private router: Router,
+                private toastr: ToastrService) {
     }
+
 
     ngOnChanges(changes: SimpleChanges) {
         this.form = new FormGroup({
             codeAgent: new FormControl('', Validators.required),
+            codeWholesaler: new FormControl('', Validators.required),
             overdraftMaxDailyCount: new FormControl('', Validators.required),
             overdraftLimitAmount: new FormControl('', Validators.required),
             overdraftBillingOccurrence: new FormControl('', Validators.required),
@@ -36,6 +46,7 @@ export class AgentUpdateComponent implements OnChanges {
         })
 
         if (changes.hasOwnProperty('agent')) {
+            this.form.get('codeWholesaler').setValue(this.agent?.wholesaler.codeWholesaler)
             this.form.get('codeAgent').setValue(this.agent?.codeAgent)
             this.form.get('description').setValue(this.agent?.description)
             this.form.get('overdraftMaxDailyCount').setValue(this.agent?.overdraftMaxDailyCount)
@@ -50,6 +61,7 @@ export class AgentUpdateComponent implements OnChanges {
     update() {
         this.agentService.update(
             this.agent.codeAgent,
+            this.form.get('codeWholesaler')?.value,
             this.form.get('codeAgent')?.value,
             this.form.get('description')?.value,
             this.form.get('overdraftMaxDailyCount')?.value,
@@ -73,6 +85,12 @@ export class AgentUpdateComponent implements OnChanges {
                 this.formError = httpError.error.errors.message
                 handleFormError(err as AppError, this.form);
             }
+        })
+    }
+
+    changeWholesaler($event: any) {
+        this.form.get('codeWholesaler')?.setValue($event.target.value, {
+            onlySelf: true,
         })
     }
 
