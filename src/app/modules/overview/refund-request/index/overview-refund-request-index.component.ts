@@ -41,8 +41,8 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
 
     protected readonly RefundRequestStatus = RefundRequestStatus;
 
-    constructor(private overviewService: OverviewService, 
-        private router: Router, 
+    constructor(private overviewService: OverviewService,
+        private router: Router,
         private breadcrumbService: BreadcrumbService,
         private toastr: ToastrService,
         ) {
@@ -82,7 +82,7 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
                         'Credit request recovered amount', 'Credit request status', 'Credit request type', 'Credit request date creation',
                         'Agent code', 'Agent description' ]
                         const dataset = response.data.map(data=>[data.token, data.amount, data.status,data.createdAt,
-                            data.creditRequest.token, data.creditRequest.amount, data.creditRequest.fees, 
+                            data.creditRequest.token, data.creditRequest.amount, data.creditRequest.fees,
                             data.creditRequest.outstandingBalance, data.creditRequest.recoveredAmount, data.creditRequest.status,
                             data.creditRequest.type, data.creditRequest.createdAt,
                             data.creditRequest.agent.codeAgent, data.creditRequest.agent.description
@@ -94,7 +94,7 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
                                 exportExcelFile(dataset, headers,'Refund_Request')
 
                             } catch (err) {
-                                this.toastr.error('Cannot export excel file. Contact your manager for more ingormations', 'File download error', {
+                                this.toastr.error('Cannot export excel file. Contact your manager for more informations', 'File download error', {
                                     timeOut: 3000,
                                   });
                             }
@@ -104,7 +104,7 @@ export class OverviewRefundRequestIndexComponent implements OnInit {
                     if (err instanceof NotFoundError)
                         this.router.navigate(['/not-found']);
                     if (err instanceof ForbiddenError)
-                        this.router.navigate(['/forbidden']);                    
+                        this.router.navigate(['/forbidden']);
                 }
             });
     }

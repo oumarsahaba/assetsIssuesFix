@@ -13,6 +13,8 @@ import {Response} from 'src/app/commons/models/response';
 import {Observable} from 'rxjs';
 import {BreadcrumbService} from "../../../../commons/services/breadcrumb.service";
 import {Breadcrumb} from "../../../../commons/interfaces/breadcrumb";
+import {exportExcelFile} from "../../../../commons/helpers";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'app-overview-credit-request-index-component',
@@ -38,7 +40,8 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
 
     home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
 
-    constructor(private overviewService: OverviewService, private router: Router, private breadcrumbService: BreadcrumbService) {
+    constructor(private overviewService: OverviewService, private router: Router, private breadcrumbService: BreadcrumbService,
+                private toastr:ToastrService) {
     }
 
     ngOnInit(): void {
@@ -84,26 +87,35 @@ export class OverviewCreditRequestIndexComponent implements OnInit {
                             'Status', 'Type',
                             'Created At'
                         ];
-
                         XLSX.utils.sheet_add_aoa(worksheet, [headerRow], {origin: -1});
-                        // Iterate over the data and add the fields to the worksheet
-                        for (let i = 0; i < response.data.length; i++) {
-                            const data = response.data[i];
-                            const row = [
-                                data.agent.wholesaler.aggregator.codeAggregator, data.agent.wholesaler.aggregator.description,
-                                data.agent.wholesaler.codeWholesaler, data.agent.wholesaler.description,
-                                data.agent.codeAgent, data.agent.description,
-                                data.amount, data.fees,
-                                data.recoveredAmount, data.outstandingBalance,
-                                data.status, data.type,
-                                data.createdAt
+                        const mappedRows = response.data.map(data => {
+                            return [
+                                data.agent?.wholesaler?.aggregator?.codeAggregator || '',
+                                data.agent?.wholesaler?.aggregator?.description || '',
+                                data.agent?.wholesaler?.codeWholesaler || '',
+                                data.agent?.wholesaler?.description || '',
+                                data.agent?.codeAgent || '',
+                                data.agent?.description || '',
+                                data.amount || '',
+                                data.fees || '',
+                                data.recoveredAmount || '',
+                                data.outstandingBalance || '',
+                                data.status || '',
+                                data.type || '',
+                                data.createdAt || '',
                             ];
+                        });
+                        try {
+                            this.toastr.info('File will be exported soon. Check downloads', 'File exportation', {
+                                timeOut: 3000,
+                            });
+                            exportExcelFile(mappedRows, headerRow, 'Credit_Request')
 
-                            XLSX.utils.sheet_add_aoa(worksheet, [row], {origin: -1});
+                        } catch (err) {
+                            this.toastr.error('Cannot export excel file. Contact your manager for more informations', 'File download error', {
+                                timeOut: 3000,
+                            });
                         }
-                        XLSX.utils.book_append_sheet(wb, worksheet, 'Sheet1');
-                        // Save the Excel spreadsheet
-                        XLSX.writeFile(wb, 'credit_request.xlsx');
                     }
                 },
                 error: (err: AppError) => {
