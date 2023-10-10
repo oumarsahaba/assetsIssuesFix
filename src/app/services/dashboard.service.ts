@@ -8,7 +8,12 @@ export class DashboardService extends BaseAPIService {
     getMetrics() {
         return this.httpGetCall(`/dashboard/metrics`)
     }
-
+    getOverDraft(dayBefore: number) {
+        return this.httpGetCall(`/dashboard/overdraftMetrics?dayBefore=${dayBefore}`)
+    }
+    getSumAmountOverDraft(dayBefore: number) {
+        return this.httpGetCall(`/dashboard/sumAmountOverdraft?dayBefore=${dayBefore}`)
+    }
     getCreditCountChartData(dayBefore: number) {
         return this.httpGetCall(`/dashboard/stats/credit/count?dayBefore=${dayBefore}`)
     }
@@ -32,4 +37,6 @@ export class DashboardService extends BaseAPIService {
     getCreditFluxByWholesalerChartData(dayBefore: number) {
         return this.httpGetCall(`/dashboard/stats/credit/flux/wholesaler?dayBefore=${dayBefore}`)
     }
+
+
 }
