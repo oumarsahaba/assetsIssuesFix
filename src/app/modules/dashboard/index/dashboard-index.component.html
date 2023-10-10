@@ -1,36 +1,70 @@
-<app-dashboard *ngIf="metrics$ | async as metricResponse; else loader">
-    <div>
-        <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-5">
-            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt class="truncate text-sm font-medium text-gray-500">System Balance</dt>
-                <dd
-                    class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.systemBalance | number: '.0-2' }}</dd>
+<app-dashboard *ngIf="metrics$ | async as metricResponse  ; else loader">
+    <div class="flex justify-between"  >
+        <div class="flex flex-col">
+            <div class="p-2">
+                <div class="col-start-2 col-span-4 ..."> <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6 flex flex-col items-center">
+                    <dt class="truncate text-sm font-medium text-gray-500">System Balance</dt>
+                    <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.systemBalance | number: '.0-2' }}</dd>
+                </div>
+                </div>
             </div>
+            <div class="flex  justify-between">
+                <div class="w-1/2 p-2" *ngIf="overdraft$ | async as overdraftResponse; else loader">
+                    <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                        <dt class="truncate text-sm font-medium text-gray-500">OverDraft Count</dt>
+                        <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ overdraftResponse?.data }}</dd>
+                    </div>
+                </div>
+                <div class="w-1/2 p-2">
+                    <select (change)="onPeriodChange($event)" class="rounded-md" id="periodSelect">
+                        <option value="30">30 Days</option>
+                        <option value="90">3 Months</option>
+                        <option value="180">6 Months</option>
+                    </select>
+                </div>
 
-            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt class="truncate text-sm font-medium text-gray-500">Lender Count</dt>
-                <dd
-                    class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.lenderCount }}</dd>
+                <div class="w-1/2 p-2" *ngIf="sumOverdraft$ | async as sumAmountOverdraftResponse; else loader">
+                    <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                        <dt class="truncate text-sm font-medium text-gray-500">OverDraft Flux</dt>
+                        <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ sumAmountOverdraftResponse?.data }}</dd>
+                    </div>
+                </div>
+                <div class="w-1/2 p-2">
+                    <select (change)="onPeriodChange1($event)" class="rounded-md" id="periodSelect1">
+                        <option value="30"> 30 Days</option>
+                        <option value="90"> 3 Months</option>
+                        <option value="180"> 6 Months</option>
+                    </select>
+                </div>
             </div>
-            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt class="truncate text-sm font-medium text-gray-500">Aggregator Count</dt>
-                <dd
-                    class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.aggregatorCount }}</dd>
+        </div>
+        <div class="flex flex-wrap justify-end">
+            <div class="w-1/2 p-2">
+                <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                    <dt class="truncate text-sm font-medium text-gray-500">Lender Count</dt>
+                    <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.lenderCount }}</dd>
+                </div>
             </div>
-            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt class="truncate text-sm font-medium text-gray-500">Wholesaler Count</dt>
-                <dd
-                    class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.wholesalerCount }}</dd>
+            <div class="w-1/2 p-2">
+                <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                    <dt class="truncate text-sm font-medium text-gray-500">Aggregator Count</dt>
+                    <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.aggregatorCount }}</dd>
+                </div>
             </div>
-            <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt class="truncate text-sm font-medium text-gray-500">Agent Count</dt>
-                <dd
-                    class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.agentCount }}</dd>
+            <div class="w-1/2 p-2">
+                <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                    <dt class="truncate text-sm font-medium text-gray-500">Wholesaler Count</dt>
+                    <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.wholesalerCount }}</dd>
+                </div>
+            </div>
+            <div class="w-1/2 p-2">
+                <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                    <dt class="truncate text-sm font-medium text-gray-500">Agent Count</dt>
+                    <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.agentCount }}</dd>
+                </div>
             </div>
         </div>
     </div>
-
-
     <div class="rounded-lg bg-white mt-5">
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div class="sm:col-span-1 py-5 px-3 border border-gray-50 rounded shadow">
