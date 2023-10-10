@@ -59,7 +59,7 @@
                                        *ngIf="page$ | async as pageResponse ; else itemsloader "
                                        [(page)]="pageResponse.data">
             <table class="min-w-full divide-y divide-gray-300">
-                <thead class="bg-gray-50 divide-y divide-gray-200">
+                <thead class="bg-gray-100 divide-y divide-gray-200">
                 <tr class="divide-x divide-gray-200">
                     <th class="hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:table-cell  xl:table-cell"
                         colspan="2"
@@ -109,7 +109,7 @@
                     <th class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900" scope="col">Created At</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="divide-y divide-gray-100 bg-white">
                 <tr *ngFor="let creditRequest of pageResponse?.data?.content" class="divide-x divide-gray-200">
                     <td class="hidden whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6 lg:table-cell xl:table-cell">{{ creditRequest.agent.wholesaler.aggregator.codeAggregator }}</td>
                     <td class="hidden whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-700 sm:pl-6 lg:table-cell xl:table-cell">{{ creditRequest.agent.wholesaler.aggregator.description }}</td>
