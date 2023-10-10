@@ -3,11 +3,11 @@
     <div class="grid grid-cols-2 gap-x-10">
         <div class="grid grid-cols-2 gap-4">
             <div
-                class="col-span-2 overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6 flex flex-col items-center">
+                class="col-span-2 overflow-hidden rounded-lg bg-blue-100 px-4 py-5 shadow sm:p-6 flex flex-col items-center">
                 <dt class="truncate text-sm font-medium text-gray-500">System Balance</dt>
                 <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ metricResponse?.data?.systemBalance | number: '.0-2' }}</dd>
             </div>
-            <div class="flex overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6 justify-between"
+            <div class="flex overflow-hidden rounded-lg bg-green-100 px-4 py-5 shadow sm:p-6 justify-between"
                  *ngIf="overdraftMetrics$ | async as overdraftResponse; else loader">
                 <div>
                     <dt class="truncate text-sm font-medium text-gray-500">OverDraft Count</dt>
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div *ngIf="overdraftMetrics$ | async as overdraftResponse; else loader">
-                <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+                <div class="overflow-hidden rounded-lg bg-yellow-100 px-4 py-5 shadow sm:p-6">
                     <dt class="truncate text-sm font-medium text-gray-500">OverDraft Flux</dt>
                     <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{{ overdraftResponse?.data.flux | number: '.0-2' }}</dd>
                 </div>
