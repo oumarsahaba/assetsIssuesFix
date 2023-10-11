@@ -69,16 +69,13 @@ export class AgentService extends BaseAPIService {
     }
 
 
-    uploadAgentsFromExcel(file: File, sheetName: string):Observable<HttpEvent<any>> { 
+    uploadAgentsFromExcel(file: File):Observable<HttpEvent<any>> { 
   
         // Create form data 
         const formData = new FormData();  
           
         // Store form name as "file" with file data 
-        formData.append("file", file, file.name); 
-        formData.append("sheet", sheetName)
-          
-        // Make http post request over api 
+        formData.append("file", file, file.name);           
         // with formData as req 
         return this.httpPostEventFormDataCall('/agent/upload/' , formData) 
     } 

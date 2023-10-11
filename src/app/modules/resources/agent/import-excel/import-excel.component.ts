@@ -1,5 +1,5 @@
 import { HttpEventType } from '@angular/common/http';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, of, timeout } from 'rxjs';
@@ -19,6 +19,8 @@ import * as XLSX from 'xlsx';
 })
 export class ImportExcelComponent implements OnInit, OnDestroy{
   
+  @ViewChild('inputFile')
+  inputFile: ElementRef;
   displayModal: any = false;
   file: File;
   agents: AgentFromExcel[]
@@ -28,8 +30,8 @@ export class ImportExcelComponent implements OnInit, OnDestroy{
   uploadCompleted = false
   form = new FormGroup({
     file: new FormControl('', Validators.required),
-    sheetName: new FormControl('', Validators.required)
 })
+  
 
 
   constructor( private agentService: AgentService,
@@ -43,26 +45,29 @@ export class ImportExcelComponent implements OnInit, OnDestroy{
   }
   
   chooseFile(){
-    const inputElement = document.getElementById("excelInput");
-    inputElement.click();
+    this.inputFile.nativeElement.click()
   }
   reloadupload(){
     //@ts-ignore
-    this.file= null
+    this.file= undefined
     this.uploadCompleted = false
     this.uploadProgression = false
-    this.form.value.file = null
+    this.form.reset()
+    this.inputFile.nativeElement.value = ""     
+    console.log(this.file);
+    
   
   }
   importFile(){    
 
     if (this.form.valid) {
       
-      this.agentService.uploadAgentsFromExcel(this.file,this.form.get('sheetName')?.value).subscribe(
+      this.uploadProgression = true
+      this.uploadCompleted = false
+      this.agentService.uploadAgentsFromExcel(this.file).subscribe(
         {next: event => {
           console.log(event);
-          this.uploadProgression = true
-          this.uploadCompleted = false
+          
         
         if (event.type === HttpEventType.Response) {
           this.uploadCompleted = true
@@ -91,39 +96,9 @@ export class ImportExcelComponent implements OnInit, OnDestroy{
   onChange(event : any) { 
     this.file = event.target.files[0]; 
     this.form.get('file')?.setValue(this.file.name)
-    console.log(this.file, event.target.files[0].name);
+    console.log(this.file, event.type);
     
 }
-  extractFile(){
-    const inputElement = document.getElementById("excelInput");
-    //@ts-ignore
-    var f = inputElement.files[0];
-    console.log(f);
-    
-    /* f is a File */
-    var reader = new FileReader();
-    reader.onload = (e) =>{
-      var data = e.target.result;
-      var workbook = XLSX.read(data, {
-        type: 'binary'
-      });
-      workbook.SheetNames.forEach((sheetName) => {
-        // Here is your object
-        var XL_row_object :any = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-        var json_object = XL_row_object;
-        
-        console.log(json_object,this.agents);
-
-      })
-
-    };
-
-    reader.onerror = function(ex) {
-      console.log(ex);
-    };
-
-    reader.readAsBinaryString(f);
-  }
 
   toggleModal() {
     this.displayModal = !this.displayModal

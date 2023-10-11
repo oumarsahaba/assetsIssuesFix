@@ -1,11 +1,16 @@
 <button
     (click)="toggleModal()"
+    data-tooltip-target="tooltip-agent-importation"
     class="rounded-full bg-blue-500 p-1 text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
     type="button">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15M9 12l3 3m0 0l3-3m-3 3V2.25" />
       </svg>      
 </button>
+<div id="tooltip-agent-importation" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+    Import excel file
+    <div class="tooltip-arrow" data-popper-arrow></div>
+</div>
 <app-shared-modal [show]="displayModal" id="modal">
     <form (ngSubmit)="importFile()" [formGroup]="form" class="w-full items-center">
         <div class="space-y-12">
@@ -16,30 +21,15 @@
                     <app-shared-warning *ngIf="form.hasError('message')">
                         {{ form.getError('message') }}
                     </app-shared-warning>
-                    <div *ngIf="file">
-                        <label for="sheetName" class="block text-sm font-medium leading-6 text-gray-900">Sheet name <p class="text-red-500">*</p></label>
-                        <div class="mt-2" *ngIf="uploadProgression == false">
-                            <input
-                                type="text" name="sheetName" id="sheetName" 
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                placeholder="Enter selected file considered sheet name"
-                                formControlName="sheetName"
-                                >
-                            <p *ngIf="form.get('sheetName')?.errors?.['serverError']"
-                                class="text-xs text-red-500">
-                                {{ form.get('sheetName')?.errors?.['serverError'] }}
-                            </p>
-                        </div>
-                    </div>
                     <button (click)="chooseFile()" *ngIf="!file"
-                        type="button" class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                        type="button" class="relative block w-5/6 rounded-lg border-2 border-dashed border-gray-300 p-12 mx-auto text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        <svg class=" mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6" />
                         </svg>
                         <span class="mt-2 block text-sm font-semibold text-gray-900">Choose an excel file</span>
                     </button >
                     <div  *ngIf="file && uploadCompleted == false"
-                         class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                         class="relative block w-5/6 rounded-lg border-2 border border-[#3a923c] p-12 mx-auto text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                             <svg *ngIf="uploadProgression == false" xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-gray-400" viewBox="0 0 384 512" fill="#3a923c">
                                 <path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM155.7 250.2L192 302.1l36.3-51.9c7.6-10.9 22.6-13.5 33.4-5.9s13.5 22.6 5.9 33.4L221.3 344l46.4 66.2c7.6 10.9 5 25.8-5.9 33.4s-25.8 5-33.4-5.9L192 385.8l-36.3 51.9c-7.6 10.9-22.6 13.5-33.4 5.9s-13.5-22.6-5.9-33.4L162.7 344l-46.4-66.2c-7.6-10.9-5-25.8 5.9-33.4s25.8-5 33.4 5.9z"/>
                             </svg>
@@ -56,7 +46,7 @@
                     </div >
                 
                     <div class="mt-2">
-                        <input
+                        <input #inputFile
                             type="file" id="excelInput"
                             class="hidden"
                             multiple="false"
@@ -71,7 +61,7 @@
             </div>
         </div>
 
-        <div class="mt-6 mr-2 flex items-center justify-end gap-x-6">
+        <div class="my-2 px-6 mr-2 flex items-center justify-end gap-x-6">
             <button
                 (click)="toggleModal()"
                 class="text-sm font-semibold leading-6 text-gray-900" type="button">Cancel
@@ -79,30 +69,12 @@
             <button
                 [ngClass]="form.valid ? 'bg-blue-600 hover:bg-blue-500':  'bg-gray-200 hover:bg-gray-200'"
                 class="rounded-md px-3 py-2 text-sm font-semibold text-white shadow-s focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                [disabled]="!form.valid && uploadProgression == true"
+                [disabled]="!(form.valid) && uploadProgression == true"
                 type="submit">
                 Import
             </button>
         </div>
     </form>
-    <!--div *ngIf="file" class="px-4 sm:px-6 lg:px-8 py-4">
-        <h2 class="text-base font-semibold leading-7 text-gray-900">Importing ... agents</h2>
-        <ul role="list" class="divide-y divide-gray-200" *ngIf="agents$ | async as agentsResponse ; else itemsloader">
-            <li *ngFor="let agent of agentsResponse" class="py-4">
-                <ul role="list" class="divide-y divide-gray-200">
-                    <li class="py-4">
-                      {{agent.codeAgent}}
-                    </li>
-                  
-                    <li class="py-4">
-                        <p>moi</p>
-                    </li>
-                  </ul>
-            </li>
-            
-        </ul>
-    </div-->
-    
 </app-shared-modal>
 <ng-template #itemsloader>
     <div class="max-w-sm animate-pulse" role="status">
