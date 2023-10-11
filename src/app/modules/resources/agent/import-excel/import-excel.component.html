@@ -15,7 +15,7 @@
     <form (ngSubmit)="importFile()" [formGroup]="form" class="w-full items-center">
         <div class="space-y-12">
             <div class="border-b border-gray-900/10">
-                <h2 class="text-base font-semibold leading-7 text-gray-900">Import a list of new or existing agents</h2>
+                <h2 class="text-base font-semibold leading-7 text-gray-900 ml-12 mt-6">Import a list of new or existing agents</h2>
 
                 <div class="grid grid-cols-1 gap-5 mt-5">
                     <app-shared-warning *ngIf="form.hasError('message')">
