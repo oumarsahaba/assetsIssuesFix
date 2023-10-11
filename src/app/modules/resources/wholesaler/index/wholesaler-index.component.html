@@ -7,6 +7,7 @@
                     <app-wholesaler-create *ngIf="aggregators$ | async as response ; else itemsloader  "
                                            [aggregators$]="response.data"/>
                 </div>
+                
                 <p class="mt-2 text-sm text-gray-700">A list of all wholesalers.</p>
             </div>
             <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">

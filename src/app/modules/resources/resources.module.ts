@@ -38,6 +38,7 @@ import {
     WholesalerProvisionValidationComponent
 } from "./wholesaler-provision/validation/wholesaler-provision-validation.component";
 import {ActiveBadgeComponent} from '../shared/active-badge/active-badge.component';
+import { ImportExcelComponent } from './agent/import-excel/import-excel.component';
 import {AgentsBulkSettingsComponent} from './wholesaler/agents-bulk-settings/agents-bulk-settings.component';
 import {LoanRequestRepayComponent} from './loan-request/repay/loan-request-repay.component';
 
@@ -75,6 +76,7 @@ import {LoanRequestRepayComponent} from './loan-request/repay/loan-request-repay
         ActiveBadgeComponent,
         AgentsBulkSettingsComponent,
         LoanRequestRepayComponent,
+        ImportExcelComponent,
     ],
     imports: [
         CommonModule,

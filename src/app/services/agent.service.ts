@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BaseAPIService} from "./base-api.service";
+import { Observable } from 'rxjs';
+import { HttpEvent } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -61,4 +63,20 @@ export class AgentService extends BaseAPIService {
     delete(code: string) {
         return this.httpDeleteCall('/agent/delete/' + code)
     }
+
+    getAggregators() {
+        return this.httpGetCall('/aggregator');
+    }
+
+
+    uploadAgentsFromExcel(file: File):Observable<HttpEvent<any>> { 
+  
+        // Create form data 
+        const formData = new FormData();  
+          
+        // Store form name as "file" with file data 
+        formData.append("file", file, file.name);           
+        // with formData as req 
+        return this.httpPostEventFormDataCall('/agent/upload/' , formData) 
+    } 
 }

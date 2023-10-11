@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpEvent, HttpHeaders} from "@angular/common/http";
 import {KeycloakService} from "keycloak-angular";
 import {catchError, throwError} from "rxjs";
 import {AppError} from "../commons/errors/app-error";
@@ -45,7 +45,15 @@ export abstract class BaseAPIService {
         this.httpHeaders.set('Content-Type', 'multipart/form-data')
 
         return this.httpClient
-            .post<ApiResponse>(this.baseUrl + pathUrl, body, {headers: this.httpHeaders})
+            .post<ApiResponse>(this.baseUrl + pathUrl, body, {headers: this.httpHeaders, reportProgress: true})
+            .pipe(catchError((err: Response) => this.handleError(err)))
+    }
+
+    httpPostEventFormDataCall(pathUrl: string, body: FormData) {
+        this.httpHeaders.set('Content-Type', 'multipart/form-data')
+
+        return this.httpClient
+            .post<HttpEvent<any>>(this.baseUrl + pathUrl, body, {headers: this.httpHeaders, reportProgress: true, observe: "events",})
             .pipe(catchError((err: Response) => this.handleError(err)))
     }
 
