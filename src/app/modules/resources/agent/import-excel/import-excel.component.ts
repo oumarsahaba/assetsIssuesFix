@@ -17,7 +17,77 @@ import * as XLSX from 'xlsx';
     templateUrl: './import-excel.component.html',
     styleUrls: ['./import-excel.component.css']
 })
-export class ImportExcelComponent {
+export class ImportExcelComponent implements OnInit, OnDestroy{
+  
+  @ViewChild('inputFile')
+  inputFile: ElementRef;
+  displayModal: any = false;
+  file: File;
+  agents: AgentFromExcel[]
+  sheetName: string
+  agents$: Observable<AgentFromExcel[]>
+  uploadProgression = false
+  uploadCompleted = false
+  templateDownloaded = false
+  form = new FormGroup({
+    file: new FormControl('', Validators.required),
+})
+  
+
+
+  constructor( private agentService: AgentService,
+    private toastr: ToastrService){}
+
+
+  ngOnInit(): void {
+  }
+
+  ngOnDestroy(){
+
+  }
+  
+  chooseFile(){
+    this.inputFile.nativeElement.click()
+  }
+  reloadupload(){
+    //@ts-ignore
+    this.file= undefined
+    this.uploadCompleted = false
+    this.uploadProgression = false
+    this.form.reset()
+    this.inputFile.nativeElement.value = ""     
+    console.log(this.file);
+    
+  
+  }
+  importFile(){    
+
+    if (this.form.valid) {
+      
+      this.uploadProgression = true
+      this.uploadCompleted = false
+      this.agentService.uploadAgentsFromExcel(this.file).subscribe(
+        {next: event => {
+          console.log(event);
+          
+        
+        if (event.type === HttpEventType.Response) {
+          this.uploadCompleted = true
+          this.uploadProgression = false
+          this.templateDownloaded = false
+          this.toggleModal()
+          this.toastr.success('File successfully uploaded');
+        }
+      
+        },
+        error: (err: AppError) => {
+          if (err instanceof UnprocessableEntityError)
+            handleFormError(err, this.form)  
+          setTimeout(() => {
+            this.uploadProgression = false
+            this.templateDownloaded = false
+          }, 2000);    
+          
 
     @ViewChild('inputFile')
     inputFile: ElementRef;

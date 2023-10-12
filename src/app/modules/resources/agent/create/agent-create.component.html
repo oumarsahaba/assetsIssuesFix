@@ -1,13 +1,25 @@
-<button
-    (click)="toggleModal()"
-    data-tooltip-target="tooltip-agent-creation"
-    class="rounded-full bg-blue-500 p-1 text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-    type="button">
-    <svg aria-hidden="true" class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-        <path
-            d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"/>
-    </svg>
-</button>
+<span 
+    class="relative inline-flex items-center rounded-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300">
+    <div type="button"
+    class="relative inline-flex items-center border-r pr-3 hover:bg-gray-50 focus:z-10">
+        <span class="sr-only">Create</span>
+        <button
+            (click)="toggleModal()"
+            data-tooltip-target="tooltip-agent-creation"
+            class="rounded-full bg-blue-500 p-1 text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            type="button">
+            <svg aria-hidden="true" class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                    d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"/>
+            </svg>
+        </button>
+    </div>
+    <div type="button"
+    class="relative inline-flex items-center border-l pl-3 hover:bg-gray-50 focus:z-10">
+        <span class="sr-only">Import</span>
+        <app-import-excel/>
+    </div>
+</span>
 <div id="tooltip-agent-creation" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
     Create Agent
     <div class="tooltip-arrow" data-popper-arrow></div>

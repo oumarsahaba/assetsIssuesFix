@@ -17,6 +17,8 @@ import {TableLoaderComponent} from './table-loader/table-loader.component';
 import {ChartLoaderComponent} from './chart-loader/chart-loader.component';
 import {BreadcrumbComponent} from './breadcrumb/breadcrumb/breadcrumb.component';
 import {ActionsDropdownComponent} from "./actions-dropdown/actions-dropdown.component";
+import { InfoComponent } from './info/info.component';
+import { ErrorComponent } from './error/error.component';
 
 
 @NgModule({
@@ -36,6 +38,8 @@ import {ActionsDropdownComponent} from "./actions-dropdown/actions-dropdown.comp
         ChartLoaderComponent,
         BreadcrumbComponent,
         ActionsDropdownComponent,
+        InfoComponent,
+        ErrorComponent,
     ],
     imports: [
         CommonModule,
@@ -54,6 +58,8 @@ import {ActionsDropdownComponent} from "./actions-dropdown/actions-dropdown.comp
         TableLoaderComponent,
         ChartLoaderComponent,
         ActionsDropdownComponent,
+        InfoComponent,
+        ErrorComponent
     ],
 })
 export class SharedModule {
