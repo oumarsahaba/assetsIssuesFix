@@ -12,6 +12,7 @@ import {BreadcrumbService} from 'src/app/commons/services/breadcrumb.service';
 import {Aggregator} from "../../../../commons/interfaces/aggregator";
 import {AggregatorService} from "../../../../services/aggregator.service";
 import {data} from "autoprefixer";
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
     selector: 'app-wholesaler-index',
@@ -23,7 +24,10 @@ export class WholesalerIndexComponent implements OnInit {
     wholesalers$: Observable<Response<PaginatedResource<Wholesaler>>>
     aggregators$: Observable<Response<Aggregator[]>>
 
-    codeWholesaler: string = ''
+    search = {
+        codeWholesaler: '',
+        codeAggregator: ''
+    }
 
     items: Breadcrumb[] = [
         {label: "Wholesalers"}
@@ -31,7 +35,8 @@ export class WholesalerIndexComponent implements OnInit {
     home: Breadcrumb = {label: "Home", routerLink: '/dashboard'}
     protected readonly data = data;
 
-    constructor(private wholesalerService: WholesalerService,
+    constructor(public keycloakService: KeycloakService,
+                private wholesalerService: WholesalerService,
                 private router: Router, private breadcrumbService: BreadcrumbService,
                 private aggregatorService: AggregatorService,) {
     }
@@ -45,7 +50,13 @@ export class WholesalerIndexComponent implements OnInit {
     }
 
     goToPage(page: number = 0) {
-        this.wholesalers$ = this.wholesalerService.getPage(this.codeWholesaler, page).pipe(share())
+        this.wholesalers$ = this.wholesalerService.getPage(this.search.codeWholesaler, this.search.codeAggregator, page).pipe(share())
+    }
+
+
+    onAggregatorChange(event: any) {
+        this.search.codeAggregator = event.target.value;
+        this.goToPage()
     }
 
     confirmDelete(codeAgent: string) {

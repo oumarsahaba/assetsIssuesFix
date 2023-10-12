@@ -22,7 +22,7 @@ export class CreditCountChartComponent implements OnInit {
 
     ngOnInit(): void {
         Chart.register(...registerables);
-        this.updateChart(this.selectedPeriod); // Initialize chart with default period
+        this.updateChart(this.selectedPeriod);// Initialize chart with default period
     }
 
     onPeriodChange(event: any) {

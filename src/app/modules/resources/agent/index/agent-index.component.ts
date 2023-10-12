@@ -57,7 +57,8 @@ export class AgentIndexComponent implements OnInit {
 
         this.aggregators$ = this.aggregatorService.getAll().pipe(share())
         this.wholesalers$ = this.wholesalerService.getAll().pipe(share())
-        this.agents$ = this.agentService.getAll(this.search.codeAggregator, this.search.codeAgent, this.search.codeWholesaler).pipe(share())
+
+        this.goToPage()
 
         this.search.codeAggregator = null;
     }
@@ -95,7 +96,7 @@ export class AgentIndexComponent implements OnInit {
 
     onAggregatorChange(event: any) {
         this.search.codeAggregator = event.target.value;
-        this.agents$ = this.agentService.getAll(this.search.codeAggregator, this.search.codeWholesaler, this.search.codeAgent, 0);
+        this.goToPage()
     }
 
 

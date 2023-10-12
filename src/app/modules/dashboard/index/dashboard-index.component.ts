@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {DashboardMetrics} from "../../../commons/interfaces/dashboard-metrics";
 import {Response} from 'src/app/commons/models/response';
 import {Observable, share} from 'rxjs';
+import {OverDraftMetrics} from "../../../commons/interfaces/overDraftMetrics";
 
 @Component({
     selector: 'app-dashboard-index',
@@ -16,13 +17,26 @@ import {Observable, share} from 'rxjs';
 export class DashboardIndexComponent implements OnInit {
 
     metrics$: Observable<Response<DashboardMetrics>>;
+    overdraftMetrics$: Observable<Response<OverDraftMetrics>>;
+    selectedPeriod: number = 30;
 
     constructor(private dashboardService: DashboardService, private router: Router) {
     }
 
     ngOnInit(): void {
         this.metrics$ = this.dashboardService.getMetrics().pipe(share())
-        this.metrics$.subscribe({
+
+        this.getOverDraftMetrics(this.selectedPeriod);
+    }
+
+    onPeriodChange(event: any) {
+        this.selectedPeriod = event.target.value;
+        this.getOverDraftMetrics(this.selectedPeriod);
+    }
+
+    private getOverDraftMetrics(dayBefore: number) {
+        this.overdraftMetrics$ = this.dashboardService.getOverDraftMetrics(dayBefore).pipe(share())
+        this.overdraftMetrics$.subscribe({
             error: (err: AppError) => {
                 if (err instanceof NotFoundError)
                     this.router.navigate(['/not-found'])
@@ -31,6 +45,5 @@ export class DashboardIndexComponent implements OnInit {
                     this.router.navigate(['/forbidden'])
             }
         })
-
     }
 }

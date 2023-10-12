@@ -1,6 +1,6 @@
 <app-dashboard *ngIf="wholesaler$ | async as wholesalerResponse ; else loader">
     <div class="px-4 sm:px-6 lg:px-8 mb-10">
-        <ul class="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-2 xl:gap-x-8" role="list">
+        <div class="grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-2 xl:gap-x-8" role="list">
             <app-detail-cards>
                 <div class="flex justify-between" header-title>
                     <div class="flex gap-x-2">
@@ -19,7 +19,6 @@
                     <app-agents-bulk-settings *ngIf="wholesaler$ | async as wholesalerResponse ; else textLoader"
                                               [wholesaler]="wholesalerResponse?.data"/>
                 </div>
-
                 <div body>
                     <div class="flex justify-between gap-x-4 py-2">
                         <dt class="text-gray-500">Code Wholesaler</dt>
@@ -46,7 +45,6 @@
             </app-detail-cards>
             <app-detail-cards>
                 <div class="flex gap-x-2" header-title>
-
                     <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="1.5"
                          viewBox="0 0 24 24">
                         <path
@@ -74,7 +72,7 @@
                     </div>
                 </div>
             </app-detail-cards>
-        </ul>
+        </div>
     </div>
 
     <div class="px-4 sm:px-6 lg:px-8 mb-10">
