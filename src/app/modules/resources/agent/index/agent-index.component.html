@@ -4,16 +4,7 @@
             <div class="sm:flex-auto ">
                 <div class="inline-flex">
                     <h1 class="text-base font-semibold leading-6 text-gray-900 px-5 py-2">Agent</h1>
-                    <span >
-                        <button type="button" class="relative inline-flex items-center rounded-l-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">
-                        <span class="sr-only">Create</span>
-                        <app-agent-create *ngIf="wholesalers$ | async as response" [wholesalers]="response.data"/>
-                        </button>
-                        <button type="button" class="relative -ml-px inline-flex items-center rounded-r-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">
-                        <span class="sr-only">Import</span>
-                        <app-import-excel/>
-                        </button>
-                    </span>
+                    <app-agent-create *ngIf="wholesalers$ | async as response" [wholesalers]="response.data"/>
                 </div>
                 <p class="mt-2 text-sm text-gray-700">A list of all agents.</p>
             </div>

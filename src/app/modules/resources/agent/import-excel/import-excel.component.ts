@@ -28,6 +28,7 @@ export class ImportExcelComponent implements OnInit, OnDestroy{
   agents$: Observable<AgentFromExcel[]>
   uploadProgression = false
   uploadCompleted = false
+  templateDownloaded = false
   form = new FormGroup({
     file: new FormControl('', Validators.required),
 })
@@ -42,6 +43,7 @@ export class ImportExcelComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(){
+
   }
   
   chooseFile(){
@@ -72,6 +74,7 @@ export class ImportExcelComponent implements OnInit, OnDestroy{
         if (event.type === HttpEventType.Response) {
           this.uploadCompleted = true
           this.uploadProgression = false
+          this.templateDownloaded = false
           this.toggleModal()
           this.toastr.success('File successfully uploaded');
         }
@@ -82,6 +85,7 @@ export class ImportExcelComponent implements OnInit, OnDestroy{
             handleFormError(err, this.form)  
           setTimeout(() => {
             this.uploadProgression = false
+            this.templateDownloaded = false
           }, 2000);    
           
 

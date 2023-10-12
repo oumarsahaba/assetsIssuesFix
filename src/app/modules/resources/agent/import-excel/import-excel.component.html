@@ -7,10 +7,6 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15M9 12l3 3m0 0l3-3m-3 3V2.25" />
       </svg>      
 </button>
-<div id="tooltip-agent-importation" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-    Import excel file
-    <div class="tooltip-arrow" data-popper-arrow></div>
-</div>
 <app-shared-modal [show]="displayModal" id="modal">
     <form (ngSubmit)="importFile()" [formGroup]="form" class="w-full items-center">
         <div class="space-y-12">
@@ -18,11 +14,22 @@
                 <h2 class="text-base font-semibold leading-7 text-gray-900 ml-12 mt-6">Import a list of new or existing agents</h2>
 
                 <div class="grid grid-cols-1 gap-5 mt-5">
-                    <app-shared-warning *ngIf="form.hasError('message')">
+                    <app-error *ngIf="form.hasError('message')">
                         {{ form.getError('message') }}
-                    </app-shared-warning>
-                    <button (click)="chooseFile()" *ngIf="!file"
+                    </app-error>
+                    <app-info *ngIf="templateDownloaded && !file">
+                        Excel template downloaded. Fill it before uploading it.
+                    </app-info>
+                    <a (click)="templateDownloaded = true" *ngIf="!file && !templateDownloaded"
+                        href="../../../../../assets/Refund_Request_export_1696503751088.xlsx" target="_self"
                         type="button" class="relative block w-5/6 rounded-lg border-2 border-dashed border-gray-300 p-12 mx-auto text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        <svg class=" mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15m0-3l-3-3m0 0l-3 3m3-3V15" />
+                        </svg>
+                        <span class="mt-2 block text-sm font-semibold text-gray-900">Upload excel templated.</span>
+                    </a>
+                    <button (click)="chooseFile()" *ngIf="templateDownloaded && !file"
+                        type="button" class="relative block w-5/6 rounded-lg border-2 border-dashed border-blue-600 p-12 mx-auto text-center hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                         <svg class=" mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6" />
                         </svg>
