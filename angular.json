@@ -13,7 +13,7 @@
                 "build": {
                     "builder": "@ngx-env/builder:browser",
                     "options": {
-                        "outputPath": "dist/credit-digital-front",
+                        "outputPath": "docs",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": [

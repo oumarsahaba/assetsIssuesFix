@@ -9,5 +9,5 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 
 // Disable logs in production
 if(environment.production){
-    window.console.log = () => {}
+    //window.console.log = () => {}
 }
